@@ -1,0 +1,2 @@
+class UserNotTeacherException implements Exception {
+}

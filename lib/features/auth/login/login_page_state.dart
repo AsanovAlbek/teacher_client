@@ -1,0 +1,3 @@
+enum LoginPageState {
+  auth, login
+}
