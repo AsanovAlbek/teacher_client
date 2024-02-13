@@ -32,3 +32,10 @@ flutter:
     - assets/images/
     - assets/images/person1.png
   uses-material-design: true
+  fonts:
+    - family: PT-Sans
+      fonts:
+        - asset: assets/fonts/PTSans-Regular.ttf
+        - asset: assets/fonts/PTSans-Bold.ttf
+        - asset: assets/fonts/PTSans-BoldItalic.ttf
+        - asset: assets/fonts/PTSans-Italic.ttf
