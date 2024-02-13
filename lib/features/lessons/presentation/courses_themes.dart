@@ -10,6 +10,7 @@ import 'package:teacher_client/features/lessons/domain/bloc/lesson_bloc.dart';
 import 'package:teacher_client/features/lessons/domain/repository/lessons_repository.dart';
 import 'package:teacher_client/features/lessons/presentation/widgets/lesson_item.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:teacher_client/features/lessons/presentation/widgets/pickable_image.dart';
 
 import '../../../core/model/course.dart';
 import '../../../core/model/lesson.dart';
@@ -28,15 +29,15 @@ class CoursesThemesPage extends StatelessWidget {
           BlocProvider<CourseBloc>.value(value: courseBloc),
           BlocProvider(
               create: (context) =>
-                  LessonBloc(repository: GetIt.I<LessonsRepository>())
-                    ..add(LessonEvent.load(courseId: course?.id ?? -1)))
+              LessonBloc(repository: GetIt.I<LessonsRepository>())
+                ..add(LessonEvent.load(courseId: course?.id ?? -1)))
         ],
         child: SafeArea(
           child: Scaffold(
             backgroundColor: AppColors.backgroundColor,
             body: Center(
               child:
-                  _CourseEditorContent(course: course, courseBloc: courseBloc),
+              _CourseEditorContent(course: course, courseBloc: courseBloc),
             ),
           ),
         ));
@@ -83,14 +84,17 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
           return Padding(
             padding: const EdgeInsets.all(50).copyWith(bottom: 10),
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                     widget.course != null
                         ? 'РЕДАКТИРОВАТЬ КУРС'
                         : 'ДОБАВИТЬ КУРС',
-                    style: Theme.of(context).textTheme.headlineLarge),
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .headlineLarge),
               ),
               Expanded(
                 child: Card(
@@ -103,40 +107,19 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Row(children: [
-                              Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: GestureDetector(
-                                  onTap: () async {
-                                    final image = await FilePicker.platform
-                                        .pickFiles(type: FileType.image);
-                                    if (image != null) {
-                                      setState(() {
-                                        _filePickerResult = image;
-                                      });
-                                    }
-                                  },
-                                  child: Container(
-                                      color:
-                                          AppColors.emptyImageBackgroundColor,
-                                      width: 200,
-                                      height: 200,
-                                      child: widget.course != null &&
-                                              (widget.course?.iconUrl
-                                                      .isNotEmpty ??
-                                                  false) &&
-                                              _filePickerResult == null
-                                          ? Image.network(
-                                              widget.course?.iconUrl ?? '',
-                                              fit: BoxFit.cover)
-                                          : _filePickerResult != null
-                                              ? Image.memory(
-                                                  _filePickerResult!
-                                                      .files.single.bytes!,
-                                                  fit: BoxFit.fill)
-                                              : const Icon(Icons.add,
-                                                      color: AppColors.gray, size: 50),
-                                  ),
-                                ),
+                              PickableImage(
+                                filePickerResult: _filePickerResult,
+                                imageUrl: widget.course?.iconUrl,
+                                imageSize: 200,
+                                onPressed: () async {
+                                  final image = await FilePicker.platform.pickFiles(
+                                      type: FileType.image);
+                                  if (image != null) {
+                                    setState(() {
+                                      _filePickerResult = image;
+                                    });
+                                  }
+                                },
                               ),
                               Expanded(
                                 child: Column(children: [
@@ -149,14 +132,14 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                             label: const Text('Название курса'),
                                             border: OutlineInputBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(8)))),
+                                                BorderRadius.circular(8)))),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: TextField(
                                         textAlign: TextAlign.start,
                                         textAlignVertical:
-                                            TextAlignVertical.top,
+                                        TextAlignVertical.top,
                                         minLines: 4,
                                         maxLines: 4,
                                         controller: _descriptionController,
@@ -164,7 +147,7 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                             label: const Text('Описание курса'),
                                             border: OutlineInputBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(8)))),
+                                                BorderRadius.circular(8)))),
                                   )
                                 ]),
                               )
@@ -177,13 +160,15 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                           name: 'Тема ${lessons.length + 1}',
                                           courseId: widget.course?.id ?? 0,
                                           description:
-                                              'Описание урока ${lessons.length + 1}',
+                                          'Описание урока ${lessons.length +
+                                              1}',
                                           status: PublicationStatus
                                               .published.label)));
                                 },
                                 child: Text(
                                   '+ Добавить урок',
-                                  style: Theme.of(context)
+                                  style: Theme
+                                      .of(context)
                                       .textTheme
                                       .bodyMedium
                                       ?.copyWith(color: AppColors.orange),
@@ -191,23 +176,25 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                             if (lessons.isNotEmpty) ...[
                               Expanded(
                                 child: ListView.separated(
-                                    itemBuilder: (context, index) => LessonItem(
-                                        lesson: lessons[index],
-                                        onRedact: (lesson) {}),
+                                    itemBuilder: (context, index) =>
+                                        LessonItem(
+                                            lesson: lessons[index],
+                                            onRedact: (lesson) {}),
                                     separatorBuilder: (context, index) =>
-                                        const SizedBox(height: 4),
+                                    const SizedBox(height: 4),
                                     itemCount: lessons.length),
                               )
-                            ] else ...[
-                              const Expanded(
-                                child: Center(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Text('Вы ещё не добавили уроки'),
+                            ] else
+                              ...[
+                                const Expanded(
+                                  child: Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text('Вы ещё не добавили уроки'),
+                                    ),
                                   ),
-                                ),
-                              )
-                            ],
+                                )
+                              ],
                             Center(
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
@@ -221,9 +208,9 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                                   name: _nameController.text
                                                       .trim(),
                                                   description:
-                                                      _descriptionController
-                                                          .text
-                                                          .trim(),
+                                                  _descriptionController
+                                                      .text
+                                                      .trim(),
                                                   status: PublicationStatus
                                                       .published.label),
                                               lessons: lessons));
