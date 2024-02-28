@@ -8,8 +8,8 @@ import 'package:teacher_client/core/extensions/context_extensions.dart';
 import 'package:teacher_client/core/navigation/router.dart';
 import 'package:teacher_client/features/auth/domain/auth_validator.dart';
 import 'package:teacher_client/features/auth/domain/repository/auth_repository.dart';
-import 'package:teacher_client/features/auth/login/bloc/login_bloc.dart';
 
+import '../../domain/bloc/login_bloc.dart';
 import '../login_page_state.dart';
 
 @RoutePage()
@@ -31,6 +31,7 @@ class _LoginState extends State<LoginPage> {
     _emailController.clear();
     _passwordController.clear();
     _nameController.clear();
+    debugPrint('page url ${AutoRouter.of(context).currentUrl}');
     super.initState();
   }
 
@@ -150,7 +151,11 @@ class _LoginState extends State<LoginPage> {
                                         const LoginEvent.changePage(
                                             pageState: LoginPageState.auth));
                                   },
-                                  child: const Text('Создать аккаунт'))
+                                  child: const Text('Создать аккаунт')),
+                              const SizedBox(height: 8),
+                              TextButton(onPressed: () {
+                                AutoRouter.of(context).navigate(RecoverRoute(fromIncomingRecoverLink: true));
+                              }, child: const Text('Забыли пароль?'))
                             ] else ...[
                               ElevatedButton(
                                   onPressed: () {

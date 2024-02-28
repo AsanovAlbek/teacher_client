@@ -27,6 +27,14 @@ mixin _$LoginEvent {
     required TResult Function(bool isPasswordMasked) changePasswordMasked,
     required TResult Function(LoginPageState pageState) changePage,
     required TResult Function() sighOut,
+    required TResult Function(
+            String password,
+            dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        updateUserPassword,
+    required TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        recoverPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +48,12 @@ mixin _$LoginEvent {
     TResult? Function(bool isPasswordMasked)? changePasswordMasked,
     TResult? Function(LoginPageState pageState)? changePage,
     TResult? Function()? sighOut,
+    TResult? Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult? Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +67,12 @@ mixin _$LoginEvent {
     TResult Function(bool isPasswordMasked)? changePasswordMasked,
     TResult Function(LoginPageState pageState)? changePage,
     TResult Function()? sighOut,
+    TResult Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +84,9 @@ mixin _$LoginEvent {
         changePasswordMasked,
     required TResult Function(LoginChagePageStateEvent value) changePage,
     required TResult Function(LoginSignOutEvent value) sighOut,
+    required TResult Function(LoginUpdatePasswordEvent value)
+        updateUserPassword,
+    required TResult Function(LoginPasswordRecoveryEvent value) recoverPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -74,6 +97,8 @@ mixin _$LoginEvent {
         changePasswordMasked,
     TResult? Function(LoginChagePageStateEvent value)? changePage,
     TResult? Function(LoginSignOutEvent value)? sighOut,
+    TResult? Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult? Function(LoginPasswordRecoveryEvent value)? recoverPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -84,6 +109,8 @@ mixin _$LoginEvent {
         changePasswordMasked,
     TResult Function(LoginChagePageStateEvent value)? changePage,
     TResult Function(LoginSignOutEvent value)? sighOut,
+    TResult Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult Function(LoginPasswordRecoveryEvent value)? recoverPassword,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -216,6 +243,14 @@ class _$LoginSignInEventImpl implements LoginSignInEvent {
     required TResult Function(bool isPasswordMasked) changePasswordMasked,
     required TResult Function(LoginPageState pageState) changePage,
     required TResult Function() sighOut,
+    required TResult Function(
+            String password,
+            dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        updateUserPassword,
+    required TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        recoverPassword,
   }) {
     return signIn(email, password, onSuccess, onError);
   }
@@ -232,6 +267,12 @@ class _$LoginSignInEventImpl implements LoginSignInEvent {
     TResult? Function(bool isPasswordMasked)? changePasswordMasked,
     TResult? Function(LoginPageState pageState)? changePage,
     TResult? Function()? sighOut,
+    TResult? Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult? Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
   }) {
     return signIn?.call(email, password, onSuccess, onError);
   }
@@ -248,6 +289,12 @@ class _$LoginSignInEventImpl implements LoginSignInEvent {
     TResult Function(bool isPasswordMasked)? changePasswordMasked,
     TResult Function(LoginPageState pageState)? changePage,
     TResult Function()? sighOut,
+    TResult Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -265,6 +312,9 @@ class _$LoginSignInEventImpl implements LoginSignInEvent {
         changePasswordMasked,
     required TResult Function(LoginChagePageStateEvent value) changePage,
     required TResult Function(LoginSignOutEvent value) sighOut,
+    required TResult Function(LoginUpdatePasswordEvent value)
+        updateUserPassword,
+    required TResult Function(LoginPasswordRecoveryEvent value) recoverPassword,
   }) {
     return signIn(this);
   }
@@ -278,6 +328,8 @@ class _$LoginSignInEventImpl implements LoginSignInEvent {
         changePasswordMasked,
     TResult? Function(LoginChagePageStateEvent value)? changePage,
     TResult? Function(LoginSignOutEvent value)? sighOut,
+    TResult? Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult? Function(LoginPasswordRecoveryEvent value)? recoverPassword,
   }) {
     return signIn?.call(this);
   }
@@ -291,6 +343,8 @@ class _$LoginSignInEventImpl implements LoginSignInEvent {
         changePasswordMasked,
     TResult Function(LoginChagePageStateEvent value)? changePage,
     TResult Function(LoginSignOutEvent value)? sighOut,
+    TResult Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult Function(LoginPasswordRecoveryEvent value)? recoverPassword,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -435,6 +489,14 @@ class _$LoginSignUpEventImpl implements LoginSignUpEvent {
     required TResult Function(bool isPasswordMasked) changePasswordMasked,
     required TResult Function(LoginPageState pageState) changePage,
     required TResult Function() sighOut,
+    required TResult Function(
+            String password,
+            dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        updateUserPassword,
+    required TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        recoverPassword,
   }) {
     return signUp(name, email, password, onSuccess, onError);
   }
@@ -451,6 +513,12 @@ class _$LoginSignUpEventImpl implements LoginSignUpEvent {
     TResult? Function(bool isPasswordMasked)? changePasswordMasked,
     TResult? Function(LoginPageState pageState)? changePage,
     TResult? Function()? sighOut,
+    TResult? Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult? Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
   }) {
     return signUp?.call(name, email, password, onSuccess, onError);
   }
@@ -467,6 +535,12 @@ class _$LoginSignUpEventImpl implements LoginSignUpEvent {
     TResult Function(bool isPasswordMasked)? changePasswordMasked,
     TResult Function(LoginPageState pageState)? changePage,
     TResult Function()? sighOut,
+    TResult Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
     required TResult orElse(),
   }) {
     if (signUp != null) {
@@ -484,6 +558,9 @@ class _$LoginSignUpEventImpl implements LoginSignUpEvent {
         changePasswordMasked,
     required TResult Function(LoginChagePageStateEvent value) changePage,
     required TResult Function(LoginSignOutEvent value) sighOut,
+    required TResult Function(LoginUpdatePasswordEvent value)
+        updateUserPassword,
+    required TResult Function(LoginPasswordRecoveryEvent value) recoverPassword,
   }) {
     return signUp(this);
   }
@@ -497,6 +574,8 @@ class _$LoginSignUpEventImpl implements LoginSignUpEvent {
         changePasswordMasked,
     TResult? Function(LoginChagePageStateEvent value)? changePage,
     TResult? Function(LoginSignOutEvent value)? sighOut,
+    TResult? Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult? Function(LoginPasswordRecoveryEvent value)? recoverPassword,
   }) {
     return signUp?.call(this);
   }
@@ -510,6 +589,8 @@ class _$LoginSignUpEventImpl implements LoginSignUpEvent {
         changePasswordMasked,
     TResult Function(LoginChagePageStateEvent value)? changePage,
     TResult Function(LoginSignOutEvent value)? sighOut,
+    TResult Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult Function(LoginPasswordRecoveryEvent value)? recoverPassword,
     required TResult orElse(),
   }) {
     if (signUp != null) {
@@ -616,6 +697,14 @@ class _$LoginChangePasswordMaskedEventImpl
     required TResult Function(bool isPasswordMasked) changePasswordMasked,
     required TResult Function(LoginPageState pageState) changePage,
     required TResult Function() sighOut,
+    required TResult Function(
+            String password,
+            dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        updateUserPassword,
+    required TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        recoverPassword,
   }) {
     return changePasswordMasked(isPasswordMasked);
   }
@@ -632,6 +721,12 @@ class _$LoginChangePasswordMaskedEventImpl
     TResult? Function(bool isPasswordMasked)? changePasswordMasked,
     TResult? Function(LoginPageState pageState)? changePage,
     TResult? Function()? sighOut,
+    TResult? Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult? Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
   }) {
     return changePasswordMasked?.call(isPasswordMasked);
   }
@@ -648,6 +743,12 @@ class _$LoginChangePasswordMaskedEventImpl
     TResult Function(bool isPasswordMasked)? changePasswordMasked,
     TResult Function(LoginPageState pageState)? changePage,
     TResult Function()? sighOut,
+    TResult Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
     required TResult orElse(),
   }) {
     if (changePasswordMasked != null) {
@@ -665,6 +766,9 @@ class _$LoginChangePasswordMaskedEventImpl
         changePasswordMasked,
     required TResult Function(LoginChagePageStateEvent value) changePage,
     required TResult Function(LoginSignOutEvent value) sighOut,
+    required TResult Function(LoginUpdatePasswordEvent value)
+        updateUserPassword,
+    required TResult Function(LoginPasswordRecoveryEvent value) recoverPassword,
   }) {
     return changePasswordMasked(this);
   }
@@ -678,6 +782,8 @@ class _$LoginChangePasswordMaskedEventImpl
         changePasswordMasked,
     TResult? Function(LoginChagePageStateEvent value)? changePage,
     TResult? Function(LoginSignOutEvent value)? sighOut,
+    TResult? Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult? Function(LoginPasswordRecoveryEvent value)? recoverPassword,
   }) {
     return changePasswordMasked?.call(this);
   }
@@ -691,6 +797,8 @@ class _$LoginChangePasswordMaskedEventImpl
         changePasswordMasked,
     TResult Function(LoginChagePageStateEvent value)? changePage,
     TResult Function(LoginSignOutEvent value)? sighOut,
+    TResult Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult Function(LoginPasswordRecoveryEvent value)? recoverPassword,
     required TResult orElse(),
   }) {
     if (changePasswordMasked != null) {
@@ -790,6 +898,14 @@ class _$LoginChagePageStateEventImpl implements LoginChagePageStateEvent {
     required TResult Function(bool isPasswordMasked) changePasswordMasked,
     required TResult Function(LoginPageState pageState) changePage,
     required TResult Function() sighOut,
+    required TResult Function(
+            String password,
+            dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        updateUserPassword,
+    required TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        recoverPassword,
   }) {
     return changePage(pageState);
   }
@@ -806,6 +922,12 @@ class _$LoginChagePageStateEventImpl implements LoginChagePageStateEvent {
     TResult? Function(bool isPasswordMasked)? changePasswordMasked,
     TResult? Function(LoginPageState pageState)? changePage,
     TResult? Function()? sighOut,
+    TResult? Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult? Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
   }) {
     return changePage?.call(pageState);
   }
@@ -822,6 +944,12 @@ class _$LoginChagePageStateEventImpl implements LoginChagePageStateEvent {
     TResult Function(bool isPasswordMasked)? changePasswordMasked,
     TResult Function(LoginPageState pageState)? changePage,
     TResult Function()? sighOut,
+    TResult Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
     required TResult orElse(),
   }) {
     if (changePage != null) {
@@ -839,6 +967,9 @@ class _$LoginChagePageStateEventImpl implements LoginChagePageStateEvent {
         changePasswordMasked,
     required TResult Function(LoginChagePageStateEvent value) changePage,
     required TResult Function(LoginSignOutEvent value) sighOut,
+    required TResult Function(LoginUpdatePasswordEvent value)
+        updateUserPassword,
+    required TResult Function(LoginPasswordRecoveryEvent value) recoverPassword,
   }) {
     return changePage(this);
   }
@@ -852,6 +983,8 @@ class _$LoginChagePageStateEventImpl implements LoginChagePageStateEvent {
         changePasswordMasked,
     TResult? Function(LoginChagePageStateEvent value)? changePage,
     TResult? Function(LoginSignOutEvent value)? sighOut,
+    TResult? Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult? Function(LoginPasswordRecoveryEvent value)? recoverPassword,
   }) {
     return changePage?.call(this);
   }
@@ -865,6 +998,8 @@ class _$LoginChagePageStateEventImpl implements LoginChagePageStateEvent {
         changePasswordMasked,
     TResult Function(LoginChagePageStateEvent value)? changePage,
     TResult Function(LoginSignOutEvent value)? sighOut,
+    TResult Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult Function(LoginPasswordRecoveryEvent value)? recoverPassword,
     required TResult orElse(),
   }) {
     if (changePage != null) {
@@ -931,6 +1066,14 @@ class _$LoginSignOutEventImpl implements LoginSignOutEvent {
     required TResult Function(bool isPasswordMasked) changePasswordMasked,
     required TResult Function(LoginPageState pageState) changePage,
     required TResult Function() sighOut,
+    required TResult Function(
+            String password,
+            dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        updateUserPassword,
+    required TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        recoverPassword,
   }) {
     return sighOut();
   }
@@ -947,6 +1090,12 @@ class _$LoginSignOutEventImpl implements LoginSignOutEvent {
     TResult? Function(bool isPasswordMasked)? changePasswordMasked,
     TResult? Function(LoginPageState pageState)? changePage,
     TResult? Function()? sighOut,
+    TResult? Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult? Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
   }) {
     return sighOut?.call();
   }
@@ -963,6 +1112,12 @@ class _$LoginSignOutEventImpl implements LoginSignOutEvent {
     TResult Function(bool isPasswordMasked)? changePasswordMasked,
     TResult Function(LoginPageState pageState)? changePage,
     TResult Function()? sighOut,
+    TResult Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
     required TResult orElse(),
   }) {
     if (sighOut != null) {
@@ -980,6 +1135,9 @@ class _$LoginSignOutEventImpl implements LoginSignOutEvent {
         changePasswordMasked,
     required TResult Function(LoginChagePageStateEvent value) changePage,
     required TResult Function(LoginSignOutEvent value) sighOut,
+    required TResult Function(LoginUpdatePasswordEvent value)
+        updateUserPassword,
+    required TResult Function(LoginPasswordRecoveryEvent value) recoverPassword,
   }) {
     return sighOut(this);
   }
@@ -993,6 +1151,8 @@ class _$LoginSignOutEventImpl implements LoginSignOutEvent {
         changePasswordMasked,
     TResult? Function(LoginChagePageStateEvent value)? changePage,
     TResult? Function(LoginSignOutEvent value)? sighOut,
+    TResult? Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult? Function(LoginPasswordRecoveryEvent value)? recoverPassword,
   }) {
     return sighOut?.call(this);
   }
@@ -1006,6 +1166,8 @@ class _$LoginSignOutEventImpl implements LoginSignOutEvent {
         changePasswordMasked,
     TResult Function(LoginChagePageStateEvent value)? changePage,
     TResult Function(LoginSignOutEvent value)? sighOut,
+    TResult Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult Function(LoginPasswordRecoveryEvent value)? recoverPassword,
     required TResult orElse(),
   }) {
     if (sighOut != null) {
@@ -1017,6 +1179,453 @@ class _$LoginSignOutEventImpl implements LoginSignOutEvent {
 
 abstract class LoginSignOutEvent implements LoginEvent {
   const factory LoginSignOutEvent() = _$LoginSignOutEventImpl;
+}
+
+/// @nodoc
+abstract class _$$LoginUpdatePasswordEventImplCopyWith<$Res> {
+  factory _$$LoginUpdatePasswordEventImplCopyWith(
+          _$LoginUpdatePasswordEventImpl value,
+          $Res Function(_$LoginUpdatePasswordEventImpl) then) =
+      __$$LoginUpdatePasswordEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String password,
+      dynamic Function(String)? onSuccess,
+      dynamic Function(Exception)? onError});
+}
+
+/// @nodoc
+class __$$LoginUpdatePasswordEventImplCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$LoginUpdatePasswordEventImpl>
+    implements _$$LoginUpdatePasswordEventImplCopyWith<$Res> {
+  __$$LoginUpdatePasswordEventImplCopyWithImpl(
+      _$LoginUpdatePasswordEventImpl _value,
+      $Res Function(_$LoginUpdatePasswordEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? password = null,
+    Object? onSuccess = freezed,
+    Object? onError = freezed,
+  }) {
+    return _then(_$LoginUpdatePasswordEventImpl(
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      onSuccess: freezed == onSuccess
+          ? _value.onSuccess
+          : onSuccess // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(String)?,
+      onError: freezed == onError
+          ? _value.onError
+          : onError // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(Exception)?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoginUpdatePasswordEventImpl implements LoginUpdatePasswordEvent {
+  const _$LoginUpdatePasswordEventImpl(
+      {required this.password, this.onSuccess, this.onError});
+
+  @override
+  final String password;
+  @override
+  final dynamic Function(String)? onSuccess;
+  @override
+  final dynamic Function(Exception)? onError;
+
+  @override
+  String toString() {
+    return 'LoginEvent.updateUserPassword(password: $password, onSuccess: $onSuccess, onError: $onError)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoginUpdatePasswordEventImpl &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess) &&
+            (identical(other.onError, onError) || other.onError == onError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, password, onSuccess, onError);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoginUpdatePasswordEventImplCopyWith<_$LoginUpdatePasswordEventImpl>
+      get copyWith => __$$LoginUpdatePasswordEventImplCopyWithImpl<
+          _$LoginUpdatePasswordEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password,
+            VoidCallback? onSuccess, dynamic Function(String?)? onError)
+        signIn,
+    required TResult Function(String name, String email, String password,
+            VoidCallback? onSuccess, dynamic Function(String?)? onError)
+        signUp,
+    required TResult Function(bool isPasswordMasked) changePasswordMasked,
+    required TResult Function(LoginPageState pageState) changePage,
+    required TResult Function() sighOut,
+    required TResult Function(
+            String password,
+            dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        updateUserPassword,
+    required TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        recoverPassword,
+  }) {
+    return updateUserPassword(password, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password, VoidCallback? onSuccess,
+            dynamic Function(String?)? onError)?
+        signIn,
+    TResult? Function(String name, String email, String password,
+            VoidCallback? onSuccess, dynamic Function(String?)? onError)?
+        signUp,
+    TResult? Function(bool isPasswordMasked)? changePasswordMasked,
+    TResult? Function(LoginPageState pageState)? changePage,
+    TResult? Function()? sighOut,
+    TResult? Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult? Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
+  }) {
+    return updateUserPassword?.call(password, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password, VoidCallback? onSuccess,
+            dynamic Function(String?)? onError)?
+        signIn,
+    TResult Function(String name, String email, String password,
+            VoidCallback? onSuccess, dynamic Function(String?)? onError)?
+        signUp,
+    TResult Function(bool isPasswordMasked)? changePasswordMasked,
+    TResult Function(LoginPageState pageState)? changePage,
+    TResult Function()? sighOut,
+    TResult Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
+    required TResult orElse(),
+  }) {
+    if (updateUserPassword != null) {
+      return updateUserPassword(password, onSuccess, onError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoginSignInEvent value) signIn,
+    required TResult Function(LoginSignUpEvent value) signUp,
+    required TResult Function(LoginChangePasswordMaskedEvent value)
+        changePasswordMasked,
+    required TResult Function(LoginChagePageStateEvent value) changePage,
+    required TResult Function(LoginSignOutEvent value) sighOut,
+    required TResult Function(LoginUpdatePasswordEvent value)
+        updateUserPassword,
+    required TResult Function(LoginPasswordRecoveryEvent value) recoverPassword,
+  }) {
+    return updateUserPassword(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoginSignInEvent value)? signIn,
+    TResult? Function(LoginSignUpEvent value)? signUp,
+    TResult? Function(LoginChangePasswordMaskedEvent value)?
+        changePasswordMasked,
+    TResult? Function(LoginChagePageStateEvent value)? changePage,
+    TResult? Function(LoginSignOutEvent value)? sighOut,
+    TResult? Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult? Function(LoginPasswordRecoveryEvent value)? recoverPassword,
+  }) {
+    return updateUserPassword?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoginSignInEvent value)? signIn,
+    TResult Function(LoginSignUpEvent value)? signUp,
+    TResult Function(LoginChangePasswordMaskedEvent value)?
+        changePasswordMasked,
+    TResult Function(LoginChagePageStateEvent value)? changePage,
+    TResult Function(LoginSignOutEvent value)? sighOut,
+    TResult Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult Function(LoginPasswordRecoveryEvent value)? recoverPassword,
+    required TResult orElse(),
+  }) {
+    if (updateUserPassword != null) {
+      return updateUserPassword(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoginUpdatePasswordEvent implements LoginEvent {
+  const factory LoginUpdatePasswordEvent(
+          {required final String password,
+          final dynamic Function(String)? onSuccess,
+          final dynamic Function(Exception)? onError}) =
+      _$LoginUpdatePasswordEventImpl;
+
+  String get password;
+  dynamic Function(String)? get onSuccess;
+  dynamic Function(Exception)? get onError;
+  @JsonKey(ignore: true)
+  _$$LoginUpdatePasswordEventImplCopyWith<_$LoginUpdatePasswordEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoginPasswordRecoveryEventImplCopyWith<$Res> {
+  factory _$$LoginPasswordRecoveryEventImplCopyWith(
+          _$LoginPasswordRecoveryEventImpl value,
+          $Res Function(_$LoginPasswordRecoveryEventImpl) then) =
+      __$$LoginPasswordRecoveryEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String email,
+      dynamic Function(String)? onSuccess,
+      dynamic Function(Exception)? onError});
+}
+
+/// @nodoc
+class __$$LoginPasswordRecoveryEventImplCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$LoginPasswordRecoveryEventImpl>
+    implements _$$LoginPasswordRecoveryEventImplCopyWith<$Res> {
+  __$$LoginPasswordRecoveryEventImplCopyWithImpl(
+      _$LoginPasswordRecoveryEventImpl _value,
+      $Res Function(_$LoginPasswordRecoveryEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? onSuccess = freezed,
+    Object? onError = freezed,
+  }) {
+    return _then(_$LoginPasswordRecoveryEventImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      onSuccess: freezed == onSuccess
+          ? _value.onSuccess
+          : onSuccess // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(String)?,
+      onError: freezed == onError
+          ? _value.onError
+          : onError // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(Exception)?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoginPasswordRecoveryEventImpl implements LoginPasswordRecoveryEvent {
+  const _$LoginPasswordRecoveryEventImpl(
+      {required this.email, this.onSuccess, this.onError});
+
+  @override
+  final String email;
+  @override
+  final dynamic Function(String)? onSuccess;
+  @override
+  final dynamic Function(Exception)? onError;
+
+  @override
+  String toString() {
+    return 'LoginEvent.recoverPassword(email: $email, onSuccess: $onSuccess, onError: $onError)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoginPasswordRecoveryEventImpl &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess) &&
+            (identical(other.onError, onError) || other.onError == onError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email, onSuccess, onError);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoginPasswordRecoveryEventImplCopyWith<_$LoginPasswordRecoveryEventImpl>
+      get copyWith => __$$LoginPasswordRecoveryEventImplCopyWithImpl<
+          _$LoginPasswordRecoveryEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password,
+            VoidCallback? onSuccess, dynamic Function(String?)? onError)
+        signIn,
+    required TResult Function(String name, String email, String password,
+            VoidCallback? onSuccess, dynamic Function(String?)? onError)
+        signUp,
+    required TResult Function(bool isPasswordMasked) changePasswordMasked,
+    required TResult Function(LoginPageState pageState) changePage,
+    required TResult Function() sighOut,
+    required TResult Function(
+            String password,
+            dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        updateUserPassword,
+    required TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)
+        recoverPassword,
+  }) {
+    return recoverPassword(email, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password, VoidCallback? onSuccess,
+            dynamic Function(String?)? onError)?
+        signIn,
+    TResult? Function(String name, String email, String password,
+            VoidCallback? onSuccess, dynamic Function(String?)? onError)?
+        signUp,
+    TResult? Function(bool isPasswordMasked)? changePasswordMasked,
+    TResult? Function(LoginPageState pageState)? changePage,
+    TResult? Function()? sighOut,
+    TResult? Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult? Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
+  }) {
+    return recoverPassword?.call(email, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password, VoidCallback? onSuccess,
+            dynamic Function(String?)? onError)?
+        signIn,
+    TResult Function(String name, String email, String password,
+            VoidCallback? onSuccess, dynamic Function(String?)? onError)?
+        signUp,
+    TResult Function(bool isPasswordMasked)? changePasswordMasked,
+    TResult Function(LoginPageState pageState)? changePage,
+    TResult Function()? sighOut,
+    TResult Function(String password, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        updateUserPassword,
+    TResult Function(String email, dynamic Function(String)? onSuccess,
+            dynamic Function(Exception)? onError)?
+        recoverPassword,
+    required TResult orElse(),
+  }) {
+    if (recoverPassword != null) {
+      return recoverPassword(email, onSuccess, onError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoginSignInEvent value) signIn,
+    required TResult Function(LoginSignUpEvent value) signUp,
+    required TResult Function(LoginChangePasswordMaskedEvent value)
+        changePasswordMasked,
+    required TResult Function(LoginChagePageStateEvent value) changePage,
+    required TResult Function(LoginSignOutEvent value) sighOut,
+    required TResult Function(LoginUpdatePasswordEvent value)
+        updateUserPassword,
+    required TResult Function(LoginPasswordRecoveryEvent value) recoverPassword,
+  }) {
+    return recoverPassword(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoginSignInEvent value)? signIn,
+    TResult? Function(LoginSignUpEvent value)? signUp,
+    TResult? Function(LoginChangePasswordMaskedEvent value)?
+        changePasswordMasked,
+    TResult? Function(LoginChagePageStateEvent value)? changePage,
+    TResult? Function(LoginSignOutEvent value)? sighOut,
+    TResult? Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult? Function(LoginPasswordRecoveryEvent value)? recoverPassword,
+  }) {
+    return recoverPassword?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoginSignInEvent value)? signIn,
+    TResult Function(LoginSignUpEvent value)? signUp,
+    TResult Function(LoginChangePasswordMaskedEvent value)?
+        changePasswordMasked,
+    TResult Function(LoginChagePageStateEvent value)? changePage,
+    TResult Function(LoginSignOutEvent value)? sighOut,
+    TResult Function(LoginUpdatePasswordEvent value)? updateUserPassword,
+    TResult Function(LoginPasswordRecoveryEvent value)? recoverPassword,
+    required TResult orElse(),
+  }) {
+    if (recoverPassword != null) {
+      return recoverPassword(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoginPasswordRecoveryEvent implements LoginEvent {
+  const factory LoginPasswordRecoveryEvent(
+          {required final String email,
+          final dynamic Function(String)? onSuccess,
+          final dynamic Function(Exception)? onError}) =
+      _$LoginPasswordRecoveryEventImpl;
+
+  String get email;
+  dynamic Function(String)? get onSuccess;
+  dynamic Function(Exception)? get onError;
+  @JsonKey(ignore: true)
+  _$$LoginPasswordRecoveryEventImplCopyWith<_$LoginPasswordRecoveryEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

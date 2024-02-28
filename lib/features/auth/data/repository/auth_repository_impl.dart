@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'dart:html';
 
+import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/features/auth/domain/exceptions/auth_exceptions.dart';
 import 'package:teacher_client/features/auth/domain/repository/auth_repository.dart';
@@ -16,10 +18,9 @@ class AuthRepositoryImpl implements AuthRepository {
     final signInResponse =
         await _auth.signInWithPassword(email: email, password: password);
     final uuid = signInResponse.session?.user.id;
+    debugPrint('uuid $uuid');
     if (uuid != null) {
-      final teacher =
-          await _client.from('teachers').select().eq('id', uuid);
-      log('teachers = $teacher');
+      final teacher = await _client.from('teachers').select().eq('id', uuid);
       if (teacher.isEmpty) {
         signOut();
         throw UserNotTeacherException();
@@ -32,7 +33,6 @@ class AuthRepositoryImpl implements AuthRepository {
       {required String email,
       required String password,
       required String teacherName}) async {
-    log('$email $password $teacherName');
     await _auth.signUp(email: email, password: password);
     await _client
         .from('teachers')
@@ -42,5 +42,18 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> signOut() async {
     return _auth.signOut();
+  }
+
+  @override
+  Future<void> recoverPassword(String email) async {
+    final location = window.location;
+    final link =
+        '${location.protocol}//${location.host}/#/recover-route?fromIncomingRecoverLink=true';
+    _auth.resetPasswordForEmail(email, redirectTo: link);
+  }
+
+  @override
+  Future<void> updateUserPassword(String password) async {
+    _auth.updateUser(UserAttributes(password: password));
   }
 }

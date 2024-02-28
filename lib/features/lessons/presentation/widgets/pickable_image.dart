@@ -10,6 +10,7 @@ class PickableImage extends StatelessWidget {
   final double imageSize;
   final BoxFit? fit;
   final Widget? placeholder;
+  final Color? backgroundColor;
 
   const PickableImage(
       {super.key,
@@ -18,7 +19,7 @@ class PickableImage extends StatelessWidget {
       required this.filePickerResult,
       this.imageSize = 25,
       this.fit = BoxFit.cover,
-      this.placeholder});
+      this.placeholder, this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class PickableImage extends StatelessWidget {
         child: GestureDetector(
             onTap: () => onPressed?.call(),
             child: Container(
-                color: AppColors.emptyImageBackgroundColor,
+                color: backgroundColor ?? AppColors.emptyImageBackgroundColor,
                 width: imageSize,
                 height: imageSize,
                 child: _createImage())));

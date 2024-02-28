@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/core/model/course.dart';
 import 'package:teacher_client/features/courses/domain/repository/courses_repository.dart';
@@ -13,6 +14,7 @@ class CoursesRepositoryImpl implements CoursesRepository {
 
   @override
   Future<int> addCourse(Course course, [List<Lesson>? lessons]) async {
+    debugPrint('uid ${_client.auth.currentUser?.id}');
     int? courseId;
     // новая запись
     if (course.id == null) {
@@ -43,7 +45,7 @@ class CoursesRepositoryImpl implements CoursesRepository {
     }
 
     await _client.from('teachers_courses').upsert({
-      'teacher_id': _client.auth.currentUser?.id ?? 0,
+      'teacher_id': _client.auth.currentUser!.id,
       // Если мы добавили новую запись, используем полученный id, иначе запись уже
       // существует и мы её обновили, используя id имеющегося курса
       'course_id': courseId ?? course.id
@@ -53,16 +55,19 @@ class CoursesRepositoryImpl implements CoursesRepository {
 
   @override
   Future<List<Course>> teacherCourses() async {
-    return _client.rpc('teacher_courses', params: {
-      'user_id': _client.auth.currentUser?.id ?? 0
-    }).withConverter((data) =>
-        List<Map<String, dynamic>>.from(data).map(Course.fromJson).toList());
+    return _client.rpc<List<Map<String, dynamic>>>('teacher_courses', params: {
+      'user_id': _client.auth.currentUser?.id
+    }).withConverter((data) {
+      debugPrint(data.toString());
+      return List<Map<String, dynamic>>.from(data).map(Course.fromJson).toList();
+    });
   }
 
   @override
   Future<List<Course>> searchCourses(String query) async {
+    debugPrint('uid ${_client.auth.currentUser?.id}');
     return _client.rpc('search_teacher_courses', params: {
-      'user_id': _client.auth.currentUser?.id ?? 0,
+      'user_id': _client.auth.currentUser?.id,
       'query': '%$query%'
     }).withConverter((data) =>
         List<Map<String, dynamic>>.from(data).map(Course.fromJson).toList());

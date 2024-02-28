@@ -1,9 +1,11 @@
+import 'dart:async';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:teacher_client/core/constants/supa_const.dart';
 import 'package:teacher_client/core/di/core_module.dart';
 import 'package:teacher_client/core/navigation/router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:teacher_client/core/resources/colors.dart';
 import 'package:teacher_client/core/resources/fonts.dart';
 import 'package:teacher_client/core/resources/themes.dart';
 import 'package:teacher_client/features/auth/di/auth_module.dart';
@@ -33,11 +35,21 @@ class TeacherApp extends StatefulWidget {
 
 class TeacherAppState extends State<TeacherApp> {
   late final AppRouter _appRouter;
+  late final StreamSubscription _authEvents;
 
   @override
   void initState() {
     super.initState();
     _appRouter = AppRouter();
+    _authEvents = Supabase.instance.client.auth.onAuthStateChange.listen((state) {
+      debugPrint("auth event is ${state.event.name}");
+    });
+  }
+
+  @override
+  void dispose() {
+    _authEvents.cancel();
+    super.dispose();
   }
 
   // This widget is the root of your application.

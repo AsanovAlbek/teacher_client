@@ -13,16 +13,12 @@ class LessonsRepositoryImpl implements LessonsRepository {
   @override
   Future<void> addLesson(int courseId, Lesson lesson) async {
     if (lesson.id == null) {
-      log('insert');
       final res = await _client
           .from('lessons')
           .insert(lesson.toJson()..remove('id')).select();
-      debugPrint(res.toString());
     } else {
-      log('update');
       await _client.from('lessons').update(lesson.toJson()).eq('id', lesson.id!);
     }
-    //return _client.from('lessons').upsert(lesson.toJson());
   }
 
   @override

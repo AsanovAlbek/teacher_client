@@ -23,4 +23,14 @@ class LoginEvent with _$LoginEvent {
       LoginChagePageStateEvent;
 
   const factory LoginEvent.sighOut() = LoginSignOutEvent;
+
+  const factory LoginEvent.updateUserPassword(
+      {required String password,
+      Function(String)? onSuccess,
+      Function(Exception)? onError}) = LoginUpdatePasswordEvent;
+
+  const factory LoginEvent.recoverPassword(
+      {required String email,
+      Function(String)? onSuccess,
+      Function(Exception)? onError}) = LoginPasswordRecoveryEvent;
 }

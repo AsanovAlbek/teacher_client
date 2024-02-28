@@ -38,7 +38,6 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
       emit(_loaded);
     } catch (e, stack) {
       emit(const LessonState.error('Нет подключения к интернету'));
-      log('err $e', stackTrace: stack);
     }
   }
 
@@ -47,16 +46,14 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
       if (event.courseId != -1) {
         await _repository.addLesson(event.courseId, event.lesson);
         add(LessonEvent.load(courseId: event.courseId));
-        debugPrint('state exist lesson $_loaded');
       } else {
         final lessons = _loaded.lessons.toList(growable: true);
         lessons.add(event.lesson);
         _loaded = _loaded.copyWith(lessons: lessons);
         emit(_loaded);
-        debugPrint('state $_loaded');
       }
     } catch (e, stack) {
-      log('err $e', stackTrace: stack);
+      debugPrint('err $e');
     }
   }
 }

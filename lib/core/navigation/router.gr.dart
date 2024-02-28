@@ -44,6 +44,17 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    RecoverRoute.name: (routeData) {
+      final args = routeData.argsAs<RecoverRouteArgs>(
+          orElse: () => const RecoverRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RecoverPage(
+          key: args.key,
+          fromIncomingRecoverLink: args.fromIncomingRecoverLink,
+        ),
+      );
+    },
   };
 }
 
@@ -130,4 +141,42 @@ class LoginRoute extends PageRouteInfo<void> {
   static const String name = 'LoginRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RecoverPage]
+class RecoverRoute extends PageRouteInfo<RecoverRouteArgs> {
+  RecoverRoute({
+    Key? key,
+    bool fromIncomingRecoverLink = false,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RecoverRoute.name,
+          args: RecoverRouteArgs(
+            key: key,
+            fromIncomingRecoverLink: fromIncomingRecoverLink,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'RecoverRoute';
+
+  static const PageInfo<RecoverRouteArgs> page =
+      PageInfo<RecoverRouteArgs>(name);
+}
+
+class RecoverRouteArgs {
+  const RecoverRouteArgs({
+    this.key,
+    this.fromIncomingRecoverLink = false,
+  });
+
+  final Key? key;
+
+  final bool fromIncomingRecoverLink;
+
+  @override
+  String toString() {
+    return 'RecoverRouteArgs{key: $key, fromIncomingRecoverLink: $fromIncomingRecoverLink}';
+  }
 }

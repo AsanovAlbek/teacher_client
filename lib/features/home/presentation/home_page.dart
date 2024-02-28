@@ -1,5 +1,9 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:teacher_client/core/navigation/router.dart';
 import 'package:teacher_client/core/resources/images.dart';
 
 @RoutePage()
@@ -8,9 +12,11 @@ class HomePage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _HomePageState();
+
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,13 +33,18 @@ class _HomePageState extends State<HomePage> {
                     child: SizedBox.square(
                         dimension: 100,
                         child: CircleAvatar(child: AppImages.person)),
-                  )
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        Supabase.instance.client.auth.signOut();
+                        AutoRouter.of(context).replace(const LoginRoute());
+                      },
+                      child: const Text('Выйти'))
                 ],
               ),
             ),
           ),
-          const Expanded(
-              child: AutoRouter())
+          const Expanded(child: AutoRouter())
         ],
       ),
     );

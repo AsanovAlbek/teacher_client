@@ -41,7 +41,7 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
     }
     try {
       final courses = await _coursesRepository.teacherCourses();
-      debugPrint('set = ${courses.toSet()}');
+      debugPrint('courses = ${courses.map((e) => e.name).toList()}');
       if (courses.isEmpty) {
         emit(const CourseState.empty());
       } else {
@@ -49,8 +49,8 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
         emit(_loaded);
       }
     } catch (e, stack) {
-      log('err $e', stackTrace: stack);
-      debugPrint('$e');
+      debugPrint('err $e');
+      debugPrintStack(stackTrace: stack);
       emit(const CourseState.error(message: 'Нет подключения к интернету'));
     }
   }
@@ -62,16 +62,18 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
     }
     try {
       final courses = await _coursesRepository.searchCourses(event.query);
+      debugPrint('search courses = ${courses.map((e) => e.name).toList()}');
       if (courses.isEmpty) {
         emit(const CourseState.empty());
       } else {
-        debugPrint('set = ${courses.toSet()}');
         _loaded = _loaded.copyWith(courses: courses.toSet().toList());
         emit(_loaded);
+
       }
     } catch (e, stack) {
-      log('err $e', stackTrace: stack);
       emit(const CourseState.error(message: 'Нет подключения к интернету'));
+      debugPrint('err $e');
+      debugPrintStack(stackTrace: stack);
     }
   }
 
