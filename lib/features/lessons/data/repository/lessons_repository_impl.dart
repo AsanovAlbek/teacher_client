@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/core/model/lesson.dart';
 import 'package:teacher_client/features/lessons/domain/repository/lessons_repository.dart';
@@ -15,9 +12,13 @@ class LessonsRepositoryImpl implements LessonsRepository {
     if (lesson.id == null) {
       final res = await _client
           .from('lessons')
-          .insert(lesson.toJson()..remove('id')).select();
+          .insert(lesson.toJson()..remove('id'))
+          .select();
     } else {
-      await _client.from('lessons').update(lesson.toJson()).eq('id', lesson.id!);
+      await _client
+          .from('lessons')
+          .update(lesson.toJson())
+          .eq('id', lesson.id!);
     }
   }
 
@@ -31,5 +32,20 @@ class LessonsRepositoryImpl implements LessonsRepository {
             List<Map<String, dynamic>>.from(data)
                 .map(Lesson.fromJson)
                 .toList());
+  }
+
+  @override
+  Future<Lesson> lessonById(int lessonId) async {
+    return await _client
+        .from('lessons')
+        .select()
+        .eq('id', lessonId)
+        .single()
+        .withConverter(Lesson.fromJson);
+  }
+
+  @override
+  Future<void> deleteLesson(Lesson lesson) async {
+    await _client.from('lessons').delete().eq('id', lesson.id ?? 0);
   }
 }

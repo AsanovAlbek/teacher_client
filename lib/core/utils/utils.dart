@@ -1,11 +1,11 @@
 import 'dart:async';
 
 class AppUtils {
-  static Timer? timer;
+  static Timer? _timer;
   static void debounce(Function action, [Duration duration = const Duration(milliseconds: 500)]) {
-    if (timer?.isActive ?? false) {
-      timer?.cancel();
+    if (_timer?.isActive ?? false) {
+      _timer?.cancel();
     }
-    timer = Timer(duration, () => action());
+    _timer = Timer(duration, () => action());
   }
 }

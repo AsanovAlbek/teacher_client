@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:teacher_client/core/constants/supa_const.dart';
 import 'package:teacher_client/core/di/core_module.dart';
@@ -11,6 +10,7 @@ import 'package:teacher_client/core/resources/themes.dart';
 import 'package:teacher_client/features/auth/di/auth_module.dart';
 import 'package:teacher_client/features/courses/di/courses_module.dart';
 import 'package:teacher_client/features/lessons/di/lessons_module.dart';
+import 'package:teacher_client/features/tasks/di/tasks_module.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +23,7 @@ void main() async {
   authModule();
   coursesModule();
   lessonsModule();
+  tasksModule();
   runApp(const TeacherApp());
 }
 

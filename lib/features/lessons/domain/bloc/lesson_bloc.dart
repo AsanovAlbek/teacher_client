@@ -22,6 +22,7 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
         super(const LessonState.loading()) {
     on<LessonLoadEvent>(_load);
     on<LessonAddEvent>(_addLesson);
+    on<LessonDeleteEvent>(_deleteLesson);
   }
 
   LessonLoadedState _loaded = const LessonLoadedState();
@@ -54,6 +55,14 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
       }
     } catch (e, stack) {
       debugPrint('err $e');
+    }
+  }
+
+  FutureOr<void> _deleteLesson(LessonDeleteEvent event, Emitter<LessonState> emit) async {
+    try {
+      await _repository.deleteLesson(event.lesson);
+    } catch(e) {
+      debugPrint(e.toString());
     }
   }
 }

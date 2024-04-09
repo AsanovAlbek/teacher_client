@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:teacher_client/core/navigation/router.dart';
-import 'package:teacher_client/core/repository/image_upload_repository.dart';
+import 'package:teacher_client/core/repository/storage_repository.dart';
 import 'package:teacher_client/core/resources/colors.dart';
 import 'package:teacher_client/core/utils/utils.dart';
 import 'package:teacher_client/features/courses/domain/bloc/course_bloc.dart';
@@ -37,7 +37,7 @@ class _CoursesPageState extends State<CoursesPage> {
     return BlocProvider(
       create: (context) => CourseBloc(
           coursesRepository: GetIt.I<CoursesRepository>(),
-          uploadRepository: GetIt.I<ImageUploadRepository>())
+          uploadRepository: GetIt.I<StorageRepository>())
         ..add(const CoursesEvent.load()),
       child: Scaffold(
         backgroundColor: AppColors.backgroundColor,

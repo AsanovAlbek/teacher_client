@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/features/auth/domain/exceptions/auth_exceptions.dart';

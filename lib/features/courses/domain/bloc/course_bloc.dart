@@ -8,7 +8,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/model/course.dart';
 import '../../../../core/model/lesson.dart';
-import '../../../../core/repository/image_upload_repository.dart';
+import '../../../../core/repository/storage_repository.dart';
 import '../repository/courses_repository.dart';
 
 part 'course_event.dart';
@@ -19,11 +19,11 @@ part 'course_bloc.freezed.dart';
 
 class CourseBloc extends Bloc<CoursesEvent, CourseState> {
   final CoursesRepository _coursesRepository;
-  final ImageUploadRepository _imageUploadRepository;
+  final StorageRepository _imageUploadRepository;
 
   CourseBloc(
       {required CoursesRepository coursesRepository,
-      required ImageUploadRepository uploadRepository})
+      required StorageRepository uploadRepository})
       : _coursesRepository = coursesRepository,
         _imageUploadRepository = uploadRepository,
         super(const CourseState.loading()) {
@@ -82,7 +82,7 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
     Course course = event.course;
     try {
       if (event.pickerResult != null) {
-        final imageUrl = await _imageUploadRepository.uploadImage(
+        final imageUrl = await _imageUploadRepository.uploadFile(
             'courses_images', event.pickerResult!);
         course = course.copyWith(iconUrl: imageUrl);
       }

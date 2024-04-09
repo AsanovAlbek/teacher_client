@@ -12,27 +12,29 @@ part of 'lesson_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LessonEvent {
-  int get courseId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) load,
     required TResult Function(int courseId, Lesson lesson) addLesson,
+    required TResult Function(Lesson lesson) deleteLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? load,
     TResult? Function(int courseId, Lesson lesson)? addLesson,
+    TResult? Function(Lesson lesson)? deleteLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? load,
     TResult Function(int courseId, Lesson lesson)? addLesson,
+    TResult Function(Lesson lesson)? deleteLesson,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,24 +42,23 @@ mixin _$LessonEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(LessonLoadEvent value) load,
     required TResult Function(LessonAddEvent value) addLesson,
+    required TResult Function(LessonDeleteEvent value) deleteLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LessonLoadEvent value)? load,
     TResult? Function(LessonAddEvent value)? addLesson,
+    TResult? Function(LessonDeleteEvent value)? deleteLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LessonLoadEvent value)? load,
     TResult Function(LessonAddEvent value)? addLesson,
+    TResult Function(LessonDeleteEvent value)? deleteLesson,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $LessonEventCopyWith<LessonEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -66,8 +67,6 @@ abstract class $LessonEventCopyWith<$Res> {
   factory $LessonEventCopyWith(
           LessonEvent value, $Res Function(LessonEvent) then) =
       _$LessonEventCopyWithImpl<$Res, LessonEvent>;
-  @useResult
-  $Res call({int courseId});
 }
 
 /// @nodoc
@@ -79,28 +78,13 @@ class _$LessonEventCopyWithImpl<$Res, $Val extends LessonEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? courseId = null,
-  }) {
-    return _then(_value.copyWith(
-      courseId: null == courseId
-          ? _value.courseId
-          : courseId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$LessonLoadEventImplCopyWith<$Res>
-    implements $LessonEventCopyWith<$Res> {
+abstract class _$$LessonLoadEventImplCopyWith<$Res> {
   factory _$$LessonLoadEventImplCopyWith(_$LessonLoadEventImpl value,
           $Res Function(_$LessonLoadEventImpl) then) =
       __$$LessonLoadEventImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({int courseId});
 }
@@ -164,6 +148,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) load,
     required TResult Function(int courseId, Lesson lesson) addLesson,
+    required TResult Function(Lesson lesson) deleteLesson,
   }) {
     return load(courseId);
   }
@@ -173,6 +158,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? load,
     TResult? Function(int courseId, Lesson lesson)? addLesson,
+    TResult? Function(Lesson lesson)? deleteLesson,
   }) {
     return load?.call(courseId);
   }
@@ -182,6 +168,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? load,
     TResult Function(int courseId, Lesson lesson)? addLesson,
+    TResult Function(Lesson lesson)? deleteLesson,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -195,6 +182,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(LessonLoadEvent value) load,
     required TResult Function(LessonAddEvent value) addLesson,
+    required TResult Function(LessonDeleteEvent value) deleteLesson,
   }) {
     return load(this);
   }
@@ -204,6 +192,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LessonLoadEvent value)? load,
     TResult? Function(LessonAddEvent value)? addLesson,
+    TResult? Function(LessonDeleteEvent value)? deleteLesson,
   }) {
     return load?.call(this);
   }
@@ -213,6 +202,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LessonLoadEvent value)? load,
     TResult Function(LessonAddEvent value)? addLesson,
+    TResult Function(LessonDeleteEvent value)? deleteLesson,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -227,21 +217,17 @@ abstract class LessonLoadEvent extends LessonEvent {
       _$LessonLoadEventImpl;
   const LessonLoadEvent._() : super._();
 
-  @override
   int get courseId;
-  @override
   @JsonKey(ignore: true)
   _$$LessonLoadEventImplCopyWith<_$LessonLoadEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LessonAddEventImplCopyWith<$Res>
-    implements $LessonEventCopyWith<$Res> {
+abstract class _$$LessonAddEventImplCopyWith<$Res> {
   factory _$$LessonAddEventImplCopyWith(_$LessonAddEventImpl value,
           $Res Function(_$LessonAddEventImpl) then) =
       __$$LessonAddEventImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({int courseId, Lesson lesson});
 
@@ -324,6 +310,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) load,
     required TResult Function(int courseId, Lesson lesson) addLesson,
+    required TResult Function(Lesson lesson) deleteLesson,
   }) {
     return addLesson(courseId, lesson);
   }
@@ -333,6 +320,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? load,
     TResult? Function(int courseId, Lesson lesson)? addLesson,
+    TResult? Function(Lesson lesson)? deleteLesson,
   }) {
     return addLesson?.call(courseId, lesson);
   }
@@ -342,6 +330,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? load,
     TResult Function(int courseId, Lesson lesson)? addLesson,
+    TResult Function(Lesson lesson)? deleteLesson,
     required TResult orElse(),
   }) {
     if (addLesson != null) {
@@ -355,6 +344,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(LessonLoadEvent value) load,
     required TResult Function(LessonAddEvent value) addLesson,
+    required TResult Function(LessonDeleteEvent value) deleteLesson,
   }) {
     return addLesson(this);
   }
@@ -364,6 +354,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LessonLoadEvent value)? load,
     TResult? Function(LessonAddEvent value)? addLesson,
+    TResult? Function(LessonDeleteEvent value)? deleteLesson,
   }) {
     return addLesson?.call(this);
   }
@@ -373,6 +364,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LessonLoadEvent value)? load,
     TResult Function(LessonAddEvent value)? addLesson,
+    TResult Function(LessonDeleteEvent value)? deleteLesson,
     required TResult orElse(),
   }) {
     if (addLesson != null) {
@@ -388,12 +380,162 @@ abstract class LessonAddEvent extends LessonEvent {
       required final Lesson lesson}) = _$LessonAddEventImpl;
   const LessonAddEvent._() : super._();
 
-  @override
   int get courseId;
   Lesson get lesson;
-  @override
   @JsonKey(ignore: true)
   _$$LessonAddEventImplCopyWith<_$LessonAddEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LessonDeleteEventImplCopyWith<$Res> {
+  factory _$$LessonDeleteEventImplCopyWith(_$LessonDeleteEventImpl value,
+          $Res Function(_$LessonDeleteEventImpl) then) =
+      __$$LessonDeleteEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Lesson lesson});
+
+  $LessonCopyWith<$Res> get lesson;
+}
+
+/// @nodoc
+class __$$LessonDeleteEventImplCopyWithImpl<$Res>
+    extends _$LessonEventCopyWithImpl<$Res, _$LessonDeleteEventImpl>
+    implements _$$LessonDeleteEventImplCopyWith<$Res> {
+  __$$LessonDeleteEventImplCopyWithImpl(_$LessonDeleteEventImpl _value,
+      $Res Function(_$LessonDeleteEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? lesson = null,
+  }) {
+    return _then(_$LessonDeleteEventImpl(
+      lesson: null == lesson
+          ? _value.lesson
+          : lesson // ignore: cast_nullable_to_non_nullable
+              as Lesson,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LessonCopyWith<$Res> get lesson {
+    return $LessonCopyWith<$Res>(_value.lesson, (value) {
+      return _then(_value.copyWith(lesson: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$LessonDeleteEventImpl extends LessonDeleteEvent {
+  const _$LessonDeleteEventImpl({required this.lesson}) : super._();
+
+  @override
+  final Lesson lesson;
+
+  @override
+  String toString() {
+    return 'LessonEvent.deleteLesson(lesson: $lesson)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LessonDeleteEventImpl &&
+            (identical(other.lesson, lesson) || other.lesson == lesson));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, lesson);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LessonDeleteEventImplCopyWith<_$LessonDeleteEventImpl> get copyWith =>
+      __$$LessonDeleteEventImplCopyWithImpl<_$LessonDeleteEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int courseId) load,
+    required TResult Function(int courseId, Lesson lesson) addLesson,
+    required TResult Function(Lesson lesson) deleteLesson,
+  }) {
+    return deleteLesson(lesson);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int courseId)? load,
+    TResult? Function(int courseId, Lesson lesson)? addLesson,
+    TResult? Function(Lesson lesson)? deleteLesson,
+  }) {
+    return deleteLesson?.call(lesson);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int courseId)? load,
+    TResult Function(int courseId, Lesson lesson)? addLesson,
+    TResult Function(Lesson lesson)? deleteLesson,
+    required TResult orElse(),
+  }) {
+    if (deleteLesson != null) {
+      return deleteLesson(lesson);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LessonLoadEvent value) load,
+    required TResult Function(LessonAddEvent value) addLesson,
+    required TResult Function(LessonDeleteEvent value) deleteLesson,
+  }) {
+    return deleteLesson(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LessonLoadEvent value)? load,
+    TResult? Function(LessonAddEvent value)? addLesson,
+    TResult? Function(LessonDeleteEvent value)? deleteLesson,
+  }) {
+    return deleteLesson?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LessonLoadEvent value)? load,
+    TResult Function(LessonAddEvent value)? addLesson,
+    TResult Function(LessonDeleteEvent value)? deleteLesson,
+    required TResult orElse(),
+  }) {
+    if (deleteLesson != null) {
+      return deleteLesson(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LessonDeleteEvent extends LessonEvent {
+  const factory LessonDeleteEvent({required final Lesson lesson}) =
+      _$LessonDeleteEventImpl;
+  const LessonDeleteEvent._() : super._();
+
+  Lesson get lesson;
+  @JsonKey(ignore: true)
+  _$$LessonDeleteEventImplCopyWith<_$LessonDeleteEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

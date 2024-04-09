@@ -10,7 +10,7 @@ import 'package:teacher_client/features/lessons/domain/bloc/lesson_bloc.dart';
 import 'package:teacher_client/features/lessons/domain/repository/lessons_repository.dart';
 import 'package:teacher_client/features/lessons/presentation/widgets/lesson_item.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:teacher_client/features/lessons/presentation/widgets/pickable_image.dart';
+import 'package:teacher_client/core/widget/pickable_image.dart';
 
 import '../../../core/model/course.dart';
 import '../../../core/model/lesson.dart';
@@ -29,15 +29,15 @@ class CoursesThemesPage extends StatelessWidget {
           BlocProvider<CourseBloc>.value(value: courseBloc),
           BlocProvider(
               create: (context) =>
-              LessonBloc(repository: GetIt.I<LessonsRepository>())
-                ..add(LessonEvent.load(courseId: course?.id ?? -1)))
+                  LessonBloc(repository: GetIt.I<LessonsRepository>())
+                    ..add(LessonEvent.load(courseId: course?.id ?? -1)))
         ],
         child: SafeArea(
           child: Scaffold(
             backgroundColor: AppColors.backgroundColor,
             body: Center(
               child:
-              _CourseEditorContent(course: course, courseBloc: courseBloc),
+                  _CourseEditorContent(course: course, courseBloc: courseBloc),
             ),
           ),
         ));
@@ -84,17 +84,14 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
           return Padding(
             padding: const EdgeInsets.all(50).copyWith(bottom: 10),
             child:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                     widget.course != null
                         ? 'РЕДАКТИРОВАТЬ КУРС'
                         : 'ДОБАВИТЬ КУРС',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headlineLarge),
+                    style: Theme.of(context).textTheme.headlineLarge),
               ),
               Expanded(
                 child: Card(
@@ -112,8 +109,8 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                 imageUrl: widget.course?.iconUrl,
                                 imageSize: 200,
                                 onPressed: () async {
-                                  final image = await FilePicker.platform.pickFiles(
-                                      type: FileType.image);
+                                  final image = await FilePicker.platform
+                                      .pickFiles(type: FileType.image);
                                   if (image != null) {
                                     setState(() {
                                       _filePickerResult = image;
@@ -132,14 +129,14 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                             label: const Text('Название курса'),
                                             border: OutlineInputBorder(
                                                 borderRadius:
-                                                BorderRadius.circular(8)))),
+                                                    BorderRadius.circular(8)))),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: TextField(
                                         textAlign: TextAlign.start,
                                         textAlignVertical:
-                                        TextAlignVertical.top,
+                                            TextAlignVertical.top,
                                         minLines: 4,
                                         maxLines: 4,
                                         controller: _descriptionController,
@@ -147,28 +144,30 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                             label: const Text('Описание курса'),
                                             border: OutlineInputBorder(
                                                 borderRadius:
-                                                BorderRadius.circular(8)))),
+                                                    BorderRadius.circular(8)))),
                                   )
                                 ]),
                               )
                             ]),
                             TextButton(
                                 onPressed: () {
-                                  lessonBloc.add(LessonEvent.addLesson(
-                                      courseId: widget.course?.id ?? -1,
-                                      lesson: Lesson(
-                                          name: 'Тема ${lessons.length + 1}',
-                                          courseId: widget.course?.id ?? 0,
-                                          description:
-                                          'Описание урока ${lessons.length +
-                                              1}',
-                                          status: PublicationStatus
-                                              .published.label)));
+                                  // lessonBloc.add(LessonEvent.addLesson(
+                                  //     courseId: widget.course?.id ?? -1,
+                                  //     lesson: Lesson(
+                                  //         name: 'Тема ${lessons.length + 1}',
+                                  //         courseId: widget.course?.id ?? 0,
+                                  //         description:
+                                  //             'Описание урока ${lessons.length + 1}',
+                                  //         status: PublicationStatus
+                                  //             .published.label)));
+                                  AutoRouter.of(context).navigate(TasksRoute(
+                                    lesson: Lesson(courseId: widget.course?.id ?? -1),
+                                      lessonBloc: BlocProvider.of<LessonBloc>(
+                                          context)));
                                 },
                                 child: Text(
                                   '+ Добавить урок',
-                                  style: Theme
-                                      .of(context)
+                                  style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium
                                       ?.copyWith(color: AppColors.orange),
@@ -176,25 +175,29 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                             if (lessons.isNotEmpty) ...[
                               Expanded(
                                 child: ListView.separated(
-                                    itemBuilder: (context, index) =>
-                                        LessonItem(
-                                            lesson: lessons[index],
-                                            onRedact: (lesson) {}),
+                                    itemBuilder: (context, index) => LessonItem(
+                                        lesson: lessons[index],
+                                        onRedact: (lesson) {
+                                          AutoRouter.of(context).navigate(
+                                              TasksRoute(
+                                                  lessonBloc: context
+                                                      .read<LessonBloc>(),
+                                                  lesson: lessons[index]));
+                                        }),
                                     separatorBuilder: (context, index) =>
-                                    const SizedBox(height: 4),
+                                        const SizedBox(height: 4),
                                     itemCount: lessons.length),
                               )
-                            ] else
-                              ...[
-                                const Expanded(
-                                  child: Center(
-                                    child: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text('Вы ещё не добавили уроки'),
-                                    ),
+                            ] else ...[
+                              const Expanded(
+                                child: Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Вы ещё не добавили уроки'),
                                   ),
-                                )
-                              ],
+                                ),
+                              )
+                            ],
                             Center(
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
@@ -208,9 +211,9 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                                   name: _nameController.text
                                                       .trim(),
                                                   description:
-                                                  _descriptionController
-                                                      .text
-                                                      .trim(),
+                                                      _descriptionController
+                                                          .text
+                                                          .trim(),
                                                   status: PublicationStatus
                                                       .published.label),
                                               lessons: lessons));

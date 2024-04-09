@@ -55,6 +55,17 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    TasksRoute.name: (routeData) {
+      final args = routeData.argsAs<TasksRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: TasksScreen(
+          key: args.key,
+          lesson: args.lesson,
+          lessonBloc: args.lessonBloc,
+        ),
+      );
+    },
   };
 }
 
@@ -178,5 +189,47 @@ class RecoverRouteArgs {
   @override
   String toString() {
     return 'RecoverRouteArgs{key: $key, fromIncomingRecoverLink: $fromIncomingRecoverLink}';
+  }
+}
+
+/// generated route for
+/// [TasksScreen]
+class TasksRoute extends PageRouteInfo<TasksRouteArgs> {
+  TasksRoute({
+    Key? key,
+    required Lesson lesson,
+    required LessonBloc lessonBloc,
+    List<PageRouteInfo>? children,
+  }) : super(
+          TasksRoute.name,
+          args: TasksRouteArgs(
+            key: key,
+            lesson: lesson,
+            lessonBloc: lessonBloc,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'TasksRoute';
+
+  static const PageInfo<TasksRouteArgs> page = PageInfo<TasksRouteArgs>(name);
+}
+
+class TasksRouteArgs {
+  const TasksRouteArgs({
+    this.key,
+    required this.lesson,
+    required this.lessonBloc,
+  });
+
+  final Key? key;
+
+  final Lesson lesson;
+
+  final LessonBloc lessonBloc;
+
+  @override
+  String toString() {
+    return 'TasksRouteArgs{key: $key, lesson: $lesson, lessonBloc: $lessonBloc}';
   }
 }

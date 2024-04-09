@@ -9,7 +9,10 @@ import 'package:teacher_client/features/lessons/presentation/courses_themes.dart
 
 import '../../features/courses/domain/bloc/course_bloc.dart';
 import '../../features/home/presentation/home_page.dart';
+import '../../features/lessons/domain/bloc/lesson_bloc.dart';
+import '../../features/tasks/presentation/tasks_screen.dart';
 import '../model/course.dart';
+import '../model/lesson.dart';
 
 part 'router.gr.dart';
 
@@ -21,7 +24,8 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: RecoverRoute.page),
         AutoRoute(page: HomeRoute.page, children: [
           AutoRoute(page: CoursesRoute.page, initial: true),
-          AutoRoute(page: CoursesThemesRoute.page)
+          AutoRoute(page: CoursesThemesRoute.page),
+          AutoRoute(page: TasksRoute.page)
         ])
       ];
 }
