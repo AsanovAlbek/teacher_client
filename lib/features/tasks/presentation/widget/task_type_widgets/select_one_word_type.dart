@@ -11,9 +11,8 @@ import 'package:collection/collection.dart';
 
 class SelectOneWordType extends StatefulWidget {
   final TaskModel task;
-  final TasksBloc bloc;
 
-  const SelectOneWordType({super.key, required this.task, required this.bloc});
+  const SelectOneWordType({super.key, required this.task});
 
   @override
   State<SelectOneWordType> createState() => _SelectOneWordTypeState();
@@ -67,7 +66,7 @@ class _SelectOneWordTypeState extends State<SelectOneWordType> {
                         filled: true),
                     onChanged: (text) {
                       AppUtils.debounce(() {
-                        bloc.add(TasksEvent.setTask(
+                        bloc.add(TasksEvent.upsertTask(
                             task: widget.task.copyWith(task: text.trim())));
                       });
                     }),
@@ -92,7 +91,7 @@ class _SelectOneWordTypeState extends State<SelectOneWordType> {
       onChanged: (selection) {
         setState(() {
           _selectedIndex = selection;
-          bloc.add(TasksEvent.setTask(
+          bloc.add(TasksEvent.upsertTask(
               task: widget.task.copyWith(
                   answerModels: widget.task.answerModels.mapIndexed((i, e) {
                     return e.copyWith(
@@ -106,7 +105,7 @@ class _SelectOneWordTypeState extends State<SelectOneWordType> {
       initialValue: answerModel.answer.answer,
       onChanged: (text) {
         AppUtils.debounce(() {
-          bloc.add(TasksEvent.setTask(
+          bloc.add(TasksEvent.upsertTask(
               task: widget.task.copyWith(
                   answerModels: widget.task.answerModels.map((e) {
                     if (answerModel.answer == e.answer) {

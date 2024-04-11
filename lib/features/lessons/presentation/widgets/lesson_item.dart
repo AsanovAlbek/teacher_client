@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/publication_status.dart';
 import '../../../../core/model/lesson.dart';
 import '../../../../core/resources/colors.dart';
+import '../../domain/model/lesson.dart';
 
 class LessonItem extends StatelessWidget {
-  final Lesson lesson;
-  final Function(Lesson)? onRedact;
+  final LessonModel lesson;
+  final Function(LessonModel)? onRedact;
 
   const LessonItem({super.key, required this.lesson, this.onRedact});
 
@@ -15,7 +16,7 @@ class LessonItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final PublicationStatus status = PublicationStatus.values.firstWhere(
-        (s) => s.label == lesson.status.toUpperCase(),
+        (s) => s.label == lesson.status.label.toUpperCase(),
         orElse: () => PublicationStatus.error);
     return Card(
       color: Colors.white,

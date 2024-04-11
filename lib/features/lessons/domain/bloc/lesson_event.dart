@@ -7,7 +7,9 @@ class LessonEvent with _$LessonEvent {
   const factory LessonEvent.load({required int courseId}) = LessonLoadEvent;
 
   const factory LessonEvent.addLesson(
-      {required int courseId, required Lesson lesson}) = LessonAddEvent;
+      {required int courseId, required LessonModel lesson,
+        Function(Lesson)? onSuccess,
+        Function(Object?)? onError}) = LessonAddEvent;
 
-  const factory LessonEvent.deleteLesson({required Lesson lesson}) = LessonDeleteEvent;
+  const factory LessonEvent.deleteLesson({required LessonModel lesson}) = LessonDeleteEvent;
 }

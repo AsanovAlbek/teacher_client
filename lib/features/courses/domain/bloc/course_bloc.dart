@@ -86,11 +86,13 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
             'courses_images', event.pickerResult!);
         course = course.copyWith(iconUrl: imageUrl);
       }
-      await _coursesRepository.addCourse(course, event.lessons);
+      final upsertCourse = await _coursesRepository.upsertCourse(course);
       add(const CoursesEvent.load());
+      event.onSuccess?.call(upsertCourse);
     } catch (e, stack) {
       debugPrint('err $e');
       debugPrintStack(stackTrace: stack);
+      event.onError?.call(Exception(e));
     }
   }
 }

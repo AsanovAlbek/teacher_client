@@ -17,6 +17,7 @@ class RightAnswerSwitcher extends StatelessWidget {
     return Padding(
       padding: padding != null ? EdgeInsets.all(padding!) : EdgeInsets.zero,
       child: DropdownMenu(
+        width: MediaQuery.of(context).size.width / 5,
         initialSelection: task.answerModels.firstWhereOrNull(
                 (answerModel) => bool.tryParse(
                 answerModel.answer.rightAnswer.toLowerCase()) == true),
@@ -28,16 +29,6 @@ class RightAnswerSwitcher extends StatelessWidget {
         onSelected: (AnswerModel? selection) {
           if (selection != null) {
             onSelected?.call(selection);
-            // var answerModels =
-            // widget.task.answerModels.map((answerModel) {
-            //   return answerModel.copyWith(
-            //       answer: answerModel.answer.copyWith(
-            //           rightAnswer:
-            //           (answerModel == selection).toString()));
-            // }).toList();
-            // context.read<TasksBloc>().add(TasksEvent.setTask(
-            //     task:
-            //     widget.task.copyWith(answerModels: answerModels)));
           }
         },
       ),

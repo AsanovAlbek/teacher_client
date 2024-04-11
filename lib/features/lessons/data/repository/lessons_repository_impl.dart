@@ -8,18 +8,20 @@ class LessonsRepositoryImpl implements LessonsRepository {
   LessonsRepositoryImpl({required SupabaseClient client}) : _client = client;
 
   @override
-  Future<void> addLesson(int courseId, Lesson lesson) async {
+  Future<Lesson> upsertLesson(Lesson lesson) async {
+    Map<String,dynamic>? upsertLessonJson;
     if (lesson.id == null) {
-      final res = await _client
+      upsertLessonJson = await _client
           .from('lessons')
           .insert(lesson.toJson()..remove('id'))
-          .select();
+          .select().limit(1).single();
     } else {
       await _client
           .from('lessons')
           .update(lesson.toJson())
-          .eq('id', lesson.id!);
+          .eq('id', lesson.id!).select().limit(1).single();
     }
+    return Lesson.fromJson(upsertLessonJson!);
   }
 
   @override

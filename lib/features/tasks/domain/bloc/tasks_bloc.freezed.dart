@@ -22,6 +22,12 @@ mixin _$TasksEvent {
     required TResult Function(Lesson lesson) createLesson,
     required TResult Function(Lesson lesson) setLesson,
     required TResult Function(int lessonId, TaskModel task) addTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess,
+            dynamic Function()? onError)
+        upsertTask,
     required TResult Function(int taskId) removeTask,
     required TResult Function(TaskModel task) updateTask,
     required TResult Function(TaskModel task) setTask,
@@ -35,6 +41,9 @@ mixin _$TasksEvent {
     TResult? Function(Lesson lesson)? createLesson,
     TResult? Function(Lesson lesson)? setLesson,
     TResult? Function(int lessonId, TaskModel task)? addTask,
+    TResult? Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult? Function(int taskId)? removeTask,
     TResult? Function(TaskModel task)? updateTask,
     TResult? Function(TaskModel task)? setTask,
@@ -48,6 +57,9 @@ mixin _$TasksEvent {
     TResult Function(Lesson lesson)? createLesson,
     TResult Function(Lesson lesson)? setLesson,
     TResult Function(int lessonId, TaskModel task)? addTask,
+    TResult Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult Function(int taskId)? removeTask,
     TResult Function(TaskModel task)? updateTask,
     TResult Function(TaskModel task)? setTask,
@@ -62,6 +74,7 @@ mixin _$TasksEvent {
     required TResult Function(TasksCreateLessonEvent value) createLesson,
     required TResult Function(TasksSetLessonEvent value) setLesson,
     required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksUpsertEvent value) upsertTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
     required TResult Function(TasksSetEvent value) setTask,
@@ -76,6 +89,7 @@ mixin _$TasksEvent {
     TResult? Function(TasksCreateLessonEvent value)? createLesson,
     TResult? Function(TasksSetLessonEvent value)? setLesson,
     TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksUpsertEvent value)? upsertTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
     TResult? Function(TasksSetEvent value)? setTask,
@@ -89,6 +103,7 @@ mixin _$TasksEvent {
     TResult Function(TasksCreateLessonEvent value)? createLesson,
     TResult Function(TasksSetLessonEvent value)? setLesson,
     TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksUpsertEvent value)? upsertTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
     TResult Function(TasksSetEvent value)? setTask,
@@ -196,6 +211,12 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
     required TResult Function(Lesson lesson) createLesson,
     required TResult Function(Lesson lesson) setLesson,
     required TResult Function(int lessonId, TaskModel task) addTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess,
+            dynamic Function()? onError)
+        upsertTask,
     required TResult Function(int taskId) removeTask,
     required TResult Function(TaskModel task) updateTask,
     required TResult Function(TaskModel task) setTask,
@@ -212,6 +233,9 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
     TResult? Function(Lesson lesson)? createLesson,
     TResult? Function(Lesson lesson)? setLesson,
     TResult? Function(int lessonId, TaskModel task)? addTask,
+    TResult? Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult? Function(int taskId)? removeTask,
     TResult? Function(TaskModel task)? updateTask,
     TResult? Function(TaskModel task)? setTask,
@@ -228,6 +252,9 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
     TResult Function(Lesson lesson)? createLesson,
     TResult Function(Lesson lesson)? setLesson,
     TResult Function(int lessonId, TaskModel task)? addTask,
+    TResult Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult Function(int taskId)? removeTask,
     TResult Function(TaskModel task)? updateTask,
     TResult Function(TaskModel task)? setTask,
@@ -248,6 +275,7 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
     required TResult Function(TasksCreateLessonEvent value) createLesson,
     required TResult Function(TasksSetLessonEvent value) setLesson,
     required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksUpsertEvent value) upsertTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
     required TResult Function(TasksSetEvent value) setTask,
@@ -265,6 +293,7 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
     TResult? Function(TasksCreateLessonEvent value)? createLesson,
     TResult? Function(TasksSetLessonEvent value)? setLesson,
     TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksUpsertEvent value)? upsertTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
     TResult? Function(TasksSetEvent value)? setTask,
@@ -281,6 +310,7 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
     TResult Function(TasksCreateLessonEvent value)? createLesson,
     TResult Function(TasksSetLessonEvent value)? setLesson,
     TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksUpsertEvent value)? upsertTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
     TResult Function(TasksSetEvent value)? setTask,
@@ -387,6 +417,12 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
     required TResult Function(Lesson lesson) createLesson,
     required TResult Function(Lesson lesson) setLesson,
     required TResult Function(int lessonId, TaskModel task) addTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess,
+            dynamic Function()? onError)
+        upsertTask,
     required TResult Function(int taskId) removeTask,
     required TResult Function(TaskModel task) updateTask,
     required TResult Function(TaskModel task) setTask,
@@ -403,6 +439,9 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
     TResult? Function(Lesson lesson)? createLesson,
     TResult? Function(Lesson lesson)? setLesson,
     TResult? Function(int lessonId, TaskModel task)? addTask,
+    TResult? Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult? Function(int taskId)? removeTask,
     TResult? Function(TaskModel task)? updateTask,
     TResult? Function(TaskModel task)? setTask,
@@ -419,6 +458,9 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
     TResult Function(Lesson lesson)? createLesson,
     TResult Function(Lesson lesson)? setLesson,
     TResult Function(int lessonId, TaskModel task)? addTask,
+    TResult Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult Function(int taskId)? removeTask,
     TResult Function(TaskModel task)? updateTask,
     TResult Function(TaskModel task)? setTask,
@@ -439,6 +481,7 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
     required TResult Function(TasksCreateLessonEvent value) createLesson,
     required TResult Function(TasksSetLessonEvent value) setLesson,
     required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksUpsertEvent value) upsertTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
     required TResult Function(TasksSetEvent value) setTask,
@@ -456,6 +499,7 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
     TResult? Function(TasksCreateLessonEvent value)? createLesson,
     TResult? Function(TasksSetLessonEvent value)? setLesson,
     TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksUpsertEvent value)? upsertTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
     TResult? Function(TasksSetEvent value)? setTask,
@@ -472,6 +516,7 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
     TResult Function(TasksCreateLessonEvent value)? createLesson,
     TResult Function(TasksSetLessonEvent value)? setLesson,
     TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksUpsertEvent value)? upsertTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
     TResult Function(TasksSetEvent value)? setTask,
@@ -576,6 +621,12 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
     required TResult Function(Lesson lesson) createLesson,
     required TResult Function(Lesson lesson) setLesson,
     required TResult Function(int lessonId, TaskModel task) addTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess,
+            dynamic Function()? onError)
+        upsertTask,
     required TResult Function(int taskId) removeTask,
     required TResult Function(TaskModel task) updateTask,
     required TResult Function(TaskModel task) setTask,
@@ -592,6 +643,9 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
     TResult? Function(Lesson lesson)? createLesson,
     TResult? Function(Lesson lesson)? setLesson,
     TResult? Function(int lessonId, TaskModel task)? addTask,
+    TResult? Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult? Function(int taskId)? removeTask,
     TResult? Function(TaskModel task)? updateTask,
     TResult? Function(TaskModel task)? setTask,
@@ -608,6 +662,9 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
     TResult Function(Lesson lesson)? createLesson,
     TResult Function(Lesson lesson)? setLesson,
     TResult Function(int lessonId, TaskModel task)? addTask,
+    TResult Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult Function(int taskId)? removeTask,
     TResult Function(TaskModel task)? updateTask,
     TResult Function(TaskModel task)? setTask,
@@ -628,6 +685,7 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
     required TResult Function(TasksCreateLessonEvent value) createLesson,
     required TResult Function(TasksSetLessonEvent value) setLesson,
     required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksUpsertEvent value) upsertTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
     required TResult Function(TasksSetEvent value) setTask,
@@ -645,6 +703,7 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
     TResult? Function(TasksCreateLessonEvent value)? createLesson,
     TResult? Function(TasksSetLessonEvent value)? setLesson,
     TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksUpsertEvent value)? upsertTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
     TResult? Function(TasksSetEvent value)? setTask,
@@ -661,6 +720,7 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
     TResult Function(TasksCreateLessonEvent value)? createLesson,
     TResult Function(TasksSetLessonEvent value)? setLesson,
     TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksUpsertEvent value)? upsertTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
     TResult Function(TasksSetEvent value)? setTask,
@@ -764,6 +824,12 @@ class _$TasksAddEventImpl extends TasksAddEvent {
     required TResult Function(Lesson lesson) createLesson,
     required TResult Function(Lesson lesson) setLesson,
     required TResult Function(int lessonId, TaskModel task) addTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess,
+            dynamic Function()? onError)
+        upsertTask,
     required TResult Function(int taskId) removeTask,
     required TResult Function(TaskModel task) updateTask,
     required TResult Function(TaskModel task) setTask,
@@ -780,6 +846,9 @@ class _$TasksAddEventImpl extends TasksAddEvent {
     TResult? Function(Lesson lesson)? createLesson,
     TResult? Function(Lesson lesson)? setLesson,
     TResult? Function(int lessonId, TaskModel task)? addTask,
+    TResult? Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult? Function(int taskId)? removeTask,
     TResult? Function(TaskModel task)? updateTask,
     TResult? Function(TaskModel task)? setTask,
@@ -796,6 +865,9 @@ class _$TasksAddEventImpl extends TasksAddEvent {
     TResult Function(Lesson lesson)? createLesson,
     TResult Function(Lesson lesson)? setLesson,
     TResult Function(int lessonId, TaskModel task)? addTask,
+    TResult Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult Function(int taskId)? removeTask,
     TResult Function(TaskModel task)? updateTask,
     TResult Function(TaskModel task)? setTask,
@@ -816,6 +888,7 @@ class _$TasksAddEventImpl extends TasksAddEvent {
     required TResult Function(TasksCreateLessonEvent value) createLesson,
     required TResult Function(TasksSetLessonEvent value) setLesson,
     required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksUpsertEvent value) upsertTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
     required TResult Function(TasksSetEvent value) setTask,
@@ -833,6 +906,7 @@ class _$TasksAddEventImpl extends TasksAddEvent {
     TResult? Function(TasksCreateLessonEvent value)? createLesson,
     TResult? Function(TasksSetLessonEvent value)? setLesson,
     TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksUpsertEvent value)? upsertTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
     TResult? Function(TasksSetEvent value)? setTask,
@@ -849,6 +923,7 @@ class _$TasksAddEventImpl extends TasksAddEvent {
     TResult Function(TasksCreateLessonEvent value)? createLesson,
     TResult Function(TasksSetLessonEvent value)? setLesson,
     TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksUpsertEvent value)? upsertTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
     TResult Function(TasksSetEvent value)? setTask,
@@ -873,6 +948,239 @@ abstract class TasksAddEvent extends TasksEvent {
   TaskModel get task;
   @JsonKey(ignore: true)
   _$$TasksAddEventImplCopyWith<_$TasksAddEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TasksUpsertEventImplCopyWith<$Res> {
+  factory _$$TasksUpsertEventImplCopyWith(_$TasksUpsertEventImpl value,
+          $Res Function(_$TasksUpsertEventImpl) then) =
+      __$$TasksUpsertEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {TaskModel task,
+      dynamic Function(bool)? onProgress,
+      dynamic Function()? onSuccess,
+      dynamic Function()? onError});
+}
+
+/// @nodoc
+class __$$TasksUpsertEventImplCopyWithImpl<$Res>
+    extends _$TasksEventCopyWithImpl<$Res, _$TasksUpsertEventImpl>
+    implements _$$TasksUpsertEventImplCopyWith<$Res> {
+  __$$TasksUpsertEventImplCopyWithImpl(_$TasksUpsertEventImpl _value,
+      $Res Function(_$TasksUpsertEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? task = null,
+    Object? onProgress = freezed,
+    Object? onSuccess = freezed,
+    Object? onError = freezed,
+  }) {
+    return _then(_$TasksUpsertEventImpl(
+      task: null == task
+          ? _value.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as TaskModel,
+      onProgress: freezed == onProgress
+          ? _value.onProgress
+          : onProgress // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(bool)?,
+      onSuccess: freezed == onSuccess
+          ? _value.onSuccess
+          : onSuccess // ignore: cast_nullable_to_non_nullable
+              as dynamic Function()?,
+      onError: freezed == onError
+          ? _value.onError
+          : onError // ignore: cast_nullable_to_non_nullable
+              as dynamic Function()?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TasksUpsertEventImpl extends TasksUpsertEvent {
+  const _$TasksUpsertEventImpl(
+      {required this.task, this.onProgress, this.onSuccess, this.onError})
+      : super._();
+
+  @override
+  final TaskModel task;
+  @override
+  final dynamic Function(bool)? onProgress;
+  @override
+  final dynamic Function()? onSuccess;
+  @override
+  final dynamic Function()? onError;
+
+  @override
+  String toString() {
+    return 'TasksEvent.upsertTask(task: $task, onProgress: $onProgress, onSuccess: $onSuccess, onError: $onError)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TasksUpsertEventImpl &&
+            (identical(other.task, task) || other.task == task) &&
+            (identical(other.onProgress, onProgress) ||
+                other.onProgress == onProgress) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess) &&
+            (identical(other.onError, onError) || other.onError == onError));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, task, onProgress, onSuccess, onError);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TasksUpsertEventImplCopyWith<_$TasksUpsertEventImpl> get copyWith =>
+      __$$TasksUpsertEventImplCopyWithImpl<_$TasksUpsertEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Lesson lesson) load,
+    required TResult Function(Lesson lesson) createLesson,
+    required TResult Function(Lesson lesson) setLesson,
+    required TResult Function(int lessonId, TaskModel task) addTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess,
+            dynamic Function()? onError)
+        upsertTask,
+    required TResult Function(int taskId) removeTask,
+    required TResult Function(TaskModel task) updateTask,
+    required TResult Function(TaskModel task) setTask,
+    required TResult Function(List<TaskModel> tasks) saveTasks,
+    required TResult Function(Task task) removeAnswersFromTask,
+  }) {
+    return upsertTask(task, onProgress, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Lesson lesson)? load,
+    TResult? Function(Lesson lesson)? createLesson,
+    TResult? Function(Lesson lesson)? setLesson,
+    TResult? Function(int lessonId, TaskModel task)? addTask,
+    TResult? Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
+    TResult? Function(int taskId)? removeTask,
+    TResult? Function(TaskModel task)? updateTask,
+    TResult? Function(TaskModel task)? setTask,
+    TResult? Function(List<TaskModel> tasks)? saveTasks,
+    TResult? Function(Task task)? removeAnswersFromTask,
+  }) {
+    return upsertTask?.call(task, onProgress, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Lesson lesson)? load,
+    TResult Function(Lesson lesson)? createLesson,
+    TResult Function(Lesson lesson)? setLesson,
+    TResult Function(int lessonId, TaskModel task)? addTask,
+    TResult Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
+    TResult Function(int taskId)? removeTask,
+    TResult Function(TaskModel task)? updateTask,
+    TResult Function(TaskModel task)? setTask,
+    TResult Function(List<TaskModel> tasks)? saveTasks,
+    TResult Function(Task task)? removeAnswersFromTask,
+    required TResult orElse(),
+  }) {
+    if (upsertTask != null) {
+      return upsertTask(task, onProgress, onSuccess, onError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TasksLoadEvent value) load,
+    required TResult Function(TasksCreateLessonEvent value) createLesson,
+    required TResult Function(TasksSetLessonEvent value) setLesson,
+    required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksUpsertEvent value) upsertTask,
+    required TResult Function(TasksRemoveEvent value) removeTask,
+    required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(TasksSetEvent value) setTask,
+    required TResult Function(TasksSaveEvent value) saveTasks,
+    required TResult Function(RemoveAnswersFromTaskEvent value)
+        removeAnswersFromTask,
+  }) {
+    return upsertTask(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TasksLoadEvent value)? load,
+    TResult? Function(TasksCreateLessonEvent value)? createLesson,
+    TResult? Function(TasksSetLessonEvent value)? setLesson,
+    TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksUpsertEvent value)? upsertTask,
+    TResult? Function(TasksRemoveEvent value)? removeTask,
+    TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(TasksSetEvent value)? setTask,
+    TResult? Function(TasksSaveEvent value)? saveTasks,
+    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
+  }) {
+    return upsertTask?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TasksLoadEvent value)? load,
+    TResult Function(TasksCreateLessonEvent value)? createLesson,
+    TResult Function(TasksSetLessonEvent value)? setLesson,
+    TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksUpsertEvent value)? upsertTask,
+    TResult Function(TasksRemoveEvent value)? removeTask,
+    TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(TasksSetEvent value)? setTask,
+    TResult Function(TasksSaveEvent value)? saveTasks,
+    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
+    required TResult orElse(),
+  }) {
+    if (upsertTask != null) {
+      return upsertTask(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TasksUpsertEvent extends TasksEvent {
+  const factory TasksUpsertEvent(
+      {required final TaskModel task,
+      final dynamic Function(bool)? onProgress,
+      final dynamic Function()? onSuccess,
+      final dynamic Function()? onError}) = _$TasksUpsertEventImpl;
+  const TasksUpsertEvent._() : super._();
+
+  TaskModel get task;
+  dynamic Function(bool)? get onProgress;
+  dynamic Function()? get onSuccess;
+  dynamic Function()? get onError;
+  @JsonKey(ignore: true)
+  _$$TasksUpsertEventImplCopyWith<_$TasksUpsertEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -945,6 +1253,12 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
     required TResult Function(Lesson lesson) createLesson,
     required TResult Function(Lesson lesson) setLesson,
     required TResult Function(int lessonId, TaskModel task) addTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess,
+            dynamic Function()? onError)
+        upsertTask,
     required TResult Function(int taskId) removeTask,
     required TResult Function(TaskModel task) updateTask,
     required TResult Function(TaskModel task) setTask,
@@ -961,6 +1275,9 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
     TResult? Function(Lesson lesson)? createLesson,
     TResult? Function(Lesson lesson)? setLesson,
     TResult? Function(int lessonId, TaskModel task)? addTask,
+    TResult? Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult? Function(int taskId)? removeTask,
     TResult? Function(TaskModel task)? updateTask,
     TResult? Function(TaskModel task)? setTask,
@@ -977,6 +1294,9 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
     TResult Function(Lesson lesson)? createLesson,
     TResult Function(Lesson lesson)? setLesson,
     TResult Function(int lessonId, TaskModel task)? addTask,
+    TResult Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult Function(int taskId)? removeTask,
     TResult Function(TaskModel task)? updateTask,
     TResult Function(TaskModel task)? setTask,
@@ -997,6 +1317,7 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
     required TResult Function(TasksCreateLessonEvent value) createLesson,
     required TResult Function(TasksSetLessonEvent value) setLesson,
     required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksUpsertEvent value) upsertTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
     required TResult Function(TasksSetEvent value) setTask,
@@ -1014,6 +1335,7 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
     TResult? Function(TasksCreateLessonEvent value)? createLesson,
     TResult? Function(TasksSetLessonEvent value)? setLesson,
     TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksUpsertEvent value)? upsertTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
     TResult? Function(TasksSetEvent value)? setTask,
@@ -1030,6 +1352,7 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
     TResult Function(TasksCreateLessonEvent value)? createLesson,
     TResult Function(TasksSetLessonEvent value)? setLesson,
     TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksUpsertEvent value)? upsertTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
     TResult Function(TasksSetEvent value)? setTask,
@@ -1124,6 +1447,12 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
     required TResult Function(Lesson lesson) createLesson,
     required TResult Function(Lesson lesson) setLesson,
     required TResult Function(int lessonId, TaskModel task) addTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess,
+            dynamic Function()? onError)
+        upsertTask,
     required TResult Function(int taskId) removeTask,
     required TResult Function(TaskModel task) updateTask,
     required TResult Function(TaskModel task) setTask,
@@ -1140,6 +1469,9 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
     TResult? Function(Lesson lesson)? createLesson,
     TResult? Function(Lesson lesson)? setLesson,
     TResult? Function(int lessonId, TaskModel task)? addTask,
+    TResult? Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult? Function(int taskId)? removeTask,
     TResult? Function(TaskModel task)? updateTask,
     TResult? Function(TaskModel task)? setTask,
@@ -1156,6 +1488,9 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
     TResult Function(Lesson lesson)? createLesson,
     TResult Function(Lesson lesson)? setLesson,
     TResult Function(int lessonId, TaskModel task)? addTask,
+    TResult Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult Function(int taskId)? removeTask,
     TResult Function(TaskModel task)? updateTask,
     TResult Function(TaskModel task)? setTask,
@@ -1176,6 +1511,7 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
     required TResult Function(TasksCreateLessonEvent value) createLesson,
     required TResult Function(TasksSetLessonEvent value) setLesson,
     required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksUpsertEvent value) upsertTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
     required TResult Function(TasksSetEvent value) setTask,
@@ -1193,6 +1529,7 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
     TResult? Function(TasksCreateLessonEvent value)? createLesson,
     TResult? Function(TasksSetLessonEvent value)? setLesson,
     TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksUpsertEvent value)? upsertTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
     TResult? Function(TasksSetEvent value)? setTask,
@@ -1209,6 +1546,7 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
     TResult Function(TasksCreateLessonEvent value)? createLesson,
     TResult Function(TasksSetLessonEvent value)? setLesson,
     TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksUpsertEvent value)? upsertTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
     TResult Function(TasksSetEvent value)? setTask,
@@ -1302,6 +1640,12 @@ class _$TasksSetEventImpl extends TasksSetEvent {
     required TResult Function(Lesson lesson) createLesson,
     required TResult Function(Lesson lesson) setLesson,
     required TResult Function(int lessonId, TaskModel task) addTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess,
+            dynamic Function()? onError)
+        upsertTask,
     required TResult Function(int taskId) removeTask,
     required TResult Function(TaskModel task) updateTask,
     required TResult Function(TaskModel task) setTask,
@@ -1318,6 +1662,9 @@ class _$TasksSetEventImpl extends TasksSetEvent {
     TResult? Function(Lesson lesson)? createLesson,
     TResult? Function(Lesson lesson)? setLesson,
     TResult? Function(int lessonId, TaskModel task)? addTask,
+    TResult? Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult? Function(int taskId)? removeTask,
     TResult? Function(TaskModel task)? updateTask,
     TResult? Function(TaskModel task)? setTask,
@@ -1334,6 +1681,9 @@ class _$TasksSetEventImpl extends TasksSetEvent {
     TResult Function(Lesson lesson)? createLesson,
     TResult Function(Lesson lesson)? setLesson,
     TResult Function(int lessonId, TaskModel task)? addTask,
+    TResult Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult Function(int taskId)? removeTask,
     TResult Function(TaskModel task)? updateTask,
     TResult Function(TaskModel task)? setTask,
@@ -1354,6 +1704,7 @@ class _$TasksSetEventImpl extends TasksSetEvent {
     required TResult Function(TasksCreateLessonEvent value) createLesson,
     required TResult Function(TasksSetLessonEvent value) setLesson,
     required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksUpsertEvent value) upsertTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
     required TResult Function(TasksSetEvent value) setTask,
@@ -1371,6 +1722,7 @@ class _$TasksSetEventImpl extends TasksSetEvent {
     TResult? Function(TasksCreateLessonEvent value)? createLesson,
     TResult? Function(TasksSetLessonEvent value)? setLesson,
     TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksUpsertEvent value)? upsertTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
     TResult? Function(TasksSetEvent value)? setTask,
@@ -1387,6 +1739,7 @@ class _$TasksSetEventImpl extends TasksSetEvent {
     TResult Function(TasksCreateLessonEvent value)? createLesson,
     TResult Function(TasksSetLessonEvent value)? setLesson,
     TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksUpsertEvent value)? upsertTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
     TResult Function(TasksSetEvent value)? setTask,
@@ -1489,6 +1842,12 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
     required TResult Function(Lesson lesson) createLesson,
     required TResult Function(Lesson lesson) setLesson,
     required TResult Function(int lessonId, TaskModel task) addTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess,
+            dynamic Function()? onError)
+        upsertTask,
     required TResult Function(int taskId) removeTask,
     required TResult Function(TaskModel task) updateTask,
     required TResult Function(TaskModel task) setTask,
@@ -1505,6 +1864,9 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
     TResult? Function(Lesson lesson)? createLesson,
     TResult? Function(Lesson lesson)? setLesson,
     TResult? Function(int lessonId, TaskModel task)? addTask,
+    TResult? Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult? Function(int taskId)? removeTask,
     TResult? Function(TaskModel task)? updateTask,
     TResult? Function(TaskModel task)? setTask,
@@ -1521,6 +1883,9 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
     TResult Function(Lesson lesson)? createLesson,
     TResult Function(Lesson lesson)? setLesson,
     TResult Function(int lessonId, TaskModel task)? addTask,
+    TResult Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult Function(int taskId)? removeTask,
     TResult Function(TaskModel task)? updateTask,
     TResult Function(TaskModel task)? setTask,
@@ -1541,6 +1906,7 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
     required TResult Function(TasksCreateLessonEvent value) createLesson,
     required TResult Function(TasksSetLessonEvent value) setLesson,
     required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksUpsertEvent value) upsertTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
     required TResult Function(TasksSetEvent value) setTask,
@@ -1558,6 +1924,7 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
     TResult? Function(TasksCreateLessonEvent value)? createLesson,
     TResult? Function(TasksSetLessonEvent value)? setLesson,
     TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksUpsertEvent value)? upsertTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
     TResult? Function(TasksSetEvent value)? setTask,
@@ -1574,6 +1941,7 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
     TResult Function(TasksCreateLessonEvent value)? createLesson,
     TResult Function(TasksSetLessonEvent value)? setLesson,
     TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksUpsertEvent value)? upsertTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
     TResult Function(TasksSetEvent value)? setTask,
@@ -1680,6 +2048,12 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
     required TResult Function(Lesson lesson) createLesson,
     required TResult Function(Lesson lesson) setLesson,
     required TResult Function(int lessonId, TaskModel task) addTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess,
+            dynamic Function()? onError)
+        upsertTask,
     required TResult Function(int taskId) removeTask,
     required TResult Function(TaskModel task) updateTask,
     required TResult Function(TaskModel task) setTask,
@@ -1696,6 +2070,9 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
     TResult? Function(Lesson lesson)? createLesson,
     TResult? Function(Lesson lesson)? setLesson,
     TResult? Function(int lessonId, TaskModel task)? addTask,
+    TResult? Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult? Function(int taskId)? removeTask,
     TResult? Function(TaskModel task)? updateTask,
     TResult? Function(TaskModel task)? setTask,
@@ -1712,6 +2089,9 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
     TResult Function(Lesson lesson)? createLesson,
     TResult Function(Lesson lesson)? setLesson,
     TResult Function(int lessonId, TaskModel task)? addTask,
+    TResult Function(TaskModel task, dynamic Function(bool)? onProgress,
+            dynamic Function()? onSuccess, dynamic Function()? onError)?
+        upsertTask,
     TResult Function(int taskId)? removeTask,
     TResult Function(TaskModel task)? updateTask,
     TResult Function(TaskModel task)? setTask,
@@ -1732,6 +2112,7 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
     required TResult Function(TasksCreateLessonEvent value) createLesson,
     required TResult Function(TasksSetLessonEvent value) setLesson,
     required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksUpsertEvent value) upsertTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
     required TResult Function(TasksSetEvent value) setTask,
@@ -1749,6 +2130,7 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
     TResult? Function(TasksCreateLessonEvent value)? createLesson,
     TResult? Function(TasksSetLessonEvent value)? setLesson,
     TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksUpsertEvent value)? upsertTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
     TResult? Function(TasksSetEvent value)? setTask,
@@ -1765,6 +2147,7 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
     TResult Function(TasksCreateLessonEvent value)? createLesson,
     TResult Function(TasksSetLessonEvent value)? setLesson,
     TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksUpsertEvent value)? upsertTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
     TResult Function(TasksSetEvent value)? setTask,

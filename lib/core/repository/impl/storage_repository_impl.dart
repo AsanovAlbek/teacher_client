@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/core/repository/storage_repository.dart';
 import 'package:intl/intl.dart';
-import 'package:web/helpers.dart';
 
 class StorageRepositoryImpl implements StorageRepository {
   final SupabaseClient _client;
@@ -14,15 +13,20 @@ class StorageRepositoryImpl implements StorageRepository {
 
   @override
   Future<String> uploadFile(String bucketName, FilePickerResult pickerResult) async {
-    final file = pickerResult.files.single;
-    debugPrint("""storage url ${_client.storage.url}
-     bucket_url ${_client.storage.from(bucketName).url}
-     bucket_id ${_client.storage.from(bucketName).bucketId}
-     name ${file.name}""");
-    final dateString = DateFormat('dd.MM.yyyy_hh:mm:ss').format(DateTime.now());
-    final newFileName = '${file.name}_$dateString';
-    await _client.storage.from(bucketName).uploadBinary(newFileName, file.bytes!);
-    return '${_client.storage.from(bucketName).getPublicUrl(newFileName)}.${file.extension}';
+    var fileName = '---';
+    try {
+      final file = pickerResult.files.single;
+      final dateString = DateFormat('dd.MM.yyyy_hh:mm:ss').format(DateTime.now());
+      final ext = file.extension;
+      final newFileName = '${file.name..replaceAll(ext!, '')}_$dateString.$ext';
+      await _client.storage.from(bucketName).uploadBinary(newFileName, file.bytes!);
+      fileName = _client.storage.from(bucketName).getPublicUrl(newFileName);
+    } catch (e, s) {
+      debugPrint(e.toString());
+      debugPrintStack(stackTrace: s);
+    }
+
+    return fileName;
   }
 
   @override

@@ -13,44 +13,36 @@ class CoursesRepositoryImpl implements CoursesRepository {
   CoursesRepositoryImpl(SupabaseClient client) : _client = client;
 
   @override
-  Future<int> addCourse(Course course, [List<Lesson>? lessons]) async {
+  Future<Course> upsertCourse(Course course) async {
     debugPrint('uid ${_client.auth.currentUser?.id}');
-    int? courseId;
+    Map<String, dynamic>? upsertCourseJson;
     // новая запись
     if (course.id == null) {
       log('insert');
       // записываем без id, он добавится сам
-      final insertedCourse = await _client
+      final upsertCourseJson = await _client
           .from('courses')
           .insert(course.toJson()..remove('id'))
           .select()
           .single();
-      // так же получаем id записи, которую мы добавили
-      courseId = insertedCourse['id'] as int?;
-      if (lessons != null && lessons.isNotEmpty) {
-        final insertedLessons = lessons
-            .toList(growable: true)
-            .map((lesson) => lesson.copyWith(courseId: courseId ?? course.id!))
-            .map((e) => e.toJson()..remove('id'))
-            .toList();
-        await _client.from('lessons').insert(insertedLessons);
-      }
     } else {
       log('update');
       // Запись уже имеется, обновляем
-      await _client
+      upsertCourseJson = await _client
           .from('courses')
           .update(course.toJson())
-          .eq('id', course.id!);
+          .eq('id', course.id!).select().limit(1).single();
     }
+
+    final upsertCourse = Course.fromJson(upsertCourseJson ?? {});
 
     await _client.from('teachers_courses').upsert({
       'teacher_id': _client.auth.currentUser!.id,
       // Если мы добавили новую запись, используем полученный id, иначе запись уже
       // существует и мы её обновили, используя id имеющегося курса
-      'course_id': courseId ?? course.id
+      'course_id': upsertCourse.id ?? course.id
     });
-    return courseId ?? course.id!;
+    return upsertCourse;
   }
 
   @override

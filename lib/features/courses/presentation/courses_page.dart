@@ -1,19 +1,17 @@
-import 'dart:async';
 
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:teacher_client/core/navigation/router.dart';
-import 'package:teacher_client/core/repository/storage_repository.dart';
 import 'package:teacher_client/core/resources/colors.dart';
 import 'package:teacher_client/core/utils/utils.dart';
 import 'package:teacher_client/features/courses/domain/bloc/course_bloc.dart';
-import 'package:teacher_client/features/courses/domain/repository/courses_repository.dart';
 import 'package:teacher_client/features/courses/presentation/widgets/course_theme_item.dart';
+import 'package:teacher_client/features/home/presentation/bloc/home_event.dart';
 
 import '../../../core/model/course.dart';
+import '../../home/presentation/bloc/home_bloc.dart';
 
 @RoutePage()
 class CoursesPage extends StatefulWidget {
@@ -27,6 +25,14 @@ class _CoursesPageState extends State<CoursesPage> {
   final scrollController = ScrollController();
 
   @override
+  void initState() {
+    super.initState();
+    if (mounted) {
+      context.read<CourseBloc>().add(const CoursesEvent.load());
+    }
+  }
+
+  @override
   void dispose() {
     scrollController.dispose();
     super.dispose();
@@ -34,21 +40,15 @@ class _CoursesPageState extends State<CoursesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CourseBloc(
-          coursesRepository: GetIt.I<CoursesRepository>(),
-          uploadRepository: GetIt.I<StorageRepository>())
-        ..add(const CoursesEvent.load()),
-      child: Scaffold(
-        backgroundColor: AppColors.backgroundColor,
-        body: SafeArea(
-          child: Scrollbar(
-            controller: scrollController,
-            trackVisibility: true,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-              child: _CoursesPageContent(scrollController: scrollController),
-            ),
+    return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
+      body: SafeArea(
+        child: Scrollbar(
+          controller: scrollController,
+          trackVisibility: true,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+            child: _CoursesPageContent(scrollController: scrollController),
           ),
         ),
       ),
@@ -65,6 +65,7 @@ class _CoursesPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final bloc = context.watch<CourseBloc>();
+    final homeBloc = context.read<HomeBloc>();
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,8 +92,10 @@ class _CoursesPageContent extends StatelessWidget {
               const SizedBox(width: 8),
               TextButton(
                   onPressed: () {
-                    AutoRouter.of(context)
-                        .navigate(CoursesThemesRoute(courseBloc: bloc));
+                    bloc.add(CoursesEvent.addCourse(course: const Course(), onSuccess: (course) {
+                      homeBloc.add(HomeEvent.setCourse(course));
+                      context.router.push(const CoursesThemesRoute());
+                    }));
                   },
                   child: Text('+ Добавить курс'.toUpperCase(),
                       style: textTheme.bodyMedium
@@ -113,9 +116,8 @@ class _CoursesPageContent extends StatelessWidget {
                         return CourseThemeItem(
                             course: courses[index],
                             onRedact: (course) {
-                              AutoRouter.of(context).navigate(
-                                  CoursesThemesRoute(
-                                      course: course, courseBloc: bloc));
+                              homeBloc.add(HomeEvent.setCourse(courses[index]));
+                              context.router.push(const CoursesThemesRoute());
                             });
                       },
                       separatorBuilder: (BuildContext context, int index) {

@@ -9,12 +9,12 @@ import '../../../domain/model/task.dart';
 import 'first_task_type.dart';
 import 'type_question.dart';
 
-Widget taskWidgetsFactory(TaskModel task, TasksBloc bloc) => switch(task.taskType) {
-  TaskType.fourPictures => FirstTaskTypeView(task: task, bloc: bloc),
-  TaskType.threeAnswersSingleSelection => SelectOneWordType(task: task, bloc: bloc),
-  TaskType.typeTranslate => TypeQuestion(task: task, bloc: bloc),
-  TaskType.makeSentenceByWords => MakeSentenceQuestion(task: task, bloc: bloc),
-  TaskType.fillPassByWords => FillWordsQuestion(task: task, bloc: bloc),
-  TaskType.fillPassByType => TypeMissingWordQuestion(task: task, bloc: bloc),
+Widget taskWidgetsFactory(TaskModel task) => switch(task.taskType) {
+  TaskType.fourPictures => FirstTaskTypeView(task: task),
+  TaskType.threeAnswersSingleSelection => SelectOneWordType(task: task),
+  TaskType.typeTranslate => TypeQuestion(task: task),
+  TaskType.makeSentenceByWords => MakeSentenceQuestion(task: task),
+  TaskType.fillPassByWords => FillWordsQuestion(task: task),
+  TaskType.fillPassByType => TypeMissingWordQuestion(task: task),
   TaskType.none => Container(height: 100, width: 100, color: Colors.blueAccent),
 };

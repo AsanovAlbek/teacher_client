@@ -11,7 +11,35 @@ class TasksRepositoryImpl implements TasksRepository {
   TasksRepositoryImpl({required SupabaseClient client}) : _client = client;
 
   @override
-  Future<void> addTask(int lessonId, Task task) async {}
+  Future<void> upsertTask(Task task) async {
+    int? newTask;
+    if (task.id == 0) {
+      final insertTaskJson = await _client
+          .from('tasks')
+          .insert(task.toJson()
+            ..remove('id')
+            ..remove('answers'))
+          .select()
+          .limit(1)
+          .single();
+
+      newTask = insertTaskJson['id'] as int?;
+
+    } else {
+      await _client
+          .from('tasks')
+          .update(task.toJson()..remove('answers'))
+          .eq('id', task.id);
+    }
+    var answers = task.taskAnswers.map((answer) => answer.copyWith(taskId: newTask ?? answer.taskId)).toList();
+    for (final answer in answers) {
+      if (answer.id == 0) {
+        await _client.from('answers').insert(answer.toJson()..remove('id'));
+      } else {
+        await _client.from('answers').update(answer.toJson()).eq('id', answer.id);
+      }
+    }
+  }
 
   @override
   Future<void> deleteTask(int lessonId, int taskId) async {

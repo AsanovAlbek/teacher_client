@@ -9,12 +9,12 @@ import 'package:teacher_client/features/tasks/domain/model/answer.dart';
 
 import '../../../../../core/model/answer.dart';
 import '../../../domain/model/task.dart';
+import 'deletable_item.dart';
 
 class TypeQuestion extends StatefulWidget {
   final TaskModel task;
-  final TasksBloc bloc;
 
-  const TypeQuestion({super.key, required this.task, required this.bloc});
+  const TypeQuestion({super.key, required this.task});
 
   @override
   State<StatefulWidget> createState() => _TypeQuestionState();
@@ -34,7 +34,13 @@ class _TypeQuestionState extends State<TypeQuestion> {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<TasksBloc>();
-    return Column(
+    return DeletableItem(
+        deleteClick: () {
+      context
+          .read<TasksBloc>()
+          .add(TasksEvent.removeTask(taskId: widget.task.id));
+    },
+    child: Column(
       children: [
         const Text('Задание'),
         const SizedBox(height: 8),
@@ -44,7 +50,7 @@ class _TypeQuestionState extends State<TypeQuestion> {
           maxLines: 1,
           onChanged: (text) {
             AppUtils.debounce(() {
-              bloc.add(TasksEvent.setTask(
+              bloc.add(TasksEvent.upsertTask(
                   task: widget.task.copyWith(task: text.trim())));
             });
           },
@@ -55,7 +61,7 @@ class _TypeQuestionState extends State<TypeQuestion> {
           decoration: const InputDecoration(labelText: 'Ответ'),
           onChanged: (text) {
             AppUtils.debounce(() {
-              bloc.add(TasksEvent.setTask(
+              bloc.add(TasksEvent.upsertTask(
                   task: widget.task.copyWith(answerModels: [
                 _answer.copyWith(
                     answer: _answer.answer.copyWith(rightAnswer: text.trim()))
@@ -64,6 +70,6 @@ class _TypeQuestionState extends State<TypeQuestion> {
           },
         ),
       ],
-    );
+    ));
   }
 }

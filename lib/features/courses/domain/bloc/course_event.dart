@@ -12,5 +12,7 @@ class CoursesEvent with _$CoursesEvent {
   const factory CoursesEvent.addCourse(
       {required Course course,
       List<Lesson>? lessons,
-      FilePickerResult? pickerResult}) = CoursesAddCourseEvent;
+      FilePickerResult? pickerResult,
+      Function(Course)? onSuccess,
+      Function(Exception?)? onError}) = CoursesAddCourseEvent;
 }

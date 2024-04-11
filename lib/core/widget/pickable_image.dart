@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../resources/colors.dart';
 
-class PickableImage extends StatefulWidget {
-  final Function? onPressed;
+typedef FutureCallback = Future<void> Function();
+
+class PickableImage extends StatelessWidget {
+  final FutureCallback? onPressed;
   final String? imageUrl;
   final FilePickerResult? filePickerResult;
   final double? imageSize;
@@ -27,39 +29,31 @@ class PickableImage extends StatefulWidget {
       this.width});
 
   @override
-  State<PickableImage> createState() => _PickableImageState();
-}
-
-class _PickableImageState extends State<PickableImage> {
-  @override
   Widget build(BuildContext context) {
-    final image = _createImage();
-    debugPrint('img $image');
     return Padding(
         padding: const EdgeInsets.all(16),
         child: GestureDetector(
             onTap: () async {
-              await widget.onPressed?.call();
-              setState(() {});
-              debugPrint('fpr = ${widget.filePickerResult?.names.join()}');
+              await onPressed?.call();
+              debugPrint('fpr = ${filePickerResult?.names.join()}');
             },
             child: Container(
-                color: widget.backgroundColor ?? AppColors.emptyImageBackgroundColor,
-                width: widget.width ?? widget.imageSize ?? MediaQuery.of(context).size.width,
-                height: widget.height ?? widget.imageSize,
-                child: image)));
+                color: backgroundColor ?? AppColors.emptyImageBackgroundColor,
+                width: width ?? imageSize ?? MediaQuery.of(context).size.width,
+                height: height ?? imageSize,
+                child: _createImage())));
   }
 
   Widget _createImage() {
-    if (widget.filePickerResult?.files.single.bytes case final fileBytes?) {
-      return Image.memory(fileBytes, fit: widget.fit);
-    } else if (widget.imageUrl != null &&
-        (widget.imageUrl?.isNotEmpty ?? false) &&
-        widget.filePickerResult == null) {
-      return Image.network(widget.imageUrl!, fit: widget.fit);
+    if (imageUrl != null &&
+        (imageUrl?.isNotEmpty ?? false) &&
+        filePickerResult == null) {
+      return Image.network(imageUrl!, fit: fit);
+    } else if (filePickerResult?.files.single.bytes case final fileBytes?) {
+      return Image.memory(fileBytes, fit: fit);
     } else {
-      return widget.placeholder ??
-          Icon(Icons.add, color: AppColors.gray, size: widget.imageSize ?? 100 / 4);
+      return placeholder ??
+          Icon(Icons.add, color: AppColors.gray, size: imageSize ?? 100 / 4);
     }
   }
 }

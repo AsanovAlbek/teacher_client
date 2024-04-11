@@ -10,11 +10,12 @@ import '../../../domain/model/answer.dart';
 import '../../../domain/model/task.dart';
 import 'package:collection/collection.dart';
 
+import 'deletable_item.dart';
+
 class FillWordsQuestion extends StatefulWidget {
   final TaskModel task;
-  final TasksBloc bloc;
 
-  const FillWordsQuestion({super.key, required this.task, required this.bloc});
+  const FillWordsQuestion({super.key, required this.task});
 
   @override
   State<StatefulWidget> createState() => _FillWordsState();
@@ -38,7 +39,13 @@ class _FillWordsState extends State<FillWordsQuestion> {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<TasksBloc>();
-    return Column(
+    return DeletableItem(
+        deleteClick: () {
+      context
+          .read<TasksBloc>()
+          .add(TasksEvent.removeTask(taskId: widget.task.id));
+    },
+    child: Column(
       children: [
         const Text(
             'В ответе введите слова через запятые, для обозначения пропуска используйте ****'),
@@ -49,7 +56,7 @@ class _FillWordsState extends State<FillWordsQuestion> {
           maxLines: 1,
           onChanged: (text) {
             AppUtils.debounce(() {
-              bloc.add(TasksEvent.setTask(
+              bloc.add(TasksEvent.upsertTask(
                   task: widget.task.copyWith(task: text.trim())));
             });
           },
@@ -64,7 +71,7 @@ class _FillWordsState extends State<FillWordsQuestion> {
             AppUtils.debounce(() {
               bloc.add(
                   TasksEvent.removeAnswersFromTask(task: widget.task.toDto()));
-              bloc.add(TasksEvent.setTask(
+              bloc.add(TasksEvent.upsertTask(
                   task: widget.task.copyWith(
                       answerModels: text
                           .trim()
@@ -84,7 +91,7 @@ class _FillWordsState extends State<FillWordsQuestion> {
           onChanged: (text) {
             AppUtils.debounce(() {
               final task = widget.task;
-              bloc.add(TasksEvent.setTask(
+              bloc.add(TasksEvent.upsertTask(
                   task: task.copyWith(
                       answerModels: task.answerModels
                           .map((answerModel) => answerModel.copyWith(
@@ -98,6 +105,6 @@ class _FillWordsState extends State<FillWordsQuestion> {
           },
         )
       ],
-    );
+    ));
   }
 }
