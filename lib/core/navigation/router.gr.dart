@@ -22,14 +22,9 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     CoursesThemesRoute.name: (routeData) {
-      final args = routeData.argsAs<CoursesThemesRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: CoursesThemesPage(
-          key: args.key,
-          course: args.course,
-          courseBloc: args.courseBloc,
-        ),
+        child: const CoursesThemesPage(),
       );
     },
     HomeRoute.name: (routeData) {
@@ -56,14 +51,9 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     TasksRoute.name: (routeData) {
-      final args = routeData.argsAs<TasksRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: TasksScreen(
-          key: args.key,
-          lesson: args.lesson,
-          lessonBloc: args.lessonBloc,
-        ),
+        child: const TasksScreen(),
       );
     },
   };
@@ -85,45 +75,16 @@ class CoursesRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [CoursesThemesPage]
-class CoursesThemesRoute extends PageRouteInfo<CoursesThemesRouteArgs> {
-  CoursesThemesRoute({
-    Key? key,
-    Course? course,
-    required CourseBloc courseBloc,
-    List<PageRouteInfo>? children,
-  }) : super(
+class CoursesThemesRoute extends PageRouteInfo<void> {
+  const CoursesThemesRoute({List<PageRouteInfo>? children})
+      : super(
           CoursesThemesRoute.name,
-          args: CoursesThemesRouteArgs(
-            key: key,
-            course: course,
-            courseBloc: courseBloc,
-          ),
           initialChildren: children,
         );
 
   static const String name = 'CoursesThemesRoute';
 
-  static const PageInfo<CoursesThemesRouteArgs> page =
-      PageInfo<CoursesThemesRouteArgs>(name);
-}
-
-class CoursesThemesRouteArgs {
-  const CoursesThemesRouteArgs({
-    this.key,
-    this.course,
-    required this.courseBloc,
-  });
-
-  final Key? key;
-
-  final Course? course;
-
-  final CourseBloc courseBloc;
-
-  @override
-  String toString() {
-    return 'CoursesThemesRouteArgs{key: $key, course: $course, courseBloc: $courseBloc}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -194,42 +155,14 @@ class RecoverRouteArgs {
 
 /// generated route for
 /// [TasksScreen]
-class TasksRoute extends PageRouteInfo<TasksRouteArgs> {
-  TasksRoute({
-    Key? key,
-    required Lesson lesson,
-    required LessonBloc lessonBloc,
-    List<PageRouteInfo>? children,
-  }) : super(
+class TasksRoute extends PageRouteInfo<void> {
+  const TasksRoute({List<PageRouteInfo>? children})
+      : super(
           TasksRoute.name,
-          args: TasksRouteArgs(
-            key: key,
-            lesson: lesson,
-            lessonBloc: lessonBloc,
-          ),
           initialChildren: children,
         );
 
   static const String name = 'TasksRoute';
 
-  static const PageInfo<TasksRouteArgs> page = PageInfo<TasksRouteArgs>(name);
-}
-
-class TasksRouteArgs {
-  const TasksRouteArgs({
-    this.key,
-    required this.lesson,
-    required this.lessonBloc,
-  });
-
-  final Key? key;
-
-  final Lesson lesson;
-
-  final LessonBloc lessonBloc;
-
-  @override
-  String toString() {
-    return 'TasksRouteArgs{key: $key, lesson: $lesson, lessonBloc: $lessonBloc}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

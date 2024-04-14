@@ -21,21 +21,19 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
   final CoursesRepository _coursesRepository;
   final StorageRepository _imageUploadRepository;
 
-  CourseBloc(
-      {required CoursesRepository coursesRepository,
-      required StorageRepository uploadRepository})
+  CourseBloc({required CoursesRepository coursesRepository, required StorageRepository uploadRepository})
       : _coursesRepository = coursesRepository,
         _imageUploadRepository = uploadRepository,
         super(const CourseState.loading()) {
     on<CoursesLoadEvent>(_load);
     on<CoursesSearchEvent>(_search);
     on<CoursesAddCourseEvent>(_addCourse);
+    on<CourseUpdateEvent>(_updateCourse);
   }
 
   CourseStateLoaded _loaded = const CourseStateLoaded();
 
-  FutureOr<void> _load(
-      CoursesLoadEvent event, Emitter<CourseState> emit) async {
+  FutureOr<void> _load(CoursesLoadEvent event, Emitter<CourseState> emit) async {
     if (state is! CourseStateLoading) {
       emit(const CourseState.loading());
     }
@@ -55,8 +53,7 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
     }
   }
 
-  FutureOr<void> _search(
-      CoursesSearchEvent event, Emitter<CourseState> emit) async {
+  FutureOr<void> _search(CoursesSearchEvent event, Emitter<CourseState> emit) async {
     if (state is! CourseStateLoading) {
       emit(const CourseState.loading());
     }
@@ -68,7 +65,6 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
       } else {
         _loaded = _loaded.copyWith(courses: courses.toSet().toList());
         emit(_loaded);
-
       }
     } catch (e, stack) {
       emit(const CourseState.error(message: 'Нет подключения к интернету'));
@@ -77,8 +73,7 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
     }
   }
 
-  FutureOr<void> _addCourse(
-      CoursesAddCourseEvent event, Emitter<CourseState> emit) async {
+  FutureOr<void> _addCourse(CoursesAddCourseEvent event, Emitter<CourseState> emit) async {
     Course course = event.course;
     try {
       if (event.pickerResult != null) {
@@ -86,11 +81,29 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
             'courses_images', event.pickerResult!);
         course = course.copyWith(iconUrl: imageUrl);
       }
-      await _coursesRepository.addCourse(course, event.lessons);
+      final insertedCourse = await _coursesRepository.addCourse(course);
+      event.onSuccess?.call(insertedCourse);
       add(const CoursesEvent.load());
-    } catch (e, stack) {
+    } on Exception catch (e, stack) {
       debugPrint('err $e');
       debugPrintStack(stackTrace: stack);
+      event.onError?.call(e);
+    }
+  }
+
+  FutureOr<void> _updateCourse(CourseUpdateEvent event, Emitter<CourseState> emit) async {
+    Course course = event.course;
+    try {
+      if (event.pickerResult != null) {
+        final imageUrl = await _imageUploadRepository.uploadFile(
+            'courses_images', event.pickerResult!);
+        course = course.copyWith(iconUrl: imageUrl);
+      }
+      final updatedCourse = await _coursesRepository.updateCourse(course);
+      add(const CoursesEvent.load());
+      event.onSuccess?.call(updatedCourse);
+    } on Exception catch(e) {
+      event.onError?.call(e);
     }
   }
 }

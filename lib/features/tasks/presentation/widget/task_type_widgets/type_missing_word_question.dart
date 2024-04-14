@@ -7,13 +7,13 @@ import '../../../../../core/utils/utils.dart';
 import '../../../domain/bloc/tasks_bloc.dart';
 import '../../../domain/model/answer.dart';
 import '../../../domain/model/task.dart';
+import 'deletable_item.dart';
 
 class TypeMissingWordQuestion extends StatefulWidget {
   final TaskModel task;
-  final TasksBloc bloc;
 
   const TypeMissingWordQuestion(
-      {super.key, required this.task, required this.bloc});
+      {super.key, required this.task});
 
   @override
   State<StatefulWidget> createState() => _TypeMissingWordState();
@@ -39,53 +39,59 @@ class _TypeMissingWordState extends State<TypeMissingWordQuestion> {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<TasksBloc>();
-    return Column(
-      children: [
-        const Text(
-            'В ответе введите слова через запятые, для обозначения пропуска используйте ****'),
-        const SizedBox(height: 8),
-        TextFormField(
-          controller: _taskController,
-          decoration: const InputDecoration(labelText: 'Задание'),
-          maxLines: 1,
-          onChanged: (text) {
-            AppUtils.debounce(() {
-              bloc.add(TasksEvent.setTask(
-                  task: widget.task.copyWith(answerModels: [
-                _answer.copyWith(
-                    answer: _answer.answer.copyWith(rightAnswer: text.trim()))
-              ])));
-            });
-          },
-        ),
-        const SizedBox(height: 8),
-        TextFormField(
-          initialValue: widget.task.task,
-          decoration: const InputDecoration(labelText: 'Ответ (на месте пропусков ****)'),
-          maxLines: 1,
-          onChanged: (text) {
-            AppUtils.debounce(() {
-              bloc.add(TasksEvent.setTask(
-                  task: widget.task.copyWith(task: text.trim())));
-            });
-          },
-        ),
-        const SizedBox(height: 8),
-        TextFormField(
-          initialValue: _answer.answer.answer,
-          decoration: const InputDecoration(labelText: 'Пропущенные слова (через запятую)'),
-          maxLines: 1,
-          onChanged: (text) {
-            AppUtils.debounce(() {
-              bloc.add(TasksEvent.setTask(
-                  task: widget.task.copyWith(answerModels: [
-                _answer.copyWith(
-                    answer: _answer.answer.copyWith(answer: text.trim()))
-              ])));
-            });
-          },
-        )
-      ],
-    );
+    return DeletableItem(
+        deleteClick: () {
+          context
+              .read<TasksBloc>()
+              .add(TasksEvent.removeTask(taskId: widget.task.id));
+        },
+        child: Column(
+          children: [
+            const Text(
+                'В ответе введите слова через запятые, для обозначения пропуска используйте ****'),
+            const SizedBox(height: 8),
+            TextFormField(
+              controller: _taskController,
+              decoration: const InputDecoration(labelText: 'Задание'),
+              maxLines: 1,
+              onChanged: (text) {
+                AppUtils.debounce(() {
+                  bloc.add(TasksEvent.setTask(
+                      task: widget.task.copyWith(answerModels: [
+                        _answer.copyWith(
+                            answer: _answer.answer.copyWith(rightAnswer: text.trim()))
+                      ])));
+                });
+              },
+            ),
+            const SizedBox(height: 8),
+            TextFormField(
+              initialValue: widget.task.task,
+              decoration: const InputDecoration(labelText: 'Ответ (на месте пропусков ****)'),
+              maxLines: 1,
+              onChanged: (text) {
+                AppUtils.debounce(() {
+                  bloc.add(TasksEvent.setTask(
+                      task: widget.task.copyWith(task: text.trim())));
+                });
+              },
+            ),
+            const SizedBox(height: 8),
+            TextFormField(
+              initialValue: _answer.answer.answer,
+              decoration: const InputDecoration(labelText: 'Пропущенные слова (через запятую)'),
+              maxLines: 1,
+              onChanged: (text) {
+                AppUtils.debounce(() {
+                  bloc.add(TasksEvent.setTask(
+                      task: widget.task.copyWith(answerModels: [
+                        _answer.copyWith(
+                            answer: _answer.answer.copyWith(answer: text.trim()))
+                      ])));
+                });
+              },
+            )
+          ],
+        ));
   }
 }

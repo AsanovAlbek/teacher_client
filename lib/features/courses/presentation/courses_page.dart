@@ -12,8 +12,10 @@ import 'package:teacher_client/core/utils/utils.dart';
 import 'package:teacher_client/features/courses/domain/bloc/course_bloc.dart';
 import 'package:teacher_client/features/courses/domain/repository/courses_repository.dart';
 import 'package:teacher_client/features/courses/presentation/widgets/course_theme_item.dart';
+import 'package:teacher_client/features/home/domain/home_bloc.dart';
 
 import '../../../core/model/course.dart';
+import '../../home/domain/home_event.dart';
 
 @RoutePage()
 class CoursesPage extends StatefulWidget {
@@ -65,6 +67,7 @@ class _CoursesPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final bloc = context.watch<CourseBloc>();
+    final homeBloc = context.read<HomeBloc>();
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,8 +94,14 @@ class _CoursesPageContent extends StatelessWidget {
               const SizedBox(width: 8),
               TextButton(
                   onPressed: () {
-                    AutoRouter.of(context)
-                        .navigate(CoursesThemesRoute(courseBloc: bloc));
+                    bloc.add(CoursesEvent.addCourse(course: const Course(), onSuccess: (course) {
+                      homeBloc.add(HomeEvent.setCourse(course));
+                      AutoRouter.of(context)
+                          .navigate(const CoursesThemesRoute());
+                    }, onError: (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ошибка $e')));
+                    }));
+
                   },
                   child: Text('+ Добавить курс'.toUpperCase(),
                       style: textTheme.bodyMedium
@@ -113,9 +122,8 @@ class _CoursesPageContent extends StatelessWidget {
                         return CourseThemeItem(
                             course: courses[index],
                             onRedact: (course) {
-                              AutoRouter.of(context).navigate(
-                                  CoursesThemesRoute(
-                                      course: course, courseBloc: bloc));
+                              homeBloc.add(HomeEvent.setCourse(course));
+                              context.router.navigate(const CoursesThemesRoute());
                             });
                       },
                       separatorBuilder: (BuildContext context, int index) {

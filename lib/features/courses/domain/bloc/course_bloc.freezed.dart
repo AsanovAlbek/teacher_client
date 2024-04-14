@@ -20,27 +20,60 @@ mixin _$CoursesEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(String query) search,
-    required TResult Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
         addCourse,
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateCourse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function(String query)? search,
-    TResult? Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)?
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
         addCourse,
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(String query)? search,
-    TResult Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)?
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
         addCourse,
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +82,7 @@ mixin _$CoursesEvent {
     required TResult Function(CoursesLoadEvent value) load,
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
+    required TResult Function(CourseUpdateEvent value) updateCourse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +90,7 @@ mixin _$CoursesEvent {
     TResult? Function(CoursesLoadEvent value)? load,
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
+    TResult? Function(CourseUpdateEvent value)? updateCourse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +98,7 @@ mixin _$CoursesEvent {
     TResult Function(CoursesLoadEvent value)? load,
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
+    TResult Function(CourseUpdateEvent value)? updateCourse,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,9 +162,20 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(String query) search,
-    required TResult Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
         addCourse,
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateCourse,
   }) {
     return load();
   }
@@ -138,9 +185,20 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function(String query)? search,
-    TResult? Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)?
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
         addCourse,
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
   }) {
     return load?.call();
   }
@@ -150,9 +208,20 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(String query)? search,
-    TResult Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)?
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
         addCourse,
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -167,6 +236,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
     required TResult Function(CoursesLoadEvent value) load,
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
+    required TResult Function(CourseUpdateEvent value) updateCourse,
   }) {
     return load(this);
   }
@@ -177,6 +247,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
     TResult? Function(CoursesLoadEvent value)? load,
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
+    TResult? Function(CourseUpdateEvent value)? updateCourse,
   }) {
     return load?.call(this);
   }
@@ -187,6 +258,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
     TResult Function(CoursesLoadEvent value)? load,
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
+    TResult Function(CourseUpdateEvent value)? updateCourse,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -268,9 +340,20 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(String query) search,
-    required TResult Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
         addCourse,
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateCourse,
   }) {
     return search(query);
   }
@@ -280,9 +363,20 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function(String query)? search,
-    TResult? Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)?
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
         addCourse,
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
   }) {
     return search?.call(query);
   }
@@ -292,9 +386,20 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(String query)? search,
-    TResult Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)?
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
         addCourse,
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -309,6 +414,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
     required TResult Function(CoursesLoadEvent value) load,
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
+    required TResult Function(CourseUpdateEvent value) updateCourse,
   }) {
     return search(this);
   }
@@ -319,6 +425,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
     TResult? Function(CoursesLoadEvent value)? load,
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
+    TResult? Function(CourseUpdateEvent value)? updateCourse,
   }) {
     return search?.call(this);
   }
@@ -329,6 +436,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
     TResult Function(CoursesLoadEvent value)? load,
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
+    TResult Function(CourseUpdateEvent value)? updateCourse,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -357,7 +465,11 @@ abstract class _$$CoursesAddCourseEventImplCopyWith<$Res> {
       __$$CoursesAddCourseEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {Course course, List<Lesson>? lessons, FilePickerResult? pickerResult});
+      {Course course,
+      List<Lesson>? lessons,
+      FilePickerResult? pickerResult,
+      dynamic Function(Course)? onSuccess,
+      dynamic Function(Exception?)? onError});
 
   $CourseCopyWith<$Res> get course;
 }
@@ -376,6 +488,8 @@ class __$$CoursesAddCourseEventImplCopyWithImpl<$Res>
     Object? course = null,
     Object? lessons = freezed,
     Object? pickerResult = freezed,
+    Object? onSuccess = freezed,
+    Object? onError = freezed,
   }) {
     return _then(_$CoursesAddCourseEventImpl(
       course: null == course
@@ -390,6 +504,14 @@ class __$$CoursesAddCourseEventImplCopyWithImpl<$Res>
           ? _value.pickerResult
           : pickerResult // ignore: cast_nullable_to_non_nullable
               as FilePickerResult?,
+      onSuccess: freezed == onSuccess
+          ? _value.onSuccess
+          : onSuccess // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(Course)?,
+      onError: freezed == onError
+          ? _value.onError
+          : onError // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(Exception?)?,
     ));
   }
 
@@ -406,7 +528,11 @@ class __$$CoursesAddCourseEventImplCopyWithImpl<$Res>
 
 class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
   const _$CoursesAddCourseEventImpl(
-      {required this.course, final List<Lesson>? lessons, this.pickerResult})
+      {required this.course,
+      final List<Lesson>? lessons,
+      this.pickerResult,
+      this.onSuccess,
+      this.onError})
       : _lessons = lessons,
         super._();
 
@@ -424,10 +550,14 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
 
   @override
   final FilePickerResult? pickerResult;
+  @override
+  final dynamic Function(Course)? onSuccess;
+  @override
+  final dynamic Function(Exception?)? onError;
 
   @override
   String toString() {
-    return 'CoursesEvent.addCourse(course: $course, lessons: $lessons, pickerResult: $pickerResult)';
+    return 'CoursesEvent.addCourse(course: $course, lessons: $lessons, pickerResult: $pickerResult, onSuccess: $onSuccess, onError: $onError)';
   }
 
   @override
@@ -438,12 +568,20 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
             (identical(other.course, course) || other.course == course) &&
             const DeepCollectionEquality().equals(other._lessons, _lessons) &&
             (identical(other.pickerResult, pickerResult) ||
-                other.pickerResult == pickerResult));
+                other.pickerResult == pickerResult) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess) &&
+            (identical(other.onError, onError) || other.onError == onError));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, course,
-      const DeepCollectionEquality().hash(_lessons), pickerResult);
+  int get hashCode => Object.hash(
+      runtimeType,
+      course,
+      const DeepCollectionEquality().hash(_lessons),
+      pickerResult,
+      onSuccess,
+      onError);
 
   @JsonKey(ignore: true)
   @override
@@ -457,11 +595,22 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() load,
     required TResult Function(String query) search,
-    required TResult Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
         addCourse,
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateCourse,
   }) {
-    return addCourse(course, lessons, pickerResult);
+    return addCourse(course, lessons, pickerResult, onSuccess, onError);
   }
 
   @override
@@ -469,11 +618,22 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
     TResult? Function(String query)? search,
-    TResult? Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)?
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
         addCourse,
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
   }) {
-    return addCourse?.call(course, lessons, pickerResult);
+    return addCourse?.call(course, lessons, pickerResult, onSuccess, onError);
   }
 
   @override
@@ -481,13 +641,24 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
     TResult Function(String query)? search,
-    TResult Function(Course course, List<Lesson>? lessons,
-            FilePickerResult? pickerResult)?
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
         addCourse,
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
     required TResult orElse(),
   }) {
     if (addCourse != null) {
-      return addCourse(course, lessons, pickerResult);
+      return addCourse(course, lessons, pickerResult, onSuccess, onError);
     }
     return orElse();
   }
@@ -498,6 +669,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
     required TResult Function(CoursesLoadEvent value) load,
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
+    required TResult Function(CourseUpdateEvent value) updateCourse,
   }) {
     return addCourse(this);
   }
@@ -508,6 +680,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
     TResult? Function(CoursesLoadEvent value)? load,
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
+    TResult? Function(CourseUpdateEvent value)? updateCourse,
   }) {
     return addCourse?.call(this);
   }
@@ -518,6 +691,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
     TResult Function(CoursesLoadEvent value)? load,
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
+    TResult Function(CourseUpdateEvent value)? updateCourse,
     required TResult orElse(),
   }) {
     if (addCourse != null) {
@@ -529,17 +703,285 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
 
 abstract class CoursesAddCourseEvent extends CoursesEvent {
   const factory CoursesAddCourseEvent(
-      {required final Course course,
-      final List<Lesson>? lessons,
-      final FilePickerResult? pickerResult}) = _$CoursesAddCourseEventImpl;
+          {required final Course course,
+          final List<Lesson>? lessons,
+          final FilePickerResult? pickerResult,
+          final dynamic Function(Course)? onSuccess,
+          final dynamic Function(Exception?)? onError}) =
+      _$CoursesAddCourseEventImpl;
   const CoursesAddCourseEvent._() : super._();
 
   Course get course;
   List<Lesson>? get lessons;
   FilePickerResult? get pickerResult;
+  dynamic Function(Course)? get onSuccess;
+  dynamic Function(Exception?)? get onError;
   @JsonKey(ignore: true)
   _$$CoursesAddCourseEventImplCopyWith<_$CoursesAddCourseEventImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CourseUpdateEventImplCopyWith<$Res> {
+  factory _$$CourseUpdateEventImplCopyWith(_$CourseUpdateEventImpl value,
+          $Res Function(_$CourseUpdateEventImpl) then) =
+      __$$CourseUpdateEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {Course course,
+      List<Lesson>? lessons,
+      FilePickerResult? pickerResult,
+      dynamic Function(Course)? onSuccess,
+      dynamic Function(Exception?)? onError});
+
+  $CourseCopyWith<$Res> get course;
+}
+
+/// @nodoc
+class __$$CourseUpdateEventImplCopyWithImpl<$Res>
+    extends _$CoursesEventCopyWithImpl<$Res, _$CourseUpdateEventImpl>
+    implements _$$CourseUpdateEventImplCopyWith<$Res> {
+  __$$CourseUpdateEventImplCopyWithImpl(_$CourseUpdateEventImpl _value,
+      $Res Function(_$CourseUpdateEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? course = null,
+    Object? lessons = freezed,
+    Object? pickerResult = freezed,
+    Object? onSuccess = freezed,
+    Object? onError = freezed,
+  }) {
+    return _then(_$CourseUpdateEventImpl(
+      course: null == course
+          ? _value.course
+          : course // ignore: cast_nullable_to_non_nullable
+              as Course,
+      lessons: freezed == lessons
+          ? _value._lessons
+          : lessons // ignore: cast_nullable_to_non_nullable
+              as List<Lesson>?,
+      pickerResult: freezed == pickerResult
+          ? _value.pickerResult
+          : pickerResult // ignore: cast_nullable_to_non_nullable
+              as FilePickerResult?,
+      onSuccess: freezed == onSuccess
+          ? _value.onSuccess
+          : onSuccess // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(Course)?,
+      onError: freezed == onError
+          ? _value.onError
+          : onError // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(Exception?)?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CourseCopyWith<$Res> get course {
+    return $CourseCopyWith<$Res>(_value.course, (value) {
+      return _then(_value.copyWith(course: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$CourseUpdateEventImpl extends CourseUpdateEvent {
+  const _$CourseUpdateEventImpl(
+      {required this.course,
+      final List<Lesson>? lessons,
+      this.pickerResult,
+      this.onSuccess,
+      this.onError})
+      : _lessons = lessons,
+        super._();
+
+  @override
+  final Course course;
+  final List<Lesson>? _lessons;
+  @override
+  List<Lesson>? get lessons {
+    final value = _lessons;
+    if (value == null) return null;
+    if (_lessons is EqualUnmodifiableListView) return _lessons;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final FilePickerResult? pickerResult;
+  @override
+  final dynamic Function(Course)? onSuccess;
+  @override
+  final dynamic Function(Exception?)? onError;
+
+  @override
+  String toString() {
+    return 'CoursesEvent.updateCourse(course: $course, lessons: $lessons, pickerResult: $pickerResult, onSuccess: $onSuccess, onError: $onError)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CourseUpdateEventImpl &&
+            (identical(other.course, course) || other.course == course) &&
+            const DeepCollectionEquality().equals(other._lessons, _lessons) &&
+            (identical(other.pickerResult, pickerResult) ||
+                other.pickerResult == pickerResult) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess) &&
+            (identical(other.onError, onError) || other.onError == onError));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      course,
+      const DeepCollectionEquality().hash(_lessons),
+      pickerResult,
+      onSuccess,
+      onError);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CourseUpdateEventImplCopyWith<_$CourseUpdateEventImpl> get copyWith =>
+      __$$CourseUpdateEventImplCopyWithImpl<_$CourseUpdateEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(String query) search,
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        addCourse,
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateCourse,
+  }) {
+    return updateCourse(course, lessons, pickerResult, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function(String query)? search,
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        addCourse,
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
+  }) {
+    return updateCourse?.call(
+        course, lessons, pickerResult, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(String query)? search,
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        addCourse,
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
+    required TResult orElse(),
+  }) {
+    if (updateCourse != null) {
+      return updateCourse(course, lessons, pickerResult, onSuccess, onError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CoursesLoadEvent value) load,
+    required TResult Function(CoursesSearchEvent value) search,
+    required TResult Function(CoursesAddCourseEvent value) addCourse,
+    required TResult Function(CourseUpdateEvent value) updateCourse,
+  }) {
+    return updateCourse(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CoursesLoadEvent value)? load,
+    TResult? Function(CoursesSearchEvent value)? search,
+    TResult? Function(CoursesAddCourseEvent value)? addCourse,
+    TResult? Function(CourseUpdateEvent value)? updateCourse,
+  }) {
+    return updateCourse?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CoursesLoadEvent value)? load,
+    TResult Function(CoursesSearchEvent value)? search,
+    TResult Function(CoursesAddCourseEvent value)? addCourse,
+    TResult Function(CourseUpdateEvent value)? updateCourse,
+    required TResult orElse(),
+  }) {
+    if (updateCourse != null) {
+      return updateCourse(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CourseUpdateEvent extends CoursesEvent {
+  const factory CourseUpdateEvent(
+      {required final Course course,
+      final List<Lesson>? lessons,
+      final FilePickerResult? pickerResult,
+      final dynamic Function(Course)? onSuccess,
+      final dynamic Function(Exception?)? onError}) = _$CourseUpdateEventImpl;
+  const CourseUpdateEvent._() : super._();
+
+  Course get course;
+  List<Lesson>? get lessons;
+  FilePickerResult? get pickerResult;
+  dynamic Function(Course)? get onSuccess;
+  dynamic Function(Exception?)? get onError;
+  @JsonKey(ignore: true)
+  _$$CourseUpdateEventImplCopyWith<_$CourseUpdateEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
