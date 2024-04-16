@@ -5,7 +5,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:teacher_client/core/utils/utils.dart';
 import 'package:teacher_client/features/courses/domain/bloc/course_bloc.dart';
 import 'package:teacher_client/features/lessons/domain/bloc/lesson_bloc.dart';
 import 'package:teacher_client/features/lessons/domain/repository/lessons_repository.dart';
@@ -17,6 +16,7 @@ import 'package:teacher_client/core/repository/storage_repository.dart';
 import 'package:teacher_client/features/tasks/presentation/widget/task_type_widgets/task_container.dart';
 
 import '../../../core/model/answer.dart';
+import '../../../core/model/course.dart';
 import '../../../core/model/lesson.dart';
 import '../../home/domain/home_bloc.dart';
 import '../../home/domain/home_state.dart';
@@ -41,38 +41,37 @@ class _TasksScreenState extends State<TasksScreen> {
     super.initState();
     if (mounted) {
       final homeState = context.read<HomeBloc>().state;
-      _nameController.text = homeState.lesson?.name ?? '';
-      _descriptionController.text = homeState.lesson?.description ?? '';
+      // _nameController.text = homeState.lesson?.name ?? 'unnamed';
+      // _descriptionController.text = homeState.lesson?.description ?? 'empty';
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TasksBloc(
-          lessonsRepository: di<LessonsRepository>(),
-          tasksRepository: di<TasksRepository>(),
-          storageRepository: di<StorageRepository>())
-        ..add(TasksEvent.load(lesson: context.read<HomeBloc>().state.lesson!)),
-      child: PopScope(
-        canPop: false,
-        onPopInvoked: (didPop) {
-          if (didPop) return;
-          if (context.router.canPop()) {
-            context.router.maybePop();
-          }
-        },
-        child: BlocBuilder<HomeBloc, HomeState>(
-          builder: (BuildContext context, HomeState homeState) {
-            final bloc = context.read<TasksBloc>();
-            return Scaffold(
-              body: Center(
+    return Scaffold(
+      body: PopScope(
+          canPop: false,
+          onPopInvoked: (didPop) {
+            if (didPop) {
+              context.router.maybePop();
+            }
+          },
+          child: BlocProvider(
+              create: (context) => TasksBloc(
+                  lessonsRepository: di<LessonsRepository>(),
+                  tasksRepository: di<TasksRepository>(),
+                  storageRepository: di<StorageRepository>())
+                ..add(TasksEvent.load(lesson: context.read<HomeBloc>().state.lesson ?? const Lesson(name: 'unnamed'))),
+              child: Center(
                   child: Padding(
                 padding: const EdgeInsets.all(32.0),
                 child: BlocBuilder<TasksBloc, TasksState>(builder: (context, state) {
+                  final bloc = context.read<TasksBloc>();
                   return state.when(
                       loading: () => const Center(child: CircularProgressIndicator()),
-                      load: (Lesson lesson, List<TaskModel> tasks) {
+                      load: (Course course, Lesson lesson, List<TaskModel> tasks) {
+                        _nameController.text = lesson.name;
+                        _descriptionController.text = lesson.description;
                         final taskWidgets = tasks.map((task) => taskWidgetsFactory(task)).toList();
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +103,7 @@ class _TasksScreenState extends State<TasksScreen> {
                               ),
                               ElevatedButton(
                                   onPressed: () {
-                                    _showTaskCreateDialog(context, homeState.lesson!);
+                                    _showTaskCreateDialog(context, lesson);
                                   },
                                   style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                                       backgroundColor: MaterialStateProperty.all(Colors.lightGreen),
@@ -113,7 +112,7 @@ class _TasksScreenState extends State<TasksScreen> {
                               const SizedBox(width: 8),
                               ElevatedButton(
                                   onPressed: () {
-                                    context.read<LessonBloc>().add(LessonEvent.deleteLesson(lesson: homeState.lesson!));
+                                    context.read<LessonBloc>().add(LessonEvent.deleteLesson(lesson: lesson));
                                     context.read<CourseBloc>().add(const CoursesEvent.load());
                                     context.router.maybePop();
                                   },
@@ -142,16 +141,16 @@ class _TasksScreenState extends State<TasksScreen> {
                                   final tasksBloc = context.read<TasksBloc>();
                                   final lessonBloc = context.read<LessonBloc>();
                                   lessonBloc.add(LessonEvent.updateLesson(
-                                      courseId: homeState.course!.id,
-                                      lesson: homeState.lesson!.copyWith(
-                                          name: _nameController.text, description: _descriptionController.text),
+                                      courseId: course.id,
+                                      lesson: lesson.copyWith(
+                                              name: _nameController.text, description: _descriptionController.text),
                                       onSuccess: (_) {
                                         for (var task in tasks) {
                                           tasksBloc.add(TasksEvent.updateTask(task: task));
                                         }
-                                        lessonBloc.add(LessonEvent.load(courseId: homeState.course!.id));
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(content: Text('Сохранено')));
+                                        lessonBloc.add(LessonEvent.load(courseId: course.id));
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            const SnackBar(behavior: SnackBarBehavior.floating, content: Text('Сохранено')));
                                       }));
                                 },
                                 child: const Text('Сохранить'))
@@ -160,11 +159,7 @@ class _TasksScreenState extends State<TasksScreen> {
                       },
                       error: (String? message) => Center(child: Text(message ?? 'Неизвестная ошибка')));
                 }),
-              )),
-            );
-          },
-        ),
-      ),
+              )))),
     );
   }
 
@@ -198,11 +193,11 @@ class _TasksScreenState extends State<TasksScreen> {
                         final TaskType type =
                             TaskType.values.firstWhereOrNull((t) => t.rowTaskType == taskType) ?? TaskType.none;
                         buildContext.read<TasksBloc>().add(TasksEvent.addTask(
-                            lesson: homeState.lesson!,
+                            lesson: homeState.lesson ?? const Lesson(),
                             task: TaskModel(
                                 taskType: type,
-                                lessonId: homeState.lesson!.id,
-                                courseId: homeState.course!.id,
+                                lessonId: homeState.lesson?.id ?? 0,
+                                courseId: homeState.course?.id ?? 0,
                                 answerModels: List<AnswerModel>.filled(type.defaultAnswersCount, AnswerModel())),
                             onSuccess: (task, answers) {
                               buildContext.read<TasksBloc>().add(TasksEvent.load(lesson: homeState.lesson!));

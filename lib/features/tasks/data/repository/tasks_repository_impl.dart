@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:talker/talker.dart';
 import 'package:teacher_client/core/model/task.dart';
 import 'package:teacher_client/features/tasks/domain/repository/tasks_repository.dart';
 
@@ -8,6 +9,7 @@ import '../../../../core/model/lesson.dart';
 
 class TasksRepositoryImpl implements TasksRepository {
   final SupabaseClient _client;
+  final talker = Talker();
 
   TasksRepositoryImpl({required SupabaseClient client}) : _client = client;
 
@@ -58,8 +60,12 @@ class TasksRepositoryImpl implements TasksRepository {
 
   @override
   Future<void> updateAnswers(List<Answer> answers, int taskId) async {
-    for (var answerJson in answers.map((e) => e.toJson()).toList()) {
-      await _client.from('answers').update(answerJson).eq('task_id', taskId);
+    for (var answer in answers) {
+      try {
+        await _client.from('answers').update(answer.toJson()).eq('id', answer.id);
+      } catch (e, s) {
+        talker.handle(e,s, 'update error answer ${answer.id}');
+      }
     }
   }
 }

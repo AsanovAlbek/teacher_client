@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teacher_client/core/constants/publication_status.dart';
@@ -35,12 +34,12 @@ class _CoursesThemesPageState extends State<CoursesThemesPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (BuildContext context, HomeState state) {
-        context.read<LessonBloc>().add(LessonEvent.load(courseId: state.course!.id));
+        context.read<LessonBloc>().add(LessonEvent.load(courseId: state.course?.id ?? 0));
         return SafeArea(
           child: Scaffold(
             backgroundColor: AppColors.backgroundColor,
             body: Center(
-              child: _CourseEditorContent(course: state.course!),
+              child: _CourseEditorContent(course: state.course ?? const Course(name: 'unnamed', description: 'empty')),
             ),
           ),
         );
@@ -97,7 +96,9 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
           return lessonBloc.state.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (String? message) => Center(child: Text(message ?? '')),
-              loaded: (List<Lesson> lessons) {
+              loaded: (Course course, List<Lesson> lessons) {
+                _nameController.text = course.name;
+                _descriptionController.text = course.description;
                 return Padding(
                   padding: const EdgeInsets.all(50).copyWith(bottom: 10),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -156,12 +157,12 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                               TextButton(
                                   onPressed: () {
                                     lessonBloc.add(LessonEvent.addLesson(
-                                        courseId: homeState.course!.id,
+                                        courseId: course.id,
                                         lesson: const Lesson(),
                                         onSuccess: (lesson) {
                                           courseBloc.add(CoursesEvent.updateCourse(
                                             pickerResult: _filePickerResult,
-                                              course: homeState.course!.copyWith(
+                                              course: course.copyWith(
                                                   name: _nameController.text,
                                                   description: _descriptionController.text,
                                                   status: _nameController.text.isNotEmpty &&
@@ -169,11 +170,12 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                                       ? PublicationStatus.published.label
                                                       : PublicationStatus.draft.label),
                                             onSuccess: (_) {
-                                              //courseBloc.add(const CoursesEvent.load());
+                                              courseBloc.add(const CoursesEvent.load());
                                             }
                                           ));
-                                          homeBloc.add(HomeEvent.setLesson(lesson));
-                                          context.router.navigate(const TasksRoute());
+                                          homeBloc.add(HomeEvent.setLesson(lesson: lesson, onSuccess: (_) {
+                                            context.router.navigate(const TasksRoute());
+                                          }));
                                         }));
                                   },
                                   child: Text(
@@ -188,15 +190,16 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                           onRedact: (lesson) {
                                             courseBloc.add(CoursesEvent.updateCourse(
                                                 pickerResult: _filePickerResult,
-                                                course: homeState.course!.copyWith(
+                                                course: course.copyWith(
                                                     name: _nameController.text,
                                                     description: _descriptionController.text,
                                                     status: _nameController.text.isNotEmpty &&
                                                         _descriptionController.text.isNotEmpty
                                                         ? PublicationStatus.published.label
                                                         : PublicationStatus.draft.label)));
-                                            homeBloc.add(HomeEvent.setLesson(lessons[index]));
-                                            context.router.navigate(const TasksRoute());
+                                            homeBloc.add(HomeEvent.setLesson(lesson: lessons[index], onSuccess: (_) {
+                                              context.router.navigate(const TasksRoute());
+                                            }));
                                           }),
                                       separatorBuilder: (context, index) => const SizedBox(height: 4),
                                       itemCount: lessons.length),
@@ -218,7 +221,7 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                       onPressed: () async {
                                         courseBloc.add(CoursesEvent.updateCourse(
                                             pickerResult: _filePickerResult,
-                                            course: homeState.course!.copyWith(
+                                            course: course.copyWith(
                                                 name: _nameController.text,
                                                 description: _descriptionController.text,
                                                 status: _nameController.text.isNotEmpty &&

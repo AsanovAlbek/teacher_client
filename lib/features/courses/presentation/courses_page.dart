@@ -36,21 +36,16 @@ class _CoursesPageState extends State<CoursesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CourseBloc(
-          coursesRepository: GetIt.I<CoursesRepository>(),
-          uploadRepository: GetIt.I<StorageRepository>())
-        ..add(const CoursesEvent.load()),
-      child: Scaffold(
-        backgroundColor: AppColors.backgroundColor,
-        body: SafeArea(
-          child: Scrollbar(
-            controller: scrollController,
-            trackVisibility: true,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-              child: _CoursesPageContent(scrollController: scrollController),
-            ),
+    context.read<CourseBloc>().add(const CoursesEvent.load());
+    return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
+      body: SafeArea(
+        child: Scrollbar(
+          controller: scrollController,
+          trackVisibility: true,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+            child: _CoursesPageContent(scrollController: scrollController),
           ),
         ),
       ),
@@ -95,9 +90,10 @@ class _CoursesPageContent extends StatelessWidget {
               TextButton(
                   onPressed: () {
                     bloc.add(CoursesEvent.addCourse(course: const Course(), onSuccess: (course) {
-                      homeBloc.add(HomeEvent.setCourse(course));
-                      AutoRouter.of(context)
-                          .navigate(const CoursesThemesRoute());
+                      homeBloc.add(HomeEvent.setCourse(course: course, onSuccess: (_) {
+                        AutoRouter.of(context)
+                            .navigate(const CoursesThemesRoute());
+                      }));
                     }, onError: (e) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ошибка $e')));
                     }));
@@ -122,8 +118,10 @@ class _CoursesPageContent extends StatelessWidget {
                         return CourseThemeItem(
                             course: courses[index],
                             onRedact: (course) {
-                              homeBloc.add(HomeEvent.setCourse(course));
-                              context.router.navigate(const CoursesThemesRoute());
+                              homeBloc.add(HomeEvent.setCourse(course: course, onSuccess: (_) {
+                                context.router.navigate(const CoursesThemesRoute());
+                              }));
+
                             });
                       },
                       separatorBuilder: (BuildContext context, int index) {

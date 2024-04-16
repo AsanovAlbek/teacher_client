@@ -2127,21 +2127,24 @@ mixin _$TasksState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Lesson lesson, List<TaskModel> tasks) load,
+    required TResult Function(
+            Course course, Lesson lesson, List<TaskModel> tasks)
+        load,
     required TResult Function(String? message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Lesson lesson, List<TaskModel> tasks)? load,
+    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks)?
+        load,
     TResult? Function(String? message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Lesson lesson, List<TaskModel> tasks)? load,
+    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks)? load,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) =>
@@ -2227,7 +2230,9 @@ class _$TasksStateLoadingImpl extends TasksStateLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Lesson lesson, List<TaskModel> tasks) load,
+    required TResult Function(
+            Course course, Lesson lesson, List<TaskModel> tasks)
+        load,
     required TResult Function(String? message) error,
   }) {
     return loading();
@@ -2237,7 +2242,8 @@ class _$TasksStateLoadingImpl extends TasksStateLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Lesson lesson, List<TaskModel> tasks)? load,
+    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks)?
+        load,
     TResult? Function(String? message)? error,
   }) {
     return loading?.call();
@@ -2247,7 +2253,7 @@ class _$TasksStateLoadingImpl extends TasksStateLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Lesson lesson, List<TaskModel> tasks)? load,
+    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks)? load,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
@@ -2303,8 +2309,9 @@ abstract class _$$TasksStateLoadedImplCopyWith<$Res> {
           $Res Function(_$TasksStateLoadedImpl) then) =
       __$$TasksStateLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Lesson lesson, List<TaskModel> tasks});
+  $Res call({Course course, Lesson lesson, List<TaskModel> tasks});
 
+  $CourseCopyWith<$Res> get course;
   $LessonCopyWith<$Res> get lesson;
 }
 
@@ -2319,10 +2326,15 @@ class __$$TasksStateLoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? course = null,
     Object? lesson = null,
     Object? tasks = null,
   }) {
     return _then(_$TasksStateLoadedImpl(
+      course: null == course
+          ? _value.course
+          : course // ignore: cast_nullable_to_non_nullable
+              as Course,
       lesson: null == lesson
           ? _value.lesson
           : lesson // ignore: cast_nullable_to_non_nullable
@@ -2332,6 +2344,14 @@ class __$$TasksStateLoadedImplCopyWithImpl<$Res>
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<TaskModel>,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CourseCopyWith<$Res> get course {
+    return $CourseCopyWith<$Res>(_value.course, (value) {
+      return _then(_value.copyWith(course: value));
+    });
   }
 
   @override
@@ -2347,11 +2367,15 @@ class __$$TasksStateLoadedImplCopyWithImpl<$Res>
 
 class _$TasksStateLoadedImpl extends TasksStateLoaded {
   const _$TasksStateLoadedImpl(
-      {this.lesson = const Lesson(),
+      {this.course = const Course(),
+      this.lesson = const Lesson(),
       final List<TaskModel> tasks = const <TaskModel>[]})
       : _tasks = tasks,
         super._();
 
+  @override
+  @JsonKey()
+  final Course course;
   @override
   @JsonKey()
   final Lesson lesson;
@@ -2366,7 +2390,7 @@ class _$TasksStateLoadedImpl extends TasksStateLoaded {
 
   @override
   String toString() {
-    return 'TasksState.load(lesson: $lesson, tasks: $tasks)';
+    return 'TasksState.load(course: $course, lesson: $lesson, tasks: $tasks)';
   }
 
   @override
@@ -2374,13 +2398,14 @@ class _$TasksStateLoadedImpl extends TasksStateLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TasksStateLoadedImpl &&
+            (identical(other.course, course) || other.course == course) &&
             (identical(other.lesson, lesson) || other.lesson == lesson) &&
             const DeepCollectionEquality().equals(other._tasks, _tasks));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, lesson, const DeepCollectionEquality().hash(_tasks));
+      runtimeType, course, lesson, const DeepCollectionEquality().hash(_tasks));
 
   @JsonKey(ignore: true)
   @override
@@ -2393,32 +2418,35 @@ class _$TasksStateLoadedImpl extends TasksStateLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Lesson lesson, List<TaskModel> tasks) load,
+    required TResult Function(
+            Course course, Lesson lesson, List<TaskModel> tasks)
+        load,
     required TResult Function(String? message) error,
   }) {
-    return load(lesson, tasks);
+    return load(course, lesson, tasks);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Lesson lesson, List<TaskModel> tasks)? load,
+    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks)?
+        load,
     TResult? Function(String? message)? error,
   }) {
-    return load?.call(lesson, tasks);
+    return load?.call(course, lesson, tasks);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Lesson lesson, List<TaskModel> tasks)? load,
+    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks)? load,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (load != null) {
-      return load(lesson, tasks);
+      return load(course, lesson, tasks);
     }
     return orElse();
   }
@@ -2460,10 +2488,12 @@ class _$TasksStateLoadedImpl extends TasksStateLoaded {
 
 abstract class TasksStateLoaded extends TasksState {
   const factory TasksStateLoaded(
-      {final Lesson lesson,
+      {final Course course,
+      final Lesson lesson,
       final List<TaskModel> tasks}) = _$TasksStateLoadedImpl;
   const TasksStateLoaded._() : super._();
 
+  Course get course;
   Lesson get lesson;
   List<TaskModel> get tasks;
   @JsonKey(ignore: true)
@@ -2537,7 +2567,9 @@ class _$TasksStateErrorImpl extends TasksStateError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Lesson lesson, List<TaskModel> tasks) load,
+    required TResult Function(
+            Course course, Lesson lesson, List<TaskModel> tasks)
+        load,
     required TResult Function(String? message) error,
   }) {
     return error(message);
@@ -2547,7 +2579,8 @@ class _$TasksStateErrorImpl extends TasksStateError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Lesson lesson, List<TaskModel> tasks)? load,
+    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks)?
+        load,
     TResult? Function(String? message)? error,
   }) {
     return error?.call(message);
@@ -2557,7 +2590,7 @@ class _$TasksStateErrorImpl extends TasksStateError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Lesson lesson, List<TaskModel> tasks)? load,
+    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks)? load,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {

@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/model/course.dart';
 import '../../../../core/model/lesson.dart';
@@ -34,8 +36,10 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
       emit(const LessonState.loading());
     }
     try {
-      final lessons = await _repository.lessonsByCourse(event.courseId);
-      _loaded = _loaded.copyWith(lessons: lessons);
+      final prefs = await SharedPreferences.getInstance();
+      final course = Course.fromJson(json.decode(prefs.getString('course')!));
+      final lessons = await _repository.lessonsByCourse(course.id);
+      _loaded = _loaded.copyWith(course: course, lessons: lessons);
       emit(_loaded);
     } catch (e, stack) {
       emit(const LessonState.error('Нет подключения к интернету'));

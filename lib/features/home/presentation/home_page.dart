@@ -8,6 +8,7 @@ import 'package:teacher_client/core/repository/storage_repository.dart';
 import 'package:teacher_client/core/resources/images.dart';
 import 'package:teacher_client/features/courses/domain/bloc/course_bloc.dart';
 import 'package:teacher_client/features/courses/domain/repository/courses_repository.dart';
+import 'package:teacher_client/features/home/domain/home_event.dart';
 import 'package:teacher_client/features/lessons/domain/bloc/lesson_bloc.dart';
 import 'package:teacher_client/features/lessons/domain/repository/lessons_repository.dart';
 
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => HomeBloc()),
+        BlocProvider(create: (context) => HomeBloc()..add(HomeEvent.load())),
         BlocProvider(
             create: (context) => CourseBloc(
                 coursesRepository: di<CoursesRepository>(),

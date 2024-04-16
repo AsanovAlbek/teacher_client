@@ -5,6 +5,7 @@ class LessonState with _$LessonState {
   const factory LessonState.loading() = LessonsLoadingState;
   const factory LessonState.error(String? message) = LessonsErrorState;
   const factory LessonState.loaded({
+    @Default(Course()) Course course,
     @Default(<Lesson>[]) List<Lesson> lessons
 }) = LessonLoadedState;
 }
