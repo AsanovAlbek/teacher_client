@@ -21,7 +21,7 @@ Lesson _$LessonFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Lesson {
   @JsonKey(name: 'id')
-  int? get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'description')
@@ -44,7 +44,7 @@ abstract class $LessonCopyWith<$Res> {
       _$LessonCopyWithImpl<$Res, Lesson>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
+      {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'description') String description,
       @JsonKey(name: 'course_id') int courseId,
@@ -65,7 +65,7 @@ class _$LessonCopyWithImpl<$Res, $Val extends Lesson>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? name = null,
     Object? description = null,
     Object? courseId = null,
@@ -73,10 +73,10 @@ class _$LessonCopyWithImpl<$Res, $Val extends Lesson>
     Object? status = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -109,7 +109,7 @@ abstract class _$$LessonImplCopyWith<$Res> implements $LessonCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
+      {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'description') String description,
       @JsonKey(name: 'course_id') int courseId,
@@ -128,7 +128,7 @@ class __$$LessonImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? name = null,
     Object? description = null,
     Object? courseId = null,
@@ -136,10 +136,10 @@ class __$$LessonImplCopyWithImpl<$Res>
     Object? status = null,
   }) {
     return _then(_$LessonImpl(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -168,7 +168,7 @@ class __$$LessonImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LessonImpl implements _Lesson {
   const _$LessonImpl(
-      {@JsonKey(name: 'id') this.id,
+      {@JsonKey(name: 'id') this.id = 0,
       @JsonKey(name: 'name') this.name = '',
       @JsonKey(name: 'description') this.description = '',
       @JsonKey(name: 'course_id') this.courseId = 0,
@@ -180,7 +180,7 @@ class _$LessonImpl implements _Lesson {
 
   @override
   @JsonKey(name: 'id')
-  final int? id;
+  final int id;
   @override
   @JsonKey(name: 'name')
   final String name;
@@ -239,7 +239,7 @@ class _$LessonImpl implements _Lesson {
 
 abstract class _Lesson implements Lesson {
   const factory _Lesson(
-      {@JsonKey(name: 'id') final int? id,
+      {@JsonKey(name: 'id') final int id,
       @JsonKey(name: 'name') final String name,
       @JsonKey(name: 'description') final String description,
       @JsonKey(name: 'course_id') final int courseId,
@@ -250,7 +250,7 @@ abstract class _Lesson implements Lesson {
 
   @override
   @JsonKey(name: 'id')
-  int? get id;
+  int get id;
   @override
   @JsonKey(name: 'name')
   String get name;

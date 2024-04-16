@@ -5,7 +5,7 @@ part 'course.g.dart';
 @freezed
 class Course with _$Course {
   const factory Course({
-    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'id') @Default(0) int id,
     @JsonKey(name: 'name') @Default('') String name,
     @JsonKey(name: 'description') @Default('') String description,
     @JsonKey(name: 'icon_url') @Default('') String iconUrl,

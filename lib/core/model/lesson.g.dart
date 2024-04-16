@@ -7,7 +7,7 @@ part of 'lesson.dart';
 // **************************************************************************
 
 _$LessonImpl _$$LessonImplFromJson(Map<String, dynamic> json) => _$LessonImpl(
-      id: json['id'] as int?,
+      id: json['id'] as int? ?? 0,
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       courseId: json['course_id'] as int? ?? 0,

@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../core/model/course.dart';
 import '../../../../core/model/lesson.dart';
 import '../repository/lessons_repository.dart';
 
@@ -23,6 +26,7 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
     on<LessonLoadEvent>(_load);
     on<LessonAddEvent>(_addLesson);
     on<LessonDeleteEvent>(_deleteLesson);
+    on<LessonUpdateEvent>(_updateLesson);
   }
 
   LessonLoadedState _loaded = const LessonLoadedState();
@@ -32,10 +36,10 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
       emit(const LessonState.loading());
     }
     try {
-      final lessons = event.courseId != -1
-          ? await _repository.lessonsByCourse(event.courseId)
-          : List<Lesson>.empty(growable: true);
-      _loaded = _loaded.copyWith(lessons: lessons);
+      final prefs = await SharedPreferences.getInstance();
+      final course = Course.fromJson(json.decode(prefs.getString('course')!));
+      final lessons = await _repository.lessonsByCourse(course.id);
+      _loaded = _loaded.copyWith(course: course, lessons: lessons);
       emit(_loaded);
     } catch (e, stack) {
       emit(const LessonState.error('Нет подключения к интернету'));
@@ -44,17 +48,13 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
 
   FutureOr<void> _addLesson(LessonAddEvent event, Emitter<LessonState> emit) async {
     try {
-      if (event.courseId != -1) {
-        await _repository.addLesson(event.courseId, event.lesson);
-        add(LessonEvent.load(courseId: event.courseId));
-      } else {
-        final lessons = _loaded.lessons.toList(growable: true);
-        lessons.add(event.lesson);
-        _loaded = _loaded.copyWith(lessons: lessons);
-        emit(_loaded);
-      }
-    } catch (e, stack) {
+      final lesson = await _repository.addLesson(event.courseId, event.lesson.copyWith(courseId: event.courseId));
+      debugPrint('new lesson = $lesson');
+      add(LessonEvent.load(courseId: event.courseId));
+      event.onSuccess?.call(lesson);
+    } on Exception catch (e, stack) {
       debugPrint('err $e');
+      event.onError?.call(e);
     }
   }
 
@@ -63,6 +63,17 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
       await _repository.deleteLesson(event.lesson);
     } catch(e) {
       debugPrint(e.toString());
+    }
+  }
+
+  FutureOr<void> _updateLesson(LessonUpdateEvent event, Emitter<LessonState> emit) async {
+    try {
+      final lesson = await _repository.updateLesson(event.courseId, event.lesson);
+      add(LessonEvent.load(courseId: event.courseId));
+      event.onSuccess?.call(lesson);
+    } on Exception catch(e) {
+      debugPrint(e.toString());
+      event.onError?.call(e);
     }
   }
 }

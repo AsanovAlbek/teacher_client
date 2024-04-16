@@ -1,13 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:talker/talker.dart';
 import 'package:teacher_client/features/tasks/domain/mapper/tasks_mapper.dart';
 import 'package:teacher_client/features/tasks/domain/model/answer.dart';
 
 import '../../../../core/model/answer.dart';
+import '../../../../core/model/course.dart';
 import '../../../../core/model/lesson.dart';
 import '../../../../core/model/task.dart';
 import '../../../../core/repository/storage_repository.dart';
@@ -25,18 +29,15 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   final TasksRepository tasksRepository;
   final LessonsRepository lessonsRepository;
   final StorageRepository storageRepository;
+  Talker talker = Talker();
 
-  TasksBloc(
-      {required this.lessonsRepository,
-      required this.tasksRepository,
-      required this.storageRepository})
+  TasksBloc({required this.lessonsRepository, required this.tasksRepository, required this.storageRepository})
       : super(const TasksState.loading()) {
     on<TasksAddEvent>(_add);
     on<TasksLoadEvent>(_load);
     on<TasksRemoveEvent>(_remove);
     on<TasksUpdateEvent>(_update);
     on<TasksSetEvent>(_setTask);
-    on<TasksSaveEvent>(_saveTasks);
     on<TasksCreateLessonEvent>(_createLesson);
     on<TasksSetLessonEvent>(_setLesson);
     on<RemoveAnswersFromTaskEvent>(_removeAnswersFromTask);
@@ -45,8 +46,31 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   var _loaded = const TasksStateLoaded();
 
   FutureOr<void> _add(TasksAddEvent event, Emitter<TasksState> emit) async {
-    _loaded = _loaded.copyWith(tasks: [..._loaded.tasks, event.task]);
-    emit(_loaded);
+    try {
+      final answersFeatures = event.task.answerModels.map((answerModel) async {
+        if (answerModel.imageFilePickerResult != null) {
+          final imageUrl = await storageRepository.uploadFile('pictures', answerModel.imageFilePickerResult!);
+          answerModel = answerModel.copyWith(answer: answerModel.answer.copyWith(imageUrl: imageUrl));
+        }
+        if (answerModel.audioFilePickerResult != null) {
+          final audioUrl = await storageRepository.uploadFile('sounds', answerModel.audioFilePickerResult!);
+          answerModel = answerModel.copyWith(answer: answerModel.answer.copyWith(soundUrl: audioUrl));
+        }
+        talker.debug("""
+          answer imgUrl = ${answerModel.answer.imageUrl}
+          answer audioUrl = ${answerModel.answer.soundUrl}
+        """);
+        return answerModel.answer;
+      }).toList();
+      final answers = [for (var answerFuture in answersFeatures) await answerFuture];
+      final task = await tasksRepository.addTask(event.lesson.id, event.task.toDto());
+      final insertedAnswers = await tasksRepository.addAnswers(answers, task.id);
+      add(TasksEvent.load(lesson: event.lesson));
+      event.onSuccess?.call(task.toDomain(), insertedAnswers);
+    } catch (e, stack) {
+      talker.handle(e, stack, 'Error when add task');
+      event.onError?.call(e);
+    }
   }
 
   FutureOr<void> _load(TasksLoadEvent event, Emitter<TasksState> emit) async {
@@ -54,11 +78,14 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       emit(const TasksState.loading());
     }
     try {
-      final tasksByLesson = await tasksRepository.lessonTasks(event.lesson.id!);
+      final prefs = await SharedPreferences.getInstance();
+      final course = Course.fromJson(json.decode(prefs.getString('course')!));
+      final lesson = Lesson.fromJson(json.decode(prefs.getString('lesson')!));
+      final tasksByLesson = await tasksRepository.lessonTasks(lesson.id);
       _loaded = _loaded.copyWith(
-          lesson: event.lesson,
-          tasks: tasksByLesson.map((task) => task.toDomain()).toList());
+          course: course, lesson: lesson, tasks: tasksByLesson.map((task) => task.toDomain()).toList());
       emit(_loaded);
+      debugPrint(_loaded.tasks.join());
     } on Exception catch (e, s) {
       emit(TasksState.error(message: 'Error $e'));
       debugPrint('Error is $e');
@@ -66,106 +93,56 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     }
   }
 
-  FutureOr<void> _remove(
-      TasksRemoveEvent event, Emitter<TasksState> emit) async {
-    await tasksRepository.deleteTask(
-        _loaded.tasks.first.lessonId, event.taskId);
+  FutureOr<void> _remove(TasksRemoveEvent event, Emitter<TasksState> emit) async {
+    await tasksRepository.deleteTask(_loaded.tasks.first.lessonId, event.taskId);
     add(TasksEvent.load(lesson: _loaded.lesson));
   }
 
-  FutureOr<void> _update(
-      TasksUpdateEvent event, Emitter<TasksState> emit) async {}
+  FutureOr<void> _update(TasksUpdateEvent event, Emitter<TasksState> emit) async {
+    try {
+      final answersFeatures = event.task.answerModels.map((answerModel) async {
+        var model = answerModel;
+        if (model.imageFilePickerResult != null) {
+          final imageUrl = await storageRepository.uploadFile('pictures', model.imageFilePickerResult!);
+          model = model.copyWith(answer: model.answer.copyWith(imageUrl: imageUrl));
+        }
+        if (model.audioFilePickerResult != null) {
+          final audioUrl = await storageRepository.uploadFile('sounds', model.audioFilePickerResult!);
+          model = model.copyWith(answer: model.answer.copyWith(soundUrl: audioUrl));
+        }
+        talker.debug("""
+          answer imgUrl = ${model.answer.imageUrl}
+          answer audioUrl = ${model.answer.soundUrl}
+        """);
+        return model.answer;
+      }).toList();
+      final answers = [for (var answerFeature in answersFeatures) await answerFeature];
+      await tasksRepository.updateTask(event.task.toDto());
+      await tasksRepository.updateAnswers(answers, event.task.id);
+      add(TasksEvent.load(lesson: _loaded.lesson));
+    } catch (e, stack) {
+      event.onError?.call(e);
+      talker.handle(e, stack, 'Error when update task');
+    }
+  }
 
   FutureOr<void> _setTask(TasksSetEvent event, Emitter<TasksState> emit) {
-    final int taskIndex =
-        _loaded.tasks.indexWhere((task) => task.id == event.task.id);
+    talker.debug('set task id ${event.task.id}');
+    final int taskIndex = _loaded.tasks.indexWhere((task) => task.id == event.task.id);
     List<TaskModel> tasks = _loaded.tasks.toList(growable: true);
     tasks[taskIndex] = event.task;
     _loaded = _loaded.copyWith(tasks: tasks);
     emit(_loaded);
   }
 
-  FutureOr<void> _saveTasks(
-      TasksSaveEvent event, Emitter<TasksState> emit) async {
-    if (state is! TasksStateLoading) {
-      emit(const TasksState.loading());
-    }
-    try {
-      final processedTasks = _loaded.tasks.map((taskModel) async {
-        final taskAnswersFeatures =
-            taskModel.answerModels.map((answerModel) async {
-          var answer = answerModel.answer;
-          _upsertImage(answerModel, (updatedAnswer) => answer = updatedAnswer);
-          _upsertAudio(answerModel, (updatedAnswer) => answer = updatedAnswer);
-          return answer;
-        }).toList();
-        final taskAnswers = [
-          for (final answerFeature in taskAnswersFeatures) await answerFeature
-        ];
-        return taskModel.toDto().copyWith(taskAnswers: taskAnswers);
-      }).toList();
-      final tasks = [for (var task in processedTasks) await task];
-      await tasksRepository
-          .addAllTasks(_loaded.lesson, tasks);
-      //add(TasksEvent.load(lesson: _loaded.lesson));
-      emit(_loaded);
-    } catch (e) {
-      debugPrint('error $e');
-    }
-  }
-
-  FutureOr<void> _createLesson(
-      TasksCreateLessonEvent event, Emitter<TasksState> emit) {
-    _loaded = _loaded.copyWith(
-        lesson: event.lesson, tasks: List.empty(growable: true));
+  FutureOr<void> _createLesson(TasksCreateLessonEvent event, Emitter<TasksState> emit) {
+    _loaded = _loaded.copyWith(lesson: event.lesson, tasks: List.empty(growable: true));
     emit(_loaded);
   }
 
-  FutureOr<void> _setLesson(
-      TasksSetLessonEvent event, Emitter<TasksState> emit) {
+  FutureOr<void> _setLesson(TasksSetLessonEvent event, Emitter<TasksState> emit) {
     _loaded = _loaded.copyWith(lesson: event.lesson);
     emit(_loaded);
-  }
-
-  Future<void> _upsertImage(AnswerModel answerModel, Function(Answer) updateAnswer) async {
-    if (answerModel.imageFilePickerResult != null) {
-      // if (answerModel.answer.imageUrl.trim().isNotEmpty) {
-      //   final updatedImageUrl = await storageRepository.updateFile(
-      //       'pictures',
-      //       answerModel.imageFilePickerResult!,
-      //       answerModel.answer.imageUrl);
-      //   debugPrint('updated image url = $updatedImageUrl');
-      // } else {
-      //   final imageUrl = await storageRepository.uploadFile(
-      //       'pictures', answerModel.imageFilePickerResult!);
-      //   updateAnswer(answerModel.answer.copyWith(imageUrl: imageUrl));
-      //   debugPrint('image url = $imageUrl');
-      // }
-      final imageUrl = await storageRepository.uploadFile(
-          'pictures', answerModel.imageFilePickerResult!);
-      updateAnswer(answerModel.answer.copyWith(imageUrl: imageUrl));
-      debugPrint('image url = $imageUrl');
-    }
-  }
-
-  Future<void> _upsertAudio(AnswerModel answerModel, Function(Answer) updateAnswer) async {
-    if (answerModel.audioFilePickerResult != null) {
-      // if (answerModel.answer.soundUrl.trim().isNotEmpty) {
-      //   final updatedAudioUrl = await storageRepository.updateFile(
-      //       'sounds',
-      //       answerModel.audioFilePickerResult!,
-      //       answerModel.answer.soundUrl);
-      //   debugPrint('updated audio url = $updatedAudioUrl');
-      // }
-      // final audioUrl = await storageRepository.uploadFile(
-      //     'sounds', answerModel.audioFilePickerResult!);
-      // updateAnswer(answerModel.answer.copyWith(soundUrl: audioUrl));
-      // debugPrint('audio url = $audioUrl');
-      final audioUrl = await storageRepository.uploadFile(
-          'sounds', answerModel.audioFilePickerResult!);
-      updateAnswer(answerModel.answer.copyWith(soundUrl: audioUrl));
-      debugPrint('audio url = $audioUrl');
-    }
   }
 
   FutureOr<void> _removeAnswersFromTask(RemoveAnswersFromTaskEvent event, Emitter<TasksState> emit) async {

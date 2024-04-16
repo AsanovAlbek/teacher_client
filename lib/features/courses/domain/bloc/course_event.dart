@@ -6,11 +6,18 @@ class CoursesEvent with _$CoursesEvent {
 
   const factory CoursesEvent.load() = CoursesLoadEvent;
 
-  const factory CoursesEvent.search({required String query}) =
-      CoursesSearchEvent;
+  const factory CoursesEvent.search({required String query}) = CoursesSearchEvent;
 
   const factory CoursesEvent.addCourse(
       {required Course course,
       List<Lesson>? lessons,
-      FilePickerResult? pickerResult}) = CoursesAddCourseEvent;
+      FilePickerResult? pickerResult,
+      Function(Course)? onSuccess,
+      Function(Exception?)? onError}) = CoursesAddCourseEvent;
+
+  const factory CoursesEvent.updateCourse({required Course course,
+    List<Lesson>? lessons,
+    FilePickerResult? pickerResult,
+    Function(Course)? onSuccess,
+    Function(Exception?)? onError}) = CourseUpdateEvent;
 }
