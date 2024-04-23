@@ -37,16 +37,6 @@ class _TasksScreenState extends State<TasksScreen> {
   final _descriptionController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    if (mounted) {
-      final homeState = context.read<HomeBloc>().state;
-      // _nameController.text = homeState.lesson?.name ?? 'unnamed';
-      // _descriptionController.text = homeState.lesson?.description ?? 'empty';
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PopScope(
