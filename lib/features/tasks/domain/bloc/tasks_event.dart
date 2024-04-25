@@ -23,6 +23,11 @@ class TasksEvent with _$TasksEvent {
       Function(TaskModel, List<AnswerModel>)? onSuccess,
       Function(Object?)? onError}) = TasksUpdateEvent;
 
+  const factory TasksEvent.updateAllTasks(
+      {required List<TaskModel> tasks,
+      Function(List<Task>)? onSuccess,
+      Function(Exception?)? onError}) = UpdateAllTasksEvent;
+
   const factory TasksEvent.setTask({required TaskModel task}) = TasksSetEvent;
 
   const factory TasksEvent.saveTasks({required List<TaskModel> tasks}) = TasksSaveEvent;

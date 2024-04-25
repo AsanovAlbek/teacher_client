@@ -33,6 +33,11 @@ mixin _$TasksEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
+    required TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateAllTasks,
     required TResult Function(TaskModel task) setTask,
     required TResult Function(List<TaskModel> tasks) saveTasks,
     required TResult Function(Task task) removeAnswersFromTask,
@@ -55,6 +60,11 @@ mixin _$TasksEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult? Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult? Function(TaskModel task)? setTask,
     TResult? Function(List<TaskModel> tasks)? saveTasks,
     TResult? Function(Task task)? removeAnswersFromTask,
@@ -77,6 +87,11 @@ mixin _$TasksEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult Function(TaskModel task)? setTask,
     TResult Function(List<TaskModel> tasks)? saveTasks,
     TResult Function(Task task)? removeAnswersFromTask,
@@ -91,6 +106,7 @@ mixin _$TasksEvent {
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
     required TResult Function(TasksSetEvent value) setTask,
     required TResult Function(TasksSaveEvent value) saveTasks,
     required TResult Function(RemoveAnswersFromTaskEvent value)
@@ -105,6 +121,7 @@ mixin _$TasksEvent {
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult? Function(TasksSetEvent value)? setTask,
     TResult? Function(TasksSaveEvent value)? saveTasks,
     TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -118,6 +135,7 @@ mixin _$TasksEvent {
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult Function(TasksSetEvent value)? setTask,
     TResult Function(TasksSaveEvent value)? saveTasks,
     TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -234,6 +252,11 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
+    required TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateAllTasks,
     required TResult Function(TaskModel task) setTask,
     required TResult Function(List<TaskModel> tasks) saveTasks,
     required TResult Function(Task task) removeAnswersFromTask,
@@ -259,6 +282,11 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult? Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult? Function(TaskModel task)? setTask,
     TResult? Function(List<TaskModel> tasks)? saveTasks,
     TResult? Function(Task task)? removeAnswersFromTask,
@@ -284,6 +312,11 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult Function(TaskModel task)? setTask,
     TResult Function(List<TaskModel> tasks)? saveTasks,
     TResult Function(Task task)? removeAnswersFromTask,
@@ -304,6 +337,7 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
     required TResult Function(TasksSetEvent value) setTask,
     required TResult Function(TasksSaveEvent value) saveTasks,
     required TResult Function(RemoveAnswersFromTaskEvent value)
@@ -321,6 +355,7 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult? Function(TasksSetEvent value)? setTask,
     TResult? Function(TasksSaveEvent value)? saveTasks,
     TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -337,6 +372,7 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult Function(TasksSetEvent value)? setTask,
     TResult Function(TasksSaveEvent value)? saveTasks,
     TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -452,6 +488,11 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
+    required TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateAllTasks,
     required TResult Function(TaskModel task) setTask,
     required TResult Function(List<TaskModel> tasks) saveTasks,
     required TResult Function(Task task) removeAnswersFromTask,
@@ -477,6 +518,11 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult? Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult? Function(TaskModel task)? setTask,
     TResult? Function(List<TaskModel> tasks)? saveTasks,
     TResult? Function(Task task)? removeAnswersFromTask,
@@ -502,6 +548,11 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult Function(TaskModel task)? setTask,
     TResult Function(List<TaskModel> tasks)? saveTasks,
     TResult Function(Task task)? removeAnswersFromTask,
@@ -522,6 +573,7 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
     required TResult Function(TasksSetEvent value) setTask,
     required TResult Function(TasksSaveEvent value) saveTasks,
     required TResult Function(RemoveAnswersFromTaskEvent value)
@@ -539,6 +591,7 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult? Function(TasksSetEvent value)? setTask,
     TResult? Function(TasksSaveEvent value)? saveTasks,
     TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -555,6 +608,7 @@ class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult Function(TasksSetEvent value)? setTask,
     TResult Function(TasksSaveEvent value)? saveTasks,
     TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -668,6 +722,11 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
+    required TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateAllTasks,
     required TResult Function(TaskModel task) setTask,
     required TResult Function(List<TaskModel> tasks) saveTasks,
     required TResult Function(Task task) removeAnswersFromTask,
@@ -693,6 +752,11 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult? Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult? Function(TaskModel task)? setTask,
     TResult? Function(List<TaskModel> tasks)? saveTasks,
     TResult? Function(Task task)? removeAnswersFromTask,
@@ -718,6 +782,11 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult Function(TaskModel task)? setTask,
     TResult Function(List<TaskModel> tasks)? saveTasks,
     TResult Function(Task task)? removeAnswersFromTask,
@@ -738,6 +807,7 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
     required TResult Function(TasksSetEvent value) setTask,
     required TResult Function(TasksSaveEvent value) saveTasks,
     required TResult Function(RemoveAnswersFromTaskEvent value)
@@ -755,6 +825,7 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult? Function(TasksSetEvent value)? setTask,
     TResult? Function(TasksSaveEvent value)? saveTasks,
     TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -771,6 +842,7 @@ class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult Function(TasksSetEvent value)? setTask,
     TResult Function(TasksSaveEvent value)? saveTasks,
     TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -915,6 +987,11 @@ class _$TasksAddEventImpl extends TasksAddEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
+    required TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateAllTasks,
     required TResult Function(TaskModel task) setTask,
     required TResult Function(List<TaskModel> tasks) saveTasks,
     required TResult Function(Task task) removeAnswersFromTask,
@@ -940,6 +1017,11 @@ class _$TasksAddEventImpl extends TasksAddEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult? Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult? Function(TaskModel task)? setTask,
     TResult? Function(List<TaskModel> tasks)? saveTasks,
     TResult? Function(Task task)? removeAnswersFromTask,
@@ -965,6 +1047,11 @@ class _$TasksAddEventImpl extends TasksAddEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult Function(TaskModel task)? setTask,
     TResult Function(List<TaskModel> tasks)? saveTasks,
     TResult Function(Task task)? removeAnswersFromTask,
@@ -985,6 +1072,7 @@ class _$TasksAddEventImpl extends TasksAddEvent {
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
     required TResult Function(TasksSetEvent value) setTask,
     required TResult Function(TasksSaveEvent value) saveTasks,
     required TResult Function(RemoveAnswersFromTaskEvent value)
@@ -1002,6 +1090,7 @@ class _$TasksAddEventImpl extends TasksAddEvent {
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult? Function(TasksSetEvent value)? setTask,
     TResult? Function(TasksSaveEvent value)? saveTasks,
     TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -1018,6 +1107,7 @@ class _$TasksAddEventImpl extends TasksAddEvent {
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult Function(TasksSetEvent value)? setTask,
     TResult Function(TasksSaveEvent value)? saveTasks,
     TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -1127,6 +1217,11 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
+    required TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateAllTasks,
     required TResult Function(TaskModel task) setTask,
     required TResult Function(List<TaskModel> tasks) saveTasks,
     required TResult Function(Task task) removeAnswersFromTask,
@@ -1152,6 +1247,11 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult? Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult? Function(TaskModel task)? setTask,
     TResult? Function(List<TaskModel> tasks)? saveTasks,
     TResult? Function(Task task)? removeAnswersFromTask,
@@ -1177,6 +1277,11 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult Function(TaskModel task)? setTask,
     TResult Function(List<TaskModel> tasks)? saveTasks,
     TResult Function(Task task)? removeAnswersFromTask,
@@ -1197,6 +1302,7 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
     required TResult Function(TasksSetEvent value) setTask,
     required TResult Function(TasksSaveEvent value) saveTasks,
     required TResult Function(RemoveAnswersFromTaskEvent value)
@@ -1214,6 +1320,7 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult? Function(TasksSetEvent value)? setTask,
     TResult? Function(TasksSaveEvent value)? saveTasks,
     TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -1230,6 +1337,7 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult Function(TasksSetEvent value)? setTask,
     TResult Function(TasksSaveEvent value)? saveTasks,
     TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -1355,6 +1463,11 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
+    required TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateAllTasks,
     required TResult Function(TaskModel task) setTask,
     required TResult Function(List<TaskModel> tasks) saveTasks,
     required TResult Function(Task task) removeAnswersFromTask,
@@ -1380,6 +1493,11 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult? Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult? Function(TaskModel task)? setTask,
     TResult? Function(List<TaskModel> tasks)? saveTasks,
     TResult? Function(Task task)? removeAnswersFromTask,
@@ -1405,6 +1523,11 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult Function(TaskModel task)? setTask,
     TResult Function(List<TaskModel> tasks)? saveTasks,
     TResult Function(Task task)? removeAnswersFromTask,
@@ -1425,6 +1548,7 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
     required TResult Function(TasksSetEvent value) setTask,
     required TResult Function(TasksSaveEvent value) saveTasks,
     required TResult Function(RemoveAnswersFromTaskEvent value)
@@ -1442,6 +1566,7 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult? Function(TasksSetEvent value)? setTask,
     TResult? Function(TasksSaveEvent value)? saveTasks,
     TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -1458,6 +1583,7 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult Function(TasksSetEvent value)? setTask,
     TResult Function(TasksSaveEvent value)? saveTasks,
     TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -1482,6 +1608,264 @@ abstract class TasksUpdateEvent extends TasksEvent {
   dynamic Function(Object?)? get onError;
   @JsonKey(ignore: true)
   _$$TasksUpdateEventImplCopyWith<_$TasksUpdateEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateAllTasksEventImplCopyWith<$Res> {
+  factory _$$UpdateAllTasksEventImplCopyWith(_$UpdateAllTasksEventImpl value,
+          $Res Function(_$UpdateAllTasksEventImpl) then) =
+      __$$UpdateAllTasksEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {List<TaskModel> tasks,
+      dynamic Function(List<Task>)? onSuccess,
+      dynamic Function(Exception?)? onError});
+}
+
+/// @nodoc
+class __$$UpdateAllTasksEventImplCopyWithImpl<$Res>
+    extends _$TasksEventCopyWithImpl<$Res, _$UpdateAllTasksEventImpl>
+    implements _$$UpdateAllTasksEventImplCopyWith<$Res> {
+  __$$UpdateAllTasksEventImplCopyWithImpl(_$UpdateAllTasksEventImpl _value,
+      $Res Function(_$UpdateAllTasksEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tasks = null,
+    Object? onSuccess = freezed,
+    Object? onError = freezed,
+  }) {
+    return _then(_$UpdateAllTasksEventImpl(
+      tasks: null == tasks
+          ? _value._tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<TaskModel>,
+      onSuccess: freezed == onSuccess
+          ? _value.onSuccess
+          : onSuccess // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(List<Task>)?,
+      onError: freezed == onError
+          ? _value.onError
+          : onError // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(Exception?)?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateAllTasksEventImpl extends UpdateAllTasksEvent {
+  const _$UpdateAllTasksEventImpl(
+      {required final List<TaskModel> tasks, this.onSuccess, this.onError})
+      : _tasks = tasks,
+        super._();
+
+  final List<TaskModel> _tasks;
+  @override
+  List<TaskModel> get tasks {
+    if (_tasks is EqualUnmodifiableListView) return _tasks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tasks);
+  }
+
+  @override
+  final dynamic Function(List<Task>)? onSuccess;
+  @override
+  final dynamic Function(Exception?)? onError;
+
+  @override
+  String toString() {
+    return 'TasksEvent.updateAllTasks(tasks: $tasks, onSuccess: $onSuccess, onError: $onError)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateAllTasksEventImpl &&
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess) &&
+            (identical(other.onError, onError) || other.onError == onError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_tasks), onSuccess, onError);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateAllTasksEventImplCopyWith<_$UpdateAllTasksEventImpl> get copyWith =>
+      __$$UpdateAllTasksEventImplCopyWithImpl<_$UpdateAllTasksEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Lesson lesson) load,
+    required TResult Function(Lesson lesson) createLesson,
+    required TResult Function(Lesson lesson) setLesson,
+    required TResult Function(
+            Lesson lesson,
+            TaskModel task,
+            dynamic Function(TaskModel, List<Answer>)? onSuccess,
+            dynamic Function(Object?)? onError)
+        addTask,
+    required TResult Function(int taskId) removeTask,
+    required TResult Function(
+            TaskModel task,
+            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
+            dynamic Function(Object?)? onError)
+        updateTask,
+    required TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateAllTasks,
+    required TResult Function(TaskModel task) setTask,
+    required TResult Function(List<TaskModel> tasks) saveTasks,
+    required TResult Function(Task task) removeAnswersFromTask,
+  }) {
+    return updateAllTasks(tasks, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Lesson lesson)? load,
+    TResult? Function(Lesson lesson)? createLesson,
+    TResult? Function(Lesson lesson)? setLesson,
+    TResult? Function(
+            Lesson lesson,
+            TaskModel task,
+            dynamic Function(TaskModel, List<Answer>)? onSuccess,
+            dynamic Function(Object?)? onError)?
+        addTask,
+    TResult? Function(int taskId)? removeTask,
+    TResult? Function(
+            TaskModel task,
+            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
+            dynamic Function(Object?)? onError)?
+        updateTask,
+    TResult? Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
+    TResult? Function(TaskModel task)? setTask,
+    TResult? Function(List<TaskModel> tasks)? saveTasks,
+    TResult? Function(Task task)? removeAnswersFromTask,
+  }) {
+    return updateAllTasks?.call(tasks, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Lesson lesson)? load,
+    TResult Function(Lesson lesson)? createLesson,
+    TResult Function(Lesson lesson)? setLesson,
+    TResult Function(
+            Lesson lesson,
+            TaskModel task,
+            dynamic Function(TaskModel, List<Answer>)? onSuccess,
+            dynamic Function(Object?)? onError)?
+        addTask,
+    TResult Function(int taskId)? removeTask,
+    TResult Function(
+            TaskModel task,
+            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
+            dynamic Function(Object?)? onError)?
+        updateTask,
+    TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
+    TResult Function(TaskModel task)? setTask,
+    TResult Function(List<TaskModel> tasks)? saveTasks,
+    TResult Function(Task task)? removeAnswersFromTask,
+    required TResult orElse(),
+  }) {
+    if (updateAllTasks != null) {
+      return updateAllTasks(tasks, onSuccess, onError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TasksLoadEvent value) load,
+    required TResult Function(TasksCreateLessonEvent value) createLesson,
+    required TResult Function(TasksSetLessonEvent value) setLesson,
+    required TResult Function(TasksAddEvent value) addTask,
+    required TResult Function(TasksRemoveEvent value) removeTask,
+    required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
+    required TResult Function(TasksSetEvent value) setTask,
+    required TResult Function(TasksSaveEvent value) saveTasks,
+    required TResult Function(RemoveAnswersFromTaskEvent value)
+        removeAnswersFromTask,
+  }) {
+    return updateAllTasks(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TasksLoadEvent value)? load,
+    TResult? Function(TasksCreateLessonEvent value)? createLesson,
+    TResult? Function(TasksSetLessonEvent value)? setLesson,
+    TResult? Function(TasksAddEvent value)? addTask,
+    TResult? Function(TasksRemoveEvent value)? removeTask,
+    TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
+    TResult? Function(TasksSetEvent value)? setTask,
+    TResult? Function(TasksSaveEvent value)? saveTasks,
+    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
+  }) {
+    return updateAllTasks?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TasksLoadEvent value)? load,
+    TResult Function(TasksCreateLessonEvent value)? createLesson,
+    TResult Function(TasksSetLessonEvent value)? setLesson,
+    TResult Function(TasksAddEvent value)? addTask,
+    TResult Function(TasksRemoveEvent value)? removeTask,
+    TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
+    TResult Function(TasksSetEvent value)? setTask,
+    TResult Function(TasksSaveEvent value)? saveTasks,
+    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
+    required TResult orElse(),
+  }) {
+    if (updateAllTasks != null) {
+      return updateAllTasks(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateAllTasksEvent extends TasksEvent {
+  const factory UpdateAllTasksEvent(
+      {required final List<TaskModel> tasks,
+      final dynamic Function(List<Task>)? onSuccess,
+      final dynamic Function(Exception?)? onError}) = _$UpdateAllTasksEventImpl;
+  const UpdateAllTasksEvent._() : super._();
+
+  List<TaskModel> get tasks;
+  dynamic Function(List<Task>)? get onSuccess;
+  dynamic Function(Exception?)? get onError;
+  @JsonKey(ignore: true)
+  _$$UpdateAllTasksEventImplCopyWith<_$UpdateAllTasksEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1564,6 +1948,11 @@ class _$TasksSetEventImpl extends TasksSetEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
+    required TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateAllTasks,
     required TResult Function(TaskModel task) setTask,
     required TResult Function(List<TaskModel> tasks) saveTasks,
     required TResult Function(Task task) removeAnswersFromTask,
@@ -1589,6 +1978,11 @@ class _$TasksSetEventImpl extends TasksSetEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult? Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult? Function(TaskModel task)? setTask,
     TResult? Function(List<TaskModel> tasks)? saveTasks,
     TResult? Function(Task task)? removeAnswersFromTask,
@@ -1614,6 +2008,11 @@ class _$TasksSetEventImpl extends TasksSetEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult Function(TaskModel task)? setTask,
     TResult Function(List<TaskModel> tasks)? saveTasks,
     TResult Function(Task task)? removeAnswersFromTask,
@@ -1634,6 +2033,7 @@ class _$TasksSetEventImpl extends TasksSetEvent {
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
     required TResult Function(TasksSetEvent value) setTask,
     required TResult Function(TasksSaveEvent value) saveTasks,
     required TResult Function(RemoveAnswersFromTaskEvent value)
@@ -1651,6 +2051,7 @@ class _$TasksSetEventImpl extends TasksSetEvent {
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult? Function(TasksSetEvent value)? setTask,
     TResult? Function(TasksSaveEvent value)? saveTasks,
     TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -1667,6 +2068,7 @@ class _$TasksSetEventImpl extends TasksSetEvent {
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult Function(TasksSetEvent value)? setTask,
     TResult Function(TasksSaveEvent value)? saveTasks,
     TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -1778,6 +2180,11 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
+    required TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateAllTasks,
     required TResult Function(TaskModel task) setTask,
     required TResult Function(List<TaskModel> tasks) saveTasks,
     required TResult Function(Task task) removeAnswersFromTask,
@@ -1803,6 +2210,11 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult? Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult? Function(TaskModel task)? setTask,
     TResult? Function(List<TaskModel> tasks)? saveTasks,
     TResult? Function(Task task)? removeAnswersFromTask,
@@ -1828,6 +2240,11 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult Function(TaskModel task)? setTask,
     TResult Function(List<TaskModel> tasks)? saveTasks,
     TResult Function(Task task)? removeAnswersFromTask,
@@ -1848,6 +2265,7 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
     required TResult Function(TasksSetEvent value) setTask,
     required TResult Function(TasksSaveEvent value) saveTasks,
     required TResult Function(RemoveAnswersFromTaskEvent value)
@@ -1865,6 +2283,7 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult? Function(TasksSetEvent value)? setTask,
     TResult? Function(TasksSaveEvent value)? saveTasks,
     TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -1881,6 +2300,7 @@ class _$TasksSaveEventImpl extends TasksSaveEvent {
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult Function(TasksSetEvent value)? setTask,
     TResult Function(TasksSaveEvent value)? saveTasks,
     TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -1996,6 +2416,11 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
+    required TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateAllTasks,
     required TResult Function(TaskModel task) setTask,
     required TResult Function(List<TaskModel> tasks) saveTasks,
     required TResult Function(Task task) removeAnswersFromTask,
@@ -2021,6 +2446,11 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult? Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult? Function(TaskModel task)? setTask,
     TResult? Function(List<TaskModel> tasks)? saveTasks,
     TResult? Function(Task task)? removeAnswersFromTask,
@@ -2046,6 +2476,11 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
+    TResult Function(
+            List<TaskModel> tasks,
+            dynamic Function(List<Task>)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateAllTasks,
     TResult Function(TaskModel task)? setTask,
     TResult Function(List<TaskModel> tasks)? saveTasks,
     TResult Function(Task task)? removeAnswersFromTask,
@@ -2066,6 +2501,7 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
+    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
     required TResult Function(TasksSetEvent value) setTask,
     required TResult Function(TasksSaveEvent value) saveTasks,
     required TResult Function(RemoveAnswersFromTaskEvent value)
@@ -2083,6 +2519,7 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
+    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult? Function(TasksSetEvent value)? setTask,
     TResult? Function(TasksSaveEvent value)? saveTasks,
     TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -2099,6 +2536,7 @@ class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
+    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
     TResult Function(TasksSetEvent value)? setTask,
     TResult Function(TasksSaveEvent value)? saveTasks,
     TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
@@ -2127,8 +2565,8 @@ mixin _$TasksState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(
-            Course course, Lesson lesson, List<TaskModel> tasks)
+    required TResult Function(Course course, Lesson lesson,
+            List<TaskModel> tasks, UpdatingState updatingState)
         load,
     required TResult Function(String? message) error,
   }) =>
@@ -2136,7 +2574,8 @@ mixin _$TasksState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks)?
+    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks,
+            UpdatingState updatingState)?
         load,
     TResult? Function(String? message)? error,
   }) =>
@@ -2144,7 +2583,9 @@ mixin _$TasksState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks)? load,
+    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks,
+            UpdatingState updatingState)?
+        load,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) =>
@@ -2230,8 +2671,8 @@ class _$TasksStateLoadingImpl extends TasksStateLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(
-            Course course, Lesson lesson, List<TaskModel> tasks)
+    required TResult Function(Course course, Lesson lesson,
+            List<TaskModel> tasks, UpdatingState updatingState)
         load,
     required TResult Function(String? message) error,
   }) {
@@ -2242,7 +2683,8 @@ class _$TasksStateLoadingImpl extends TasksStateLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks)?
+    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks,
+            UpdatingState updatingState)?
         load,
     TResult? Function(String? message)? error,
   }) {
@@ -2253,7 +2695,9 @@ class _$TasksStateLoadingImpl extends TasksStateLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks)? load,
+    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks,
+            UpdatingState updatingState)?
+        load,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
@@ -2309,7 +2753,11 @@ abstract class _$$TasksStateLoadedImplCopyWith<$Res> {
           $Res Function(_$TasksStateLoadedImpl) then) =
       __$$TasksStateLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Course course, Lesson lesson, List<TaskModel> tasks});
+  $Res call(
+      {Course course,
+      Lesson lesson,
+      List<TaskModel> tasks,
+      UpdatingState updatingState});
 
   $CourseCopyWith<$Res> get course;
   $LessonCopyWith<$Res> get lesson;
@@ -2329,6 +2777,7 @@ class __$$TasksStateLoadedImplCopyWithImpl<$Res>
     Object? course = null,
     Object? lesson = null,
     Object? tasks = null,
+    Object? updatingState = null,
   }) {
     return _then(_$TasksStateLoadedImpl(
       course: null == course
@@ -2343,6 +2792,10 @@ class __$$TasksStateLoadedImplCopyWithImpl<$Res>
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<TaskModel>,
+      updatingState: null == updatingState
+          ? _value.updatingState
+          : updatingState // ignore: cast_nullable_to_non_nullable
+              as UpdatingState,
     ));
   }
 
@@ -2369,7 +2822,8 @@ class _$TasksStateLoadedImpl extends TasksStateLoaded {
   const _$TasksStateLoadedImpl(
       {this.course = const Course(),
       this.lesson = const Lesson(),
-      final List<TaskModel> tasks = const <TaskModel>[]})
+      final List<TaskModel> tasks = const <TaskModel>[],
+      this.updatingState = UpdatingState.closed})
       : _tasks = tasks,
         super._();
 
@@ -2389,8 +2843,12 @@ class _$TasksStateLoadedImpl extends TasksStateLoaded {
   }
 
   @override
+  @JsonKey()
+  final UpdatingState updatingState;
+
+  @override
   String toString() {
-    return 'TasksState.load(course: $course, lesson: $lesson, tasks: $tasks)';
+    return 'TasksState.load(course: $course, lesson: $lesson, tasks: $tasks, updatingState: $updatingState)';
   }
 
   @override
@@ -2400,12 +2858,14 @@ class _$TasksStateLoadedImpl extends TasksStateLoaded {
             other is _$TasksStateLoadedImpl &&
             (identical(other.course, course) || other.course == course) &&
             (identical(other.lesson, lesson) || other.lesson == lesson) &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks));
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
+            (identical(other.updatingState, updatingState) ||
+                other.updatingState == updatingState));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, course, lesson, const DeepCollectionEquality().hash(_tasks));
+  int get hashCode => Object.hash(runtimeType, course, lesson,
+      const DeepCollectionEquality().hash(_tasks), updatingState);
 
   @JsonKey(ignore: true)
   @override
@@ -2418,35 +2878,38 @@ class _$TasksStateLoadedImpl extends TasksStateLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(
-            Course course, Lesson lesson, List<TaskModel> tasks)
+    required TResult Function(Course course, Lesson lesson,
+            List<TaskModel> tasks, UpdatingState updatingState)
         load,
     required TResult Function(String? message) error,
   }) {
-    return load(course, lesson, tasks);
+    return load(course, lesson, tasks, updatingState);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks)?
+    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks,
+            UpdatingState updatingState)?
         load,
     TResult? Function(String? message)? error,
   }) {
-    return load?.call(course, lesson, tasks);
+    return load?.call(course, lesson, tasks, updatingState);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks)? load,
+    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks,
+            UpdatingState updatingState)?
+        load,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (load != null) {
-      return load(course, lesson, tasks);
+      return load(course, lesson, tasks, updatingState);
     }
     return orElse();
   }
@@ -2490,12 +2953,14 @@ abstract class TasksStateLoaded extends TasksState {
   const factory TasksStateLoaded(
       {final Course course,
       final Lesson lesson,
-      final List<TaskModel> tasks}) = _$TasksStateLoadedImpl;
+      final List<TaskModel> tasks,
+      final UpdatingState updatingState}) = _$TasksStateLoadedImpl;
   const TasksStateLoaded._() : super._();
 
   Course get course;
   Lesson get lesson;
   List<TaskModel> get tasks;
+  UpdatingState get updatingState;
   @JsonKey(ignore: true)
   _$$TasksStateLoadedImplCopyWith<_$TasksStateLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2567,8 +3032,8 @@ class _$TasksStateErrorImpl extends TasksStateError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(
-            Course course, Lesson lesson, List<TaskModel> tasks)
+    required TResult Function(Course course, Lesson lesson,
+            List<TaskModel> tasks, UpdatingState updatingState)
         load,
     required TResult Function(String? message) error,
   }) {
@@ -2579,7 +3044,8 @@ class _$TasksStateErrorImpl extends TasksStateError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks)?
+    TResult? Function(Course course, Lesson lesson, List<TaskModel> tasks,
+            UpdatingState updatingState)?
         load,
     TResult? Function(String? message)? error,
   }) {
@@ -2590,7 +3056,9 @@ class _$TasksStateErrorImpl extends TasksStateError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks)? load,
+    TResult Function(Course course, Lesson lesson, List<TaskModel> tasks,
+            UpdatingState updatingState)?
+        load,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {

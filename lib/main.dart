@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:teacher_client/core/constants/supa_const.dart';
 import 'package:teacher_client/core/di/core_module.dart';
 import 'package:teacher_client/core/navigation/router.dart';
@@ -19,6 +20,7 @@ void main() async {
       anonKey: SupabaseConst.supabaseKey,
       authOptions:
           const FlutterAuthClientOptions(authFlowType: AuthFlowType.pkce));
+  usePathUrlStrategy();
   coreModule();
   authModule();
   coursesModule();
@@ -58,7 +60,7 @@ class TeacherAppState extends State<TeacherApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Teacher App',
         theme: ThemeData(
           fontFamily: AppFonts.ptSans,
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

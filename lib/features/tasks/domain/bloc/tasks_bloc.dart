@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talker/talker.dart';
 import 'package:teacher_client/features/tasks/domain/mapper/tasks_mapper.dart';
@@ -29,7 +30,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   final TasksRepository tasksRepository;
   final LessonsRepository lessonsRepository;
   final StorageRepository storageRepository;
-  Talker talker = Talker();
+  Talker talker = GetIt.I<Talker>();
 
   TasksBloc({required this.lessonsRepository, required this.tasksRepository, required this.storageRepository})
       : super(const TasksState.loading()) {
@@ -41,6 +42,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     on<TasksCreateLessonEvent>(_createLesson);
     on<TasksSetLessonEvent>(_setLesson);
     on<RemoveAnswersFromTaskEvent>(_removeAnswersFromTask);
+    on<UpdateAllTasksEvent>(_updateAllTasks);
   }
 
   var _loaded = const TasksStateLoaded();
@@ -98,6 +100,42 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     add(TasksEvent.load(lesson: _loaded.lesson));
   }
 
+  FutureOr<void> _updateAllTasks(UpdateAllTasksEvent event, Emitter<TasksState> emit) async {
+    try {
+      _loaded = _loaded.copyWith(updatingState: UpdatingState.update);
+      emit(_loaded);
+      for (var task in event.tasks) {
+        final answersFeatures = task.answerModels.map((answerModel) async {
+          var model = answerModel;
+          if (model.imageFilePickerResult != null) {
+            final imageUrl = await storageRepository.uploadFile('pictures', model.imageFilePickerResult!);
+            model = model.copyWith(answer: model.answer.copyWith(imageUrl: imageUrl));
+          }
+          if (model.audioFilePickerResult != null) {
+            final audioUrl = await storageRepository.uploadFile('sounds', model.audioFilePickerResult!);
+            model = model.copyWith(answer: model.answer.copyWith(soundUrl: audioUrl));
+          }
+          talker.debug("""
+          answer imgUrl = ${model.answer.imageUrl}
+          answer audioUrl = ${model.answer.soundUrl}
+        """);
+          return model.answer;
+        }).toList();
+        final answers = [for (var answerFeature in answersFeatures) await answerFeature];
+        await tasksRepository.updateTask(task.toDto());
+        await tasksRepository.updateAnswers(answers, task.id);
+        _loaded = _loaded.copyWith(updatingState: UpdatingState.success);
+        emit(_loaded);
+        event.onSuccess?.call(event.tasks.map((t) => t.toDto()).toList());
+      }
+    } on Exception catch(e, s) {
+      event.onError?.call(e);
+      talker.handle(e, s);
+      _loaded = _loaded.copyWith(updatingState: UpdatingState.error);
+      emit(_loaded);
+    }
+  }
+
   FutureOr<void> _update(TasksUpdateEvent event, Emitter<TasksState> emit) async {
     try {
       final answersFeatures = event.task.answerModels.map((answerModel) async {
@@ -119,7 +157,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       final answers = [for (var answerFeature in answersFeatures) await answerFeature];
       await tasksRepository.updateTask(event.task.toDto());
       await tasksRepository.updateAnswers(answers, event.task.id);
-      add(TasksEvent.load(lesson: _loaded.lesson));
+      //add(TasksEvent.load(lesson: _loaded.lesson));
     } catch (e, stack) {
       event.onError?.call(e);
       talker.handle(e, stack, 'Error when update task');
