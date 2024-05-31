@@ -171,6 +171,9 @@ class _LoginState extends State<LoginPage> {
                                                   context.showSnackBar(
                                                       message:
                                                           'Вы успешно зарегистрировались');
+                                                  context.read<LoginBloc>().add(
+                                                      const LoginEvent.changePage(
+                                                          pageState: LoginPageState.login));
                                                 },
                                                 onError: (message) {
                                                   context.showSnackBar(

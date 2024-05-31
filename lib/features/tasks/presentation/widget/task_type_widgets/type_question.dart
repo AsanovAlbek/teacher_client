@@ -4,10 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teacher_client/core/utils/utils.dart';
 import 'package:teacher_client/features/tasks/domain/bloc/tasks_bloc.dart';
-import 'package:teacher_client/features/tasks/domain/mapper/tasks_mapper.dart';
-import 'package:teacher_client/features/tasks/domain/model/answer.dart';
-
-import '../../../../../core/model/answer.dart';
 import '../../../domain/model/task.dart';
 import 'deletable_item.dart';
 
@@ -22,13 +18,17 @@ class TypeQuestion extends StatefulWidget {
 
 class _TypeQuestionState extends State<TypeQuestion> {
   final _taskController = TextEditingController();
-  late final AnswerModel _answer;
 
   @override
   void initState() {
-    _answer = widget.task.answerModels.single;
     _taskController.text = widget.task.task;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _taskController.dispose();
+    super.dispose();
   }
 
   @override
@@ -57,14 +57,14 @@ class _TypeQuestionState extends State<TypeQuestion> {
             ),
             const SizedBox(height: 8),
             TextFormField(
-              initialValue: _answer.answer.rightAnswer,
+              initialValue: widget.task.answerModels.single.answer.rightAnswer,
               decoration: const InputDecoration(labelText: 'Ответ'),
               onChanged: (text) {
                 AppUtils.debounce(() {
                   bloc.add(TasksEvent.setTask(
                       task: widget.task.copyWith(answerModels: [
-                        _answer.copyWith(
-                            answer: _answer.answer.copyWith(rightAnswer: text.trim()))
+                        widget.task.answerModels.single.copyWith(
+                            answer: widget.task.answerModels.single.answer.copyWith(rightAnswer: text.trim()))
                       ])));
                 });
               },

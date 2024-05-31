@@ -135,8 +135,8 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
                 _showTaskCreateDialog(context, widget.lesson);
               },
               style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  backgroundColor: MaterialStateProperty.all(Colors.lightGreen),
-                  foregroundColor: MaterialStateProperty.all(Colors.white)),
+                  backgroundColor: WidgetStateProperty.all(Colors.lightGreen),
+                  foregroundColor: WidgetStateProperty.all(Colors.white)),
               child: const Text('Добавить задание')),
           const SizedBox(width: 8),
           ElevatedButton(
@@ -146,8 +146,8 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
                 context.router.maybePop();
               },
               style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  backgroundColor: MaterialStateProperty.all(Colors.red),
-                  foregroundColor: MaterialStateProperty.all(Colors.white)),
+                  backgroundColor: WidgetStateProperty.all(Colors.red),
+                  foregroundColor: WidgetStateProperty.all(Colors.white)),
               child: const Text('Удалить урок'))
         ]),
         const SizedBox(height: 8),

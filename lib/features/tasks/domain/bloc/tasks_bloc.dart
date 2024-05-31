@@ -69,6 +69,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       final insertedAnswers = await tasksRepository.addAnswers(answers, task.id);
       add(TasksEvent.load(lesson: event.lesson));
       event.onSuccess?.call(task.toDomain(), insertedAnswers);
+      talker.debug('Success added $insertedAnswers');
     } catch (e, stack) {
       talker.handle(e, stack, 'Error when add task');
       event.onError?.call(e);
@@ -122,8 +123,12 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
           return model.answer;
         }).toList();
         final answers = [for (var answerFeature in answersFeatures) await answerFeature];
+        talker.debug('answers = $answers');
         await tasksRepository.updateTask(task.toDto());
-        await tasksRepository.updateAnswers(answers, task.id);
+        final oldAnswers = answers.where((answer) => answer.id != 0).toList();
+        final newAnswers = answers.where((answer) => answer.id == 0).toList();
+        await tasksRepository.updateAnswers(oldAnswers, task.id);
+        await tasksRepository.addAnswers(newAnswers, task.id);
         _loaded = _loaded.copyWith(updatingState: UpdatingState.success);
         emit(_loaded);
         event.onSuccess?.call(event.tasks.map((t) => t.toDto()).toList());
