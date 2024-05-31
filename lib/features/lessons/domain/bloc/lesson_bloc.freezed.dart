@@ -31,7 +31,12 @@ mixin _$LessonEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)
         updateLesson,
-    required TResult Function(Lesson lesson) deleteLesson,
+    required TResult Function(FilePickerResult? filePickerResult) updateImage,
+    required TResult Function(
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)
+        deleteLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -49,7 +54,10 @@ mixin _$LessonEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateLesson,
-    TResult? Function(Lesson lesson)? deleteLesson,
+    TResult? Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult? Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,7 +75,10 @@ mixin _$LessonEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateLesson,
-    TResult Function(Lesson lesson)? deleteLesson,
+    TResult Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +87,7 @@ mixin _$LessonEvent {
     required TResult Function(LessonLoadEvent value) load,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
+    required TResult Function(LessonUpdateImageEvent value) updateImage,
     required TResult Function(LessonDeleteEvent value) deleteLesson,
   }) =>
       throw _privateConstructorUsedError;
@@ -84,6 +96,7 @@ mixin _$LessonEvent {
     TResult? Function(LessonLoadEvent value)? load,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
+    TResult? Function(LessonUpdateImageEvent value)? updateImage,
     TResult? Function(LessonDeleteEvent value)? deleteLesson,
   }) =>
       throw _privateConstructorUsedError;
@@ -92,6 +105,7 @@ mixin _$LessonEvent {
     TResult Function(LessonLoadEvent value)? load,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
+    TResult Function(LessonUpdateImageEvent value)? updateImage,
     TResult Function(LessonDeleteEvent value)? deleteLesson,
     required TResult orElse(),
   }) =>
@@ -195,7 +209,12 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)
         updateLesson,
-    required TResult Function(Lesson lesson) deleteLesson,
+    required TResult Function(FilePickerResult? filePickerResult) updateImage,
+    required TResult Function(
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)
+        deleteLesson,
   }) {
     return load(courseId);
   }
@@ -216,7 +235,10 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateLesson,
-    TResult? Function(Lesson lesson)? deleteLesson,
+    TResult? Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult? Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
   }) {
     return load?.call(courseId);
   }
@@ -237,7 +259,10 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateLesson,
-    TResult Function(Lesson lesson)? deleteLesson,
+    TResult Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -252,6 +277,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
     required TResult Function(LessonLoadEvent value) load,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
+    required TResult Function(LessonUpdateImageEvent value) updateImage,
     required TResult Function(LessonDeleteEvent value) deleteLesson,
   }) {
     return load(this);
@@ -263,6 +289,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
     TResult? Function(LessonLoadEvent value)? load,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
+    TResult? Function(LessonUpdateImageEvent value)? updateImage,
     TResult? Function(LessonDeleteEvent value)? deleteLesson,
   }) {
     return load?.call(this);
@@ -274,6 +301,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
     TResult Function(LessonLoadEvent value)? load,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
+    TResult Function(LessonUpdateImageEvent value)? updateImage,
     TResult Function(LessonDeleteEvent value)? deleteLesson,
     required TResult orElse(),
   }) {
@@ -419,7 +447,12 @@ class _$LessonAddEventImpl extends LessonAddEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)
         updateLesson,
-    required TResult Function(Lesson lesson) deleteLesson,
+    required TResult Function(FilePickerResult? filePickerResult) updateImage,
+    required TResult Function(
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)
+        deleteLesson,
   }) {
     return addLesson(courseId, lesson, onSuccess, onError);
   }
@@ -440,7 +473,10 @@ class _$LessonAddEventImpl extends LessonAddEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateLesson,
-    TResult? Function(Lesson lesson)? deleteLesson,
+    TResult? Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult? Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
   }) {
     return addLesson?.call(courseId, lesson, onSuccess, onError);
   }
@@ -461,7 +497,10 @@ class _$LessonAddEventImpl extends LessonAddEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateLesson,
-    TResult Function(Lesson lesson)? deleteLesson,
+    TResult Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
     required TResult orElse(),
   }) {
     if (addLesson != null) {
@@ -476,6 +515,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
     required TResult Function(LessonLoadEvent value) load,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
+    required TResult Function(LessonUpdateImageEvent value) updateImage,
     required TResult Function(LessonDeleteEvent value) deleteLesson,
   }) {
     return addLesson(this);
@@ -487,6 +527,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
     TResult? Function(LessonLoadEvent value)? load,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
+    TResult? Function(LessonUpdateImageEvent value)? updateImage,
     TResult? Function(LessonDeleteEvent value)? deleteLesson,
   }) {
     return addLesson?.call(this);
@@ -498,6 +539,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
     TResult Function(LessonLoadEvent value)? load,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
+    TResult Function(LessonUpdateImageEvent value)? updateImage,
     TResult Function(LessonDeleteEvent value)? deleteLesson,
     required TResult orElse(),
   }) {
@@ -649,7 +691,12 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)
         updateLesson,
-    required TResult Function(Lesson lesson) deleteLesson,
+    required TResult Function(FilePickerResult? filePickerResult) updateImage,
+    required TResult Function(
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)
+        deleteLesson,
   }) {
     return updateLesson(courseId, lesson, onSuccess, onError);
   }
@@ -670,7 +717,10 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateLesson,
-    TResult? Function(Lesson lesson)? deleteLesson,
+    TResult? Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult? Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
   }) {
     return updateLesson?.call(courseId, lesson, onSuccess, onError);
   }
@@ -691,7 +741,10 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateLesson,
-    TResult Function(Lesson lesson)? deleteLesson,
+    TResult Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
     required TResult orElse(),
   }) {
     if (updateLesson != null) {
@@ -706,6 +759,7 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
     required TResult Function(LessonLoadEvent value) load,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
+    required TResult Function(LessonUpdateImageEvent value) updateImage,
     required TResult Function(LessonDeleteEvent value) deleteLesson,
   }) {
     return updateLesson(this);
@@ -717,6 +771,7 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
     TResult? Function(LessonLoadEvent value)? load,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
+    TResult? Function(LessonUpdateImageEvent value)? updateImage,
     TResult? Function(LessonDeleteEvent value)? deleteLesson,
   }) {
     return updateLesson?.call(this);
@@ -728,6 +783,7 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
     TResult Function(LessonLoadEvent value)? load,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
+    TResult Function(LessonUpdateImageEvent value)? updateImage,
     TResult Function(LessonDeleteEvent value)? deleteLesson,
     required TResult orElse(),
   }) {
@@ -756,12 +812,212 @@ abstract class LessonUpdateEvent extends LessonEvent {
 }
 
 /// @nodoc
+abstract class _$$LessonUpdateImageEventImplCopyWith<$Res> {
+  factory _$$LessonUpdateImageEventImplCopyWith(
+          _$LessonUpdateImageEventImpl value,
+          $Res Function(_$LessonUpdateImageEventImpl) then) =
+      __$$LessonUpdateImageEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({FilePickerResult? filePickerResult});
+}
+
+/// @nodoc
+class __$$LessonUpdateImageEventImplCopyWithImpl<$Res>
+    extends _$LessonEventCopyWithImpl<$Res, _$LessonUpdateImageEventImpl>
+    implements _$$LessonUpdateImageEventImplCopyWith<$Res> {
+  __$$LessonUpdateImageEventImplCopyWithImpl(
+      _$LessonUpdateImageEventImpl _value,
+      $Res Function(_$LessonUpdateImageEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? filePickerResult = freezed,
+  }) {
+    return _then(_$LessonUpdateImageEventImpl(
+      filePickerResult: freezed == filePickerResult
+          ? _value.filePickerResult
+          : filePickerResult // ignore: cast_nullable_to_non_nullable
+              as FilePickerResult?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LessonUpdateImageEventImpl extends LessonUpdateImageEvent {
+  const _$LessonUpdateImageEventImpl({required this.filePickerResult})
+      : super._();
+
+  @override
+  final FilePickerResult? filePickerResult;
+
+  @override
+  String toString() {
+    return 'LessonEvent.updateImage(filePickerResult: $filePickerResult)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LessonUpdateImageEventImpl &&
+            (identical(other.filePickerResult, filePickerResult) ||
+                other.filePickerResult == filePickerResult));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, filePickerResult);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LessonUpdateImageEventImplCopyWith<_$LessonUpdateImageEventImpl>
+      get copyWith => __$$LessonUpdateImageEventImplCopyWithImpl<
+          _$LessonUpdateImageEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int courseId) load,
+    required TResult Function(
+            int courseId,
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        addLesson,
+    required TResult Function(
+            int courseId,
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateLesson,
+    required TResult Function(FilePickerResult? filePickerResult) updateImage,
+    required TResult Function(
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)
+        deleteLesson,
+  }) {
+    return updateImage(filePickerResult);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int courseId)? load,
+    TResult? Function(
+            int courseId,
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        addLesson,
+    TResult? Function(
+            int courseId,
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateLesson,
+    TResult? Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult? Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
+  }) {
+    return updateImage?.call(filePickerResult);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int courseId)? load,
+    TResult Function(
+            int courseId,
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        addLesson,
+    TResult Function(
+            int courseId,
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateLesson,
+    TResult Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
+    required TResult orElse(),
+  }) {
+    if (updateImage != null) {
+      return updateImage(filePickerResult);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LessonLoadEvent value) load,
+    required TResult Function(LessonAddEvent value) addLesson,
+    required TResult Function(LessonUpdateEvent value) updateLesson,
+    required TResult Function(LessonUpdateImageEvent value) updateImage,
+    required TResult Function(LessonDeleteEvent value) deleteLesson,
+  }) {
+    return updateImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LessonLoadEvent value)? load,
+    TResult? Function(LessonAddEvent value)? addLesson,
+    TResult? Function(LessonUpdateEvent value)? updateLesson,
+    TResult? Function(LessonUpdateImageEvent value)? updateImage,
+    TResult? Function(LessonDeleteEvent value)? deleteLesson,
+  }) {
+    return updateImage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LessonLoadEvent value)? load,
+    TResult Function(LessonAddEvent value)? addLesson,
+    TResult Function(LessonUpdateEvent value)? updateLesson,
+    TResult Function(LessonUpdateImageEvent value)? updateImage,
+    TResult Function(LessonDeleteEvent value)? deleteLesson,
+    required TResult orElse(),
+  }) {
+    if (updateImage != null) {
+      return updateImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LessonUpdateImageEvent extends LessonEvent {
+  const factory LessonUpdateImageEvent(
+          {required final FilePickerResult? filePickerResult}) =
+      _$LessonUpdateImageEventImpl;
+  const LessonUpdateImageEvent._() : super._();
+
+  FilePickerResult? get filePickerResult;
+  @JsonKey(ignore: true)
+  _$$LessonUpdateImageEventImplCopyWith<_$LessonUpdateImageEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$LessonDeleteEventImplCopyWith<$Res> {
   factory _$$LessonDeleteEventImplCopyWith(_$LessonDeleteEventImpl value,
           $Res Function(_$LessonDeleteEventImpl) then) =
       __$$LessonDeleteEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Lesson lesson});
+  $Res call(
+      {Lesson lesson,
+      dynamic Function(Lesson)? onSuccess,
+      dynamic Function(Lesson)? onError});
 
   $LessonCopyWith<$Res> get lesson;
 }
@@ -778,12 +1034,22 @@ class __$$LessonDeleteEventImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? lesson = null,
+    Object? onSuccess = freezed,
+    Object? onError = freezed,
   }) {
     return _then(_$LessonDeleteEventImpl(
       lesson: null == lesson
           ? _value.lesson
           : lesson // ignore: cast_nullable_to_non_nullable
               as Lesson,
+      onSuccess: freezed == onSuccess
+          ? _value.onSuccess
+          : onSuccess // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(Lesson)?,
+      onError: freezed == onError
+          ? _value.onError
+          : onError // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(Lesson)?,
     ));
   }
 
@@ -799,14 +1065,20 @@ class __$$LessonDeleteEventImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LessonDeleteEventImpl extends LessonDeleteEvent {
-  const _$LessonDeleteEventImpl({required this.lesson}) : super._();
+  const _$LessonDeleteEventImpl(
+      {required this.lesson, this.onSuccess, this.onError})
+      : super._();
 
   @override
   final Lesson lesson;
+  @override
+  final dynamic Function(Lesson)? onSuccess;
+  @override
+  final dynamic Function(Lesson)? onError;
 
   @override
   String toString() {
-    return 'LessonEvent.deleteLesson(lesson: $lesson)';
+    return 'LessonEvent.deleteLesson(lesson: $lesson, onSuccess: $onSuccess, onError: $onError)';
   }
 
   @override
@@ -814,11 +1086,14 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LessonDeleteEventImpl &&
-            (identical(other.lesson, lesson) || other.lesson == lesson));
+            (identical(other.lesson, lesson) || other.lesson == lesson) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess) &&
+            (identical(other.onError, onError) || other.onError == onError));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, lesson);
+  int get hashCode => Object.hash(runtimeType, lesson, onSuccess, onError);
 
   @JsonKey(ignore: true)
   @override
@@ -843,9 +1118,14 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)
         updateLesson,
-    required TResult Function(Lesson lesson) deleteLesson,
+    required TResult Function(FilePickerResult? filePickerResult) updateImage,
+    required TResult Function(
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)
+        deleteLesson,
   }) {
-    return deleteLesson(lesson);
+    return deleteLesson(lesson, onSuccess, onError);
   }
 
   @override
@@ -864,9 +1144,12 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateLesson,
-    TResult? Function(Lesson lesson)? deleteLesson,
+    TResult? Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult? Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
   }) {
-    return deleteLesson?.call(lesson);
+    return deleteLesson?.call(lesson, onSuccess, onError);
   }
 
   @override
@@ -885,11 +1168,14 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
             dynamic Function(Lesson)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateLesson,
-    TResult Function(Lesson lesson)? deleteLesson,
+    TResult Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
     required TResult orElse(),
   }) {
     if (deleteLesson != null) {
-      return deleteLesson(lesson);
+      return deleteLesson(lesson, onSuccess, onError);
     }
     return orElse();
   }
@@ -900,6 +1186,7 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
     required TResult Function(LessonLoadEvent value) load,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
+    required TResult Function(LessonUpdateImageEvent value) updateImage,
     required TResult Function(LessonDeleteEvent value) deleteLesson,
   }) {
     return deleteLesson(this);
@@ -911,6 +1198,7 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
     TResult? Function(LessonLoadEvent value)? load,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
+    TResult? Function(LessonUpdateImageEvent value)? updateImage,
     TResult? Function(LessonDeleteEvent value)? deleteLesson,
   }) {
     return deleteLesson?.call(this);
@@ -922,6 +1210,7 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
     TResult Function(LessonLoadEvent value)? load,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
+    TResult Function(LessonUpdateImageEvent value)? updateImage,
     TResult Function(LessonDeleteEvent value)? deleteLesson,
     required TResult orElse(),
   }) {
@@ -933,11 +1222,15 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
 }
 
 abstract class LessonDeleteEvent extends LessonEvent {
-  const factory LessonDeleteEvent({required final Lesson lesson}) =
-      _$LessonDeleteEventImpl;
+  const factory LessonDeleteEvent(
+      {required final Lesson lesson,
+      final dynamic Function(Lesson)? onSuccess,
+      final dynamic Function(Lesson)? onError}) = _$LessonDeleteEventImpl;
   const LessonDeleteEvent._() : super._();
 
   Lesson get lesson;
+  dynamic Function(Lesson)? get onSuccess;
+  dynamic Function(Lesson)? get onError;
   @JsonKey(ignore: true)
   _$$LessonDeleteEventImplCopyWith<_$LessonDeleteEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -949,21 +1242,27 @@ mixin _$LessonState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String? message) error,
-    required TResult Function(Course course, List<Lesson> lessons) loaded,
+    required TResult Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String? message)? error,
-    TResult? Function(Course course, List<Lesson> lessons)? loaded,
+    TResult? Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String? message)? error,
-    TResult Function(Course course, List<Lesson> lessons)? loaded,
+    TResult Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1050,7 +1349,9 @@ class _$LessonsLoadingStateImpl extends LessonsLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String? message) error,
-    required TResult Function(Course course, List<Lesson> lessons) loaded,
+    required TResult Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)
+        loaded,
   }) {
     return loading();
   }
@@ -1060,7 +1361,9 @@ class _$LessonsLoadingStateImpl extends LessonsLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String? message)? error,
-    TResult? Function(Course course, List<Lesson> lessons)? loaded,
+    TResult? Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)?
+        loaded,
   }) {
     return loading?.call();
   }
@@ -1070,7 +1373,9 @@ class _$LessonsLoadingStateImpl extends LessonsLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String? message)? error,
-    TResult Function(Course course, List<Lesson> lessons)? loaded,
+    TResult Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1186,7 +1491,9 @@ class _$LessonsErrorStateImpl extends LessonsErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String? message) error,
-    required TResult Function(Course course, List<Lesson> lessons) loaded,
+    required TResult Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)
+        loaded,
   }) {
     return error(message);
   }
@@ -1196,7 +1503,9 @@ class _$LessonsErrorStateImpl extends LessonsErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String? message)? error,
-    TResult? Function(Course course, List<Lesson> lessons)? loaded,
+    TResult? Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)?
+        loaded,
   }) {
     return error?.call(message);
   }
@@ -1206,7 +1515,9 @@ class _$LessonsErrorStateImpl extends LessonsErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String? message)? error,
-    TResult Function(Course course, List<Lesson> lessons)? loaded,
+    TResult Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)?
+        loaded,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1267,7 +1578,10 @@ abstract class _$$LessonLoadedStateImplCopyWith<$Res> {
           $Res Function(_$LessonLoadedStateImpl) then) =
       __$$LessonLoadedStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Course course, List<Lesson> lessons});
+  $Res call(
+      {Course course,
+      List<Lesson> lessons,
+      FilePickerResult? filePickerResult});
 
   $CourseCopyWith<$Res> get course;
 }
@@ -1285,6 +1599,7 @@ class __$$LessonLoadedStateImplCopyWithImpl<$Res>
   $Res call({
     Object? course = null,
     Object? lessons = null,
+    Object? filePickerResult = freezed,
   }) {
     return _then(_$LessonLoadedStateImpl(
       course: null == course
@@ -1295,6 +1610,10 @@ class __$$LessonLoadedStateImplCopyWithImpl<$Res>
           ? _value._lessons
           : lessons // ignore: cast_nullable_to_non_nullable
               as List<Lesson>,
+      filePickerResult: freezed == filePickerResult
+          ? _value.filePickerResult
+          : filePickerResult // ignore: cast_nullable_to_non_nullable
+              as FilePickerResult?,
     ));
   }
 
@@ -1312,7 +1631,8 @@ class __$$LessonLoadedStateImplCopyWithImpl<$Res>
 class _$LessonLoadedStateImpl extends LessonLoadedState {
   const _$LessonLoadedStateImpl(
       {this.course = const Course(),
-      final List<Lesson> lessons = const <Lesson>[]})
+      final List<Lesson> lessons = const <Lesson>[],
+      this.filePickerResult})
       : _lessons = lessons,
         super._();
 
@@ -1329,8 +1649,11 @@ class _$LessonLoadedStateImpl extends LessonLoadedState {
   }
 
   @override
+  final FilePickerResult? filePickerResult;
+
+  @override
   String toString() {
-    return 'LessonState.loaded(course: $course, lessons: $lessons)';
+    return 'LessonState.loaded(course: $course, lessons: $lessons, filePickerResult: $filePickerResult)';
   }
 
   @override
@@ -1339,12 +1662,14 @@ class _$LessonLoadedStateImpl extends LessonLoadedState {
         (other.runtimeType == runtimeType &&
             other is _$LessonLoadedStateImpl &&
             (identical(other.course, course) || other.course == course) &&
-            const DeepCollectionEquality().equals(other._lessons, _lessons));
+            const DeepCollectionEquality().equals(other._lessons, _lessons) &&
+            (identical(other.filePickerResult, filePickerResult) ||
+                other.filePickerResult == filePickerResult));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, course, const DeepCollectionEquality().hash(_lessons));
+  int get hashCode => Object.hash(runtimeType, course,
+      const DeepCollectionEquality().hash(_lessons), filePickerResult);
 
   @JsonKey(ignore: true)
   @override
@@ -1358,9 +1683,11 @@ class _$LessonLoadedStateImpl extends LessonLoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String? message) error,
-    required TResult Function(Course course, List<Lesson> lessons) loaded,
+    required TResult Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)
+        loaded,
   }) {
-    return loaded(course, lessons);
+    return loaded(course, lessons, filePickerResult);
   }
 
   @override
@@ -1368,9 +1695,11 @@ class _$LessonLoadedStateImpl extends LessonLoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String? message)? error,
-    TResult? Function(Course course, List<Lesson> lessons)? loaded,
+    TResult? Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)?
+        loaded,
   }) {
-    return loaded?.call(course, lessons);
+    return loaded?.call(course, lessons, filePickerResult);
   }
 
   @override
@@ -1378,11 +1707,13 @@ class _$LessonLoadedStateImpl extends LessonLoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String? message)? error,
-    TResult Function(Course course, List<Lesson> lessons)? loaded,
+    TResult Function(Course course, List<Lesson> lessons,
+            FilePickerResult? filePickerResult)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(course, lessons);
+      return loaded(course, lessons, filePickerResult);
     }
     return orElse();
   }
@@ -1425,11 +1756,13 @@ class _$LessonLoadedStateImpl extends LessonLoadedState {
 abstract class LessonLoadedState extends LessonState {
   const factory LessonLoadedState(
       {final Course course,
-      final List<Lesson> lessons}) = _$LessonLoadedStateImpl;
+      final List<Lesson> lessons,
+      final FilePickerResult? filePickerResult}) = _$LessonLoadedStateImpl;
   const LessonLoadedState._() : super._();
 
   Course get course;
   List<Lesson> get lessons;
+  FilePickerResult? get filePickerResult;
   @JsonKey(ignore: true)
   _$$LessonLoadedStateImplCopyWith<_$LessonLoadedStateImpl> get copyWith =>
       throw _privateConstructorUsedError;

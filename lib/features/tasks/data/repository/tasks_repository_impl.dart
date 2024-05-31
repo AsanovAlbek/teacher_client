@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:talker/talker.dart';
 import 'package:teacher_client/core/model/task.dart';
 import 'package:teacher_client/features/tasks/domain/repository/tasks_repository.dart';
 
 import '../../../../core/model/answer.dart';
-import '../../../../core/model/lesson.dart';
 
 class TasksRepositoryImpl implements TasksRepository {
   final SupabaseClient _client;
@@ -50,21 +48,27 @@ class TasksRepositoryImpl implements TasksRepository {
   }
 
   @override
-  Future<List<Answer>> addAnswers(List<Answer> answers, int taskId) {
-    return _client
-        .from('answers')
-        .insert(answers.map((answer) => answer.copyWith(taskId: taskId).toJson()..remove('id')).toList())
-        .select()
-        .withConverter<List<Answer>>((data) => List<Map<String, dynamic>>.from(data).map(Answer.fromJson).toList());
+  Future<List<Answer>> addAnswers(List<Answer> answers, int taskId) async {
+    if (answers.isNotEmpty) {
+      return _client
+          .from('answers')
+          .insert(answers.map((answer) => answer.copyWith(taskId: taskId).toJson()..remove('id')).toList())
+          .select()
+          .withConverter<List<Answer>>((data) => List<Map<String, dynamic>>.from(data).map(Answer.fromJson).toList());
+    } else {
+      return <Answer>[];
+    }
   }
 
   @override
   Future<void> updateAnswers(List<Answer> answers, int taskId) async {
-    for (var answer in answers) {
-      try {
-        await _client.from('answers').update(answer.toJson()).eq('id', answer.id);
-      } catch (e, s) {
-        talker.handle(e,s, 'update error answer ${answer.id}');
+    if (answers.isNotEmpty) {
+      for (var answer in answers) {
+        try {
+          await _client.from('answers').update(answer.toJson()).eq('id', answer.id);
+        } catch (e, s) {
+          talker.handle(e,s, 'update error answer ${answer.id}');
+        }
       }
     }
   }

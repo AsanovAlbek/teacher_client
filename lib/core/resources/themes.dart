@@ -6,13 +6,13 @@ import 'colors.dart';
 class AppThemes {
   static final elevatedButtonTheme = ElevatedButtonThemeData(
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(AppColors.orange),
-          foregroundColor: MaterialStateProperty.all(Colors.white),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          backgroundColor: WidgetStateProperty.all<Color>(AppColors.orange),
+          foregroundColor: WidgetStateProperty.all(Colors.white),
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)))));
   static final textButtonTheme = TextButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all(AppColors.orange)
+      foregroundColor: WidgetStateProperty.all(AppColors.orange)
     )
   );
 

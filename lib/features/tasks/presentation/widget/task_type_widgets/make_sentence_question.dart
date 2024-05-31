@@ -5,7 +5,6 @@ import 'package:teacher_client/features/tasks/domain/model/answer.dart';
 import 'package:teacher_client/features/tasks/presentation/widget/task_type_widgets/deletable_item.dart';
 
 import '../../../../../core/model/answer.dart';
-import '../../../../../core/model/task.dart';
 import '../../../../../core/utils/utils.dart';
 import '../../../domain/bloc/tasks_bloc.dart';
 import '../../../domain/model/task.dart';

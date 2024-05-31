@@ -12,10 +12,15 @@ class LessonEvent with _$LessonEvent {
       Function(Lesson)? onSuccess,
       Function(Exception?)? onError}) = LessonAddEvent;
 
-  const factory LessonEvent.updateLesson({required int courseId,
-    required Lesson lesson,
-    Function(Lesson)? onSuccess,
-    Function(Exception?)? onError}) = LessonUpdateEvent;
+  const factory LessonEvent.updateLesson(
+      {required int courseId,
+      required Lesson lesson,
+      Function(Lesson)? onSuccess,
+      Function(Exception?)? onError}) = LessonUpdateEvent;
 
-  const factory LessonEvent.deleteLesson({required Lesson lesson}) = LessonDeleteEvent;
+  const factory LessonEvent.updateImage({required FilePickerResult? filePickerResult}) =
+      LessonUpdateImageEvent;
+
+  const factory LessonEvent.deleteLesson(
+      {required Lesson lesson, Function(Lesson)? onSuccess, Function(Lesson)? onError}) = LessonDeleteEvent;
 }

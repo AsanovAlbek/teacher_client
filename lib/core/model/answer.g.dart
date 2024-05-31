@@ -7,8 +7,8 @@ part of 'answer.dart';
 // **************************************************************************
 
 _$AnswerImpl _$$AnswerImplFromJson(Map<String, dynamic> json) => _$AnswerImpl(
-      id: json['id'] as int? ?? 0,
-      taskId: json['task_id'] as int? ?? 0,
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      taskId: (json['task_id'] as num?)?.toInt() ?? 0,
       answer: json['answer'] as String? ?? '',
       rightAnswer: json['correct_answer'] as String? ?? '',
       imageUrl: json['pic_url'] as String? ?? '',

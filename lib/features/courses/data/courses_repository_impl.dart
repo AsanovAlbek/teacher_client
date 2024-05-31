@@ -5,7 +5,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/core/model/course.dart';
 import 'package:teacher_client/features/courses/domain/repository/courses_repository.dart';
 
-import '../../../core/model/lesson.dart';
 
 class CoursesRepositoryImpl implements CoursesRepository {
   final SupabaseClient _client;
