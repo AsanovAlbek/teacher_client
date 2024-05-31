@@ -6,6 +6,7 @@ class LessonState with _$LessonState {
   const factory LessonState.error(String? message) = LessonsErrorState;
   const factory LessonState.loaded({
     @Default(Course()) Course course,
-    @Default(<Lesson>[]) List<Lesson> lessons
+    @Default(<Lesson>[]) List<Lesson> lessons,
+    FilePickerResult? filePickerResult
 }) = LessonLoadedState;
 }

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -133,6 +132,8 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
         emit(_loaded);
         event.onSuccess?.call(event.tasks.map((t) => t.toDto()).toList());
       }
+      _loaded = _loaded.copyWith(updatingState: UpdatingState.success);
+      emit(_loaded);
     } on Exception catch(e, s) {
       event.onError?.call(e);
       talker.handle(e, s);

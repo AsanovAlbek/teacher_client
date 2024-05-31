@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,9 +36,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       await _repository.signIn(email: event.email, password: event.password);
       event.onSuccess?.call();
-    } on AuthException catch (e, stack) {
+    } on AuthException {
       event.onError?.call('Нет подключения к интернету');
-    } on UserNotTeacherException catch (e) {
+    } on UserNotTeacherException {
       event.onError?.call('Ошибка входа');
     } catch (e, stack) {
       log(e.toString(), stackTrace: stack);
@@ -107,7 +106,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       event.onError?.call(e);
       debugPrint('err $e');
       debugPrintStack(stackTrace: s);
-    } catch(e, s) {
+    } catch(e) {
       debugPrint('err $e is handle');
     }
   }

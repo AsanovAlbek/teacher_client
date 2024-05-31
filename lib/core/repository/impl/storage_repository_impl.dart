@@ -1,11 +1,9 @@
-import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/core/repository/storage_repository.dart';
 import 'package:intl/intl.dart';
-import 'package:web/helpers.dart';
 
 class StorageRepositoryImpl implements StorageRepository {
   final SupabaseClient _client;

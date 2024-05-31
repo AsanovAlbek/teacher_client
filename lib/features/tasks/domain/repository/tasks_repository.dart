@@ -1,5 +1,4 @@
 import '../../../../core/model/answer.dart';
-import '../../../../core/model/lesson.dart';
 import '../../../../core/model/task.dart';
 
 abstract interface class TasksRepository {

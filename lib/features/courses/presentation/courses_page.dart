@@ -1,16 +1,11 @@
-import 'dart:async';
 
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:teacher_client/core/navigation/router.dart';
-import 'package:teacher_client/core/repository/storage_repository.dart';
 import 'package:teacher_client/core/resources/colors.dart';
 import 'package:teacher_client/core/utils/utils.dart';
 import 'package:teacher_client/features/courses/domain/bloc/course_bloc.dart';
-import 'package:teacher_client/features/courses/domain/repository/courses_repository.dart';
 import 'package:teacher_client/features/courses/presentation/widgets/course_theme_item.dart';
 import 'package:teacher_client/features/home/domain/home_bloc.dart';
 
@@ -56,7 +51,7 @@ class _CoursesPageState extends State<CoursesPage> {
 class _CoursesPageContent extends StatelessWidget {
   final ScrollController scrollController;
 
-  const _CoursesPageContent({super.key, required this.scrollController});
+  const _CoursesPageContent({required this.scrollController});
 
   @override
   Widget build(BuildContext context) {

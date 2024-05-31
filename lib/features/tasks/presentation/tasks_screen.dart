@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +11,7 @@ import 'package:teacher_client/features/tasks/domain/model/answer.dart';
 import 'package:teacher_client/features/tasks/domain/model/task_type.dart';
 import 'package:teacher_client/features/tasks/domain/repository/tasks_repository.dart';
 import 'package:teacher_client/core/repository/storage_repository.dart';
+import 'package:teacher_client/features/tasks/presentation/widget/task_type_dialog.dart';
 import 'package:teacher_client/features/tasks/presentation/widget/task_type_widgets/task_container.dart';
 
 import '../../../core/model/course.dart';
@@ -38,30 +38,35 @@ class _TasksScreenState extends State<TasksScreen> {
           canPop: false,
           onPopInvoked: (didPop) {
             if (didPop) {
-              context.router.maybePop();
+              context.router.back();
             }
           },
           child: BlocProvider(
-              create: (context) => TasksBloc(
+              create: (context) =>
+              TasksBloc(
                   lessonsRepository: di<LessonsRepository>(),
                   tasksRepository: di<TasksRepository>(),
                   storageRepository: di<StorageRepository>())
-                ..add(TasksEvent.load(lesson: context.read<HomeBloc>().state.lesson ?? const Lesson(name: 'unnamed'))),
+                ..add(TasksEvent.load(lesson: context
+                    .read<HomeBloc>()
+                    .state
+                    .lesson ?? const Lesson(name: 'unnamed'))),
               child: Center(
                   child: Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: BlocBuilder<TasksBloc, TasksState>(builder: (context, state) {
-                  return state.when(
-                      loading: () => const Center(child: CircularProgressIndicator()),
-                      load: (Course course, Lesson lesson, List<TaskModel> tasks, UpdatingState updatingState) =>
-                          TasksScreenLoaded(
-                              course: course,
-                              lesson: lesson,
-                              tasks: tasks,
-                              isUpdating: updatingState == UpdatingState.update),
-                      error: (String? message) => Center(child: Text(message ?? 'Неизвестная ошибка')));
-                }),
-              )))),
+                    padding: const EdgeInsets.all(32.0),
+                    child: BlocBuilder<TasksBloc, TasksState>(builder: (context, state) {
+                      return state.when(
+                          loading: () => const Center(child: CircularProgressIndicator()),
+                          load: (Course course, Lesson lesson, List<TaskModel> tasks,
+                              UpdatingState updatingState) =>
+                              TasksScreenLoaded(
+                                  course: course,
+                                  lesson: lesson,
+                                  tasks: tasks,
+                                  isUpdating: updatingState == UpdatingState.update),
+                          error: (String? message) => Center(child: Text(message ?? 'Неизвестная ошибка')));
+                    }),
+                  )))),
     );
   }
 }
@@ -134,18 +139,28 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
               onPressed: () {
                 _showTaskCreateDialog(context, widget.lesson);
               },
-              style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+              style: Theme
+                  .of(context)
+                  .elevatedButtonTheme
+                  .style
+                  ?.copyWith(
                   backgroundColor: WidgetStateProperty.all(Colors.lightGreen),
                   foregroundColor: WidgetStateProperty.all(Colors.white)),
               child: const Text('Добавить задание')),
           const SizedBox(width: 8),
           ElevatedButton(
               onPressed: () {
-                context.read<LessonBloc>().add(LessonEvent.deleteLesson(lesson: widget.lesson));
-                context.read<CourseBloc>().add(const CoursesEvent.load());
-                context.router.maybePop();
+                context.read<LessonBloc>().add(LessonEvent.deleteLesson(lesson: widget.lesson, onSuccess: (lesson) {
+                  //context.read<CourseBloc>().add(const CoursesEvent.load());
+                  context.read<LessonBloc>().add(LessonEvent.load(courseId: widget.course.id));
+                  context.router.back();
+                }));
               },
-              style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+              style: Theme
+                  .of(context)
+                  .elevatedButtonTheme
+                  .style
+                  ?.copyWith(
                   backgroundColor: WidgetStateProperty.all(Colors.red),
                   foregroundColor: WidgetStateProperty.all(Colors.white)),
               child: const Text('Удалить урок'))
@@ -169,10 +184,10 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
             label: Text(widget.isUpdating ? 'Сохраняем' : 'Сохранить'),
             icon: widget.isUpdating
                 ? const SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(
-                        color: Colors.white, backgroundColor: AppColors.orange, strokeWidth: 3))
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                    color: Colors.white, backgroundColor: AppColors.orange, strokeWidth: 3))
                 : const SizedBox.shrink(),
             onPressed: () {
               final tasksBloc = context.read<TasksBloc>();
@@ -180,17 +195,20 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
               //final snackBar = SnackBar(content: Row());
               lessonBloc.add(LessonEvent.updateLesson(
                   courseId: widget.course.id,
-                  lesson: widget.lesson.copyWith(name: _nameController.text, description: _descriptionController.text),
+                  lesson: widget.lesson.copyWith(
+                      name: _nameController.text, description: _descriptionController.text),
                   onSuccess: (_) {
                     lessonBloc.add(LessonEvent.load(courseId: widget.course.id));
                     tasksBloc.add(TasksEvent.updateAllTasks(
                         tasks: widget.tasks,
                         onSuccess: (_) {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Сохранено')));
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(
+                              'Сохранено')));
                         }));
                   },
                   onError: (exception) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ошибка сохранения')));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Ошибка сохранения')));
                   }));
             })
       ],
@@ -201,48 +219,18 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
     showDialog(
         context: buildContext,
         builder: (context) {
-          int taskType = 1;
-          final homeState = buildContext.read<HomeBloc>().state;
-          return Dialog(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text('Создание задания'),
-                  DropdownMenu(
-                      initialSelection: TaskType.fourPictures.rowTaskType,
-                      label: const Text('Тип задания'),
-                      onSelected: (type) {
-                        setState(() {
-                          taskType = type ?? TaskType.fourPictures.rowTaskType;
-                        });
-                      },
-                      dropdownMenuEntries: TaskType.values
-                          .map((TaskType type) => DropdownMenuEntry<int>(value: type.rowTaskType, label: type.label))
-                          .toList()
-                        ..removeLast()),
-                  ElevatedButton(
-                      onPressed: () {
-                        final TaskType type =
-                            TaskType.values.firstWhereOrNull((t) => t.rowTaskType == taskType) ?? TaskType.none;
-                        buildContext.read<TasksBloc>().add(TasksEvent.addTask(
-                            lesson: homeState.lesson ?? const Lesson(),
-                            task: TaskModel(
-                                taskType: type,
-                                lessonId: homeState.lesson?.id ?? 0,
-                                courseId: homeState.course?.id ?? 0,
-                                answerModels: List<AnswerModel>.filled(type.defaultAnswersCount, AnswerModel())),
-                            onSuccess: (task, answers) {
-                              buildContext.read<TasksBloc>().add(TasksEvent.load(lesson: homeState.lesson!));
-                            }));
-                        context.router.maybePop();
-                      },
-                      child: const Text('Создать'))
-                ],
-              ),
-            ),
-          );
+          final homeState = buildContext
+              .read<HomeBloc>()
+              .state;
+          return TaskTypeDialog(onAddTask: (taskModel, answers) {
+            buildContext.read<TasksBloc>().add(TasksEvent.addTask(
+                lesson: homeState.lesson ?? const Lesson(),
+                task: taskModel,
+                onSuccess: (task, answers) {
+                  buildContext.read<TasksBloc>().add(TasksEvent.load(lesson: homeState.lesson!));
+            }));
+            context.router.maybePop();
+          }, course: homeState.course, lesson: homeState.lesson);
         });
   }
 }

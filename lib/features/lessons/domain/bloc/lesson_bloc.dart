@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -27,6 +27,7 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
     on<LessonAddEvent>(_addLesson);
     on<LessonDeleteEvent>(_deleteLesson);
     on<LessonUpdateEvent>(_updateLesson);
+    on<LessonUpdateImageEvent>(_updateImage);
   }
 
   LessonLoadedState _loaded = const LessonLoadedState();
@@ -41,7 +42,7 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
       final lessons = await _repository.lessonsByCourse(course.id);
       _loaded = _loaded.copyWith(course: course, lessons: lessons);
       emit(_loaded);
-    } catch (e, stack) {
+    } catch (e) {
       emit(const LessonState.error('Нет подключения к интернету'));
     }
   }
@@ -52,7 +53,7 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
       debugPrint('new lesson = $lesson');
       add(LessonEvent.load(courseId: event.courseId));
       event.onSuccess?.call(lesson);
-    } on Exception catch (e, stack) {
+    } on Exception catch (e) {
       debugPrint('err $e');
       event.onError?.call(e);
     }
@@ -61,8 +62,10 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
   FutureOr<void> _deleteLesson(LessonDeleteEvent event, Emitter<LessonState> emit) async {
     try {
       await _repository.deleteLesson(event.lesson);
+      event.onSuccess?.call(event.lesson);
     } catch(e) {
       debugPrint(e.toString());
+      event.onError?.call(event.lesson);
     }
   }
 
@@ -75,5 +78,10 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
       debugPrint(e.toString());
       event.onError?.call(e);
     }
+  }
+
+  FutureOr<void> _updateImage(LessonUpdateImageEvent event, Emitter<LessonState> emit) {
+    _loaded = _loaded.copyWith(filePickerResult: event.filePickerResult);
+    emit(_loaded);
   }
 }

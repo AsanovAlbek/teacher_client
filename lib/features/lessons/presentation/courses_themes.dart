@@ -60,7 +60,6 @@ class _CourseEditorContent extends StatefulWidget {
 class _CourseEditorContentState extends State<_CourseEditorContent> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  FilePickerResult? _filePickerResult;
 
   @override
   void initState() {
@@ -96,7 +95,7 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
           return lessonBloc.state.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (String? message) => Center(child: Text(message ?? '')),
-              loaded: (Course course, List<Lesson> lessons) {
+              loaded: (Course course, List<Lesson> lessons, FilePickerResult? filePickerResult) {
                 _nameController.text = course.name;
                 _descriptionController.text = course.description;
                 return Padding(
@@ -115,15 +114,13 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                             child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                               Row(children: [
                                 PickableImage(
-                                  filePickerResult: _filePickerResult,
+                                  filePickerResult: filePickerResult,
                                   imageUrl: widget.course.iconUrl,
                                   imageSize: 200,
                                   onPressed: () async {
                                     final image = await FilePicker.platform.pickFiles(type: FileType.image);
                                     if (image != null) {
-                                      setState(() {
-                                        _filePickerResult = image;
-                                      });
+                                      lessonBloc.add(LessonEvent.updateImage(filePickerResult: image));
                                     }
                                   },
                                 ),
@@ -161,7 +158,7 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                         lesson: const Lesson(),
                                         onSuccess: (lesson) {
                                           courseBloc.add(CoursesEvent.updateCourse(
-                                            pickerResult: _filePickerResult,
+                                            pickerResult: filePickerResult,
                                               course: course.copyWith(
                                                   name: _nameController.text,
                                                   description: _descriptionController.text,
@@ -189,16 +186,18 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                           lesson: lessons[index],
                                           onRedact: (lesson) {
                                             courseBloc.add(CoursesEvent.updateCourse(
-                                                pickerResult: _filePickerResult,
+                                                pickerResult: filePickerResult,
                                                 course: course.copyWith(
                                                     name: _nameController.text,
                                                     description: _descriptionController.text,
                                                     status: _nameController.text.isNotEmpty &&
                                                         _descriptionController.text.isNotEmpty
                                                         ? PublicationStatus.published.label
-                                                        : PublicationStatus.draft.label)));
-                                            homeBloc.add(HomeEvent.setLesson(lesson: lessons[index], onSuccess: (_) {
-                                              context.router.navigate(const TasksRoute());
+                                                        : PublicationStatus.draft.label),
+                                            onSuccess: (_) {
+                                              homeBloc.add(HomeEvent.setLesson(lesson: lessons[index], onSuccess: (_) {
+                                                context.router.navigate(const TasksRoute());
+                                              }));
                                             }));
                                           }),
                                       separatorBuilder: (context, index) => const SizedBox(height: 4),
@@ -220,7 +219,7 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                   child: ElevatedButton(
                                       onPressed: () async {
                                         courseBloc.add(CoursesEvent.updateCourse(
-                                            pickerResult: _filePickerResult,
+                                            pickerResult: filePickerResult,
                                             course: course.copyWith(
                                                 name: _nameController.text,
                                                 description: _descriptionController.text,
