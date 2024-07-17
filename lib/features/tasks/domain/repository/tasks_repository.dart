@@ -1,5 +1,5 @@
-import '../../../../core/model/answer.dart';
-import '../../../../core/model/task.dart';
+import '../../../../core/model/answer/answer.dart';
+import '../../../../core/model/task/task.dart';
 
 abstract interface class TasksRepository {
   Future<List<Task>>lessonTasks(int lessonId);

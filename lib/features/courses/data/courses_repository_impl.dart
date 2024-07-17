@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:teacher_client/core/model/course.dart';
+import 'package:teacher_client/core/model/course/course.dart';
 import 'package:teacher_client/features/courses/domain/repository/courses_repository.dart';
 
 

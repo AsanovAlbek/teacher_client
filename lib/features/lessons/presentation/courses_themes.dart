@@ -10,8 +10,8 @@ import 'package:teacher_client/features/lessons/presentation/widgets/lesson_item
 import 'package:file_picker/file_picker.dart';
 import 'package:teacher_client/core/widget/pickable_image.dart';
 
-import '../../../core/model/course.dart';
-import '../../../core/model/lesson.dart';
+import '../../../core/model/course/course.dart';
+import '../../../core/model/lesson/lesson.dart';
 import '../../home/domain/home_bloc.dart';
 import '../../home/domain/home_event.dart';
 import '../../home/domain/home_state.dart';
@@ -34,12 +34,16 @@ class _CoursesThemesPageState extends State<CoursesThemesPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (BuildContext context, HomeState state) {
-        context.read<LessonBloc>().add(LessonEvent.load(courseId: state.course?.id ?? 0));
+        context
+            .read<LessonBloc>()
+            .add(LessonEvent.load(courseId: state.course?.id ?? 0));
         return SafeArea(
           child: Scaffold(
             backgroundColor: AppColors.backgroundColor,
             body: Center(
-              child: _CourseEditorContent(course: state.course ?? const Course(name: 'unnamed', description: 'empty')),
+              child: _CourseEditorContent(
+                  course: state.course ??
+                      const Course(name: 'unnamed', description: 'empty')),
             ),
           ),
         );
@@ -86,156 +90,241 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
       canPop: false,
       onPopInvoked: (didPop) {
         if (didPop) return;
-        if (context.router.canPop()) {
-          context.router.maybePop();
-        }
+        context.router.navigate(const CoursesRoute());
       },
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, homeState) {
           return lessonBloc.state.when(
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (String? message) => Center(child: Text(message ?? '')),
-              loaded: (Course course, List<Lesson> lessons, FilePickerResult? filePickerResult) {
+              loaded: (Course course, List<Lesson> lessons,
+                  FilePickerResult? filePickerResult, bool isTitleEditable) {
                 // _nameController.text = course.name;
                 // _descriptionController.text = course.description;
                 return Padding(
                   padding: const EdgeInsets.all(50).copyWith(bottom: 10),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('РЕДАКТИРОВАТЬ КУРС', style: Theme.of(context).textTheme.headlineLarge),
-                    ),
-                    Expanded(
-                      child: Card(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                              Row(children: [
-                                PickableImage(
-                                  filePickerResult: filePickerResult,
-                                  imageUrl: widget.course.iconUrl,
-                                  imageSize: 200,
-                                  onPressed: () async {
-                                    final image = await FilePicker.platform.pickFiles(type: FileType.image);
-                                    if (image != null) {
-                                      lessonBloc.add(LessonEvent.updateImage(filePickerResult: image));
-                                    }
-                                  },
-                                ),
-                                Expanded(
-                                  child: Column(children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: TextFormField(
-                                        controller: _nameController,
-                                        maxLines: 1,
-                                        decoration: InputDecoration(
-                                            label: const Text('Название курса'),
-                                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: TextFormField(
-                                          controller: _descriptionController,
-                                          textAlign: TextAlign.start,
-                                          textAlignVertical: TextAlignVertical.top,
-                                          minLines: 4,
-                                          maxLines: 4,
-                                          decoration: InputDecoration(
-                                              label: const Text('Описание курса'),
-                                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)))),
-                                    )
-                                  ]),
-                                )
-                              ]),
-                              TextButton(
-                                  onPressed: () {
-                                    lessonBloc.add(LessonEvent.addLesson(
-                                        courseId: course.id,
-                                        lesson: const Lesson(),
-                                        onSuccess: (lesson) {
-                                          courseBloc.add(CoursesEvent.updateCourse(
-                                            pickerResult: filePickerResult,
-                                              course: course.copyWith(
-                                                  name: _nameController.text,
-                                                  description: _descriptionController.text,
-                                                  status: _nameController.text.isNotEmpty &&
-                                                          _descriptionController.text.isNotEmpty
-                                                      ? PublicationStatus.published.label
-                                                      : PublicationStatus.draft.label),
-                                            onSuccess: (_) {
-                                              courseBloc.add(const CoursesEvent.load());
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('РЕДАКТИРОВАТЬ КУРС',
+                              style: Theme.of(context).textTheme.headlineLarge),
+                        ),
+                        Expanded(
+                          child: Card(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Row(children: [
+                                        PickableImage(
+                                          filePickerResult: filePickerResult,
+                                          imageUrl: widget.course.iconUrl,
+                                          imageSize: 200,
+                                          onPressed: () async {
+                                            final image = await FilePicker
+                                                .platform
+                                                .pickFiles(
+                                                    type: FileType.image);
+                                            if (image != null) {
+                                              lessonBloc.add(
+                                                  LessonEvent.updateImage(
+                                                      filePickerResult: image));
                                             }
-                                          ));
-                                          homeBloc.add(HomeEvent.setLesson(lesson: lesson, onSuccess: (_) {
-                                            context.router.navigate(const TasksRoute());
-                                          }));
-                                        }));
-                                  },
-                                  child: Text(
-                                    '+ Добавить урок',
-                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.orange),
-                                  )),
-                              if (lessons.isNotEmpty) ...[
-                                Expanded(
-                                  child: ListView.separated(
-                                      itemBuilder: (context, index) => LessonItem(
-                                          lesson: lessons[index],
-                                          onRedact: (lesson) {
-                                            courseBloc.add(CoursesEvent.updateCourse(
-                                                pickerResult: filePickerResult,
-                                                course: course.copyWith(
-                                                    name: _nameController.text,
-                                                    description: _descriptionController.text,
-                                                    status: _nameController.text.isNotEmpty &&
-                                                        _descriptionController.text.isNotEmpty
-                                                        ? PublicationStatus.published.label
-                                                        : PublicationStatus.draft.label),
-                                            onSuccess: (_) {
-                                              homeBloc.add(HomeEvent.setLesson(lesson: lessons[index], onSuccess: (_) {
-                                                context.router.navigate(const TasksRoute());
-                                              }));
-                                            }));
+                                          },
+                                        ),
+                                        Expanded(
+                                          child: Column(children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: TextFormField(
+                                                controller: _nameController,
+                                                maxLines: 1,
+                                                readOnly: isTitleEditable,
+                                                decoration: InputDecoration(
+                                                    label: const Text(
+                                                        'Название курса'),
+                                                    border: OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8))),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: TextFormField(
+                                                  controller:
+                                                      _descriptionController,
+                                                  textAlign: TextAlign.start,
+                                                  textAlignVertical:
+                                                      TextAlignVertical.top,
+                                                  minLines: 4,
+                                                  maxLines: 4,
+                                                  readOnly: isTitleEditable,
+                                                  decoration: InputDecoration(
+                                                      label: const Text(
+                                                          'Описание курса'),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8)))),
+                                            )
+                                          ]),
+                                        )
+                                      ]),
+                                      SwitchListTile.adaptive(
+                                          value: !isTitleEditable,
+                                          title: const Text(
+                                              'Редактировать описание'),
+                                          onChanged: (editable) {
+                                            context.read<LessonBloc>().add(
+                                                const LessonEvent
+                                                    .changeFieldsEditable());
                                           }),
-                                      separatorBuilder: (context, index) => const SizedBox(height: 4),
-                                      itemCount: lessons.length),
-                                )
-                              ] else ...[
-                                const Expanded(
-                                  child: Center(
-                                    child: Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text('Вы ещё не добавили уроки'),
-                                    ),
-                                  ),
-                                )
-                              ],
-                              Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: ElevatedButton(
-                                      onPressed: () async {
-                                        courseBloc.add(CoursesEvent.updateCourse(
-                                            pickerResult: filePickerResult,
-                                            course: course.copyWith(
-                                                name: _nameController.text,
-                                                description: _descriptionController.text,
-                                                status: _nameController.text.isNotEmpty &&
-                                                    _descriptionController.text.isNotEmpty
-                                                    ? PublicationStatus.published.label
-                                                    : PublicationStatus.draft.label)));
-                                        AutoRouter.of(context).navigate(const CoursesRoute());
-                                      },
-                                      child: const Text('Сохранить')),
-                                ),
-                              )
-                            ]),
-                          )),
-                    )
-                  ]),
+                                      TextButton(
+                                          onPressed: () {
+                                            lessonBloc
+                                                .add(LessonEvent.addLesson(
+                                                    courseId: course.id,
+                                                    lesson: const Lesson(),
+                                                    onSuccess: (lesson) {
+                                                      courseBloc.add(CoursesEvent
+                                                          .updateCourse(
+                                                              pickerResult:
+                                                                  filePickerResult,
+                                                              course: course.copyWith(
+                                                                  name:
+                                                                      _nameController
+                                                                          .text,
+                                                                  description:
+                                                                      _descriptionController
+                                                                          .text,
+                                                                  status: _nameController
+                                                                              .text.isNotEmpty &&
+                                                                          _descriptionController
+                                                                              .text
+                                                                              .isNotEmpty
+                                                                      ? PublicationStatus
+                                                                          .published
+                                                                          .label
+                                                                      : PublicationStatus
+                                                                          .draft
+                                                                          .label),
+                                                              onSuccess: (_) {
+                                                                courseBloc.add(
+                                                                    const CoursesEvent
+                                                                        .load());
+                                                              }));
+                                                      homeBloc.add(
+                                                          HomeEvent.setLesson(
+                                                              lesson: lesson,
+                                                              onSuccess: (_) {
+                                                                context.router
+                                                                    .navigate(
+                                                                        const TasksRoute());
+                                                              }));
+                                                    }));
+                                          },
+                                          child: Text(
+                                            '+ Добавить урок',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium
+                                                ?.copyWith(
+                                                    color: AppColors.orange),
+                                          )),
+                                      if (lessons.isNotEmpty) ...[
+                                        Expanded(
+                                          child: ListView.separated(
+                                              itemBuilder:
+                                                  (context, index) =>
+                                                      LessonItem(
+                                                          lesson:
+                                                              lessons[index],
+                                                          onRedact: (lesson) {
+                                                            courseBloc.add(CoursesEvent
+                                                                .updateCourse(
+                                                                    pickerResult:
+                                                                        filePickerResult,
+                                                                    course: course.copyWith(
+                                                                        name: _nameController
+                                                                            .text,
+                                                                        description:
+                                                                            _descriptionController
+                                                                                .text,
+                                                                        status: _nameController.text.isNotEmpty && _descriptionController.text.isNotEmpty
+                                                                            ? PublicationStatus
+                                                                                .published.label
+                                                                            : PublicationStatus
+                                                                                .draft.label),
+                                                                    onSuccess:
+                                                                        (_) {
+                                                                      homeBloc.add(HomeEvent.setLesson(
+                                                                          lesson: lessons[index],
+                                                                          onSuccess: (_) {
+                                                                            context.router.navigate(const TasksRoute());
+                                                                          }));
+                                                                    }));
+                                                          }),
+                                              separatorBuilder:
+                                                  (context, index) =>
+                                                      const SizedBox(height: 4),
+                                              itemCount: lessons.length),
+                                        )
+                                      ] else ...[
+                                        const Expanded(
+                                          child: Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Text(
+                                                  'Вы ещё не добавили уроки'),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                      Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16.0),
+                                          child: ElevatedButton(
+                                              onPressed: () async {
+                                                courseBloc.add(CoursesEvent.updateCourse(
+                                                    pickerResult:
+                                                        filePickerResult,
+                                                    course: course.copyWith(
+                                                        name: _nameController
+                                                            .text,
+                                                        description:
+                                                            _descriptionController
+                                                                .text,
+                                                        status: _nameController
+                                                                    .text
+                                                                    .isNotEmpty &&
+                                                                _descriptionController
+                                                                    .text
+                                                                    .isNotEmpty
+                                                            ? PublicationStatus
+                                                                .published.label
+                                                            : PublicationStatus
+                                                                .draft.label)));
+                                                AutoRouter.of(context).navigate(
+                                                    const CoursesRoute());
+                                              },
+                                              child: const Text('Сохранить')),
+                                        ),
+                                      )
+                                    ]),
+                              )),
+                        )
+                      ]),
                 );
               });
         },

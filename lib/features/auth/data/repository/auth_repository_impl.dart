@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/features/auth/domain/exceptions/auth_exceptions.dart';
@@ -34,7 +33,7 @@ class AuthRepositoryImpl implements AuthRepository {
     await _auth.signUp(email: email, password: password);
     await _client
         .from('teachers')
-        .insert({'id': _auth.currentSession?.user.id, 'name': teacherName});
+        .insert({'id': _auth.currentSession?.user.id, 'name': teacherName, 'email': email});
   }
 
   @override
@@ -44,10 +43,15 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> recoverPassword(String email) async {
-    final location = window.location;
-    final link =
-        '${location.protocol}//${location.host}/#/recover-route?fromIncomingRecoverLink=true';
-    _auth.resetPasswordForEmail(email, redirectTo: link);
+    try {
+      final uri = Uri.parse('${Uri.base.toString()}/recover-route');
+      final link = '$uri?fromIncomingRecoverLink=true';
+      debugPrint('link = $link');
+      _auth.resetPasswordForEmail(email, redirectTo: link);
+    } catch (e, s) {
+      debugPrint('error $e');
+      debugPrintStack(stackTrace: s);
+    }
   }
 
   @override

@@ -9,7 +9,7 @@ import 'package:teacher_client/features/courses/domain/bloc/course_bloc.dart';
 import 'package:teacher_client/features/courses/presentation/widgets/course_theme_item.dart';
 import 'package:teacher_client/features/home/domain/home_bloc.dart';
 
-import '../../../core/model/course.dart';
+import '../../../core/model/course/course.dart';
 import '../../home/domain/home_event.dart';
 
 @RoutePage()

@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../core/model/course.dart';
-import '../../../core/model/lesson.dart';
+import '../../../core/model/course/course.dart';
+import '../../../core/model/lesson/lesson.dart';
 import 'home_event.dart';
 import 'home_state.dart';
 
@@ -45,7 +45,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         debugPrint('lesson is $restoredLesson');
         emit(state.copyWith(lesson: restoredLesson));
       }
-      event.onSuccess?.call(restoredCourse, restoredLesson);
+      event.onSuccess?.call(restoredCourse, restoredLesson, []);
     }
   }
 }

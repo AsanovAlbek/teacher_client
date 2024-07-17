@@ -9,8 +9,10 @@ import 'package:teacher_client/core/resources/images.dart';
 import 'package:teacher_client/features/courses/domain/bloc/course_bloc.dart';
 import 'package:teacher_client/features/courses/domain/repository/courses_repository.dart';
 import 'package:teacher_client/features/home/domain/home_event.dart';
+import 'package:teacher_client/features/home/domain/home_state.dart';
 import 'package:teacher_client/features/lessons/domain/bloc/lesson_bloc.dart';
 import 'package:teacher_client/features/lessons/domain/repository/lessons_repository.dart';
+import 'package:teacher_client/features/preview_lesson/domain/bloc%20copy/quiz_bloc.dart';
 
 import '../domain/home_bloc.dart';
 
@@ -29,12 +31,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => HomeBloc()..add(HomeEvent.load())),
+        BlocProvider(create: (context) => HomeBloc()),
         BlocProvider(
             create: (context) => CourseBloc(
                 coursesRepository: di<CoursesRepository>(),
                 uploadRepository: di<StorageRepository>())),
-        BlocProvider(create: (context) => LessonBloc(repository: di<LessonsRepository>()))
+        BlocProvider(
+            create: (context) => LessonBloc(
+                repository: di<LessonsRepository>(),
+                storageRepository: di<StorageRepository>())),
+        BlocProvider(create: (context) => QuizBloc())
       ],
       child: Scaffold(
         body: Row(
@@ -56,12 +62,25 @@ class _HomePageState extends State<HomePage> {
                           Supabase.instance.client.auth.signOut();
                           AutoRouter.of(context).replace(const LoginRoute());
                         },
-                        child: const Text('Выйти'))
+                        child: const Text('Выйти')),
                   ],
                 ),
               ),
             ),
-            const Expanded(child: AutoRouter())
+            BlocBuilder<HomeBloc, HomeState>(
+              builder: (context, state) {
+                context.read<HomeBloc>().add(HomeEvent.load());
+                return Expanded(
+                    child: Stack(children: [
+                  const AutoRouter(),
+                  TextButton.icon(
+                    onPressed: () => context.router.back(),
+                    label: const Text('Назад'),
+                    icon: const Icon(Icons.arrow_back),
+                  ),
+                ]));
+              }
+            ),
           ],
         ),
       ),

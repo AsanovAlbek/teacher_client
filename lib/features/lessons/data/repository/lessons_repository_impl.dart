@@ -1,5 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:teacher_client/core/model/lesson.dart';
+import 'package:teacher_client/core/model/lesson/lesson.dart';
 import 'package:teacher_client/features/lessons/domain/repository/lessons_repository.dart';
 
 class LessonsRepositoryImpl implements LessonsRepository {
@@ -33,7 +33,7 @@ class LessonsRepositoryImpl implements LessonsRepository {
 
   @override
   Future<void> deleteLesson(Lesson lesson) async {
-    await _client.from('lessons').delete().eq('id', lesson.id ?? 0);
+    await _client.from('lessons').delete().eq('id', lesson.id);
   }
 
   @override

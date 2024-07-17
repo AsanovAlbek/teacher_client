@@ -3,7 +3,7 @@ import 'package:teacher_client/features/tasks/domain/model/task.dart';
 import 'package:teacher_client/features/tasks/domain/model/task_type.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 
-import '../../../../core/model/task.dart';
+import '../../../../core/model/task/task.dart';
 
 extension TaskToTaskModel on Task {
   TaskModel toDomain() {

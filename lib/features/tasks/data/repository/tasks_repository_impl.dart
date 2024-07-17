@@ -1,9 +1,9 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:talker/talker.dart';
-import 'package:teacher_client/core/model/task.dart';
+import 'package:teacher_client/core/model/task/task.dart';
 import 'package:teacher_client/features/tasks/domain/repository/tasks_repository.dart';
 
-import '../../../../core/model/answer.dart';
+import '../../../../core/model/answer/answer.dart';
 
 class TasksRepositoryImpl implements TasksRepository {
   final SupabaseClient _client;

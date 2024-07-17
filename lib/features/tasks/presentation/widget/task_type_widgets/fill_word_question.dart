@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teacher_client/core/utils/utils.dart';
 import 'package:teacher_client/features/tasks/domain/mapper/tasks_mapper.dart';
 
-import '../../../../../core/model/answer.dart';
+import '../../../../../core/model/answer/answer.dart';
 import '../../../domain/bloc/tasks_bloc.dart';
 import '../../../domain/model/answer.dart';
 import '../../../domain/model/task.dart';

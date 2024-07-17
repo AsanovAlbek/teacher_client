@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    CollaboratorsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CollaboratorsPage(),
+      );
+    },
     CoursesRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -39,6 +45,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    PreviewTasksRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PreviewTasksScreen(),
+      );
+    },
     RecoverRoute.name: (routeData) {
       final args = routeData.argsAs<RecoverRouteArgs>(
           orElse: () => const RecoverRouteArgs());
@@ -57,6 +69,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [CollaboratorsPage]
+class CollaboratorsRoute extends PageRouteInfo<void> {
+  const CollaboratorsRoute({List<PageRouteInfo>? children})
+      : super(
+          CollaboratorsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CollaboratorsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -111,6 +137,20 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PreviewTasksScreen]
+class PreviewTasksRoute extends PageRouteInfo<void> {
+  const PreviewTasksRoute({List<PageRouteInfo>? children})
+      : super(
+          PreviewTasksRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PreviewTasksRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

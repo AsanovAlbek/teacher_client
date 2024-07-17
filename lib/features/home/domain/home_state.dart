@@ -1,20 +1,23 @@
 import 'package:equatable/equatable.dart';
+import 'package:teacher_client/core/model/task/task.dart';
 
-import '../../../../core/model/course.dart';
-import '../../../../core/model/lesson.dart';
+import '../../../core/model/course/course.dart';
+import '../../../core/model/lesson/lesson.dart';
 
-class HomeState with EquatableMixin{
+class HomeState with EquatableMixin {
   Course? course;
   Lesson? lesson;
-  HomeState({this.course, this.lesson});
+  List<Task>? tasks;
+  HomeState({this.course, this.lesson, this.tasks});
 
   @override
   List<Object?> get props => [course, lesson];
 
-  HomeState copyWith({Course? course, Lesson? lesson}) {
+  HomeState copyWith({Course? course, Lesson? lesson, List<Task>? tasks}) {
     return HomeState(
         course: course ?? this.course,
-        lesson: lesson ?? this.lesson
+        lesson: lesson ?? this.lesson,
+        tasks: tasks ?? this.tasks
     );
   }
   @override

@@ -33,4 +33,8 @@ class TasksEvent with _$TasksEvent {
   const factory TasksEvent.saveTasks({required List<TaskModel> tasks}) = TasksSaveEvent;
 
   const factory TasksEvent.removeAnswersFromTask({required Task task}) = RemoveAnswersFromTaskEvent;
+
+  const factory TasksEvent.changeFieldsEditable() = ChangeFieldsEditableTasksEvent;
+
+  const factory TasksEvent.updateLessonImage({required FilePickerResult? filePickerResult}) = UpdateLessonImageTaskEvent;
 }

@@ -7,7 +7,9 @@ class TasksState with _$TasksState {
     @Default(Course()) Course course,
     @Default(Lesson()) Lesson lesson,
     @Default(<TaskModel>[]) List<TaskModel> tasks,
-    @Default(UpdatingState.closed) UpdatingState updatingState
+    @Default(UpdatingState.closed) UpdatingState updatingState,
+    @Default(true) bool isTitleEditable,
+    FilePickerResult? filePickerResult
 }) = TasksStateLoaded;
   const factory TasksState.error({String? message}) = TasksStateError;
 }

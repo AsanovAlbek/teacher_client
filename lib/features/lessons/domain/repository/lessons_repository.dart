@@ -1,4 +1,4 @@
-import 'package:teacher_client/core/model/lesson.dart';
+import 'package:teacher_client/core/model/lesson/lesson.dart';
 
 abstract interface class LessonsRepository {
   Future<List<Lesson>> lessonsByCourse(int courseId);

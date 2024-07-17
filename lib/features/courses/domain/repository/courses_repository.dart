@@ -1,4 +1,4 @@
-import 'package:teacher_client/core/model/course.dart';
+import 'package:teacher_client/core/model/course/course.dart';
 
 
 abstract interface class CoursesRepository {

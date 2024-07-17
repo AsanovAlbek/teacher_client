@@ -9,6 +9,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/core/resources/fonts.dart';
 import 'package:teacher_client/core/resources/themes.dart';
 import 'package:teacher_client/features/auth/di/auth_module.dart';
+import 'package:teacher_client/features/collaborators/di/collaborators_module.dart';
 import 'package:teacher_client/features/courses/di/courses_module.dart';
 import 'package:teacher_client/features/lessons/di/lessons_module.dart';
 import 'package:teacher_client/features/tasks/di/tasks_module.dart';
@@ -26,6 +27,7 @@ void main() async {
   coursesModule();
   lessonsModule();
   tasksModule();
+  collaboratorsModule();
   runApp(const TeacherApp());
 }
 

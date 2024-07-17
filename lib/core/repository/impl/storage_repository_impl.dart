@@ -11,10 +11,13 @@ class StorageRepositoryImpl implements StorageRepository {
   StorageRepositoryImpl(SupabaseClient client) : _client = client;
 
   @override
-  Future<String> uploadFile(String bucketName, FilePickerResult pickerResult) async {
+  Future<String> uploadFile(String bucketName, FilePickerResult pickerResult, {int sizeLimitForMb = 10}) async {
     var fileName = '---';
     try {
       final file = pickerResult.files.single;
+      if (file.size >= sizeLimitForMb * 1024 * 1024) {
+        throw Exception('Слишком большой размер файла');
+      }
       final dateString = DateFormat('dd.MM.yyyy_hh:mm:ss').format(DateTime.now());
       final ext = file.extension;
       final newFileName = '${file.name..replaceAll(ext!, '')}_$dateString.$ext';
@@ -29,8 +32,11 @@ class StorageRepositoryImpl implements StorageRepository {
   }
 
   @override
-  Future<String> updateFile(String bucketName, FilePickerResult pickerResult, String fileUrl) async {
+  Future<String> updateFile(String bucketName, FilePickerResult pickerResult, String fileUrl, {int sizeLimitForMb = 10}) async {
     final newFile = pickerResult.files.single;
+    if (newFile.size >= sizeLimitForMb * 1024 * 1024) {
+        throw Exception('Слишком большой размер файла');
+    }
     var oldFileNameFromUrl = fileUrl.replaceFirst('${_client.storage.url}/object/public/$bucketName/', '').trim();
     oldFileNameFromUrl = 'public/$oldFileNameFromUrl';
     debugPrint('file url $fileUrl');

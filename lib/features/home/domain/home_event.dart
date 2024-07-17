@@ -1,16 +1,24 @@
-import 'package:teacher_client/core/model/lesson.dart';
+import 'package:teacher_client/core/model/lesson/lesson.dart';
+import 'package:teacher_client/core/model/task/task.dart';
 
-import '../../../../core/model/course.dart';
+import '../../../core/model/course/course.dart';
 
 sealed class HomeEvent {
-  static HomeEventSetCourse setCourse({required Course course, Function(Course)? onSuccess}) =>
+  static HomeEventSetCourse setCourse(
+          {required Course course, Function(Course)? onSuccess}) =>
       HomeEventSetCourse(course: course, onSuccess: onSuccess);
 
-  static HomeEventSetLesson setLesson({required Lesson lesson, Function(Lesson)? onSuccess}) =>
+  static HomeEventSetLesson setLesson(
+          {required Lesson lesson, Function(Lesson)? onSuccess}) =>
       HomeEventSetLesson(lesson: lesson, onSuccess: onSuccess);
 
-  static HomeEventRestoreGlobalNavigateArgsEvent load({Function(Course?, Lesson?)? onSuccess}) =>
+  static HomeEventRestoreGlobalNavigateArgsEvent load(
+          {Function(Course?, Lesson?, List<Task>?)? onSuccess}) =>
       HomeEventRestoreGlobalNavigateArgsEvent(onSuccess: onSuccess);
+
+  static HomeEventSetTasks setTasks({required List<Task> tasks, Function()? onSuccess}) {
+    return HomeEventSetTasks(tasks: tasks, onSuccess: onSuccess);
+  }
 }
 
 class HomeEventSetCourse extends HomeEvent {
@@ -28,7 +36,14 @@ class HomeEventSetLesson extends HomeEvent {
 }
 
 class HomeEventRestoreGlobalNavigateArgsEvent extends HomeEvent {
-  final Function(Course?, Lesson?)? onSuccess;
+  final Function(Course?, Lesson?, List<Task>?)? onSuccess;
 
   HomeEventRestoreGlobalNavigateArgsEvent({this.onSuccess});
+}
+
+class HomeEventSetTasks extends HomeEvent {
+  final List<Task> tasks;
+  final Function()? onSuccess;
+
+  HomeEventSetTasks({required this.tasks, this.onSuccess});
 }

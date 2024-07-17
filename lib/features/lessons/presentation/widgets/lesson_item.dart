@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/constants/publication_status.dart';
-import '../../../../core/model/lesson.dart';
+import '../../../../core/model/lesson/lesson.dart';
 import '../../../../core/resources/colors.dart';
 
 class LessonItem extends StatelessWidget {
@@ -13,6 +14,7 @@ class LessonItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final createdDate = DateFormat('dd MM yyyy HH:mm').format(DateTime.parse(lesson.createdAt));
     final textTheme = Theme.of(context).textTheme;
     final PublicationStatus status = PublicationStatus.values.firstWhere(
         (s) => s.label == lesson.status.toUpperCase(),
@@ -56,7 +58,8 @@ class LessonItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                       style: textTheme.bodySmall,
-                    )
+                    ),
+                    Text(createdDate, style: textTheme.bodySmall)
                   ],
                 ),
               ),

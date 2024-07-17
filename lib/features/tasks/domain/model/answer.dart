@@ -1,6 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:equatable/equatable.dart';
-import '../../../../core/model/answer.dart';
+import '../../../../core/model/answer/answer.dart';
 
 class AnswerModel with EquatableMixin {
   final Answer answer;

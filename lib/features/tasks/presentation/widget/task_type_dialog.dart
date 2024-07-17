@@ -1,12 +1,8 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
-import '../../../../core/model/course.dart';
-import '../../../../core/model/lesson.dart';
-import '../../domain/bloc/tasks_bloc.dart';
+import '../../../../core/model/course/course.dart';
+import '../../../../core/model/lesson/lesson.dart';
 import '../../domain/model/answer.dart';
 import '../../domain/model/task.dart';
 import '../../domain/model/task_type.dart';
@@ -44,7 +40,7 @@ class _TaskTypeState extends State<TaskTypeDialog> {
                 },
                 dropdownMenuEntries: TaskType.values
                     .map(
-                        (TaskType type) => DropdownMenuEntry<int>(value: type.rowTaskType, label: type.label))
+                        (TaskType type) => DropdownMenuEntry<int>(value: type.rowTaskType, label: '${type.rowTaskType}: ${type.label}'))
                     .toList()
                   ..removeLast()),
             ElevatedButton(

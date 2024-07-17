@@ -69,9 +69,9 @@ class _FirstTaskTypeState extends State<FirstTaskTypeView> {
               direction: Axis.horizontal,
               alignment: WrapAlignment.center,
               children: [
-                ...widget.task.answerModels.skip(2).take(2).mapIndexed((index,
-                    e) =>
-                    _ImageItem(index: index + 2, answerModel: e, task: widget.task))
+                ...widget.task.answerModels.skip(2).take(2).mapIndexed(
+                    (index, e) => _ImageItem(
+                        index: index + 2, answerModel: e, task: widget.task))
               ],
             ),
             const SizedBox(height: 8),
@@ -124,19 +124,27 @@ class _ImageItemState extends State<_ImageItem> {
             imageSize: 250,
             onPressed: () async {
               final image =
-              await FilePicker.platform.pickFiles(type: FileType.image);
-              debugPrint('pressed. Image name = ${image?.names.join()}');
-              if (image != null) {
-                setState(() {
-                  _images[widget.index] = image;
-                });
-                var answerModels = widget.task.answerModels;
-                answerModels[widget.index] = answerModels[widget.index]
-                    .copyWith(imageFilePickerResult: _images[widget.index]);
-                debugPrint(
-                    'new am = ${answerModels[widget.index].imageFilePickerResult?.names.join()}');
-                bloc.add(TasksEvent.setTask(
-                    task: widget.task.copyWith(answerModels: answerModels)));
+                  await FilePicker.platform.pickFiles(type: FileType.image);
+              if (image != null &&
+                  image.files.single.size / 1024 / 1024 >= 10) {
+                Future.sync(() => ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content:
+                            Text('Размер файла не должен превышать 10 мб'))));
+              } else {
+                debugPrint('pressed. Image name = ${image?.names.join()}');
+                if (image != null) {
+                  setState(() {
+                    _images[widget.index] = image;
+                  });
+                  var answerModels = widget.task.answerModels;
+                  answerModels[widget.index] = answerModels[widget.index]
+                      .copyWith(imageFilePickerResult: _images[widget.index]);
+                  debugPrint(
+                      'new am = ${answerModels[widget.index].imageFilePickerResult?.names.join()}');
+                  bloc.add(TasksEvent.setTask(
+                      task: widget.task.copyWith(answerModels: answerModels)));
+                }
               }
             },
           ),
@@ -147,16 +155,25 @@ class _ImageItemState extends State<_ImageItem> {
               audioFilePickerResult: _audios[widget.index],
               onPickAudioFile: () async {
                 final audio =
-                await FilePicker.platform.pickFiles(type: FileType.audio);
-                if (audio != null) {
-                  setState(() {
-                    _audios[widget.index] = audio;
-                  });
-                  var answerModels = widget.task.answerModels;
-                  answerModels[widget.index] = answerModels[widget.index]
-                      .copyWith(audioFilePickerResult: _audios[widget.index]);
-                  bloc.add(TasksEvent.setTask(
-                      task: widget.task.copyWith(answerModels: answerModels)));
+                    await FilePicker.platform.pickFiles(type: FileType.audio);
+                if (audio != null &&
+                    audio.files.single.size / 1024 / 1024 >= 10) {
+                  Future.sync(() =>
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Файл должен быть не более 10 мб'),
+                      )));
+                } else {
+                  if (audio != null) {
+                    setState(() {
+                      _audios[widget.index] = audio;
+                    });
+                    var answerModels = widget.task.answerModels;
+                    answerModels[widget.index] = answerModels[widget.index]
+                        .copyWith(audioFilePickerResult: _audios[widget.index]);
+                    bloc.add(TasksEvent.setTask(
+                        task:
+                            widget.task.copyWith(answerModels: answerModels)));
+                  }
                 }
               },
             ),

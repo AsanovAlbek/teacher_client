@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../core/model/course.dart';
-import '../../../../core/model/lesson.dart';
+import '../../../../core/model/course/course.dart';
+import '../../../../core/model/lesson/lesson.dart';
 import '../../../../core/repository/storage_repository.dart';
 import '../repository/courses_repository.dart';
 

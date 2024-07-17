@@ -40,7 +40,7 @@ class _PickableImageState extends State<PickableImage> {
         child: GestureDetector(
             onTap: () async {
               await widget.onPressed?.call();
-              setState(() {});
+              //setState(() {});
               debugPrint('fpr = ${widget.filePickerResult?.names.join()}');
             },
             child: Container(

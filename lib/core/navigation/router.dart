@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:teacher_client/core/navigation/auth_navigate_guard.dart';
 import 'package:teacher_client/features/auth/login/presentation/login_page.dart';
 import 'package:teacher_client/features/auth/password_recovery/presentation/recover_page.dart';
+import 'package:teacher_client/features/collaborators/view/collaborators_page.dart';
 import 'package:teacher_client/features/courses/presentation/courses_page.dart';
 import 'package:teacher_client/features/lessons/presentation/courses_themes.dart';
+import 'package:teacher_client/features/preview_lesson/view/preview_tasks_screen.dart';
 
 import '../../features/home/presentation/home_page.dart';
 import '../../features/tasks/presentation/tasks_screen.dart';
@@ -20,7 +22,9 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: HomeRoute.page, children: [
           AutoRoute(page: CoursesRoute.page, initial: true),
           AutoRoute(page: CoursesThemesRoute.page),
-          AutoRoute(page: TasksRoute.page)
+          AutoRoute(page: TasksRoute.page),
+          AutoRoute(page: PreviewTasksRoute.page),
+          AutoRoute(page: CollaboratorsRoute.page),
         ])
       ];
 }

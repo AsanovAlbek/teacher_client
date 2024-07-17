@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,10 +11,10 @@ import 'package:talker/talker.dart';
 import 'package:teacher_client/features/tasks/domain/mapper/tasks_mapper.dart';
 import 'package:teacher_client/features/tasks/domain/model/answer.dart';
 
-import '../../../../core/model/answer.dart';
-import '../../../../core/model/course.dart';
-import '../../../../core/model/lesson.dart';
-import '../../../../core/model/task.dart';
+import '../../../../core/model/answer/answer.dart';
+import '../../../../core/model/course/course.dart';
+import '../../../../core/model/lesson/lesson.dart';
+import '../../../../core/model/task/task.dart';
 import '../../../../core/repository/storage_repository.dart';
 import '../../../lessons/domain/repository/lessons_repository.dart';
 import '../model/task.dart';
@@ -42,6 +43,8 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     on<TasksSetLessonEvent>(_setLesson);
     on<RemoveAnswersFromTaskEvent>(_removeAnswersFromTask);
     on<UpdateAllTasksEvent>(_updateAllTasks);
+    on<UpdateLessonImageTaskEvent>(_updateLessonImage);
+    on<ChangeFieldsEditableTasksEvent>(_changeFieldsEditable);
   }
 
   var _loaded = const TasksStateLoaded();
@@ -191,5 +194,15 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
 
   FutureOr<void> _removeAnswersFromTask(RemoveAnswersFromTaskEvent event, Emitter<TasksState> emit) async {
     await tasksRepository.deleteAnswersFromTask(event.task);
+  }
+
+  FutureOr<void> _updateLessonImage(UpdateLessonImageTaskEvent event, Emitter<TasksState> emit) async {
+    _loaded = _loaded.copyWith(filePickerResult: event.filePickerResult);
+    emit(_loaded);
+  }
+
+  FutureOr<void> _changeFieldsEditable(ChangeFieldsEditableTasksEvent event, Emitter<TasksState> emit) {
+    _loaded = _loaded.copyWith(isTitleEditable: !_loaded.isTitleEditable);
+    emit(_loaded);
   }
 }

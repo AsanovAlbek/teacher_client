@@ -6,9 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:teacher_client/core/repository/storage_repository.dart';
 
-import '../../../../core/model/course.dart';
-import '../../../../core/model/lesson.dart';
+import '../../../../core/model/course/course.dart';
+import '../../../../core/model/lesson/lesson.dart';
 import '../repository/lessons_repository.dart';
 
 part 'lesson_event.dart';
@@ -19,15 +20,20 @@ part 'lesson_bloc.freezed.dart';
 
 class LessonBloc extends Bloc<LessonEvent, LessonState> {
   final LessonsRepository _repository;
+  final StorageRepository _storageRepository;
 
-  LessonBloc({required LessonsRepository repository})
+  LessonBloc(
+      {required LessonsRepository repository,
+      required StorageRepository storageRepository})
       : _repository = repository,
+        _storageRepository = storageRepository,
         super(const LessonState.loading()) {
     on<LessonLoadEvent>(_load);
     on<LessonAddEvent>(_addLesson);
     on<LessonDeleteEvent>(_deleteLesson);
     on<LessonUpdateEvent>(_updateLesson);
     on<LessonUpdateImageEvent>(_updateImage);
+    on<ChangeFieldsEditableLessonEvent>(_changeFieldsEditable);
   }
 
   LessonLoadedState _loaded = const LessonLoadedState();
@@ -47,41 +53,62 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
     }
   }
 
-  FutureOr<void> _addLesson(LessonAddEvent event, Emitter<LessonState> emit) async {
+  FutureOr<void> _addLesson(
+      LessonAddEvent event, Emitter<LessonState> emit) async {
     try {
-      final lesson = await _repository.addLesson(event.courseId, event.lesson.copyWith(courseId: event.courseId));
-      debugPrint('new lesson = $lesson');
+      Lesson lesson = event.lesson;
+      if (event.filePickerResult != null) {
+        final lessonImageUrl = await _storageRepository.uploadFile('lessons_images', event.filePickerResult!);
+        lesson = lesson.copyWith(imageUrl: lessonImageUrl);
+      }
+      final addedLesson = await _repository.addLesson(
+          event.courseId, lesson.copyWith(courseId: event.courseId));
+      debugPrint('new lesson = $addedLesson');
       add(LessonEvent.load(courseId: event.courseId));
-      event.onSuccess?.call(lesson);
+      event.onSuccess?.call(addedLesson);
     } on Exception catch (e) {
       debugPrint('err $e');
       event.onError?.call(e);
     }
   }
 
-  FutureOr<void> _deleteLesson(LessonDeleteEvent event, Emitter<LessonState> emit) async {
+  FutureOr<void> _deleteLesson(
+      LessonDeleteEvent event, Emitter<LessonState> emit) async {
     try {
       await _repository.deleteLesson(event.lesson);
       event.onSuccess?.call(event.lesson);
-    } catch(e) {
+    } catch (e) {
       debugPrint(e.toString());
       event.onError?.call(event.lesson);
     }
   }
 
-  FutureOr<void> _updateLesson(LessonUpdateEvent event, Emitter<LessonState> emit) async {
+  FutureOr<void> _updateLesson(
+      LessonUpdateEvent event, Emitter<LessonState> emit) async {
     try {
-      final lesson = await _repository.updateLesson(event.courseId, event.lesson);
+      Lesson lesson = event.lesson;
+      if (event.filePickerResult != null) {
+        final lessonImageUrl = await _storageRepository.uploadFile('lessons_images', event.filePickerResult!);
+        lesson = lesson.copyWith(imageUrl: lessonImageUrl);
+      }
+      final updatedLesson =
+          await _repository.updateLesson(event.courseId, lesson);
       add(LessonEvent.load(courseId: event.courseId));
-      event.onSuccess?.call(lesson);
-    } on Exception catch(e) {
+      event.onSuccess?.call(updatedLesson);
+    } on Exception catch (e) {
       debugPrint(e.toString());
       event.onError?.call(e);
     }
   }
 
-  FutureOr<void> _updateImage(LessonUpdateImageEvent event, Emitter<LessonState> emit) {
+  FutureOr<void> _updateImage(
+      LessonUpdateImageEvent event, Emitter<LessonState> emit) {
     _loaded = _loaded.copyWith(filePickerResult: event.filePickerResult);
+    emit(_loaded);
+  }
+
+  FutureOr<void> _changeFieldsEditable(ChangeFieldsEditableLessonEvent event, Emitter<LessonState> emit) {
+    _loaded = _loaded.copyWith(isTitleEditable: !_loaded.isTitleEditable);
     emit(_loaded);
   }
 }
