@@ -65,12 +65,14 @@ class _LoginState extends State<LoginPage> {
                           passwordController: _passwordController,
                           nameController: _nameController,
                           isPasswordMasked: isPasswordMasked,
-                          changeAuthPageState: (loginPageState) => _changeAuthPage(context, loginPageState),
-                          changePasswordMasked: () => _changePasswordMasked(context, isPasswordMasked),
+                          changeAuthPageState: (loginPageState) =>
+                              _changeAuthPage(context, loginPageState),
+                          changePasswordMasked: () =>
+                              _changePasswordMasked(context, isPasswordMasked),
                           signIn: () => _signIn(context),
                           signUp: () => _signUp(context),
-                          navigateToRecoverPassword: _navigateToRecoverPassword
-                      ),
+                          navigateToRecoverPassword:
+                              _navigateToRecoverPassword),
                     );
                   }),
             ),
@@ -105,11 +107,13 @@ class _LoginState extends State<LoginPage> {
                 email: _emailController.text,
                 password: _passwordController.text,
                 onSuccess: () {
-                  buidlContext.showSnackBar(message: 'Вы успешно зарегистрировались');
+                  buidlContext.showSnackBar(
+                      message: 'Вы успешно зарегистрировались');
                   AutoRouter.of(buidlContext).navigate(const HomeRoute());
                 },
                 onError: (message) {
-                  buidlContext.showSnackBar(message: message ?? 'Произошла ошибка');
+                  buidlContext.showSnackBar(
+                      message: message ?? 'Произошла ошибка');
                 }),
           );
     } else {
@@ -133,150 +137,7 @@ class _LoginState extends State<LoginPage> {
   }
 
   void _navigateToRecoverPassword() {
-    AutoRouter.of(context).navigate(RecoverRoute(fromIncomingRecoverLink: true));
+    AutoRouter.of(context)
+        .navigate(RecoverRoute(fromIncomingRecoverLink: true));
   }
 }
-// Form(
-//                         key: _formKey,
-//                         child: Column(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           crossAxisAlignment: CrossAxisAlignment.center,
-//                           children: [
-//                             if (pageState == LoginPageState.auth)
-//                               TextFormField(
-//                                 controller: _nameController,
-//                                 validator: (name) =>
-//                                     AuthValidator.isNameValid(name ?? '')
-//                                         ? null
-//                                         : 'Имя не может быть меньше двух букв',
-//                                 decoration: const InputDecoration(
-//                                     hintText: 'Имя',
-//                                     labelText: 'Имя',
-//                                     border: OutlineInputBorder()),
-//                                 maxLines: 1,
-//                               ),
-//                             const SizedBox(height: 8),
-//                             TextFormField(
-//                               controller: _emailController,
-//                               validator: (email) =>
-//                                   AuthValidator.isEmailValid(email ?? '')
-//                                       ? null
-//                                       : 'Неверно введен адрес почты',
-//                               decoration: const InputDecoration(
-//                                 hintText: 'Почта',
-//                                 labelText: 'Почта',
-//                                 border: OutlineInputBorder(),
-//                               ),
-//                               maxLines: 1,
-//                             ),
-//                             const SizedBox(height: 8),
-//                             TextFormField(
-//                               controller: _passwordController,
-//                               validator: (password) =>
-//                                   AuthValidator.isPasswordValid(password ?? '')
-//                                       ? null
-//                                       : 'Неверно введён пароль',
-//                               decoration: InputDecoration(
-//                                   hintText: 'Пароль',
-//                                   labelText: 'Пароль',
-//                                   border: const OutlineInputBorder(),
-//                                   suffixIcon: IconButton(
-//                                       padding: const EdgeInsetsDirectional.only(
-//                                           end: 12.0),
-//                                       icon: isPasswordMasked
-//                                           ? const Icon(Icons.visibility)
-//                                           : const Icon(Icons.visibility_off),
-//                                       onPressed: () {
-//                                         context.read<LoginBloc>().add(
-//                                             LoginEvent.changePasswordMasked(
-//                                                 isPasswordMasked:
-//                                                     !isPasswordMasked));
-//                                       })),
-//                               maxLines: 1,
-//                               obscureText: !isPasswordMasked,
-//                             ),
-//                             const SizedBox(height: 8),
-//                             if (pageState == LoginPageState.login) ...[
-//                               ElevatedButton(
-//                                   onPressed: () {
-//                                     log('validate = ${_formKey.currentState?.validate()}');
-//                                     if (_formKey.currentState?.validate() ??
-//                                         false) {
-//                                       context.read<LoginBloc>().add(
-//                                           LoginEvent.signIn(
-//                                               email:
-//                                                   _emailController.text.trim(),
-//                                               password: _passwordController.text
-//                                                   .trim(),
-//                                               onSuccess: () {
-//                                                 AutoRouter.of(context).navigate(
-//                                                     const HomeRoute());
-//                                               },
-//                                               onError: (message) {
-//                                                 context.showSnackBar(
-//                                                     message: message ??
-//                                                         'Неизвестная ошибка');
-//                                               }));
-//                                     } else {
-//                                       context.showSnackBar(
-//                                           message: 'Введите почту и пароль');
-//                                     }
-//                                   },
-//                                   child: const Text('Войти')),
-//                               const SizedBox(height: 8),
-//                               ElevatedButton(
-//                                   onPressed: () {
-//                                     context.read<LoginBloc>().add(
-//                                         const LoginEvent.changePage(
-//                                             pageState: LoginPageState.auth));
-//                                   },
-//                                   child: const Text('Создать аккаунт')),
-//                               const SizedBox(height: 8),
-//                               TextButton(onPressed: () {
-//                                 AutoRouter.of(context).navigate(RecoverRoute(fromIncomingRecoverLink: true));
-//                               }, child: const Text('Забыли пароль?'))
-//                             ] else ...[
-//                               ElevatedButton(
-//                                   onPressed: () {
-//                                     if (_formKey.currentState?.validate() ??
-//                                         false) {
-//                                       context.read<LoginBloc>().add(
-//                                             LoginEvent.signUp(
-//                                                 name: _nameController.text,
-//                                                 email: _emailController.text,
-//                                                 password:
-//                                                     _passwordController.text,
-//                                                 onSuccess: () {
-//                                                   context.showSnackBar(
-//                                                       message:
-//                                                           'Вы успешно зарегистрировались');
-//                                                   // context.read<LoginBloc>().add(
-//                                                   //     const LoginEvent.changePage(
-//                                                   //         pageState: LoginPageState.login));
-//                                                   AutoRouter.of(context).navigate(const HomeRoute());
-//                                                 },
-//                                                 onError: (message) {
-//                                                   context.showSnackBar(
-//                                                       message: message ??
-//                                                           'Произошла ошибка');
-//                                                 }),
-//                                           );
-//                                     } else {
-//                                       context.showSnackBar(
-//                                           message:
-//                                               'Введите имя, почту и пароль');
-//                                     }
-//                                   },
-//                                   child: const Text('Создать')),
-//                               const SizedBox(height: 8),
-//                               TextButton(
-//                                   onPressed: () {
-//                                     context.read<LoginBloc>().add(
-//                                         const LoginEvent.changePage(
-//                                             pageState: LoginPageState.login));
-//                                   },
-//                                   child: const Text('Назад'))
-//                             ]
-//                           ],
-//                         ),
-//                       )

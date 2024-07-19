@@ -24,7 +24,7 @@ class TypeQuestionPreview extends StatefulWidget implements Question {
   String? getAnswer() => answer?.answer;
 
   @override
-  String rightAnswer() => task!.taskAnswers.first.answer;
+  String rightAnswer() => task!.taskAnswers.first.rightAnswer;
 
   @override
   bool isSelected() {

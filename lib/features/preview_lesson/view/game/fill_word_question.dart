@@ -65,6 +65,7 @@ class _FillWordState extends State<FillWordsQuestionPreview> {
                 direction: Axis.horizontal,
                 children: [
                   Text(words[index]),
+                  Text(widget._userAnswer),
                   if (index < words.length - 1) GestureDetector(
                       onTap: () => setState(() {
                         if (widget._userAnswer.isNotEmpty) {
@@ -85,10 +86,12 @@ class _FillWordState extends State<FillWordsQuestionPreview> {
               children: widget._answersBar.map(
                       (item) => GestureDetector(
                     onTap: () => setState(() {
-                      if (widget._userAnswer.isEmpty) {
+                      if (widget._answersBar.isNotEmpty) {
+                        widget._answersBar.add(widget._userAnswer);
+                      }
+                        
                         widget._answersBar.remove(item);
                         widget._userAnswer = item;
-                      }
                     }),
                     child: Container(
                       margin: const EdgeInsets.all(8),

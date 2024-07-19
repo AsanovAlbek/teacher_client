@@ -655,6 +655,7 @@ mixin _$CollaboratorsEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)
         removeCollaboratorById,
+    required TResult Function(int courseId) fetchCollaboratorsAsStream,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -672,6 +673,7 @@ mixin _$CollaboratorsEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)?
         removeCollaboratorById,
+    TResult? Function(int courseId)? fetchCollaboratorsAsStream,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -689,6 +691,7 @@ mixin _$CollaboratorsEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)?
         removeCollaboratorById,
+    TResult Function(int courseId)? fetchCollaboratorsAsStream,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -699,6 +702,8 @@ mixin _$CollaboratorsEvent {
         addCollaboratorByEmail,
     required TResult Function(RemoveCollaboratorByIdEvent value)
         removeCollaboratorById,
+    required TResult Function(FetchCollaboratorsAsStreamEvent value)
+        fetchCollaboratorsAsStream,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -708,6 +713,8 @@ mixin _$CollaboratorsEvent {
         addCollaboratorByEmail,
     TResult? Function(RemoveCollaboratorByIdEvent value)?
         removeCollaboratorById,
+    TResult? Function(FetchCollaboratorsAsStreamEvent value)?
+        fetchCollaboratorsAsStream,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -715,6 +722,8 @@ mixin _$CollaboratorsEvent {
     TResult Function(FetchCollaboratorsEvent value)? fetchCollaborators,
     TResult Function(AddCollaboratorByEmailEvent value)? addCollaboratorByEmail,
     TResult Function(RemoveCollaboratorByIdEvent value)? removeCollaboratorById,
+    TResult Function(FetchCollaboratorsAsStreamEvent value)?
+        fetchCollaboratorsAsStream,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -841,6 +850,7 @@ class _$FetchCollaboratorsEventImpl extends FetchCollaboratorsEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)
         removeCollaboratorById,
+    required TResult Function(int courseId) fetchCollaboratorsAsStream,
   }) {
     return fetchCollaborators(courseId);
   }
@@ -861,6 +871,7 @@ class _$FetchCollaboratorsEventImpl extends FetchCollaboratorsEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)?
         removeCollaboratorById,
+    TResult? Function(int courseId)? fetchCollaboratorsAsStream,
   }) {
     return fetchCollaborators?.call(courseId);
   }
@@ -881,6 +892,7 @@ class _$FetchCollaboratorsEventImpl extends FetchCollaboratorsEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)?
         removeCollaboratorById,
+    TResult Function(int courseId)? fetchCollaboratorsAsStream,
     required TResult orElse(),
   }) {
     if (fetchCollaborators != null) {
@@ -897,6 +909,8 @@ class _$FetchCollaboratorsEventImpl extends FetchCollaboratorsEvent {
         addCollaboratorByEmail,
     required TResult Function(RemoveCollaboratorByIdEvent value)
         removeCollaboratorById,
+    required TResult Function(FetchCollaboratorsAsStreamEvent value)
+        fetchCollaboratorsAsStream,
   }) {
     return fetchCollaborators(this);
   }
@@ -909,6 +923,8 @@ class _$FetchCollaboratorsEventImpl extends FetchCollaboratorsEvent {
         addCollaboratorByEmail,
     TResult? Function(RemoveCollaboratorByIdEvent value)?
         removeCollaboratorById,
+    TResult? Function(FetchCollaboratorsAsStreamEvent value)?
+        fetchCollaboratorsAsStream,
   }) {
     return fetchCollaborators?.call(this);
   }
@@ -919,6 +935,8 @@ class _$FetchCollaboratorsEventImpl extends FetchCollaboratorsEvent {
     TResult Function(FetchCollaboratorsEvent value)? fetchCollaborators,
     TResult Function(AddCollaboratorByEmailEvent value)? addCollaboratorByEmail,
     TResult Function(RemoveCollaboratorByIdEvent value)? removeCollaboratorById,
+    TResult Function(FetchCollaboratorsAsStreamEvent value)?
+        fetchCollaboratorsAsStream,
     required TResult orElse(),
   }) {
     if (fetchCollaborators != null) {
@@ -1060,6 +1078,7 @@ class _$AddCollaboratorByEmailEventImpl extends AddCollaboratorByEmailEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)
         removeCollaboratorById,
+    required TResult Function(int courseId) fetchCollaboratorsAsStream,
   }) {
     return addCollaboratorByEmail(courseId, email, onSuccess, onError);
   }
@@ -1080,6 +1099,7 @@ class _$AddCollaboratorByEmailEventImpl extends AddCollaboratorByEmailEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)?
         removeCollaboratorById,
+    TResult? Function(int courseId)? fetchCollaboratorsAsStream,
   }) {
     return addCollaboratorByEmail?.call(courseId, email, onSuccess, onError);
   }
@@ -1100,6 +1120,7 @@ class _$AddCollaboratorByEmailEventImpl extends AddCollaboratorByEmailEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)?
         removeCollaboratorById,
+    TResult Function(int courseId)? fetchCollaboratorsAsStream,
     required TResult orElse(),
   }) {
     if (addCollaboratorByEmail != null) {
@@ -1116,6 +1137,8 @@ class _$AddCollaboratorByEmailEventImpl extends AddCollaboratorByEmailEvent {
         addCollaboratorByEmail,
     required TResult Function(RemoveCollaboratorByIdEvent value)
         removeCollaboratorById,
+    required TResult Function(FetchCollaboratorsAsStreamEvent value)
+        fetchCollaboratorsAsStream,
   }) {
     return addCollaboratorByEmail(this);
   }
@@ -1128,6 +1151,8 @@ class _$AddCollaboratorByEmailEventImpl extends AddCollaboratorByEmailEvent {
         addCollaboratorByEmail,
     TResult? Function(RemoveCollaboratorByIdEvent value)?
         removeCollaboratorById,
+    TResult? Function(FetchCollaboratorsAsStreamEvent value)?
+        fetchCollaboratorsAsStream,
   }) {
     return addCollaboratorByEmail?.call(this);
   }
@@ -1138,6 +1163,8 @@ class _$AddCollaboratorByEmailEventImpl extends AddCollaboratorByEmailEvent {
     TResult Function(FetchCollaboratorsEvent value)? fetchCollaborators,
     TResult Function(AddCollaboratorByEmailEvent value)? addCollaboratorByEmail,
     TResult Function(RemoveCollaboratorByIdEvent value)? removeCollaboratorById,
+    TResult Function(FetchCollaboratorsAsStreamEvent value)?
+        fetchCollaboratorsAsStream,
     required TResult orElse(),
   }) {
     if (addCollaboratorByEmail != null) {
@@ -1287,6 +1314,7 @@ class _$RemoveCollaboratorByIdEventImpl extends RemoveCollaboratorByIdEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)
         removeCollaboratorById,
+    required TResult Function(int courseId) fetchCollaboratorsAsStream,
   }) {
     return removeCollaboratorById(courseId, collaboratorId, onSuccess, onError);
   }
@@ -1307,6 +1335,7 @@ class _$RemoveCollaboratorByIdEventImpl extends RemoveCollaboratorByIdEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)?
         removeCollaboratorById,
+    TResult? Function(int courseId)? fetchCollaboratorsAsStream,
   }) {
     return removeCollaboratorById?.call(
         courseId, collaboratorId, onSuccess, onError);
@@ -1328,6 +1357,7 @@ class _$RemoveCollaboratorByIdEventImpl extends RemoveCollaboratorByIdEvent {
             dynamic Function(Teacher)? onSuccess,
             dynamic Function(String?)? onError)?
         removeCollaboratorById,
+    TResult Function(int courseId)? fetchCollaboratorsAsStream,
     required TResult orElse(),
   }) {
     if (removeCollaboratorById != null) {
@@ -1345,6 +1375,8 @@ class _$RemoveCollaboratorByIdEventImpl extends RemoveCollaboratorByIdEvent {
         addCollaboratorByEmail,
     required TResult Function(RemoveCollaboratorByIdEvent value)
         removeCollaboratorById,
+    required TResult Function(FetchCollaboratorsAsStreamEvent value)
+        fetchCollaboratorsAsStream,
   }) {
     return removeCollaboratorById(this);
   }
@@ -1357,6 +1389,8 @@ class _$RemoveCollaboratorByIdEventImpl extends RemoveCollaboratorByIdEvent {
         addCollaboratorByEmail,
     TResult? Function(RemoveCollaboratorByIdEvent value)?
         removeCollaboratorById,
+    TResult? Function(FetchCollaboratorsAsStreamEvent value)?
+        fetchCollaboratorsAsStream,
   }) {
     return removeCollaboratorById?.call(this);
   }
@@ -1367,6 +1401,8 @@ class _$RemoveCollaboratorByIdEventImpl extends RemoveCollaboratorByIdEvent {
     TResult Function(FetchCollaboratorsEvent value)? fetchCollaborators,
     TResult Function(AddCollaboratorByEmailEvent value)? addCollaboratorByEmail,
     TResult Function(RemoveCollaboratorByIdEvent value)? removeCollaboratorById,
+    TResult Function(FetchCollaboratorsAsStreamEvent value)?
+        fetchCollaboratorsAsStream,
     required TResult orElse(),
   }) {
     if (removeCollaboratorById != null) {
@@ -1393,5 +1429,202 @@ abstract class RemoveCollaboratorByIdEvent extends CollaboratorsEvent {
   @override
   @JsonKey(ignore: true)
   _$$RemoveCollaboratorByIdEventImplCopyWith<_$RemoveCollaboratorByIdEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FetchCollaboratorsAsStreamEventImplCopyWith<$Res>
+    implements $CollaboratorsEventCopyWith<$Res> {
+  factory _$$FetchCollaboratorsAsStreamEventImplCopyWith(
+          _$FetchCollaboratorsAsStreamEventImpl value,
+          $Res Function(_$FetchCollaboratorsAsStreamEventImpl) then) =
+      __$$FetchCollaboratorsAsStreamEventImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int courseId});
+}
+
+/// @nodoc
+class __$$FetchCollaboratorsAsStreamEventImplCopyWithImpl<$Res>
+    extends _$CollaboratorsEventCopyWithImpl<$Res,
+        _$FetchCollaboratorsAsStreamEventImpl>
+    implements _$$FetchCollaboratorsAsStreamEventImplCopyWith<$Res> {
+  __$$FetchCollaboratorsAsStreamEventImplCopyWithImpl(
+      _$FetchCollaboratorsAsStreamEventImpl _value,
+      $Res Function(_$FetchCollaboratorsAsStreamEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? courseId = null,
+  }) {
+    return _then(_$FetchCollaboratorsAsStreamEventImpl(
+      courseId: null == courseId
+          ? _value.courseId
+          : courseId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FetchCollaboratorsAsStreamEventImpl
+    extends FetchCollaboratorsAsStreamEvent {
+  const _$FetchCollaboratorsAsStreamEventImpl({required this.courseId})
+      : super._();
+
+  @override
+  final int courseId;
+
+  @override
+  String toString() {
+    return 'CollaboratorsEvent.fetchCollaboratorsAsStream(courseId: $courseId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchCollaboratorsAsStreamEventImpl &&
+            (identical(other.courseId, courseId) ||
+                other.courseId == courseId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, courseId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchCollaboratorsAsStreamEventImplCopyWith<
+          _$FetchCollaboratorsAsStreamEventImpl>
+      get copyWith => __$$FetchCollaboratorsAsStreamEventImplCopyWithImpl<
+          _$FetchCollaboratorsAsStreamEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int courseId) fetchCollaborators,
+    required TResult Function(
+            int courseId,
+            String email,
+            dynamic Function(Teacher)? onSuccess,
+            dynamic Function(String?)? onError)
+        addCollaboratorByEmail,
+    required TResult Function(
+            int courseId,
+            String collaboratorId,
+            dynamic Function(Teacher)? onSuccess,
+            dynamic Function(String?)? onError)
+        removeCollaboratorById,
+    required TResult Function(int courseId) fetchCollaboratorsAsStream,
+  }) {
+    return fetchCollaboratorsAsStream(courseId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int courseId)? fetchCollaborators,
+    TResult? Function(
+            int courseId,
+            String email,
+            dynamic Function(Teacher)? onSuccess,
+            dynamic Function(String?)? onError)?
+        addCollaboratorByEmail,
+    TResult? Function(
+            int courseId,
+            String collaboratorId,
+            dynamic Function(Teacher)? onSuccess,
+            dynamic Function(String?)? onError)?
+        removeCollaboratorById,
+    TResult? Function(int courseId)? fetchCollaboratorsAsStream,
+  }) {
+    return fetchCollaboratorsAsStream?.call(courseId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int courseId)? fetchCollaborators,
+    TResult Function(
+            int courseId,
+            String email,
+            dynamic Function(Teacher)? onSuccess,
+            dynamic Function(String?)? onError)?
+        addCollaboratorByEmail,
+    TResult Function(
+            int courseId,
+            String collaboratorId,
+            dynamic Function(Teacher)? onSuccess,
+            dynamic Function(String?)? onError)?
+        removeCollaboratorById,
+    TResult Function(int courseId)? fetchCollaboratorsAsStream,
+    required TResult orElse(),
+  }) {
+    if (fetchCollaboratorsAsStream != null) {
+      return fetchCollaboratorsAsStream(courseId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FetchCollaboratorsEvent value) fetchCollaborators,
+    required TResult Function(AddCollaboratorByEmailEvent value)
+        addCollaboratorByEmail,
+    required TResult Function(RemoveCollaboratorByIdEvent value)
+        removeCollaboratorById,
+    required TResult Function(FetchCollaboratorsAsStreamEvent value)
+        fetchCollaboratorsAsStream,
+  }) {
+    return fetchCollaboratorsAsStream(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(FetchCollaboratorsEvent value)? fetchCollaborators,
+    TResult? Function(AddCollaboratorByEmailEvent value)?
+        addCollaboratorByEmail,
+    TResult? Function(RemoveCollaboratorByIdEvent value)?
+        removeCollaboratorById,
+    TResult? Function(FetchCollaboratorsAsStreamEvent value)?
+        fetchCollaboratorsAsStream,
+  }) {
+    return fetchCollaboratorsAsStream?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FetchCollaboratorsEvent value)? fetchCollaborators,
+    TResult Function(AddCollaboratorByEmailEvent value)? addCollaboratorByEmail,
+    TResult Function(RemoveCollaboratorByIdEvent value)? removeCollaboratorById,
+    TResult Function(FetchCollaboratorsAsStreamEvent value)?
+        fetchCollaboratorsAsStream,
+    required TResult orElse(),
+  }) {
+    if (fetchCollaboratorsAsStream != null) {
+      return fetchCollaboratorsAsStream(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FetchCollaboratorsAsStreamEvent extends CollaboratorsEvent {
+  const factory FetchCollaboratorsAsStreamEvent({required final int courseId}) =
+      _$FetchCollaboratorsAsStreamEventImpl;
+  const FetchCollaboratorsAsStreamEvent._() : super._();
+
+  @override
+  int get courseId;
+  @override
+  @JsonKey(ignore: true)
+  _$$FetchCollaboratorsAsStreamEventImplCopyWith<
+          _$FetchCollaboratorsAsStreamEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

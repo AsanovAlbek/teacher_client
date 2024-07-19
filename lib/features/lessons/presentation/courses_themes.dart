@@ -121,66 +121,14 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                 child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      Row(children: [
-                                        PickableImage(
+                                      LessonNameAndDescriptionFields(
+                                          lessonBloc: lessonBloc,
+                                          nameController: _nameController,
+                                          isTitleEditable: isTitleEditable,
                                           filePickerResult: filePickerResult,
-                                          imageUrl: widget.course.iconUrl,
-                                          imageSize: 200,
-                                          onPressed: () async {
-                                            final image = await FilePicker
-                                                .platform
-                                                .pickFiles(
-                                                    type: FileType.image);
-                                            if (image != null) {
-                                              lessonBloc.add(
-                                                  LessonEvent.updateImage(
-                                                      filePickerResult: image));
-                                            }
-                                          },
-                                        ),
-                                        Expanded(
-                                          child: Column(children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: TextFormField(
-                                                controller: _nameController,
-                                                maxLines: 1,
-                                                readOnly: isTitleEditable,
-                                                decoration: InputDecoration(
-                                                    label: const Text(
-                                                        'Название курса'),
-                                                    border: OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8))),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: TextFormField(
-                                                  controller:
-                                                      _descriptionController,
-                                                  textAlign: TextAlign.start,
-                                                  textAlignVertical:
-                                                      TextAlignVertical.top,
-                                                  minLines: 4,
-                                                  maxLines: 4,
-                                                  readOnly: isTitleEditable,
-                                                  decoration: InputDecoration(
-                                                      label: const Text(
-                                                          'Описание курса'),
-                                                      border:
-                                                          OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8)))),
-                                            )
-                                          ]),
-                                        )
-                                      ]),
+                                          course: course,
+                                          descriptionController:
+                                              _descriptionController),
                                       SwitchListTile.adaptive(
                                           value: !isTitleEditable,
                                           title: const Text(
@@ -330,5 +278,73 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
         },
       ),
     );
+  }
+}
+
+class LessonNameAndDescriptionFields extends StatelessWidget {
+  const LessonNameAndDescriptionFields({
+    super.key,
+    required this.course,
+    required this.filePickerResult,
+    required this.isTitleEditable,
+    required this.lessonBloc,
+    required TextEditingController nameController,
+    required TextEditingController descriptionController,
+  })  : _nameController = nameController,
+        _descriptionController = descriptionController;
+
+  final LessonBloc lessonBloc;
+  final Course course;
+  final TextEditingController _nameController;
+  final TextEditingController _descriptionController;
+  final FilePickerResult? filePickerResult;
+  final bool isTitleEditable;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      PickableImage(
+        filePickerResult: filePickerResult,
+        imageUrl: course.iconUrl,
+        imageSize: 200,
+        onPressed: () async {
+          final image =
+              await FilePicker.platform.pickFiles(type: FileType.image);
+          if (image != null) {
+            lessonBloc.add(LessonEvent.updateImage(filePickerResult: image));
+          }
+        },
+      ),
+      Expanded(
+        child: Column(children: [
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: TextFormField(
+              controller: _nameController,
+              maxLines: 1,
+              readOnly: isTitleEditable,
+              decoration: InputDecoration(
+                  label: const Text('Название курса'),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8))),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: TextFormField(
+                controller: _descriptionController,
+                textAlign: TextAlign.start,
+                textAlignVertical: TextAlignVertical.top,
+                minLines: 4,
+                maxLines: 4,
+                readOnly: isTitleEditable,
+                decoration: InputDecoration(
+                    label: const Text('Описание курса'),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8)))),
+          )
+        ]),
+      )
+    ]);
   }
 }

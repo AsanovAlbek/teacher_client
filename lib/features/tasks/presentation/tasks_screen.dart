@@ -200,6 +200,7 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
                         context.router.navigate(const PreviewTasksRoute());
                       },
                       child: const Text('Протестировать')),
+                  const SizedBox(height: 8,),
                   ElevatedButton(
                       onPressed: () {
                         AutoRouter.of(context)

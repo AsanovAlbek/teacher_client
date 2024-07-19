@@ -19,6 +19,7 @@ void main() async {
   await Supabase.initialize(
       url: SupabaseConst.supabaseUrl,
       anonKey: SupabaseConst.supabaseKey,
+      realtimeClientOptions: const RealtimeClientOptions(eventsPerSecond: 2),
       authOptions:
           const FlutterAuthClientOptions(authFlowType: AuthFlowType.pkce));
   usePathUrlStrategy();

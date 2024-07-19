@@ -15,4 +15,5 @@ class CollaboratorsEvent with _$CollaboratorsEvent {
       required String collaboratorId,
       Function(Teacher)? onSuccess,
       Function(String?)? onError}) = RemoveCollaboratorByIdEvent;
+  const factory CollaboratorsEvent.fetchCollaboratorsAsStream({required int courseId}) = FetchCollaboratorsAsStreamEvent;
 }

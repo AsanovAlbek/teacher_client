@@ -17,8 +17,8 @@ class CollaboratorsRepositoryImpl implements CollaboratorsRepository {
         .limit(1)
         .maybeSingle()
         .withConverter((json) {
-          return json != null ? Teacher.fromJson(json) : null;
-        });
+      return json != null ? Teacher.fromJson(json) : null;
+    });
     if (teacher != null) {
       await client
           .from('collaborators')
@@ -60,5 +60,18 @@ class CollaboratorsRepositoryImpl implements CollaboratorsRepository {
     return teachers
         .where((teacher) => collaboratorIds.contains(teacher.id))
         .toList();
+  }
+
+  @override
+  Stream<List<Teacher>> collaborators(int courseId) {
+    return client.from('collaborators').stream(primaryKey: ['id']).inFilter(
+        'course_id', [courseId]).asyncMap((jsonList) {
+      return client.rpc('get_teachers_by_course_id',
+          params: {'given_course_id': courseId}).withConverter((teachersJson) {
+        return List<Map<String, dynamic>>.from(teachersJson)
+            .map(Teacher.fromJson)
+            .toList();
+      });
+    });
   }
 }

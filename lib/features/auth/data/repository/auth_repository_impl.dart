@@ -44,8 +44,8 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> recoverPassword(String email) async {
     try {
-      final uri = Uri.parse('${Uri.base.toString()}/recover-route');
-      final link = '$uri?fromIncomingRecoverLink=true';
+      //final uri = Uri.parse('${Uri.base.toString()}/recover-route');
+      const link = 'https://teacherclienttesthosting.web.app/recover-route?fromIncomingRecoverLink=true';
       debugPrint('link = $link');
       _auth.resetPasswordForEmail(email, redirectTo: link);
     } catch (e, s) {

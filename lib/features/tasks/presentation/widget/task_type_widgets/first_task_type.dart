@@ -125,8 +125,11 @@ class _ImageItemState extends State<_ImageItem> {
             onPressed: () async {
               final image =
                   await FilePicker.platform.pickFiles(type: FileType.image);
-              if (image != null &&
-                  image.files.single.size / 1024 / 1024 >= 10) {
+              final isFileSizeValid = AppUtils.checkFileMemoryLimit(
+                  fileBytesSize: image?.files.first.size ?? 0,
+                  limit: 10,
+                  memoryLimitType: MemoryLimitType.mb);
+              if (image != null && !isFileSizeValid) {
                 Future.sync(() => ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                         content:

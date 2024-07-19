@@ -1,0 +1,11 @@
+export 'package:auto_route/auto_route.dart';
+export 'package:flutter/material.dart';
+export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:get_it/get_it.dart';
+export 'package:talker/talker.dart';
+export 'package:teacher_client/core/extensions/context_extensions.dart';
+export 'package:teacher_client/core/model/teacher/teacher.dart';
+export 'package:teacher_client/features/collaborators/domain/bloc/collaborators_bloc.dart';
+export 'package:teacher_client/features/collaborators/domain/repository/collaborators_repository.dart';
+export 'package:teacher_client/features/collaborators/view/widgets/collaborator_item.dart';
+export 'package:teacher_client/features/home/domain/home_bloc.dart';
