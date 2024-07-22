@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/core/model/lesson/lesson.dart';
+import 'package:teacher_client/features/collaborators/view/collaborators.dart';
 import 'package:teacher_client/features/lessons/domain/repository/lessons_repository.dart';
 
 class LessonsRepositoryImpl implements LessonsRepository {
@@ -23,12 +24,20 @@ class LessonsRepositoryImpl implements LessonsRepository {
         .from('lessons')
         .select()
         .eq('course_id', courseId)
-        .withConverter<List<Lesson>>((data) => List<Map<String, dynamic>>.from(data).map(Lesson.fromJson).toList());
+        .withConverter<List<Lesson>>((data) =>
+            List<Map<String, dynamic>>.from(data)
+                .map(Lesson.fromJson)
+                .toList());
   }
 
   @override
   Future<Lesson> lessonById(int lessonId) async {
-    return await _client.from('lessons').select().eq('id', lessonId).single().withConverter(Lesson.fromJson);
+    return await _client
+        .from('lessons')
+        .select()
+        .eq('id', lessonId)
+        .single()
+        .withConverter(Lesson.fromJson);
   }
 
   @override
@@ -45,5 +54,19 @@ class LessonsRepositoryImpl implements LessonsRepository {
         .select()
         .single()
         .withConverter(Lesson.fromJson);
+  }
+
+  @override
+  Stream<List<Lesson>> lessonsStream(int courseId) {
+    return _client
+        .from('lessons')
+        .stream(primaryKey: ['id'])
+        .eq('course_id', courseId)
+        .map((lessonJson) {
+          Talker().debug('lessons stream data = $lessonJson');
+          return List<Map<String, dynamic>>.from(lessonJson)
+            .map(Lesson.fromJson)
+            .toList();
+        });
   }
 }

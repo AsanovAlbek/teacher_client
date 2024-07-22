@@ -5,7 +5,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/core/model/course/course.dart';
 import 'package:teacher_client/features/courses/domain/repository/courses_repository.dart';
 
-
 class CoursesRepositoryImpl implements CoursesRepository {
   final SupabaseClient _client;
 
@@ -21,18 +20,22 @@ class CoursesRepositoryImpl implements CoursesRepository {
         .single()
         .withConverter(Course.fromJson);
 
-    await _client
-        .from('teachers_courses')
-        .upsert({'teacher_id': _client.auth.currentUser!.id, 'course_id': insertedCourse.id});
+    await _client.from('teachers_courses').upsert({
+      'teacher_id': _client.auth.currentUser!.id,
+      'course_id': insertedCourse.id
+    });
     return insertedCourse;
   }
 
   @override
   Future<List<Course>> teacherCourses() async {
-    return _client.rpc<List<Map<String, dynamic>>>('teacher_courses',
-        params: {'user_id': _client.auth.currentUser?.id}).withConverter((data) {
+    return _client.rpc<List<Map<String, dynamic>>>('teacher_courses', params: {
+      'user_id': _client.auth.currentUser?.id
+    }).withConverter((data) {
       debugPrint(data.toString());
-      return List<Map<String, dynamic>>.from(data).map(Course.fromJson).toList();
+      return List<Map<String, dynamic>>.from(data)
+          .map(Course.fromJson)
+          .toList();
     });
   }
 
@@ -42,7 +45,8 @@ class CoursesRepositoryImpl implements CoursesRepository {
     return _client.rpc('search_teacher_courses', params: {
       'user_id': _client.auth.currentUser?.id,
       'query': '%$query%'
-    }).withConverter((data) => List<Map<String, dynamic>>.from(data).map(Course.fromJson).toList());
+    }).withConverter((data) =>
+        List<Map<String, dynamic>>.from(data).map(Course.fromJson).toList());
   }
 
   @override
@@ -54,5 +58,18 @@ class CoursesRepositoryImpl implements CoursesRepository {
         .select()
         .single()
         .withConverter(Course.fromJson);
+  }
+
+  @override
+  Stream<List<Course>> searchTeacherAvailableCourses(String query) {
+    return _client
+        .from('courses')
+        .stream(primaryKey: ['id']).asyncMap((jsonList) async {
+      return _client.rpc('search_teacher_courses', params: {
+        'user_id': _client.auth.currentUser?.id,
+        'query': '%$query%'
+      }).withConverter((data) =>
+          List<Map<String, dynamic>>.from(data).map(Course.fromJson).toList());
+    });
   }
 }

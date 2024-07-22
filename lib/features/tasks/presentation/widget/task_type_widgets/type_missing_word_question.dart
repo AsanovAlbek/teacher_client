@@ -10,8 +10,7 @@ import 'deletable_item.dart';
 class TypeMissingWordQuestion extends StatefulWidget {
   final TaskModel task;
 
-  const TypeMissingWordQuestion(
-      {super.key, required this.task});
+  const TypeMissingWordQuestion({super.key, required this.task});
 
   @override
   State<StatefulWidget> createState() => _TypeMissingWordState();
@@ -53,23 +52,23 @@ class _TypeMissingWordState extends State<TypeMissingWordQuestion> {
               decoration: const InputDecoration(labelText: 'Задание'),
               maxLines: 1,
               onChanged: (text) {
-                AppUtils.debounce(() {
-                  bloc.add(TasksEvent.setTask(
-                      task: widget.task.copyWith(answerModels: [
-                        _answer.copyWith(
-                            answer: _answer.answer.copyWith(rightAnswer: text.trim()))
-                      ])));
+                AppUtils().debounce(() {
+                  bloc.add(TasksEvent.updateAnswer(
+                      taskId: widget.task.id,
+                      answer:
+                          _answer.answer.copyWith(rightAnswer: text.trim())));
                 });
               },
             ),
             const SizedBox(height: 8),
             TextFormField(
               initialValue: widget.task.task,
-              decoration: const InputDecoration(labelText: 'Ответ (на месте пропусков ****)'),
+              decoration: const InputDecoration(
+                  labelText: 'Ответ (на месте пропусков ****)'),
               maxLines: 1,
               onChanged: (text) {
-                AppUtils.debounce(() {
-                  bloc.add(TasksEvent.setTask(
+                AppUtils().debounce(() {
+                  bloc.add(TasksEvent.updateTask(
                       task: widget.task.copyWith(task: text.trim())));
                 });
               },
@@ -77,15 +76,14 @@ class _TypeMissingWordState extends State<TypeMissingWordQuestion> {
             const SizedBox(height: 8),
             TextFormField(
               initialValue: _answer.answer.answer,
-              decoration: const InputDecoration(labelText: 'Пропущенные слова (через запятую)'),
+              decoration: const InputDecoration(
+                  labelText: 'Пропущенные слова (через запятую)'),
               maxLines: 1,
               onChanged: (text) {
-                AppUtils.debounce(() {
-                  bloc.add(TasksEvent.setTask(
-                      task: widget.task.copyWith(answerModels: [
-                        _answer.copyWith(
-                            answer: _answer.answer.copyWith(answer: text.trim()))
-                      ])));
+                AppUtils().debounce(() {
+                  bloc.add(TasksEvent.updateAnswer(
+                      taskId: widget.task.id,
+                      answer: _answer.answer.copyWith(answer: text.trim())));
                 });
               },
             )

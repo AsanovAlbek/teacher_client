@@ -47,8 +47,8 @@ class _TypeQuestionState extends State<TypeQuestion> {
               decoration: const InputDecoration(labelText: 'Задание'),
               maxLines: 1,
               onChanged: (text) {
-                AppUtils.debounce(() {
-                  bloc.add(TasksEvent.setTask(
+                AppUtils().debounce(() {
+                  bloc.add(TasksEvent.updateTask(
                       task: widget.task.copyWith(task: text.trim())));
                 });
               },
@@ -58,12 +58,12 @@ class _TypeQuestionState extends State<TypeQuestion> {
               initialValue: widget.task.answerModels.single.answer.rightAnswer,
               decoration: const InputDecoration(labelText: 'Ответ'),
               onChanged: (text) {
-                AppUtils.debounce(() {
-                  bloc.add(TasksEvent.setTask(
-                      task: widget.task.copyWith(answerModels: [
-                        widget.task.answerModels.single.copyWith(
-                            answer: widget.task.answerModels.single.answer.copyWith(rightAnswer: text.trim()))
-                      ])));
+                AppUtils().debounce(() {
+                  bloc.add(TasksEvent.updateAnswer(
+                    answer: widget.task.answerModels.single.answer
+                        .copyWith(rightAnswer: text.trim()),
+                    taskId: widget.task.id,
+                  ));
                 });
               },
             ),

@@ -12,7 +12,7 @@ import 'package:teacher_client/features/home/domain/home_event.dart';
 import 'package:teacher_client/features/home/domain/home_state.dart';
 import 'package:teacher_client/features/lessons/domain/bloc/lesson_bloc.dart';
 import 'package:teacher_client/features/lessons/domain/repository/lessons_repository.dart';
-import 'package:teacher_client/features/preview_lesson/domain/bloc%20copy/quiz_bloc.dart';
+import 'package:teacher_client/features/preview_lesson/domain/bloc/quiz_bloc.dart';
 
 import '../domain/home_bloc.dart';
 

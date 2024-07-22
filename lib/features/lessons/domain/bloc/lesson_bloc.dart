@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,7 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
         _storageRepository = storageRepository,
         super(const LessonState.loading()) {
     on<LessonLoadEvent>(_load);
+    on<LessonsStreamEvent>(_lessonsStream, transformer: restartable());
     on<LessonAddEvent>(_addLesson);
     on<LessonDeleteEvent>(_deleteLesson);
     on<LessonUpdateEvent>(_updateLesson);
@@ -110,5 +112,14 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
   FutureOr<void> _changeFieldsEditable(ChangeFieldsEditableLessonEvent event, Emitter<LessonState> emit) {
     _loaded = _loaded.copyWith(isTitleEditable: !_loaded.isTitleEditable);
     emit(_loaded);
+  }
+
+  FutureOr<void> _lessonsStream(LessonsStreamEvent event, Emitter<LessonState> emit) async {
+    emit.forEach(_repository.lessonsStream(event.course.id), onData: (lessons) {
+      _loaded = _loaded.copyWith(course: event.course, lessons: lessons);
+      return _loaded;
+    }, onError: (error, stackTrace) {
+      return LessonState.error(error.toString());
+    });
   }
 }

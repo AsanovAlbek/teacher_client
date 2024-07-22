@@ -6,6 +6,8 @@ class CoursesEvent with _$CoursesEvent {
 
   const factory CoursesEvent.load() = CoursesLoadEvent;
 
+  const factory CoursesEvent.searchStream({required String query}) = CoursesStreamSearchEvent;
+
   const factory CoursesEvent.search({required String query}) = CoursesSearchEvent;
 
   const factory CoursesEvent.addCourse(
@@ -15,7 +17,8 @@ class CoursesEvent with _$CoursesEvent {
       Function(Course)? onSuccess,
       Function(Exception?)? onError}) = CoursesAddCourseEvent;
 
-  const factory CoursesEvent.updateCourse({required Course course,
+  const factory CoursesEvent.updateCourse({
+    required Course course,
     List<Lesson>? lessons,
     FilePickerResult? pickerResult,
     Function(Course)? onSuccess,

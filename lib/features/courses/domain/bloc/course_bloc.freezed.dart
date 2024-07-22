@@ -19,6 +19,7 @@ mixin _$CoursesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(String query) searchStream,
     required TResult Function(String query) search,
     required TResult Function(
             Course course,
@@ -39,6 +40,7 @@ mixin _$CoursesEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
+    TResult? Function(String query)? searchStream,
     TResult? Function(String query)? search,
     TResult? Function(
             Course course,
@@ -59,6 +61,7 @@ mixin _$CoursesEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(String query)? searchStream,
     TResult Function(String query)? search,
     TResult Function(
             Course course,
@@ -80,6 +83,7 @@ mixin _$CoursesEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CoursesLoadEvent value) load,
+    required TResult Function(CoursesStreamSearchEvent value) searchStream,
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
     required TResult Function(CourseUpdateEvent value) updateCourse,
@@ -88,6 +92,7 @@ mixin _$CoursesEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CoursesLoadEvent value)? load,
+    TResult? Function(CoursesStreamSearchEvent value)? searchStream,
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
     TResult? Function(CourseUpdateEvent value)? updateCourse,
@@ -96,6 +101,7 @@ mixin _$CoursesEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CoursesLoadEvent value)? load,
+    TResult Function(CoursesStreamSearchEvent value)? searchStream,
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
     TResult Function(CourseUpdateEvent value)? updateCourse,
@@ -161,6 +167,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(String query) searchStream,
     required TResult Function(String query) search,
     required TResult Function(
             Course course,
@@ -184,6 +191,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
+    TResult? Function(String query)? searchStream,
     TResult? Function(String query)? search,
     TResult? Function(
             Course course,
@@ -207,6 +215,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(String query)? searchStream,
     TResult Function(String query)? search,
     TResult Function(
             Course course,
@@ -234,6 +243,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CoursesLoadEvent value) load,
+    required TResult Function(CoursesStreamSearchEvent value) searchStream,
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
     required TResult Function(CourseUpdateEvent value) updateCourse,
@@ -245,6 +255,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CoursesLoadEvent value)? load,
+    TResult? Function(CoursesStreamSearchEvent value)? searchStream,
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
     TResult? Function(CourseUpdateEvent value)? updateCourse,
@@ -256,6 +267,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CoursesLoadEvent value)? load,
+    TResult Function(CoursesStreamSearchEvent value)? searchStream,
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
     TResult Function(CourseUpdateEvent value)? updateCourse,
@@ -271,6 +283,198 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
 abstract class CoursesLoadEvent extends CoursesEvent {
   const factory CoursesLoadEvent() = _$CoursesLoadEventImpl;
   const CoursesLoadEvent._() : super._();
+}
+
+/// @nodoc
+abstract class _$$CoursesStreamSearchEventImplCopyWith<$Res> {
+  factory _$$CoursesStreamSearchEventImplCopyWith(
+          _$CoursesStreamSearchEventImpl value,
+          $Res Function(_$CoursesStreamSearchEventImpl) then) =
+      __$$CoursesStreamSearchEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String query});
+}
+
+/// @nodoc
+class __$$CoursesStreamSearchEventImplCopyWithImpl<$Res>
+    extends _$CoursesEventCopyWithImpl<$Res, _$CoursesStreamSearchEventImpl>
+    implements _$$CoursesStreamSearchEventImplCopyWith<$Res> {
+  __$$CoursesStreamSearchEventImplCopyWithImpl(
+      _$CoursesStreamSearchEventImpl _value,
+      $Res Function(_$CoursesStreamSearchEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? query = null,
+  }) {
+    return _then(_$CoursesStreamSearchEventImpl(
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CoursesStreamSearchEventImpl extends CoursesStreamSearchEvent {
+  const _$CoursesStreamSearchEventImpl({required this.query}) : super._();
+
+  @override
+  final String query;
+
+  @override
+  String toString() {
+    return 'CoursesEvent.searchStream(query: $query)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CoursesStreamSearchEventImpl &&
+            (identical(other.query, query) || other.query == query));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, query);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CoursesStreamSearchEventImplCopyWith<_$CoursesStreamSearchEventImpl>
+      get copyWith => __$$CoursesStreamSearchEventImplCopyWithImpl<
+          _$CoursesStreamSearchEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(String query) searchStream,
+    required TResult Function(String query) search,
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        addCourse,
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateCourse,
+  }) {
+    return searchStream(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function(String query)? searchStream,
+    TResult? Function(String query)? search,
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        addCourse,
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
+  }) {
+    return searchStream?.call(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(String query)? searchStream,
+    TResult Function(String query)? search,
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        addCourse,
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
+    required TResult orElse(),
+  }) {
+    if (searchStream != null) {
+      return searchStream(query);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CoursesLoadEvent value) load,
+    required TResult Function(CoursesStreamSearchEvent value) searchStream,
+    required TResult Function(CoursesSearchEvent value) search,
+    required TResult Function(CoursesAddCourseEvent value) addCourse,
+    required TResult Function(CourseUpdateEvent value) updateCourse,
+  }) {
+    return searchStream(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CoursesLoadEvent value)? load,
+    TResult? Function(CoursesStreamSearchEvent value)? searchStream,
+    TResult? Function(CoursesSearchEvent value)? search,
+    TResult? Function(CoursesAddCourseEvent value)? addCourse,
+    TResult? Function(CourseUpdateEvent value)? updateCourse,
+  }) {
+    return searchStream?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CoursesLoadEvent value)? load,
+    TResult Function(CoursesStreamSearchEvent value)? searchStream,
+    TResult Function(CoursesSearchEvent value)? search,
+    TResult Function(CoursesAddCourseEvent value)? addCourse,
+    TResult Function(CourseUpdateEvent value)? updateCourse,
+    required TResult orElse(),
+  }) {
+    if (searchStream != null) {
+      return searchStream(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CoursesStreamSearchEvent extends CoursesEvent {
+  const factory CoursesStreamSearchEvent({required final String query}) =
+      _$CoursesStreamSearchEventImpl;
+  const CoursesStreamSearchEvent._() : super._();
+
+  String get query;
+  @JsonKey(ignore: true)
+  _$$CoursesStreamSearchEventImplCopyWith<_$CoursesStreamSearchEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -339,6 +543,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(String query) searchStream,
     required TResult Function(String query) search,
     required TResult Function(
             Course course,
@@ -362,6 +567,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
+    TResult? Function(String query)? searchStream,
     TResult? Function(String query)? search,
     TResult? Function(
             Course course,
@@ -385,6 +591,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(String query)? searchStream,
     TResult Function(String query)? search,
     TResult Function(
             Course course,
@@ -412,6 +619,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CoursesLoadEvent value) load,
+    required TResult Function(CoursesStreamSearchEvent value) searchStream,
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
     required TResult Function(CourseUpdateEvent value) updateCourse,
@@ -423,6 +631,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CoursesLoadEvent value)? load,
+    TResult? Function(CoursesStreamSearchEvent value)? searchStream,
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
     TResult? Function(CourseUpdateEvent value)? updateCourse,
@@ -434,6 +643,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CoursesLoadEvent value)? load,
+    TResult Function(CoursesStreamSearchEvent value)? searchStream,
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
     TResult Function(CourseUpdateEvent value)? updateCourse,
@@ -594,6 +804,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(String query) searchStream,
     required TResult Function(String query) search,
     required TResult Function(
             Course course,
@@ -617,6 +828,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
+    TResult? Function(String query)? searchStream,
     TResult? Function(String query)? search,
     TResult? Function(
             Course course,
@@ -640,6 +852,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(String query)? searchStream,
     TResult Function(String query)? search,
     TResult Function(
             Course course,
@@ -667,6 +880,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CoursesLoadEvent value) load,
+    required TResult Function(CoursesStreamSearchEvent value) searchStream,
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
     required TResult Function(CourseUpdateEvent value) updateCourse,
@@ -678,6 +892,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CoursesLoadEvent value)? load,
+    TResult? Function(CoursesStreamSearchEvent value)? searchStream,
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
     TResult? Function(CourseUpdateEvent value)? updateCourse,
@@ -689,6 +904,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CoursesLoadEvent value)? load,
+    TResult Function(CoursesStreamSearchEvent value)? searchStream,
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
     TResult Function(CourseUpdateEvent value)? updateCourse,
@@ -857,6 +1073,7 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(String query) searchStream,
     required TResult Function(String query) search,
     required TResult Function(
             Course course,
@@ -880,6 +1097,7 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? load,
+    TResult? Function(String query)? searchStream,
     TResult? Function(String query)? search,
     TResult? Function(
             Course course,
@@ -904,6 +1122,7 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(String query)? searchStream,
     TResult Function(String query)? search,
     TResult Function(
             Course course,
@@ -931,6 +1150,7 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CoursesLoadEvent value) load,
+    required TResult Function(CoursesStreamSearchEvent value) searchStream,
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
     required TResult Function(CourseUpdateEvent value) updateCourse,
@@ -942,6 +1162,7 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CoursesLoadEvent value)? load,
+    TResult? Function(CoursesStreamSearchEvent value)? searchStream,
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
     TResult? Function(CourseUpdateEvent value)? updateCourse,
@@ -953,6 +1174,7 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CoursesLoadEvent value)? load,
+    TResult Function(CoursesStreamSearchEvent value)? searchStream,
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
     TResult Function(CourseUpdateEvent value)? updateCourse,

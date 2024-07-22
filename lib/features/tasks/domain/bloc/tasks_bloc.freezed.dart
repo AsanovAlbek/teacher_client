@@ -18,9 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TasksEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
+    required TResult Function(Lesson lesson) tasksStream,
     required TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -33,24 +31,15 @@ mixin _$TasksEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
     required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
+    required TResult Function(Answer answer, int taskId,
+            FilePickerResult? image, FilePickerResult? audio)
+        updateAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
+    TResult? Function(Lesson lesson)? tasksStream,
     TResult? Function(
             Lesson lesson,
             TaskModel task,
@@ -63,23 +52,15 @@ mixin _$TasksEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
     TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult? Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
+    TResult Function(Lesson lesson)? tasksStream,
     TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -92,70 +73,44 @@ mixin _$TasksEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
     TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
+    required TResult Function(TasksStreamEvent value) tasksStream,
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
     required TResult Function(ChangeFieldsEditableTasksEvent value)
         changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
+    required TResult Function(UpdateAnswerTasksEvent value) updateAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
+    TResult? Function(TasksStreamEvent value)? tasksStream,
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult? Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult? Function(UpdateAnswerTasksEvent value)? updateAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
+    TResult Function(TasksStreamEvent value)? tasksStream,
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult Function(UpdateAnswerTasksEvent value)? updateAnswer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -180,10 +135,10 @@ class _$TasksEventCopyWithImpl<$Res, $Val extends TasksEvent>
 }
 
 /// @nodoc
-abstract class _$$TasksLoadEventImplCopyWith<$Res> {
-  factory _$$TasksLoadEventImplCopyWith(_$TasksLoadEventImpl value,
-          $Res Function(_$TasksLoadEventImpl) then) =
-      __$$TasksLoadEventImplCopyWithImpl<$Res>;
+abstract class _$$TasksStreamEventImplCopyWith<$Res> {
+  factory _$$TasksStreamEventImplCopyWith(_$TasksStreamEventImpl value,
+          $Res Function(_$TasksStreamEventImpl) then) =
+      __$$TasksStreamEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Lesson lesson});
 
@@ -191,11 +146,11 @@ abstract class _$$TasksLoadEventImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TasksLoadEventImplCopyWithImpl<$Res>
-    extends _$TasksEventCopyWithImpl<$Res, _$TasksLoadEventImpl>
-    implements _$$TasksLoadEventImplCopyWith<$Res> {
-  __$$TasksLoadEventImplCopyWithImpl(
-      _$TasksLoadEventImpl _value, $Res Function(_$TasksLoadEventImpl) _then)
+class __$$TasksStreamEventImplCopyWithImpl<$Res>
+    extends _$TasksEventCopyWithImpl<$Res, _$TasksStreamEventImpl>
+    implements _$$TasksStreamEventImplCopyWith<$Res> {
+  __$$TasksStreamEventImplCopyWithImpl(_$TasksStreamEventImpl _value,
+      $Res Function(_$TasksStreamEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -203,7 +158,7 @@ class __$$TasksLoadEventImplCopyWithImpl<$Res>
   $Res call({
     Object? lesson = null,
   }) {
-    return _then(_$TasksLoadEventImpl(
+    return _then(_$TasksStreamEventImpl(
       lesson: null == lesson
           ? _value.lesson
           : lesson // ignore: cast_nullable_to_non_nullable
@@ -222,22 +177,22 @@ class __$$TasksLoadEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TasksLoadEventImpl extends TasksLoadEvent {
-  const _$TasksLoadEventImpl({required this.lesson}) : super._();
+class _$TasksStreamEventImpl extends TasksStreamEvent {
+  const _$TasksStreamEventImpl({required this.lesson}) : super._();
 
   @override
   final Lesson lesson;
 
   @override
   String toString() {
-    return 'TasksEvent.load(lesson: $lesson)';
+    return 'TasksEvent.tasksStream(lesson: $lesson)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TasksLoadEventImpl &&
+            other is _$TasksStreamEventImpl &&
             (identical(other.lesson, lesson) || other.lesson == lesson));
   }
 
@@ -247,16 +202,14 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TasksLoadEventImplCopyWith<_$TasksLoadEventImpl> get copyWith =>
-      __$$TasksLoadEventImplCopyWithImpl<_$TasksLoadEventImpl>(
+  _$$TasksStreamEventImplCopyWith<_$TasksStreamEventImpl> get copyWith =>
+      __$$TasksStreamEventImplCopyWithImpl<_$TasksStreamEventImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
+    required TResult Function(Lesson lesson) tasksStream,
     required TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -269,27 +222,18 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
     required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
+    required TResult Function(Answer answer, int taskId,
+            FilePickerResult? image, FilePickerResult? audio)
+        updateAnswer,
   }) {
-    return load(lesson);
+    return tasksStream(lesson);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
+    TResult? Function(Lesson lesson)? tasksStream,
     TResult? Function(
             Lesson lesson,
             TaskModel task,
@@ -302,26 +246,18 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
     TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult? Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
   }) {
-    return load?.call(lesson);
+    return tasksStream?.call(lesson);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
+    TResult Function(Lesson lesson)? tasksStream,
     TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -334,20 +270,14 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
     TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
     required TResult orElse(),
   }) {
-    if (load != null) {
-      return load(lesson);
+    if (tasksStream != null) {
+      return tasksStream(lesson);
     }
     return orElse();
   }
@@ -355,582 +285,58 @@ class _$TasksLoadEventImpl extends TasksLoadEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
+    required TResult Function(TasksStreamEvent value) tasksStream,
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
     required TResult Function(ChangeFieldsEditableTasksEvent value)
         changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
+    required TResult Function(UpdateAnswerTasksEvent value) updateAnswer,
   }) {
-    return load(this);
+    return tasksStream(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
+    TResult? Function(TasksStreamEvent value)? tasksStream,
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult? Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult? Function(UpdateAnswerTasksEvent value)? updateAnswer,
   }) {
-    return load?.call(this);
+    return tasksStream?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
+    TResult Function(TasksStreamEvent value)? tasksStream,
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult Function(UpdateAnswerTasksEvent value)? updateAnswer,
     required TResult orElse(),
   }) {
-    if (load != null) {
-      return load(this);
+    if (tasksStream != null) {
+      return tasksStream(this);
     }
     return orElse();
   }
 }
 
-abstract class TasksLoadEvent extends TasksEvent {
-  const factory TasksLoadEvent({required final Lesson lesson}) =
-      _$TasksLoadEventImpl;
-  const TasksLoadEvent._() : super._();
+abstract class TasksStreamEvent extends TasksEvent {
+  const factory TasksStreamEvent({required final Lesson lesson}) =
+      _$TasksStreamEventImpl;
+  const TasksStreamEvent._() : super._();
 
   Lesson get lesson;
   @JsonKey(ignore: true)
-  _$$TasksLoadEventImplCopyWith<_$TasksLoadEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TasksCreateLessonEventImplCopyWith<$Res> {
-  factory _$$TasksCreateLessonEventImplCopyWith(
-          _$TasksCreateLessonEventImpl value,
-          $Res Function(_$TasksCreateLessonEventImpl) then) =
-      __$$TasksCreateLessonEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Lesson lesson});
-
-  $LessonCopyWith<$Res> get lesson;
-}
-
-/// @nodoc
-class __$$TasksCreateLessonEventImplCopyWithImpl<$Res>
-    extends _$TasksEventCopyWithImpl<$Res, _$TasksCreateLessonEventImpl>
-    implements _$$TasksCreateLessonEventImplCopyWith<$Res> {
-  __$$TasksCreateLessonEventImplCopyWithImpl(
-      _$TasksCreateLessonEventImpl _value,
-      $Res Function(_$TasksCreateLessonEventImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? lesson = null,
-  }) {
-    return _then(_$TasksCreateLessonEventImpl(
-      lesson: null == lesson
-          ? _value.lesson
-          : lesson // ignore: cast_nullable_to_non_nullable
-              as Lesson,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LessonCopyWith<$Res> get lesson {
-    return $LessonCopyWith<$Res>(_value.lesson, (value) {
-      return _then(_value.copyWith(lesson: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$TasksCreateLessonEventImpl extends TasksCreateLessonEvent {
-  const _$TasksCreateLessonEventImpl({required this.lesson}) : super._();
-
-  @override
-  final Lesson lesson;
-
-  @override
-  String toString() {
-    return 'TasksEvent.createLesson(lesson: $lesson)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TasksCreateLessonEventImpl &&
-            (identical(other.lesson, lesson) || other.lesson == lesson));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, lesson);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TasksCreateLessonEventImplCopyWith<_$TasksCreateLessonEventImpl>
-      get copyWith => __$$TasksCreateLessonEventImplCopyWithImpl<
-          _$TasksCreateLessonEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
-    required TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        addTask,
-    required TResult Function(int taskId) removeTask,
-    required TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
-    required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
-  }) {
-    return createLesson(lesson);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
-    TResult? Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult? Function(int taskId)? removeTask,
-    TResult? Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
-    TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
-  }) {
-    return createLesson?.call(lesson);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
-    TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult Function(int taskId)? removeTask,
-    TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
-    TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (createLesson != null) {
-      return createLesson(lesson);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
-    required TResult Function(TasksAddEvent value) addTask,
-    required TResult Function(TasksRemoveEvent value) removeTask,
-    required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
-    required TResult Function(ChangeFieldsEditableTasksEvent value)
-        changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
-  }) {
-    return createLesson(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
-    TResult? Function(TasksAddEvent value)? addTask,
-    TResult? Function(TasksRemoveEvent value)? removeTask,
-    TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult? Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-  }) {
-    return createLesson?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
-    TResult Function(TasksAddEvent value)? addTask,
-    TResult Function(TasksRemoveEvent value)? removeTask,
-    TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (createLesson != null) {
-      return createLesson(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TasksCreateLessonEvent extends TasksEvent {
-  const factory TasksCreateLessonEvent({required final Lesson lesson}) =
-      _$TasksCreateLessonEventImpl;
-  const TasksCreateLessonEvent._() : super._();
-
-  Lesson get lesson;
-  @JsonKey(ignore: true)
-  _$$TasksCreateLessonEventImplCopyWith<_$TasksCreateLessonEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TasksSetLessonEventImplCopyWith<$Res> {
-  factory _$$TasksSetLessonEventImplCopyWith(_$TasksSetLessonEventImpl value,
-          $Res Function(_$TasksSetLessonEventImpl) then) =
-      __$$TasksSetLessonEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Lesson lesson});
-
-  $LessonCopyWith<$Res> get lesson;
-}
-
-/// @nodoc
-class __$$TasksSetLessonEventImplCopyWithImpl<$Res>
-    extends _$TasksEventCopyWithImpl<$Res, _$TasksSetLessonEventImpl>
-    implements _$$TasksSetLessonEventImplCopyWith<$Res> {
-  __$$TasksSetLessonEventImplCopyWithImpl(_$TasksSetLessonEventImpl _value,
-      $Res Function(_$TasksSetLessonEventImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? lesson = null,
-  }) {
-    return _then(_$TasksSetLessonEventImpl(
-      lesson: null == lesson
-          ? _value.lesson
-          : lesson // ignore: cast_nullable_to_non_nullable
-              as Lesson,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LessonCopyWith<$Res> get lesson {
-    return $LessonCopyWith<$Res>(_value.lesson, (value) {
-      return _then(_value.copyWith(lesson: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$TasksSetLessonEventImpl extends TasksSetLessonEvent {
-  const _$TasksSetLessonEventImpl({required this.lesson}) : super._();
-
-  @override
-  final Lesson lesson;
-
-  @override
-  String toString() {
-    return 'TasksEvent.setLesson(lesson: $lesson)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TasksSetLessonEventImpl &&
-            (identical(other.lesson, lesson) || other.lesson == lesson));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, lesson);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TasksSetLessonEventImplCopyWith<_$TasksSetLessonEventImpl> get copyWith =>
-      __$$TasksSetLessonEventImplCopyWithImpl<_$TasksSetLessonEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
-    required TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        addTask,
-    required TResult Function(int taskId) removeTask,
-    required TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
-    required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
-  }) {
-    return setLesson(lesson);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
-    TResult? Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult? Function(int taskId)? removeTask,
-    TResult? Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
-    TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
-  }) {
-    return setLesson?.call(lesson);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
-    TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult Function(int taskId)? removeTask,
-    TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
-    TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (setLesson != null) {
-      return setLesson(lesson);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
-    required TResult Function(TasksAddEvent value) addTask,
-    required TResult Function(TasksRemoveEvent value) removeTask,
-    required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
-    required TResult Function(ChangeFieldsEditableTasksEvent value)
-        changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
-  }) {
-    return setLesson(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
-    TResult? Function(TasksAddEvent value)? addTask,
-    TResult? Function(TasksRemoveEvent value)? removeTask,
-    TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult? Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-  }) {
-    return setLesson?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
-    TResult Function(TasksAddEvent value)? addTask,
-    TResult Function(TasksRemoveEvent value)? removeTask,
-    TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (setLesson != null) {
-      return setLesson(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TasksSetLessonEvent extends TasksEvent {
-  const factory TasksSetLessonEvent({required final Lesson lesson}) =
-      _$TasksSetLessonEventImpl;
-  const TasksSetLessonEvent._() : super._();
-
-  Lesson get lesson;
-  @JsonKey(ignore: true)
-  _$$TasksSetLessonEventImplCopyWith<_$TasksSetLessonEventImpl> get copyWith =>
+  _$$TasksStreamEventImplCopyWith<_$TasksStreamEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1040,9 +446,7 @@ class _$TasksAddEventImpl extends TasksAddEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
+    required TResult Function(Lesson lesson) tasksStream,
     required TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -1055,17 +459,10 @@ class _$TasksAddEventImpl extends TasksAddEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
     required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
+    required TResult Function(Answer answer, int taskId,
+            FilePickerResult? image, FilePickerResult? audio)
+        updateAnswer,
   }) {
     return addTask(lesson, task, onSuccess, onError);
   }
@@ -1073,9 +470,7 @@ class _$TasksAddEventImpl extends TasksAddEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
+    TResult? Function(Lesson lesson)? tasksStream,
     TResult? Function(
             Lesson lesson,
             TaskModel task,
@@ -1088,16 +483,10 @@ class _$TasksAddEventImpl extends TasksAddEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
     TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult? Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
   }) {
     return addTask?.call(lesson, task, onSuccess, onError);
   }
@@ -1105,9 +494,7 @@ class _$TasksAddEventImpl extends TasksAddEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
+    TResult Function(Lesson lesson)? tasksStream,
     TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -1120,16 +507,10 @@ class _$TasksAddEventImpl extends TasksAddEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
     TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
     required TResult orElse(),
   }) {
     if (addTask != null) {
@@ -1141,21 +522,13 @@ class _$TasksAddEventImpl extends TasksAddEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
+    required TResult Function(TasksStreamEvent value) tasksStream,
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
     required TResult Function(ChangeFieldsEditableTasksEvent value)
         changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
+    required TResult Function(UpdateAnswerTasksEvent value) updateAnswer,
   }) {
     return addTask(this);
   }
@@ -1163,19 +536,13 @@ class _$TasksAddEventImpl extends TasksAddEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
+    TResult? Function(TasksStreamEvent value)? tasksStream,
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult? Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult? Function(UpdateAnswerTasksEvent value)? updateAnswer,
   }) {
     return addTask?.call(this);
   }
@@ -1183,19 +550,13 @@ class _$TasksAddEventImpl extends TasksAddEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
+    TResult Function(TasksStreamEvent value)? tasksStream,
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult Function(UpdateAnswerTasksEvent value)? updateAnswer,
     required TResult orElse(),
   }) {
     if (addTask != null) {
@@ -1287,9 +648,7 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
+    required TResult Function(Lesson lesson) tasksStream,
     required TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -1302,17 +661,10 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
     required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
+    required TResult Function(Answer answer, int taskId,
+            FilePickerResult? image, FilePickerResult? audio)
+        updateAnswer,
   }) {
     return removeTask(taskId);
   }
@@ -1320,9 +672,7 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
+    TResult? Function(Lesson lesson)? tasksStream,
     TResult? Function(
             Lesson lesson,
             TaskModel task,
@@ -1335,16 +685,10 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
     TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult? Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
   }) {
     return removeTask?.call(taskId);
   }
@@ -1352,9 +696,7 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
+    TResult Function(Lesson lesson)? tasksStream,
     TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -1367,16 +709,10 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
     TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
     required TResult orElse(),
   }) {
     if (removeTask != null) {
@@ -1388,21 +724,13 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
+    required TResult Function(TasksStreamEvent value) tasksStream,
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
     required TResult Function(ChangeFieldsEditableTasksEvent value)
         changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
+    required TResult Function(UpdateAnswerTasksEvent value) updateAnswer,
   }) {
     return removeTask(this);
   }
@@ -1410,19 +738,13 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
+    TResult? Function(TasksStreamEvent value)? tasksStream,
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult? Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult? Function(UpdateAnswerTasksEvent value)? updateAnswer,
   }) {
     return removeTask?.call(this);
   }
@@ -1430,19 +752,13 @@ class _$TasksRemoveEventImpl extends TasksRemoveEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
+    TResult Function(TasksStreamEvent value)? tasksStream,
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult Function(UpdateAnswerTasksEvent value)? updateAnswer,
     required TResult orElse(),
   }) {
     if (removeTask != null) {
@@ -1550,9 +866,7 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
+    required TResult Function(Lesson lesson) tasksStream,
     required TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -1565,17 +879,10 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
     required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
+    required TResult Function(Answer answer, int taskId,
+            FilePickerResult? image, FilePickerResult? audio)
+        updateAnswer,
   }) {
     return updateTask(task, onSuccess, onError);
   }
@@ -1583,9 +890,7 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
+    TResult? Function(Lesson lesson)? tasksStream,
     TResult? Function(
             Lesson lesson,
             TaskModel task,
@@ -1598,16 +903,10 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
     TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult? Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
   }) {
     return updateTask?.call(task, onSuccess, onError);
   }
@@ -1615,9 +914,7 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
+    TResult Function(Lesson lesson)? tasksStream,
     TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -1630,16 +927,10 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
     TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
     required TResult orElse(),
   }) {
     if (updateTask != null) {
@@ -1651,21 +942,13 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
+    required TResult Function(TasksStreamEvent value) tasksStream,
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
     required TResult Function(ChangeFieldsEditableTasksEvent value)
         changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
+    required TResult Function(UpdateAnswerTasksEvent value) updateAnswer,
   }) {
     return updateTask(this);
   }
@@ -1673,19 +956,13 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
+    TResult? Function(TasksStreamEvent value)? tasksStream,
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult? Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult? Function(UpdateAnswerTasksEvent value)? updateAnswer,
   }) {
     return updateTask?.call(this);
   }
@@ -1693,19 +970,13 @@ class _$TasksUpdateEventImpl extends TasksUpdateEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
+    TResult Function(TasksStreamEvent value)? tasksStream,
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult Function(UpdateAnswerTasksEvent value)? updateAnswer,
     required TResult orElse(),
   }) {
     if (updateTask != null) {
@@ -1728,1023 +999,6 @@ abstract class TasksUpdateEvent extends TasksEvent {
   @JsonKey(ignore: true)
   _$$TasksUpdateEventImplCopyWith<_$TasksUpdateEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UpdateAllTasksEventImplCopyWith<$Res> {
-  factory _$$UpdateAllTasksEventImplCopyWith(_$UpdateAllTasksEventImpl value,
-          $Res Function(_$UpdateAllTasksEventImpl) then) =
-      __$$UpdateAllTasksEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {List<TaskModel> tasks,
-      dynamic Function(List<Task>)? onSuccess,
-      dynamic Function(Exception?)? onError});
-}
-
-/// @nodoc
-class __$$UpdateAllTasksEventImplCopyWithImpl<$Res>
-    extends _$TasksEventCopyWithImpl<$Res, _$UpdateAllTasksEventImpl>
-    implements _$$UpdateAllTasksEventImplCopyWith<$Res> {
-  __$$UpdateAllTasksEventImplCopyWithImpl(_$UpdateAllTasksEventImpl _value,
-      $Res Function(_$UpdateAllTasksEventImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tasks = null,
-    Object? onSuccess = freezed,
-    Object? onError = freezed,
-  }) {
-    return _then(_$UpdateAllTasksEventImpl(
-      tasks: null == tasks
-          ? _value._tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as List<TaskModel>,
-      onSuccess: freezed == onSuccess
-          ? _value.onSuccess
-          : onSuccess // ignore: cast_nullable_to_non_nullable
-              as dynamic Function(List<Task>)?,
-      onError: freezed == onError
-          ? _value.onError
-          : onError // ignore: cast_nullable_to_non_nullable
-              as dynamic Function(Exception?)?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$UpdateAllTasksEventImpl extends UpdateAllTasksEvent {
-  const _$UpdateAllTasksEventImpl(
-      {required final List<TaskModel> tasks, this.onSuccess, this.onError})
-      : _tasks = tasks,
-        super._();
-
-  final List<TaskModel> _tasks;
-  @override
-  List<TaskModel> get tasks {
-    if (_tasks is EqualUnmodifiableListView) return _tasks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tasks);
-  }
-
-  @override
-  final dynamic Function(List<Task>)? onSuccess;
-  @override
-  final dynamic Function(Exception?)? onError;
-
-  @override
-  String toString() {
-    return 'TasksEvent.updateAllTasks(tasks: $tasks, onSuccess: $onSuccess, onError: $onError)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateAllTasksEventImpl &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
-            (identical(other.onSuccess, onSuccess) ||
-                other.onSuccess == onSuccess) &&
-            (identical(other.onError, onError) || other.onError == onError));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_tasks), onSuccess, onError);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateAllTasksEventImplCopyWith<_$UpdateAllTasksEventImpl> get copyWith =>
-      __$$UpdateAllTasksEventImplCopyWithImpl<_$UpdateAllTasksEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
-    required TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        addTask,
-    required TResult Function(int taskId) removeTask,
-    required TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
-    required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
-  }) {
-    return updateAllTasks(tasks, onSuccess, onError);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
-    TResult? Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult? Function(int taskId)? removeTask,
-    TResult? Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
-    TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
-  }) {
-    return updateAllTasks?.call(tasks, onSuccess, onError);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
-    TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult Function(int taskId)? removeTask,
-    TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
-    TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (updateAllTasks != null) {
-      return updateAllTasks(tasks, onSuccess, onError);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
-    required TResult Function(TasksAddEvent value) addTask,
-    required TResult Function(TasksRemoveEvent value) removeTask,
-    required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
-    required TResult Function(ChangeFieldsEditableTasksEvent value)
-        changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
-  }) {
-    return updateAllTasks(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
-    TResult? Function(TasksAddEvent value)? addTask,
-    TResult? Function(TasksRemoveEvent value)? removeTask,
-    TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult? Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-  }) {
-    return updateAllTasks?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
-    TResult Function(TasksAddEvent value)? addTask,
-    TResult Function(TasksRemoveEvent value)? removeTask,
-    TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (updateAllTasks != null) {
-      return updateAllTasks(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UpdateAllTasksEvent extends TasksEvent {
-  const factory UpdateAllTasksEvent(
-      {required final List<TaskModel> tasks,
-      final dynamic Function(List<Task>)? onSuccess,
-      final dynamic Function(Exception?)? onError}) = _$UpdateAllTasksEventImpl;
-  const UpdateAllTasksEvent._() : super._();
-
-  List<TaskModel> get tasks;
-  dynamic Function(List<Task>)? get onSuccess;
-  dynamic Function(Exception?)? get onError;
-  @JsonKey(ignore: true)
-  _$$UpdateAllTasksEventImplCopyWith<_$UpdateAllTasksEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TasksSetEventImplCopyWith<$Res> {
-  factory _$$TasksSetEventImplCopyWith(
-          _$TasksSetEventImpl value, $Res Function(_$TasksSetEventImpl) then) =
-      __$$TasksSetEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({TaskModel task});
-}
-
-/// @nodoc
-class __$$TasksSetEventImplCopyWithImpl<$Res>
-    extends _$TasksEventCopyWithImpl<$Res, _$TasksSetEventImpl>
-    implements _$$TasksSetEventImplCopyWith<$Res> {
-  __$$TasksSetEventImplCopyWithImpl(
-      _$TasksSetEventImpl _value, $Res Function(_$TasksSetEventImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? task = null,
-  }) {
-    return _then(_$TasksSetEventImpl(
-      task: null == task
-          ? _value.task
-          : task // ignore: cast_nullable_to_non_nullable
-              as TaskModel,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$TasksSetEventImpl extends TasksSetEvent {
-  const _$TasksSetEventImpl({required this.task}) : super._();
-
-  @override
-  final TaskModel task;
-
-  @override
-  String toString() {
-    return 'TasksEvent.setTask(task: $task)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TasksSetEventImpl &&
-            (identical(other.task, task) || other.task == task));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, task);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TasksSetEventImplCopyWith<_$TasksSetEventImpl> get copyWith =>
-      __$$TasksSetEventImplCopyWithImpl<_$TasksSetEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
-    required TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        addTask,
-    required TResult Function(int taskId) removeTask,
-    required TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
-    required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
-  }) {
-    return setTask(task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
-    TResult? Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult? Function(int taskId)? removeTask,
-    TResult? Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
-    TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
-  }) {
-    return setTask?.call(task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
-    TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult Function(int taskId)? removeTask,
-    TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
-    TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (setTask != null) {
-      return setTask(task);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
-    required TResult Function(TasksAddEvent value) addTask,
-    required TResult Function(TasksRemoveEvent value) removeTask,
-    required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
-    required TResult Function(ChangeFieldsEditableTasksEvent value)
-        changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
-  }) {
-    return setTask(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
-    TResult? Function(TasksAddEvent value)? addTask,
-    TResult? Function(TasksRemoveEvent value)? removeTask,
-    TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult? Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-  }) {
-    return setTask?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
-    TResult Function(TasksAddEvent value)? addTask,
-    TResult Function(TasksRemoveEvent value)? removeTask,
-    TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (setTask != null) {
-      return setTask(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TasksSetEvent extends TasksEvent {
-  const factory TasksSetEvent({required final TaskModel task}) =
-      _$TasksSetEventImpl;
-  const TasksSetEvent._() : super._();
-
-  TaskModel get task;
-  @JsonKey(ignore: true)
-  _$$TasksSetEventImplCopyWith<_$TasksSetEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TasksSaveEventImplCopyWith<$Res> {
-  factory _$$TasksSaveEventImplCopyWith(_$TasksSaveEventImpl value,
-          $Res Function(_$TasksSaveEventImpl) then) =
-      __$$TasksSaveEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<TaskModel> tasks});
-}
-
-/// @nodoc
-class __$$TasksSaveEventImplCopyWithImpl<$Res>
-    extends _$TasksEventCopyWithImpl<$Res, _$TasksSaveEventImpl>
-    implements _$$TasksSaveEventImplCopyWith<$Res> {
-  __$$TasksSaveEventImplCopyWithImpl(
-      _$TasksSaveEventImpl _value, $Res Function(_$TasksSaveEventImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tasks = null,
-  }) {
-    return _then(_$TasksSaveEventImpl(
-      tasks: null == tasks
-          ? _value._tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as List<TaskModel>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$TasksSaveEventImpl extends TasksSaveEvent {
-  const _$TasksSaveEventImpl({required final List<TaskModel> tasks})
-      : _tasks = tasks,
-        super._();
-
-  final List<TaskModel> _tasks;
-  @override
-  List<TaskModel> get tasks {
-    if (_tasks is EqualUnmodifiableListView) return _tasks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tasks);
-  }
-
-  @override
-  String toString() {
-    return 'TasksEvent.saveTasks(tasks: $tasks)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TasksSaveEventImpl &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tasks));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TasksSaveEventImplCopyWith<_$TasksSaveEventImpl> get copyWith =>
-      __$$TasksSaveEventImplCopyWithImpl<_$TasksSaveEventImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
-    required TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        addTask,
-    required TResult Function(int taskId) removeTask,
-    required TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
-    required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
-  }) {
-    return saveTasks(tasks);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
-    TResult? Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult? Function(int taskId)? removeTask,
-    TResult? Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
-    TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
-  }) {
-    return saveTasks?.call(tasks);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
-    TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult Function(int taskId)? removeTask,
-    TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
-    TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (saveTasks != null) {
-      return saveTasks(tasks);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
-    required TResult Function(TasksAddEvent value) addTask,
-    required TResult Function(TasksRemoveEvent value) removeTask,
-    required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
-    required TResult Function(ChangeFieldsEditableTasksEvent value)
-        changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
-  }) {
-    return saveTasks(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
-    TResult? Function(TasksAddEvent value)? addTask,
-    TResult? Function(TasksRemoveEvent value)? removeTask,
-    TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult? Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-  }) {
-    return saveTasks?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
-    TResult Function(TasksAddEvent value)? addTask,
-    TResult Function(TasksRemoveEvent value)? removeTask,
-    TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (saveTasks != null) {
-      return saveTasks(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TasksSaveEvent extends TasksEvent {
-  const factory TasksSaveEvent({required final List<TaskModel> tasks}) =
-      _$TasksSaveEventImpl;
-  const TasksSaveEvent._() : super._();
-
-  List<TaskModel> get tasks;
-  @JsonKey(ignore: true)
-  _$$TasksSaveEventImplCopyWith<_$TasksSaveEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$RemoveAnswersFromTaskEventImplCopyWith<$Res> {
-  factory _$$RemoveAnswersFromTaskEventImplCopyWith(
-          _$RemoveAnswersFromTaskEventImpl value,
-          $Res Function(_$RemoveAnswersFromTaskEventImpl) then) =
-      __$$RemoveAnswersFromTaskEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Task task});
-
-  $TaskCopyWith<$Res> get task;
-}
-
-/// @nodoc
-class __$$RemoveAnswersFromTaskEventImplCopyWithImpl<$Res>
-    extends _$TasksEventCopyWithImpl<$Res, _$RemoveAnswersFromTaskEventImpl>
-    implements _$$RemoveAnswersFromTaskEventImplCopyWith<$Res> {
-  __$$RemoveAnswersFromTaskEventImplCopyWithImpl(
-      _$RemoveAnswersFromTaskEventImpl _value,
-      $Res Function(_$RemoveAnswersFromTaskEventImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? task = null,
-  }) {
-    return _then(_$RemoveAnswersFromTaskEventImpl(
-      task: null == task
-          ? _value.task
-          : task // ignore: cast_nullable_to_non_nullable
-              as Task,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TaskCopyWith<$Res> get task {
-    return $TaskCopyWith<$Res>(_value.task, (value) {
-      return _then(_value.copyWith(task: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$RemoveAnswersFromTaskEventImpl extends RemoveAnswersFromTaskEvent {
-  const _$RemoveAnswersFromTaskEventImpl({required this.task}) : super._();
-
-  @override
-  final Task task;
-
-  @override
-  String toString() {
-    return 'TasksEvent.removeAnswersFromTask(task: $task)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$RemoveAnswersFromTaskEventImpl &&
-            (identical(other.task, task) || other.task == task));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, task);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$RemoveAnswersFromTaskEventImplCopyWith<_$RemoveAnswersFromTaskEventImpl>
-      get copyWith => __$$RemoveAnswersFromTaskEventImplCopyWithImpl<
-          _$RemoveAnswersFromTaskEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
-    required TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        addTask,
-    required TResult Function(int taskId) removeTask,
-    required TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)
-        updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
-    required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
-  }) {
-    return removeAnswersFromTask(task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
-    TResult? Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult? Function(int taskId)? removeTask,
-    TResult? Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
-    TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
-  }) {
-    return removeAnswersFromTask?.call(task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
-    TResult Function(
-            Lesson lesson,
-            TaskModel task,
-            dynamic Function(TaskModel, List<Answer>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        addTask,
-    TResult Function(int taskId)? removeTask,
-    TResult Function(
-            TaskModel task,
-            dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
-            dynamic Function(Object?)? onError)?
-        updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
-    TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (removeAnswersFromTask != null) {
-      return removeAnswersFromTask(task);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
-    required TResult Function(TasksAddEvent value) addTask,
-    required TResult Function(TasksRemoveEvent value) removeTask,
-    required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
-    required TResult Function(ChangeFieldsEditableTasksEvent value)
-        changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
-  }) {
-    return removeAnswersFromTask(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
-    TResult? Function(TasksAddEvent value)? addTask,
-    TResult? Function(TasksRemoveEvent value)? removeTask,
-    TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult? Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-  }) {
-    return removeAnswersFromTask?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
-    TResult Function(TasksAddEvent value)? addTask,
-    TResult Function(TasksRemoveEvent value)? removeTask,
-    TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
-    TResult Function(ChangeFieldsEditableTasksEvent value)?
-        changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
-    required TResult orElse(),
-  }) {
-    if (removeAnswersFromTask != null) {
-      return removeAnswersFromTask(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class RemoveAnswersFromTaskEvent extends TasksEvent {
-  const factory RemoveAnswersFromTaskEvent({required final Task task}) =
-      _$RemoveAnswersFromTaskEventImpl;
-  const RemoveAnswersFromTaskEvent._() : super._();
-
-  Task get task;
-  @JsonKey(ignore: true)
-  _$$RemoveAnswersFromTaskEventImplCopyWith<_$RemoveAnswersFromTaskEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2789,9 +1043,7 @@ class _$ChangeFieldsEditableTasksEventImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
+    required TResult Function(Lesson lesson) tasksStream,
     required TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -2804,17 +1056,10 @@ class _$ChangeFieldsEditableTasksEventImpl
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
     required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
+    required TResult Function(Answer answer, int taskId,
+            FilePickerResult? image, FilePickerResult? audio)
+        updateAnswer,
   }) {
     return changeFieldsEditable();
   }
@@ -2822,9 +1067,7 @@ class _$ChangeFieldsEditableTasksEventImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
+    TResult? Function(Lesson lesson)? tasksStream,
     TResult? Function(
             Lesson lesson,
             TaskModel task,
@@ -2837,16 +1080,10 @@ class _$ChangeFieldsEditableTasksEventImpl
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
     TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult? Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
   }) {
     return changeFieldsEditable?.call();
   }
@@ -2854,9 +1091,7 @@ class _$ChangeFieldsEditableTasksEventImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
+    TResult Function(Lesson lesson)? tasksStream,
     TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -2869,16 +1104,10 @@ class _$ChangeFieldsEditableTasksEventImpl
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
     TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
     required TResult orElse(),
   }) {
     if (changeFieldsEditable != null) {
@@ -2890,21 +1119,13 @@ class _$ChangeFieldsEditableTasksEventImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
+    required TResult Function(TasksStreamEvent value) tasksStream,
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
     required TResult Function(ChangeFieldsEditableTasksEvent value)
         changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
+    required TResult Function(UpdateAnswerTasksEvent value) updateAnswer,
   }) {
     return changeFieldsEditable(this);
   }
@@ -2912,19 +1133,13 @@ class _$ChangeFieldsEditableTasksEventImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
+    TResult? Function(TasksStreamEvent value)? tasksStream,
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult? Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult? Function(UpdateAnswerTasksEvent value)? updateAnswer,
   }) {
     return changeFieldsEditable?.call(this);
   }
@@ -2932,19 +1147,13 @@ class _$ChangeFieldsEditableTasksEventImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
+    TResult Function(TasksStreamEvent value)? tasksStream,
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult Function(UpdateAnswerTasksEvent value)? updateAnswer,
     required TResult orElse(),
   }) {
     if (changeFieldsEditable != null) {
@@ -2961,77 +1170,113 @@ abstract class ChangeFieldsEditableTasksEvent extends TasksEvent {
 }
 
 /// @nodoc
-abstract class _$$UpdateLessonImageTaskEventImplCopyWith<$Res> {
-  factory _$$UpdateLessonImageTaskEventImplCopyWith(
-          _$UpdateLessonImageTaskEventImpl value,
-          $Res Function(_$UpdateLessonImageTaskEventImpl) then) =
-      __$$UpdateLessonImageTaskEventImplCopyWithImpl<$Res>;
+abstract class _$$UpdateAnswerTasksEventImplCopyWith<$Res> {
+  factory _$$UpdateAnswerTasksEventImplCopyWith(
+          _$UpdateAnswerTasksEventImpl value,
+          $Res Function(_$UpdateAnswerTasksEventImpl) then) =
+      __$$UpdateAnswerTasksEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({FilePickerResult? filePickerResult});
+  $Res call(
+      {Answer answer,
+      int taskId,
+      FilePickerResult? image,
+      FilePickerResult? audio});
+
+  $AnswerCopyWith<$Res> get answer;
 }
 
 /// @nodoc
-class __$$UpdateLessonImageTaskEventImplCopyWithImpl<$Res>
-    extends _$TasksEventCopyWithImpl<$Res, _$UpdateLessonImageTaskEventImpl>
-    implements _$$UpdateLessonImageTaskEventImplCopyWith<$Res> {
-  __$$UpdateLessonImageTaskEventImplCopyWithImpl(
-      _$UpdateLessonImageTaskEventImpl _value,
-      $Res Function(_$UpdateLessonImageTaskEventImpl) _then)
+class __$$UpdateAnswerTasksEventImplCopyWithImpl<$Res>
+    extends _$TasksEventCopyWithImpl<$Res, _$UpdateAnswerTasksEventImpl>
+    implements _$$UpdateAnswerTasksEventImplCopyWith<$Res> {
+  __$$UpdateAnswerTasksEventImplCopyWithImpl(
+      _$UpdateAnswerTasksEventImpl _value,
+      $Res Function(_$UpdateAnswerTasksEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? filePickerResult = freezed,
+    Object? answer = null,
+    Object? taskId = null,
+    Object? image = freezed,
+    Object? audio = freezed,
   }) {
-    return _then(_$UpdateLessonImageTaskEventImpl(
-      filePickerResult: freezed == filePickerResult
-          ? _value.filePickerResult
-          : filePickerResult // ignore: cast_nullable_to_non_nullable
+    return _then(_$UpdateAnswerTasksEventImpl(
+      answer: null == answer
+          ? _value.answer
+          : answer // ignore: cast_nullable_to_non_nullable
+              as Answer,
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as int,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as FilePickerResult?,
+      audio: freezed == audio
+          ? _value.audio
+          : audio // ignore: cast_nullable_to_non_nullable
               as FilePickerResult?,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AnswerCopyWith<$Res> get answer {
+    return $AnswerCopyWith<$Res>(_value.answer, (value) {
+      return _then(_value.copyWith(answer: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$UpdateLessonImageTaskEventImpl extends UpdateLessonImageTaskEvent {
-  const _$UpdateLessonImageTaskEventImpl({required this.filePickerResult})
+class _$UpdateAnswerTasksEventImpl extends UpdateAnswerTasksEvent {
+  const _$UpdateAnswerTasksEventImpl(
+      {required this.answer, required this.taskId, this.image, this.audio})
       : super._();
 
   @override
-  final FilePickerResult? filePickerResult;
+  final Answer answer;
+  @override
+  final int taskId;
+  @override
+  final FilePickerResult? image;
+  @override
+  final FilePickerResult? audio;
 
   @override
   String toString() {
-    return 'TasksEvent.updateLessonImage(filePickerResult: $filePickerResult)';
+    return 'TasksEvent.updateAnswer(answer: $answer, taskId: $taskId, image: $image, audio: $audio)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateLessonImageTaskEventImpl &&
-            (identical(other.filePickerResult, filePickerResult) ||
-                other.filePickerResult == filePickerResult));
+            other is _$UpdateAnswerTasksEventImpl &&
+            (identical(other.answer, answer) || other.answer == answer) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.audio, audio) || other.audio == audio));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filePickerResult);
+  int get hashCode => Object.hash(runtimeType, answer, taskId, image, audio);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdateLessonImageTaskEventImplCopyWith<_$UpdateLessonImageTaskEventImpl>
-      get copyWith => __$$UpdateLessonImageTaskEventImplCopyWithImpl<
-          _$UpdateLessonImageTaskEventImpl>(this, _$identity);
+  _$$UpdateAnswerTasksEventImplCopyWith<_$UpdateAnswerTasksEventImpl>
+      get copyWith => __$$UpdateAnswerTasksEventImplCopyWithImpl<
+          _$UpdateAnswerTasksEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Lesson lesson) load,
-    required TResult Function(Lesson lesson) createLesson,
-    required TResult Function(Lesson lesson) setLesson,
+    required TResult Function(Lesson lesson) tasksStream,
     required TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -3044,27 +1289,18 @@ class _$UpdateLessonImageTaskEventImpl extends UpdateLessonImageTaskEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)
         updateTask,
-    required TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)
-        updateAllTasks,
-    required TResult Function(TaskModel task) setTask,
-    required TResult Function(List<TaskModel> tasks) saveTasks,
-    required TResult Function(Task task) removeAnswersFromTask,
     required TResult Function() changeFieldsEditable,
-    required TResult Function(FilePickerResult? filePickerResult)
-        updateLessonImage,
+    required TResult Function(Answer answer, int taskId,
+            FilePickerResult? image, FilePickerResult? audio)
+        updateAnswer,
   }) {
-    return updateLessonImage(filePickerResult);
+    return updateAnswer(answer, taskId, image, audio);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Lesson lesson)? load,
-    TResult? Function(Lesson lesson)? createLesson,
-    TResult? Function(Lesson lesson)? setLesson,
+    TResult? Function(Lesson lesson)? tasksStream,
     TResult? Function(
             Lesson lesson,
             TaskModel task,
@@ -3077,26 +1313,18 @@ class _$UpdateLessonImageTaskEventImpl extends UpdateLessonImageTaskEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult? Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult? Function(TaskModel task)? setTask,
-    TResult? Function(List<TaskModel> tasks)? saveTasks,
-    TResult? Function(Task task)? removeAnswersFromTask,
     TResult? Function()? changeFieldsEditable,
-    TResult? Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult? Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
   }) {
-    return updateLessonImage?.call(filePickerResult);
+    return updateAnswer?.call(answer, taskId, image, audio);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Lesson lesson)? load,
-    TResult Function(Lesson lesson)? createLesson,
-    TResult Function(Lesson lesson)? setLesson,
+    TResult Function(Lesson lesson)? tasksStream,
     TResult Function(
             Lesson lesson,
             TaskModel task,
@@ -3109,20 +1337,14 @@ class _$UpdateLessonImageTaskEventImpl extends UpdateLessonImageTaskEvent {
             dynamic Function(TaskModel, List<AnswerModel>)? onSuccess,
             dynamic Function(Object?)? onError)?
         updateTask,
-    TResult Function(
-            List<TaskModel> tasks,
-            dynamic Function(List<Task>)? onSuccess,
-            dynamic Function(Exception?)? onError)?
-        updateAllTasks,
-    TResult Function(TaskModel task)? setTask,
-    TResult Function(List<TaskModel> tasks)? saveTasks,
-    TResult Function(Task task)? removeAnswersFromTask,
     TResult Function()? changeFieldsEditable,
-    TResult Function(FilePickerResult? filePickerResult)? updateLessonImage,
+    TResult Function(Answer answer, int taskId, FilePickerResult? image,
+            FilePickerResult? audio)?
+        updateAnswer,
     required TResult orElse(),
   }) {
-    if (updateLessonImage != null) {
-      return updateLessonImage(filePickerResult);
+    if (updateAnswer != null) {
+      return updateAnswer(answer, taskId, image, audio);
     }
     return orElse();
   }
@@ -3130,79 +1352,64 @@ class _$UpdateLessonImageTaskEventImpl extends UpdateLessonImageTaskEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TasksLoadEvent value) load,
-    required TResult Function(TasksCreateLessonEvent value) createLesson,
-    required TResult Function(TasksSetLessonEvent value) setLesson,
+    required TResult Function(TasksStreamEvent value) tasksStream,
     required TResult Function(TasksAddEvent value) addTask,
     required TResult Function(TasksRemoveEvent value) removeTask,
     required TResult Function(TasksUpdateEvent value) updateTask,
-    required TResult Function(UpdateAllTasksEvent value) updateAllTasks,
-    required TResult Function(TasksSetEvent value) setTask,
-    required TResult Function(TasksSaveEvent value) saveTasks,
-    required TResult Function(RemoveAnswersFromTaskEvent value)
-        removeAnswersFromTask,
     required TResult Function(ChangeFieldsEditableTasksEvent value)
         changeFieldsEditable,
-    required TResult Function(UpdateLessonImageTaskEvent value)
-        updateLessonImage,
+    required TResult Function(UpdateAnswerTasksEvent value) updateAnswer,
   }) {
-    return updateLessonImage(this);
+    return updateAnswer(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TasksLoadEvent value)? load,
-    TResult? Function(TasksCreateLessonEvent value)? createLesson,
-    TResult? Function(TasksSetLessonEvent value)? setLesson,
+    TResult? Function(TasksStreamEvent value)? tasksStream,
     TResult? Function(TasksAddEvent value)? addTask,
     TResult? Function(TasksRemoveEvent value)? removeTask,
     TResult? Function(TasksUpdateEvent value)? updateTask,
-    TResult? Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult? Function(TasksSetEvent value)? setTask,
-    TResult? Function(TasksSaveEvent value)? saveTasks,
-    TResult? Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult? Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult? Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult? Function(UpdateAnswerTasksEvent value)? updateAnswer,
   }) {
-    return updateLessonImage?.call(this);
+    return updateAnswer?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TasksLoadEvent value)? load,
-    TResult Function(TasksCreateLessonEvent value)? createLesson,
-    TResult Function(TasksSetLessonEvent value)? setLesson,
+    TResult Function(TasksStreamEvent value)? tasksStream,
     TResult Function(TasksAddEvent value)? addTask,
     TResult Function(TasksRemoveEvent value)? removeTask,
     TResult Function(TasksUpdateEvent value)? updateTask,
-    TResult Function(UpdateAllTasksEvent value)? updateAllTasks,
-    TResult Function(TasksSetEvent value)? setTask,
-    TResult Function(TasksSaveEvent value)? saveTasks,
-    TResult Function(RemoveAnswersFromTaskEvent value)? removeAnswersFromTask,
     TResult Function(ChangeFieldsEditableTasksEvent value)?
         changeFieldsEditable,
-    TResult Function(UpdateLessonImageTaskEvent value)? updateLessonImage,
+    TResult Function(UpdateAnswerTasksEvent value)? updateAnswer,
     required TResult orElse(),
   }) {
-    if (updateLessonImage != null) {
-      return updateLessonImage(this);
+    if (updateAnswer != null) {
+      return updateAnswer(this);
     }
     return orElse();
   }
 }
 
-abstract class UpdateLessonImageTaskEvent extends TasksEvent {
-  const factory UpdateLessonImageTaskEvent(
-          {required final FilePickerResult? filePickerResult}) =
-      _$UpdateLessonImageTaskEventImpl;
-  const UpdateLessonImageTaskEvent._() : super._();
+abstract class UpdateAnswerTasksEvent extends TasksEvent {
+  const factory UpdateAnswerTasksEvent(
+      {required final Answer answer,
+      required final int taskId,
+      final FilePickerResult? image,
+      final FilePickerResult? audio}) = _$UpdateAnswerTasksEventImpl;
+  const UpdateAnswerTasksEvent._() : super._();
 
-  FilePickerResult? get filePickerResult;
+  Answer get answer;
+  int get taskId;
+  FilePickerResult? get image;
+  FilePickerResult? get audio;
   @JsonKey(ignore: true)
-  _$$UpdateLessonImageTaskEventImplCopyWith<_$UpdateLessonImageTaskEventImpl>
+  _$$UpdateAnswerTasksEventImplCopyWith<_$UpdateAnswerTasksEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

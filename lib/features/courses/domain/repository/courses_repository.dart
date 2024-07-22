@@ -6,4 +6,5 @@ abstract interface class CoursesRepository {
   Future<Course> addCourse(Course course);
   Future<Course> updateCourse(Course course);
   Future<List<Course>> searchCourses(String query);
+  Stream<List<Course>> searchTeacherAvailableCourses(String query);
 }

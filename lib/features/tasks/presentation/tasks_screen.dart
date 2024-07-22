@@ -5,12 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:teacher_client/core/extensions/context_extensions.dart';
 import 'package:teacher_client/core/navigation/router.dart';
-import 'package:teacher_client/core/resources/colors.dart';
 import 'package:teacher_client/core/utils/utils.dart';
 import 'package:teacher_client/core/widget/pickable_image.dart';
+import 'package:teacher_client/features/home/domain/home_state.dart';
 import 'package:teacher_client/features/lessons/domain/bloc/lesson_bloc.dart';
 import 'package:teacher_client/features/lessons/domain/repository/lessons_repository.dart';
-import 'package:teacher_client/features/preview_lesson/domain/bloc%20copy/quiz_bloc.dart';
+import 'package:teacher_client/features/preview_lesson/domain/bloc/quiz_bloc.dart';
 import 'package:teacher_client/features/tasks/domain/bloc/tasks_bloc.dart';
 import 'package:teacher_client/features/tasks/domain/mapper/tasks_mapper.dart';
 import 'package:teacher_client/features/tasks/domain/repository/tasks_repository.dart';
@@ -34,50 +34,62 @@ class TasksScreen extends StatefulWidget {
 
 class _TasksScreenState extends State<TasksScreen> {
   final di = GetIt.instance;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: PopScope(
           canPop: false,
           onPopInvoked: (didPop) {
             if (!didPop) return;
             context.router.navigate(const CoursesThemesRoute());
           },
-          child: BlocProvider(
-            create: (context) => TasksBloc(
-                lessonsRepository: di<LessonsRepository>(),
-                tasksRepository: di<TasksRepository>(),
-                storageRepository: di<StorageRepository>())
-              ..add(TasksEvent.load(
-                  lesson: context.read<HomeBloc>().state.lesson ??
-                      const Lesson(name: 'unnamed'))),
-            child: Center(
-                child: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child:
-                  BlocBuilder<TasksBloc, TasksState>(builder: (context, state) {
-                return state.when(
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    load: (Course course,
-                            Lesson lesson,
-                            List<TaskModel> tasks,
-                            UpdatingState updatingState,
-                            bool isTitleEditable,
-                            FilePickerResult? filePickerResult) =>
-                        TasksScreenLoaded(
-                            course: course,
-                            lesson: lesson,
-                            tasks: tasks,
-                            isTitleEditable: isTitleEditable,
-                            filePickerResult: filePickerResult,
-                            isUpdating: updatingState == UpdatingState.update),
-                    error: (String? message) =>
-                        Center(child: Text(message ?? 'Неизвестная ошибка')));
-              }),
-            )),
-          )),
+          child:
+              BlocBuilder<HomeBloc, HomeState>(builder: (context, homeState) {
+            return BlocBuilder<LessonBloc, LessonState>(
+                builder: (context, lessonState) {
+              return BlocProvider(
+                create: (context) => TasksBloc(
+                    lessonsRepository: di<LessonsRepository>(),
+                    tasksRepository: di<TasksRepository>(),
+                    storageRepository: di<StorageRepository>())
+                  ..add(TasksEvent.tasksStream(
+                      lesson: (lessonState as LessonLoadedState)
+                          .lessons
+                          .firstWhere((lesson) =>
+                              lesson.id == (homeState.lesson?.id ?? 0)))),
+                child: Center(
+                    child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: BlocBuilder<TasksBloc, TasksState>(
+                      builder: (context, state) {
+                    return state.when(
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
+                        load: (Course course,
+                                Lesson lesson,
+                                List<TaskModel> tasks,
+                                UpdatingState updatingState,
+                                bool isTitleEditable,
+                                FilePickerResult? filePickerResult) =>
+                            TasksScreenLoaded(
+                                course: course,
+                                lesson: lesson,
+                                tasks: tasks,
+                                isTitleEditable: isTitleEditable,
+                                filePickerResult: filePickerResult,
+                                scaffoldKey: _scaffoldKey,
+                                isUpdating:
+                                    updatingState == UpdatingState.update),
+                        error: (String? message) => Center(
+                            child: Text(message ?? 'Неизвестная ошибка')));
+                  }),
+                )),
+              );
+            });
+          })),
     );
   }
 }
@@ -88,6 +100,7 @@ class TasksScreenLoaded extends StatefulWidget {
   final List<TaskModel> tasks;
   final bool isUpdating;
   final bool isTitleEditable;
+  final GlobalKey<ScaffoldState> scaffoldKey;
   final FilePickerResult? filePickerResult;
 
   const TasksScreenLoaded(
@@ -97,6 +110,7 @@ class TasksScreenLoaded extends StatefulWidget {
       required this.tasks,
       required this.isUpdating,
       required this.isTitleEditable,
+      required this.scaffoldKey,
       required this.filePickerResult});
 
   @override
@@ -111,6 +125,9 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
   void initState() {
     super.initState();
     if (mounted) {
+      context
+          .read<TasksBloc>()
+          .add(TasksEvent.tasksStream(lesson: widget.lesson));
       _nameController.text = widget.lesson.name;
       _descriptionController.text = widget.lesson.description;
     }
@@ -149,8 +166,11 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
                     fileBytesSize: image.files.single.size,
                     limit: 10,
                     memoryLimitType: MemoryLimitType.mb)) {
-                  Future.sync(() => context.read<TasksBloc>().add(
-                      TasksEvent.updateLessonImage(filePickerResult: image)));
+                  Future.sync((() => context.read<LessonBloc>().add(
+                      LessonEvent.updateLesson(
+                          courseId: widget.course.id,
+                          lesson: widget.lesson,
+                          filePickerResult: image))));
                 } else {
                   Future.sync(() => context.showSnackBar(
                       message: 'Превышен размер файла (более 10 мб)'));
@@ -168,6 +188,14 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
                     readOnly: widget.isTitleEditable,
                     decoration:
                         const InputDecoration(labelText: 'Название урока'),
+                    onChanged: (_) {
+                      AppUtils().debounce(() {
+                        context.read<LessonBloc>().add(LessonEvent.updateLesson(
+                            courseId: widget.course.id,
+                            lesson: widget.lesson
+                                .copyWith(name: _nameController.text.trim())));
+                      });
+                    },
                   ),
                   const SizedBox(height: 8),
                   TextFormField(
@@ -179,6 +207,16 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
                           filled: true,
                           border: OutlineInputBorder()),
                       minLines: 1,
+                      onChanged: (_) {
+                        AppUtils().debounce(() {
+                          context.read<LessonBloc>().add(
+                              LessonEvent.updateLesson(
+                                  courseId: widget.course.id,
+                                  lesson: widget.lesson.copyWith(
+                                      description:
+                                          _descriptionController.text.trim())));
+                        });
+                      },
                       maxLines: 5),
                   SwitchListTile.adaptive(
                       value: !widget.isTitleEditable,
@@ -200,13 +238,9 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
                         context.router.navigate(const PreviewTasksRoute());
                       },
                       child: const Text('Протестировать')),
-                  const SizedBox(height: 8,),
-                  ElevatedButton(
-                      onPressed: () {
-                        AutoRouter.of(context)
-                            .navigate(const CollaboratorsRoute());
-                      },
-                      child: const Text('Управление доступом'))
+                  const SizedBox(
+                    height: 8,
+                  )
                 ],
               ),
             ),
@@ -225,10 +259,6 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
                 context.read<LessonBloc>().add(LessonEvent.deleteLesson(
                     lesson: widget.lesson,
                     onSuccess: (lesson) {
-                      //context.read<CourseBloc>().add(const CoursesEvent.load());
-                      context
-                          .read<LessonBloc>()
-                          .add(LessonEvent.load(courseId: widget.course.id));
                       context.router.back();
                     }));
               },
@@ -253,43 +283,6 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
               ),
             ),
         ],
-        const SizedBox(height: 8),
-        ElevatedButton.icon(
-            label: Text(widget.isUpdating ? 'Сохраняем' : 'Сохранить'),
-            icon: widget.isUpdating
-                ? const SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(
-                        color: Colors.white,
-                        backgroundColor: AppColors.orange,
-                        strokeWidth: 3))
-                : const SizedBox.shrink(),
-            onPressed: () {
-              final tasksBloc = context.read<TasksBloc>();
-              final lessonBloc = context.read<LessonBloc>();
-              //final snackBar = SnackBar(content: Row());
-              lessonBloc.add(LessonEvent.updateLesson(
-                  courseId: widget.course.id,
-                  filePickerResult: widget.filePickerResult,
-                  lesson: widget.lesson.copyWith(
-                      name: _nameController.text,
-                      description: _descriptionController.text),
-                  onSuccess: (_) {
-                    lessonBloc
-                        .add(LessonEvent.load(courseId: widget.course.id));
-                    tasksBloc.add(TasksEvent.updateAllTasks(
-                        tasks: widget.tasks,
-                        onSuccess: (_) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Сохранено')));
-                        }));
-                  },
-                  onError: (exception) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Ошибка сохранения')));
-                  }));
-            })
       ],
     );
   }
@@ -298,46 +291,25 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
     showDialog(
         context: buildContext,
         builder: (context) {
-          final homeState = buildContext.read<HomeBloc>().state;
           return TaskTypeDialog(
               onAddTask: (taskModel, answers) {
                 buildContext.read<TasksBloc>().add(TasksEvent.addTask(
-                    lesson: homeState.lesson ?? const Lesson(),
+                    lesson: widget.lesson,
                     task: taskModel,
                     onSuccess: (task, answers) {
-                      {
-                        final tasksBloc = buildContext.read<TasksBloc>();
-                        final lessonBloc = buildContext.read<LessonBloc>();
-                        //final snackBar = SnackBar(content: Row());
-                        lessonBloc.add(LessonEvent.updateLesson(
-                            courseId: widget.course.id,
-                            filePickerResult: widget.filePickerResult,
-                            lesson: widget.lesson.copyWith(
-                                name: _nameController.text,
-                                description: _descriptionController.text),
-                            onSuccess: (_) {
-                              lessonBloc.add(
-                                  LessonEvent.load(courseId: widget.course.id));
-                              tasksBloc.add(TasksEvent.updateAllTasks(
-                                  tasks: widget.tasks,
-                                  onSuccess: (_) {
-                                    ScaffoldMessenger.of(buildContext)
-                                        .showSnackBar(const SnackBar(
-                                            content: Text('Сохранено')));
-                                  }));
-                            },
-                            onError: (exception) {
-                              ScaffoldMessenger.of(buildContext).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('Ошибка сохранения')));
-                            }));
-                      }
+                      buildContext.showSnackBar(
+                          message: 'Задание добавлено успешно');
+                      buildContext
+                          .read<TasksBloc>()
+                          .add(TasksEvent.tasksStream(lesson: widget.lesson));
+                    },
+                    onError: (error) {
+                      buildContext.showSnackBar(message: 'Ошибка $error');
                     }));
-                // context.router.maybePop();
                 Navigator.of(context).pop();
               },
-              course: homeState.course,
-              lesson: homeState.lesson);
+              course: widget.course,
+              lesson: widget.lesson);
         });
   }
 }

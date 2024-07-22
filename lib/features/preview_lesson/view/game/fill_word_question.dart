@@ -37,7 +37,9 @@ class FillWordsQuestionPreview extends StatefulWidget implements Question {
   String? question() => "Дополните предложение";
 
   @override
-  String rightAnswer() => answers.firstWhere((element) => element.rightAnswer.toLowerCase() == "true").answer;
+  String rightAnswer() => answers.first.rightAnswer;
+  // @override
+  // String rightAnswer() => answers.firstWhere((element) => element.rightAnswer.toLowerCase() == "true").answer;
 }
 
 class _FillWordState extends State<FillWordsQuestionPreview> {
@@ -65,7 +67,6 @@ class _FillWordState extends State<FillWordsQuestionPreview> {
                 direction: Axis.horizontal,
                 children: [
                   Text(words[index]),
-                  Text(widget._userAnswer),
                   if (index < words.length - 1) GestureDetector(
                       onTap: () => setState(() {
                         if (widget._userAnswer.isNotEmpty) {

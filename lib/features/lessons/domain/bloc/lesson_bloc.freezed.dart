@@ -19,6 +19,7 @@ mixin _$LessonEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) load,
+    required TResult Function(Course course) lessonsStream,
     required TResult Function(
             int courseId,
             Lesson lesson,
@@ -45,6 +46,7 @@ mixin _$LessonEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? load,
+    TResult? Function(Course course)? lessonsStream,
     TResult? Function(
             int courseId,
             Lesson lesson,
@@ -69,6 +71,7 @@ mixin _$LessonEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? load,
+    TResult Function(Course course)? lessonsStream,
     TResult Function(
             int courseId,
             Lesson lesson,
@@ -94,6 +97,7 @@ mixin _$LessonEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LessonLoadEvent value) load,
+    required TResult Function(LessonsStreamEvent value) lessonsStream,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
     required TResult Function(LessonUpdateImageEvent value) updateImage,
@@ -105,6 +109,7 @@ mixin _$LessonEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LessonLoadEvent value)? load,
+    TResult? Function(LessonsStreamEvent value)? lessonsStream,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
     TResult? Function(LessonUpdateImageEvent value)? updateImage,
@@ -116,6 +121,7 @@ mixin _$LessonEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LessonLoadEvent value)? load,
+    TResult Function(LessonsStreamEvent value)? lessonsStream,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
     TResult Function(LessonUpdateImageEvent value)? updateImage,
@@ -212,6 +218,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) load,
+    required TResult Function(Course course) lessonsStream,
     required TResult Function(
             int courseId,
             Lesson lesson,
@@ -241,6 +248,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? load,
+    TResult? Function(Course course)? lessonsStream,
     TResult? Function(
             int courseId,
             Lesson lesson,
@@ -268,6 +276,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? load,
+    TResult Function(Course course)? lessonsStream,
     TResult Function(
             int courseId,
             Lesson lesson,
@@ -299,6 +308,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LessonLoadEvent value) load,
+    required TResult Function(LessonsStreamEvent value) lessonsStream,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
     required TResult Function(LessonUpdateImageEvent value) updateImage,
@@ -313,6 +323,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LessonLoadEvent value)? load,
+    TResult? Function(LessonsStreamEvent value)? lessonsStream,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
     TResult? Function(LessonUpdateImageEvent value)? updateImage,
@@ -327,6 +338,7 @@ class _$LessonLoadEventImpl extends LessonLoadEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LessonLoadEvent value)? load,
+    TResult Function(LessonsStreamEvent value)? lessonsStream,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
     TResult Function(LessonUpdateImageEvent value)? updateImage,
@@ -350,6 +362,229 @@ abstract class LessonLoadEvent extends LessonEvent {
   int get courseId;
   @JsonKey(ignore: true)
   _$$LessonLoadEventImplCopyWith<_$LessonLoadEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LessonsStreamEventImplCopyWith<$Res> {
+  factory _$$LessonsStreamEventImplCopyWith(_$LessonsStreamEventImpl value,
+          $Res Function(_$LessonsStreamEventImpl) then) =
+      __$$LessonsStreamEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Course course});
+
+  $CourseCopyWith<$Res> get course;
+}
+
+/// @nodoc
+class __$$LessonsStreamEventImplCopyWithImpl<$Res>
+    extends _$LessonEventCopyWithImpl<$Res, _$LessonsStreamEventImpl>
+    implements _$$LessonsStreamEventImplCopyWith<$Res> {
+  __$$LessonsStreamEventImplCopyWithImpl(_$LessonsStreamEventImpl _value,
+      $Res Function(_$LessonsStreamEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? course = null,
+  }) {
+    return _then(_$LessonsStreamEventImpl(
+      course: null == course
+          ? _value.course
+          : course // ignore: cast_nullable_to_non_nullable
+              as Course,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CourseCopyWith<$Res> get course {
+    return $CourseCopyWith<$Res>(_value.course, (value) {
+      return _then(_value.copyWith(course: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$LessonsStreamEventImpl extends LessonsStreamEvent {
+  const _$LessonsStreamEventImpl({required this.course}) : super._();
+
+  @override
+  final Course course;
+
+  @override
+  String toString() {
+    return 'LessonEvent.lessonsStream(course: $course)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LessonsStreamEventImpl &&
+            (identical(other.course, course) || other.course == course));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, course);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LessonsStreamEventImplCopyWith<_$LessonsStreamEventImpl> get copyWith =>
+      __$$LessonsStreamEventImplCopyWithImpl<_$LessonsStreamEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int courseId) load,
+    required TResult Function(Course course) lessonsStream,
+    required TResult Function(
+            int courseId,
+            Lesson lesson,
+            FilePickerResult? filePickerResult,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        addLesson,
+    required TResult Function(
+            int courseId,
+            Lesson lesson,
+            FilePickerResult? filePickerResult,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateLesson,
+    required TResult Function(FilePickerResult? filePickerResult) updateImage,
+    required TResult Function() changeFieldsEditable,
+    required TResult Function(
+            Lesson lesson,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)
+        deleteLesson,
+  }) {
+    return lessonsStream(course);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int courseId)? load,
+    TResult? Function(Course course)? lessonsStream,
+    TResult? Function(
+            int courseId,
+            Lesson lesson,
+            FilePickerResult? filePickerResult,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        addLesson,
+    TResult? Function(
+            int courseId,
+            Lesson lesson,
+            FilePickerResult? filePickerResult,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateLesson,
+    TResult? Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult? Function()? changeFieldsEditable,
+    TResult? Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
+  }) {
+    return lessonsStream?.call(course);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int courseId)? load,
+    TResult Function(Course course)? lessonsStream,
+    TResult Function(
+            int courseId,
+            Lesson lesson,
+            FilePickerResult? filePickerResult,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        addLesson,
+    TResult Function(
+            int courseId,
+            Lesson lesson,
+            FilePickerResult? filePickerResult,
+            dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateLesson,
+    TResult Function(FilePickerResult? filePickerResult)? updateImage,
+    TResult Function()? changeFieldsEditable,
+    TResult Function(Lesson lesson, dynamic Function(Lesson)? onSuccess,
+            dynamic Function(Lesson)? onError)?
+        deleteLesson,
+    required TResult orElse(),
+  }) {
+    if (lessonsStream != null) {
+      return lessonsStream(course);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LessonLoadEvent value) load,
+    required TResult Function(LessonsStreamEvent value) lessonsStream,
+    required TResult Function(LessonAddEvent value) addLesson,
+    required TResult Function(LessonUpdateEvent value) updateLesson,
+    required TResult Function(LessonUpdateImageEvent value) updateImage,
+    required TResult Function(ChangeFieldsEditableLessonEvent value)
+        changeFieldsEditable,
+    required TResult Function(LessonDeleteEvent value) deleteLesson,
+  }) {
+    return lessonsStream(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LessonLoadEvent value)? load,
+    TResult? Function(LessonsStreamEvent value)? lessonsStream,
+    TResult? Function(LessonAddEvent value)? addLesson,
+    TResult? Function(LessonUpdateEvent value)? updateLesson,
+    TResult? Function(LessonUpdateImageEvent value)? updateImage,
+    TResult? Function(ChangeFieldsEditableLessonEvent value)?
+        changeFieldsEditable,
+    TResult? Function(LessonDeleteEvent value)? deleteLesson,
+  }) {
+    return lessonsStream?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LessonLoadEvent value)? load,
+    TResult Function(LessonsStreamEvent value)? lessonsStream,
+    TResult Function(LessonAddEvent value)? addLesson,
+    TResult Function(LessonUpdateEvent value)? updateLesson,
+    TResult Function(LessonUpdateImageEvent value)? updateImage,
+    TResult Function(ChangeFieldsEditableLessonEvent value)?
+        changeFieldsEditable,
+    TResult Function(LessonDeleteEvent value)? deleteLesson,
+    required TResult orElse(),
+  }) {
+    if (lessonsStream != null) {
+      return lessonsStream(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LessonsStreamEvent extends LessonEvent {
+  const factory LessonsStreamEvent({required final Course course}) =
+      _$LessonsStreamEventImpl;
+  const LessonsStreamEvent._() : super._();
+
+  Course get course;
+  @JsonKey(ignore: true)
+  _$$LessonsStreamEventImplCopyWith<_$LessonsStreamEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -476,6 +711,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) load,
+    required TResult Function(Course course) lessonsStream,
     required TResult Function(
             int courseId,
             Lesson lesson,
@@ -505,6 +741,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? load,
+    TResult? Function(Course course)? lessonsStream,
     TResult? Function(
             int courseId,
             Lesson lesson,
@@ -533,6 +770,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? load,
+    TResult Function(Course course)? lessonsStream,
     TResult Function(
             int courseId,
             Lesson lesson,
@@ -564,6 +802,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LessonLoadEvent value) load,
+    required TResult Function(LessonsStreamEvent value) lessonsStream,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
     required TResult Function(LessonUpdateImageEvent value) updateImage,
@@ -578,6 +817,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LessonLoadEvent value)? load,
+    TResult? Function(LessonsStreamEvent value)? lessonsStream,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
     TResult? Function(LessonUpdateImageEvent value)? updateImage,
@@ -592,6 +832,7 @@ class _$LessonAddEventImpl extends LessonAddEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LessonLoadEvent value)? load,
+    TResult Function(LessonsStreamEvent value)? lessonsStream,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
     TResult Function(LessonUpdateImageEvent value)? updateImage,
@@ -749,6 +990,7 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) load,
+    required TResult Function(Course course) lessonsStream,
     required TResult Function(
             int courseId,
             Lesson lesson,
@@ -778,6 +1020,7 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? load,
+    TResult? Function(Course course)? lessonsStream,
     TResult? Function(
             int courseId,
             Lesson lesson,
@@ -806,6 +1049,7 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? load,
+    TResult Function(Course course)? lessonsStream,
     TResult Function(
             int courseId,
             Lesson lesson,
@@ -838,6 +1082,7 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LessonLoadEvent value) load,
+    required TResult Function(LessonsStreamEvent value) lessonsStream,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
     required TResult Function(LessonUpdateImageEvent value) updateImage,
@@ -852,6 +1097,7 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LessonLoadEvent value)? load,
+    TResult? Function(LessonsStreamEvent value)? lessonsStream,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
     TResult? Function(LessonUpdateImageEvent value)? updateImage,
@@ -866,6 +1112,7 @@ class _$LessonUpdateEventImpl extends LessonUpdateEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LessonLoadEvent value)? load,
+    TResult Function(LessonsStreamEvent value)? lessonsStream,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
     TResult Function(LessonUpdateImageEvent value)? updateImage,
@@ -970,6 +1217,7 @@ class _$LessonUpdateImageEventImpl extends LessonUpdateImageEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) load,
+    required TResult Function(Course course) lessonsStream,
     required TResult Function(
             int courseId,
             Lesson lesson,
@@ -999,6 +1247,7 @@ class _$LessonUpdateImageEventImpl extends LessonUpdateImageEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? load,
+    TResult? Function(Course course)? lessonsStream,
     TResult? Function(
             int courseId,
             Lesson lesson,
@@ -1026,6 +1275,7 @@ class _$LessonUpdateImageEventImpl extends LessonUpdateImageEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? load,
+    TResult Function(Course course)? lessonsStream,
     TResult Function(
             int courseId,
             Lesson lesson,
@@ -1057,6 +1307,7 @@ class _$LessonUpdateImageEventImpl extends LessonUpdateImageEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LessonLoadEvent value) load,
+    required TResult Function(LessonsStreamEvent value) lessonsStream,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
     required TResult Function(LessonUpdateImageEvent value) updateImage,
@@ -1071,6 +1322,7 @@ class _$LessonUpdateImageEventImpl extends LessonUpdateImageEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LessonLoadEvent value)? load,
+    TResult? Function(LessonsStreamEvent value)? lessonsStream,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
     TResult? Function(LessonUpdateImageEvent value)? updateImage,
@@ -1085,6 +1337,7 @@ class _$LessonUpdateImageEventImpl extends LessonUpdateImageEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LessonLoadEvent value)? load,
+    TResult Function(LessonsStreamEvent value)? lessonsStream,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
     TResult Function(LessonUpdateImageEvent value)? updateImage,
@@ -1156,6 +1409,7 @@ class _$ChangeFieldsEditableLessonEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) load,
+    required TResult Function(Course course) lessonsStream,
     required TResult Function(
             int courseId,
             Lesson lesson,
@@ -1185,6 +1439,7 @@ class _$ChangeFieldsEditableLessonEventImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? load,
+    TResult? Function(Course course)? lessonsStream,
     TResult? Function(
             int courseId,
             Lesson lesson,
@@ -1212,6 +1467,7 @@ class _$ChangeFieldsEditableLessonEventImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? load,
+    TResult Function(Course course)? lessonsStream,
     TResult Function(
             int courseId,
             Lesson lesson,
@@ -1243,6 +1499,7 @@ class _$ChangeFieldsEditableLessonEventImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LessonLoadEvent value) load,
+    required TResult Function(LessonsStreamEvent value) lessonsStream,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
     required TResult Function(LessonUpdateImageEvent value) updateImage,
@@ -1257,6 +1514,7 @@ class _$ChangeFieldsEditableLessonEventImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LessonLoadEvent value)? load,
+    TResult? Function(LessonsStreamEvent value)? lessonsStream,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
     TResult? Function(LessonUpdateImageEvent value)? updateImage,
@@ -1271,6 +1529,7 @@ class _$ChangeFieldsEditableLessonEventImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LessonLoadEvent value)? load,
+    TResult Function(LessonsStreamEvent value)? lessonsStream,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
     TResult Function(LessonUpdateImageEvent value)? updateImage,
@@ -1390,6 +1649,7 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int courseId) load,
+    required TResult Function(Course course) lessonsStream,
     required TResult Function(
             int courseId,
             Lesson lesson,
@@ -1419,6 +1679,7 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int courseId)? load,
+    TResult? Function(Course course)? lessonsStream,
     TResult? Function(
             int courseId,
             Lesson lesson,
@@ -1446,6 +1707,7 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int courseId)? load,
+    TResult Function(Course course)? lessonsStream,
     TResult Function(
             int courseId,
             Lesson lesson,
@@ -1477,6 +1739,7 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LessonLoadEvent value) load,
+    required TResult Function(LessonsStreamEvent value) lessonsStream,
     required TResult Function(LessonAddEvent value) addLesson,
     required TResult Function(LessonUpdateEvent value) updateLesson,
     required TResult Function(LessonUpdateImageEvent value) updateImage,
@@ -1491,6 +1754,7 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LessonLoadEvent value)? load,
+    TResult? Function(LessonsStreamEvent value)? lessonsStream,
     TResult? Function(LessonAddEvent value)? addLesson,
     TResult? Function(LessonUpdateEvent value)? updateLesson,
     TResult? Function(LessonUpdateImageEvent value)? updateImage,
@@ -1505,6 +1769,7 @@ class _$LessonDeleteEventImpl extends LessonDeleteEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LessonLoadEvent value)? load,
+    TResult Function(LessonsStreamEvent value)? lessonsStream,
     TResult Function(LessonAddEvent value)? addLesson,
     TResult Function(LessonUpdateEvent value)? updateLesson,
     TResult Function(LessonUpdateImageEvent value)? updateImage,

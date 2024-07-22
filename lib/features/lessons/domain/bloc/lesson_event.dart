@@ -6,6 +6,8 @@ class LessonEvent with _$LessonEvent {
 
   const factory LessonEvent.load({required int courseId}) = LessonLoadEvent;
 
+  const factory LessonEvent.lessonsStream({required Course course}) = LessonsStreamEvent;
+
   const factory LessonEvent.addLesson(
       {required int courseId,
       required Lesson lesson,

@@ -58,7 +58,8 @@ class CourseThemeItem extends StatelessWidget {
                       maxLines: 3,
                       style: textTheme.bodySmall,
                     ),
-                    Text(createdDate, style: textTheme.bodySmall)
+                    Text(createdDate, style: textTheme.bodySmall),
+                    Text('Оценка ${course.rating} прошло людей 0')
                   ],
                 ),
               ),

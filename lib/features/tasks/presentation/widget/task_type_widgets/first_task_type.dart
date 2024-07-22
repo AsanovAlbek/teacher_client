@@ -50,8 +50,8 @@ class _FirstTaskTypeState extends State<FirstTaskTypeView> {
                     fillColor: Colors.white,
                     filled: true),
                 onChanged: (text) {
-                  AppUtils.debounce(() {
-                    context.read<TasksBloc>().add(TasksEvent.setTask(
+                  AppUtils().debounce(() {
+                    context.read<TasksBloc>().add(TasksEvent.updateTask(
                         task: widget.task.copyWith(task: text.trim())));
                   });
                 },
@@ -78,13 +78,14 @@ class _FirstTaskTypeState extends State<FirstTaskTypeView> {
             RightAnswerSwitcher(
               task: widget.task,
               onSelected: (selection) {
-                var answerModels = widget.task.answerModels.map((answerModel) {
-                  return answerModel.copyWith(
+                for (var answerModel in widget.task.answerModels) {
+                  final answerModelUpdated = answerModel.copyWith(
                       answer: answerModel.answer.copyWith(
                           rightAnswer: (answerModel == selection).toString()));
-                }).toList();
-                context.read<TasksBloc>().add(TasksEvent.setTask(
-                    task: widget.task.copyWith(answerModels: answerModels)));
+                  context.read<TasksBloc>().add(TasksEvent.updateAnswer(
+                      answer: answerModelUpdated.answer,
+                      taskId: widget.task.id));
+                }
               },
             )
           ],
@@ -140,13 +141,10 @@ class _ImageItemState extends State<_ImageItem> {
                   setState(() {
                     _images[widget.index] = image;
                   });
-                  var answerModels = widget.task.answerModels;
-                  answerModels[widget.index] = answerModels[widget.index]
-                      .copyWith(imageFilePickerResult: _images[widget.index]);
-                  debugPrint(
-                      'new am = ${answerModels[widget.index].imageFilePickerResult?.names.join()}');
-                  bloc.add(TasksEvent.setTask(
-                      task: widget.task.copyWith(answerModels: answerModels)));
+                  bloc.add(TasksEvent.updateAnswer(
+                      answer: widget.answerModel.answer,
+                      taskId: widget.task.id,
+                      image: image));
                 }
               }
             },
@@ -159,8 +157,11 @@ class _ImageItemState extends State<_ImageItem> {
               onPickAudioFile: () async {
                 final audio =
                     await FilePicker.platform.pickFiles(type: FileType.audio);
-                if (audio != null &&
-                    audio.files.single.size / 1024 / 1024 >= 10) {
+                final isFileSizeValid = AppUtils.checkFileMemoryLimit(
+                    fileBytesSize: audio?.files.first.size ?? 0,
+                    limit: 10,
+                    memoryLimitType: MemoryLimitType.mb);
+                if (audio != null && !isFileSizeValid) {
                   Future.sync(() =>
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text('Файл должен быть не более 10 мб'),
@@ -170,12 +171,10 @@ class _ImageItemState extends State<_ImageItem> {
                     setState(() {
                       _audios[widget.index] = audio;
                     });
-                    var answerModels = widget.task.answerModels;
-                    answerModels[widget.index] = answerModels[widget.index]
-                        .copyWith(audioFilePickerResult: _audios[widget.index]);
-                    bloc.add(TasksEvent.setTask(
-                        task:
-                            widget.task.copyWith(answerModels: answerModels)));
+                    bloc.add(TasksEvent.updateAnswer(
+                        answer: widget.answerModel.answer,
+                        taskId: widget.task.id,
+                        audio: audio));
                   }
                 }
               },
@@ -187,12 +186,12 @@ class _ImageItemState extends State<_ImageItem> {
               initialValue: widget.answerModel.answer.answer,
               decoration: const InputDecoration(label: Text('Ответ')),
               onChanged: (String text) {
-                var answers = widget.task.answerModels.toList();
-                answers[widget.index] = widget.answerModel.copyWith(
-                    answer: widget.answerModel.answer
-                        .copyWith(answer: text.trim()));
-                context.read<TasksBloc>().add(TasksEvent.setTask(
-                    task: widget.task.copyWith(answerModels: answers)));
+                AppUtils().debounce(() {
+                  context.read<TasksBloc>().add(TasksEvent.updateAnswer(
+                    answer:
+                        widget.answerModel.answer.copyWith(answer: text.trim()),
+                    taskId: widget.task.id));
+                });
               },
             ),
           )

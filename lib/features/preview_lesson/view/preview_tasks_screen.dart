@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teacher_client/core/extensions/context_extensions.dart';
 import 'package:teacher_client/core/model/task/task.dart';
 import 'package:teacher_client/core/navigation/router.dart';
-import 'package:teacher_client/features/preview_lesson/domain/bloc%20copy/quiz_bloc.dart';
+import 'package:teacher_client/features/preview_lesson/domain/bloc/quiz_bloc.dart';
 import 'package:teacher_client/features/preview_lesson/view/game/question.dart';
 import 'package:teacher_client/features/tasks/presentation/tasks_screen.dart';
 

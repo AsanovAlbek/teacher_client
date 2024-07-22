@@ -4,11 +4,8 @@ part of 'tasks_bloc.dart';
 class TasksEvent with _$TasksEvent {
   const TasksEvent._();
 
-  const factory TasksEvent.load({required Lesson lesson}) = TasksLoadEvent;
-
-  const factory TasksEvent.createLesson({required Lesson lesson}) = TasksCreateLessonEvent;
-
-  const factory TasksEvent.setLesson({required Lesson lesson}) = TasksSetLessonEvent;
+  const factory TasksEvent.tasksStream({required Lesson lesson}) =
+      TasksStreamEvent;
 
   const factory TasksEvent.addTask(
       {required Lesson lesson,
@@ -23,18 +20,12 @@ class TasksEvent with _$TasksEvent {
       Function(TaskModel, List<AnswerModel>)? onSuccess,
       Function(Object?)? onError}) = TasksUpdateEvent;
 
-  const factory TasksEvent.updateAllTasks(
-      {required List<TaskModel> tasks,
-      Function(List<Task>)? onSuccess,
-      Function(Exception?)? onError}) = UpdateAllTasksEvent;
+  const factory TasksEvent.changeFieldsEditable() =
+      ChangeFieldsEditableTasksEvent;
 
-  const factory TasksEvent.setTask({required TaskModel task}) = TasksSetEvent;
-
-  const factory TasksEvent.saveTasks({required List<TaskModel> tasks}) = TasksSaveEvent;
-
-  const factory TasksEvent.removeAnswersFromTask({required Task task}) = RemoveAnswersFromTaskEvent;
-
-  const factory TasksEvent.changeFieldsEditable() = ChangeFieldsEditableTasksEvent;
-
-  const factory TasksEvent.updateLessonImage({required FilePickerResult? filePickerResult}) = UpdateLessonImageTaskEvent;
+  const factory TasksEvent.updateAnswer(
+      {required Answer answer,
+      required int taskId,
+      FilePickerResult? image,
+      FilePickerResult? audio}) = UpdateAnswerTasksEvent;
 }

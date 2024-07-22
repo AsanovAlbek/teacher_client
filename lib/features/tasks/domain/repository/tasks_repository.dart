@@ -1,12 +1,13 @@
+import 'package:teacher_client/features/tasks/data/model/lesson_info.dart';
+
 import '../../../../core/model/answer/answer.dart';
 import '../../../../core/model/task/task.dart';
 
 abstract interface class TasksRepository {
-  Future<List<Task>>lessonTasks(int lessonId);
+  Stream<List<Task>> lessonTasksStream(int lessonId);
   Future<Task> addTask(int lessonId, Task task);
   Future<void> updateTask(Task task);
   Future<void> deleteTask(int lessonId, int taskId);
-  Future<List<Answer>> addAnswers(List<Answer> answers, int taskId);
-  Future<void> updateAnswers(List<Answer> answers, int taskId);
-  Future<void> deleteAnswersFromTask(Task task);
+  Future<void> updateAnswer(Answer answer, int taskId);
+  Future<List<Answer>> addAnswers(Task task);
 }

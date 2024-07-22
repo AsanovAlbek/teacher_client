@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +23,16 @@ class _CoursesPageState extends State<CoursesPage> {
   final scrollController = ScrollController();
 
   @override
+  void initState() {
+    super.initState();
+    if (mounted) {
+      context
+          .read<CourseBloc>()
+          .add(const CoursesEvent.searchStream(query: ''));
+    }
+  }
+
+  @override
   void dispose() {
     scrollController.dispose();
     super.dispose();
@@ -31,7 +40,7 @@ class _CoursesPageState extends State<CoursesPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<CourseBloc>().add(const CoursesEvent.load());
+    //context.read<CourseBloc>().add(const CoursesEvent.load());
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
@@ -77,22 +86,27 @@ class _CoursesPageContent extends StatelessWidget {
                         fillColor: Colors.white,
                         border: OutlineInputBorder()),
                     onChanged: (text) {
-                      AppUtils.debounce(
-                          () => bloc.add(CoursesEvent.search(query: text)));
+                      AppUtils().debounce(
+                          () => bloc.add(CoursesEvent.searchStream(query: text)));
                     }),
               ),
               const SizedBox(width: 8),
               TextButton(
                   onPressed: () {
-                    bloc.add(CoursesEvent.addCourse(course: const Course(), onSuccess: (course) {
-                      homeBloc.add(HomeEvent.setCourse(course: course, onSuccess: (_) {
-                        AutoRouter.of(context)
-                            .navigate(const CoursesThemesRoute());
-                      }));
-                    }, onError: (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Ошибка $e')));
-                    }));
-
+                    bloc.add(CoursesEvent.addCourse(
+                        course: const Course(),
+                        onSuccess: (course) {
+                          homeBloc.add(HomeEvent.setCourse(
+                              course: course,
+                              onSuccess: (_) {
+                                AutoRouter.of(context)
+                                    .navigate(const CoursesThemesRoute());
+                              }));
+                        },
+                        onError: (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Ошибка $e')));
+                        }));
                   },
                   child: Text('+ Добавить курс'.toUpperCase(),
                       style: textTheme.bodyMedium
@@ -113,10 +127,12 @@ class _CoursesPageContent extends StatelessWidget {
                         return CourseThemeItem(
                             course: courses[index],
                             onRedact: (course) {
-                              homeBloc.add(HomeEvent.setCourse(course: course, onSuccess: (_) {
-                                context.router.navigate(const CoursesThemesRoute());
-                              }));
-
+                              homeBloc.add(HomeEvent.setCourse(
+                                  course: course,
+                                  onSuccess: (_) {
+                                    context.router
+                                        .navigate(const CoursesThemesRoute());
+                                  }));
                             });
                       },
                       separatorBuilder: (BuildContext context, int index) {
