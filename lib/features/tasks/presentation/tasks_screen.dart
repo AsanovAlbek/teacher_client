@@ -56,10 +56,7 @@ class _TasksScreenState extends State<TasksScreen> {
                     tasksRepository: di<TasksRepository>(),
                     storageRepository: di<StorageRepository>())
                   ..add(TasksEvent.tasksStream(
-                      lesson: (lessonState as LessonLoadedState)
-                          .lessons
-                          .firstWhere((lesson) =>
-                              lesson.id == (homeState.lesson?.id ?? 0)))),
+                      lesson: homeState.lesson ?? const Lesson())),
                 child: Center(
                     child: Padding(
                   padding: const EdgeInsets.all(32.0),
@@ -142,6 +139,9 @@ class _TasksLoadedState extends State<TasksScreenLoaded> {
 
   @override
   Widget build(BuildContext context) {
+    context
+        .read<TasksBloc>()
+        .add(TasksEvent.tasksStream(lesson: widget.lesson));
     final taskWidgets = widget.tasks
         .mapIndexed((index, task) => ExpansionTile(
             title: Text(

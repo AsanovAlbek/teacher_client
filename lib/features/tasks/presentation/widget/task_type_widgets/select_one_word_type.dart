@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:teacher_client/features/tasks/presentation/widget/task_type_widgets/deletable_item.dart';
 
 import '../../../../../core/utils/utils.dart';
 import '../../../domain/bloc/tasks_bloc.dart';
@@ -36,47 +37,40 @@ class _SelectOneWordTypeState extends State<SelectOneWordType> {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<TasksBloc>();
-    return Stack(children: [
-      Positioned(
-        top: 8,
-        right: 8,
-        child: IconButton(
-            onPressed: () {
-              context
-                  .read<TasksBloc>()
-                  .add(TasksEvent.removeTask(taskId: widget.task.id));
-            },
-            icon: const Icon(Icons.delete, color: Colors.red)),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 2,
-          height: MediaQuery.of(context).size.height / 2,
-          child: Column(
-            children: [
-              TextFormField(
-                  initialValue: widget.task.task,
-                  decoration: const InputDecoration(
-                      label: Text('Задание'),
-                      fillColor: Colors.white,
-                      filled: true),
-                  onChanged: (text) {
-                    AppUtils().debounce(() {
-                      bloc.add(TasksEvent.updateTask(
-                          task: widget.task.copyWith(task: text.trim())));
-                    });
-                  }),
-              Expanded(
-                  child: ListView(children: [
-                ...widget.task.answerModels
-                    .mapIndexed((index, answer) => _answerCard(index, answer))
-              ]))
-            ],
-          ),
-        ),
-      ),
-    ]);
+    return NewDeletableItem(
+      deleteClick: () {
+        context
+            .read<TasksBloc>()
+            .add(TasksEvent.removeTask(taskId: widget.task.id));
+      },
+      child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width / 2,
+            height: MediaQuery.of(context).size.height / 2,
+            child: Column(
+              children: [
+                TextFormField(
+                    initialValue: widget.task.task,
+                    decoration: const InputDecoration(
+                        label: Text('Задание'),
+                        fillColor: Colors.white,
+                        filled: true),
+                    onChanged: (text) {
+                      AppUtils().debounce(() {
+                        bloc.add(TasksEvent.updateTask(
+                            task: widget.task.copyWith(task: text.trim())));
+                      });
+                    }),
+                Expanded(
+                    child: ListView(children: [
+                  ...widget.task.answerModels
+                      .mapIndexed((index, answer) => _answerCard(index, answer))
+                ]))
+              ],
+            ),
+          )),
+    );
   }
 
   Widget _answerCard(int index, AnswerModel answerModel) {

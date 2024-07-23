@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:teacher_client/features/collaborators/view/collaborators.dart';
 
 import '../../../../core/model/course/course.dart';
 import '../../../../core/model/lesson/lesson.dart';
@@ -32,6 +33,7 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
     on<CoursesAddCourseEvent>(_addCourse);
     on<CourseUpdateEvent>(_updateCourse);
     on<CoursesStreamSearchEvent>(_searchStream, transformer: restartable());
+    on<CoursesDeleteEvent>(_deleteCourse);
   }
 
   CourseStateLoaded _loaded = const CourseStateLoaded();
@@ -59,9 +61,6 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
 
   FutureOr<void> _search(
       CoursesSearchEvent event, Emitter<CourseState> emit) async {
-    if (state is! CourseStateLoading) {
-      emit(const CourseState.loading());
-    }
     try {
       final courses = await _coursesRepository.searchCourses(event.query);
       debugPrint('search courses = ${courses.map((e) => e.name).toList()}');
@@ -127,5 +126,14 @@ class CourseBloc extends Bloc<CoursesEvent, CourseState> {
     }, onError: (error, stackTrace) {
       return const CourseState.error(message: 'Нет подключения к интернету');
     });
+  }
+
+  FutureOr<void> _deleteCourse(CoursesDeleteEvent event, Emitter<CourseState> emit) async {
+    try {
+      final course = await _coursesRepository.deleteCourse(event.course);
+      event.onSuccess?.call(course);
+    } on Exception catch (e) {
+      event.onError?.call(e);
+    }
   }
 }

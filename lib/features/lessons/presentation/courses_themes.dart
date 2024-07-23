@@ -1,12 +1,10 @@
-import 'dart:js_interop';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:teacher_client/core/constants/publication_status.dart';
 import 'package:teacher_client/core/navigation/router.dart';
 import 'package:teacher_client/core/resources/colors.dart';
 import 'package:teacher_client/core/utils/utils.dart';
+import 'package:teacher_client/features/collaborators/view/collaborators.dart';
 import 'package:teacher_client/features/courses/domain/bloc/course_bloc.dart';
 import 'package:teacher_client/features/lessons/domain/bloc/lesson_bloc.dart';
 import 'package:teacher_client/features/lessons/presentation/widgets/lesson_item.dart';
@@ -34,8 +32,7 @@ class CoursesThemesPage extends StatelessWidget {
               backgroundColor: AppColors.backgroundColor,
               body: Center(
                 child: _CourseEditorContent(
-                  course: (courseState as CourseStateLoaded).courses.firstWhere(
-                      (course) => course.id == (state.course?.id ?? 0)),
+                  course: state.course ?? const Course(),
                 ),
               ),
             ),
@@ -88,6 +85,9 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
 
   @override
   Widget build(BuildContext context) {
+    context
+        .read<LessonBloc>()
+        .add(LessonEvent.lessonsStream(course: widget.course));
     final lessonBloc = context.watch<LessonBloc>();
 
     return PopScope(
@@ -145,23 +145,58 @@ class _CourseEditorContentState extends State<_CourseEditorContent> {
                                         },
                                         child:
                                             const Text('Управление доступом')),
-                                    TextButton(
-                                        onPressed: () {
-                                          lessonBloc.add(LessonEvent.addLesson(
-                                              courseId: course.id,
-                                              lesson: const Lesson(),
-                                              onSuccess: (lesson) {
-                                                goToTasks(context, lesson);
-                                              }));
-                                        },
-                                        child: Text(
-                                          '+ Добавить урок',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium
-                                              ?.copyWith(
-                                                  color: AppColors.orange),
-                                        )),
+                                    Row(
+                                      children: [
+                                        TextButton(
+                                            onPressed: () {
+                                              lessonBloc
+                                                  .add(LessonEvent.addLesson(
+                                                      courseId: course.id,
+                                                      lesson: const Lesson(),
+                                                      onSuccess: (lesson) {
+                                                        goToTasks(
+                                                            context, lesson);
+                                                      }));
+                                            },
+                                            child: Text(
+                                              '+ Добавить урок',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium
+                                                  ?.copyWith(
+                                                      color: AppColors.orange),
+                                            )),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        TextButton(
+                                            onPressed: () {
+                                              context.read<CourseBloc>().add(
+                                                  CoursesEvent.deleteCourse(
+                                                      course: course,
+                                                      onSuccess:
+                                                          (deletedCourse) {
+                                                        context.showSnackBar(
+                                                            message:
+                                                                'Курс удалён');
+                                                        context.back();
+                                                      },
+                                                      onError: (error) {
+                                                        context.showSnackBar(
+                                                            message: error
+                                                                .toString());
+                                                      }));
+                                            },
+                                            child: Text(
+                                              'Удалить курс',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium
+                                                  ?.copyWith(
+                                                      color: AppColors.orange),
+                                            )),
+                                      ],
+                                    ),
                                     if (lessons.isNotEmpty) ...[
                                       Expanded(
                                         child: ListView.separated(

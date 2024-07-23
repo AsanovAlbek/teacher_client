@@ -35,6 +35,11 @@ mixin _$CoursesEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)
         updateCourse,
+    required TResult Function(
+            Course course,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        deleteCourse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +61,9 @@ mixin _$CoursesEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult? Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +85,9 @@ mixin _$CoursesEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -87,6 +98,7 @@ mixin _$CoursesEvent {
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
     required TResult Function(CourseUpdateEvent value) updateCourse,
+    required TResult Function(CoursesDeleteEvent value) deleteCourse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -96,6 +108,7 @@ mixin _$CoursesEvent {
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
     TResult? Function(CourseUpdateEvent value)? updateCourse,
+    TResult? Function(CoursesDeleteEvent value)? deleteCourse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -105,6 +118,7 @@ mixin _$CoursesEvent {
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
     TResult Function(CourseUpdateEvent value)? updateCourse,
+    TResult Function(CoursesDeleteEvent value)? deleteCourse,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -183,6 +197,11 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)
         updateCourse,
+    required TResult Function(
+            Course course,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        deleteCourse,
   }) {
     return load();
   }
@@ -207,6 +226,9 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult? Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
   }) {
     return load?.call();
   }
@@ -231,6 +253,9 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -247,6 +272,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
     required TResult Function(CourseUpdateEvent value) updateCourse,
+    required TResult Function(CoursesDeleteEvent value) deleteCourse,
   }) {
     return load(this);
   }
@@ -259,6 +285,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
     TResult? Function(CourseUpdateEvent value)? updateCourse,
+    TResult? Function(CoursesDeleteEvent value)? deleteCourse,
   }) {
     return load?.call(this);
   }
@@ -271,6 +298,7 @@ class _$CoursesLoadEventImpl extends CoursesLoadEvent {
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
     TResult Function(CourseUpdateEvent value)? updateCourse,
+    TResult Function(CoursesDeleteEvent value)? deleteCourse,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -369,6 +397,11 @@ class _$CoursesStreamSearchEventImpl extends CoursesStreamSearchEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)
         updateCourse,
+    required TResult Function(
+            Course course,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        deleteCourse,
   }) {
     return searchStream(query);
   }
@@ -393,6 +426,9 @@ class _$CoursesStreamSearchEventImpl extends CoursesStreamSearchEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult? Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
   }) {
     return searchStream?.call(query);
   }
@@ -417,6 +453,9 @@ class _$CoursesStreamSearchEventImpl extends CoursesStreamSearchEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
     required TResult orElse(),
   }) {
     if (searchStream != null) {
@@ -433,6 +472,7 @@ class _$CoursesStreamSearchEventImpl extends CoursesStreamSearchEvent {
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
     required TResult Function(CourseUpdateEvent value) updateCourse,
+    required TResult Function(CoursesDeleteEvent value) deleteCourse,
   }) {
     return searchStream(this);
   }
@@ -445,6 +485,7 @@ class _$CoursesStreamSearchEventImpl extends CoursesStreamSearchEvent {
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
     TResult? Function(CourseUpdateEvent value)? updateCourse,
+    TResult? Function(CoursesDeleteEvent value)? deleteCourse,
   }) {
     return searchStream?.call(this);
   }
@@ -457,6 +498,7 @@ class _$CoursesStreamSearchEventImpl extends CoursesStreamSearchEvent {
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
     TResult Function(CourseUpdateEvent value)? updateCourse,
+    TResult Function(CoursesDeleteEvent value)? deleteCourse,
     required TResult orElse(),
   }) {
     if (searchStream != null) {
@@ -559,6 +601,11 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)
         updateCourse,
+    required TResult Function(
+            Course course,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        deleteCourse,
   }) {
     return search(query);
   }
@@ -583,6 +630,9 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult? Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
   }) {
     return search?.call(query);
   }
@@ -607,6 +657,9 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -623,6 +676,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
     required TResult Function(CourseUpdateEvent value) updateCourse,
+    required TResult Function(CoursesDeleteEvent value) deleteCourse,
   }) {
     return search(this);
   }
@@ -635,6 +689,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
     TResult? Function(CourseUpdateEvent value)? updateCourse,
+    TResult? Function(CoursesDeleteEvent value)? deleteCourse,
   }) {
     return search?.call(this);
   }
@@ -647,6 +702,7 @@ class _$CoursesSearchEventImpl extends CoursesSearchEvent {
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
     TResult Function(CourseUpdateEvent value)? updateCourse,
+    TResult Function(CoursesDeleteEvent value)? deleteCourse,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -820,6 +876,11 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)
         updateCourse,
+    required TResult Function(
+            Course course,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        deleteCourse,
   }) {
     return addCourse(course, lessons, pickerResult, onSuccess, onError);
   }
@@ -844,6 +905,9 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult? Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
   }) {
     return addCourse?.call(course, lessons, pickerResult, onSuccess, onError);
   }
@@ -868,6 +932,9 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
     required TResult orElse(),
   }) {
     if (addCourse != null) {
@@ -884,6 +951,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
     required TResult Function(CourseUpdateEvent value) updateCourse,
+    required TResult Function(CoursesDeleteEvent value) deleteCourse,
   }) {
     return addCourse(this);
   }
@@ -896,6 +964,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
     TResult? Function(CourseUpdateEvent value)? updateCourse,
+    TResult? Function(CoursesDeleteEvent value)? deleteCourse,
   }) {
     return addCourse?.call(this);
   }
@@ -908,6 +977,7 @@ class _$CoursesAddCourseEventImpl extends CoursesAddCourseEvent {
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
     TResult Function(CourseUpdateEvent value)? updateCourse,
+    TResult Function(CoursesDeleteEvent value)? deleteCourse,
     required TResult orElse(),
   }) {
     if (addCourse != null) {
@@ -1089,6 +1159,11 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)
         updateCourse,
+    required TResult Function(
+            Course course,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        deleteCourse,
   }) {
     return updateCourse(course, lessons, pickerResult, onSuccess, onError);
   }
@@ -1113,6 +1188,9 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult? Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
   }) {
     return updateCourse?.call(
         course, lessons, pickerResult, onSuccess, onError);
@@ -1138,6 +1216,9 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
             dynamic Function(Course)? onSuccess,
             dynamic Function(Exception?)? onError)?
         updateCourse,
+    TResult Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
     required TResult orElse(),
   }) {
     if (updateCourse != null) {
@@ -1154,6 +1235,7 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
     required TResult Function(CoursesSearchEvent value) search,
     required TResult Function(CoursesAddCourseEvent value) addCourse,
     required TResult Function(CourseUpdateEvent value) updateCourse,
+    required TResult Function(CoursesDeleteEvent value) deleteCourse,
   }) {
     return updateCourse(this);
   }
@@ -1166,6 +1248,7 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
     TResult? Function(CoursesSearchEvent value)? search,
     TResult? Function(CoursesAddCourseEvent value)? addCourse,
     TResult? Function(CourseUpdateEvent value)? updateCourse,
+    TResult? Function(CoursesDeleteEvent value)? deleteCourse,
   }) {
     return updateCourse?.call(this);
   }
@@ -1178,6 +1261,7 @@ class _$CourseUpdateEventImpl extends CourseUpdateEvent {
     TResult Function(CoursesSearchEvent value)? search,
     TResult Function(CoursesAddCourseEvent value)? addCourse,
     TResult Function(CourseUpdateEvent value)? updateCourse,
+    TResult Function(CoursesDeleteEvent value)? deleteCourse,
     required TResult orElse(),
   }) {
     if (updateCourse != null) {
@@ -1203,6 +1287,246 @@ abstract class CourseUpdateEvent extends CoursesEvent {
   dynamic Function(Exception?)? get onError;
   @JsonKey(ignore: true)
   _$$CourseUpdateEventImplCopyWith<_$CourseUpdateEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CoursesDeleteEventImplCopyWith<$Res> {
+  factory _$$CoursesDeleteEventImplCopyWith(_$CoursesDeleteEventImpl value,
+          $Res Function(_$CoursesDeleteEventImpl) then) =
+      __$$CoursesDeleteEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {Course course,
+      dynamic Function(Course)? onSuccess,
+      dynamic Function(Exception?)? onError});
+
+  $CourseCopyWith<$Res> get course;
+}
+
+/// @nodoc
+class __$$CoursesDeleteEventImplCopyWithImpl<$Res>
+    extends _$CoursesEventCopyWithImpl<$Res, _$CoursesDeleteEventImpl>
+    implements _$$CoursesDeleteEventImplCopyWith<$Res> {
+  __$$CoursesDeleteEventImplCopyWithImpl(_$CoursesDeleteEventImpl _value,
+      $Res Function(_$CoursesDeleteEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? course = null,
+    Object? onSuccess = freezed,
+    Object? onError = freezed,
+  }) {
+    return _then(_$CoursesDeleteEventImpl(
+      course: null == course
+          ? _value.course
+          : course // ignore: cast_nullable_to_non_nullable
+              as Course,
+      onSuccess: freezed == onSuccess
+          ? _value.onSuccess
+          : onSuccess // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(Course)?,
+      onError: freezed == onError
+          ? _value.onError
+          : onError // ignore: cast_nullable_to_non_nullable
+              as dynamic Function(Exception?)?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CourseCopyWith<$Res> get course {
+    return $CourseCopyWith<$Res>(_value.course, (value) {
+      return _then(_value.copyWith(course: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$CoursesDeleteEventImpl extends CoursesDeleteEvent {
+  const _$CoursesDeleteEventImpl(
+      {required this.course, this.onSuccess, this.onError})
+      : super._();
+
+  @override
+  final Course course;
+  @override
+  final dynamic Function(Course)? onSuccess;
+  @override
+  final dynamic Function(Exception?)? onError;
+
+  @override
+  String toString() {
+    return 'CoursesEvent.deleteCourse(course: $course, onSuccess: $onSuccess, onError: $onError)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CoursesDeleteEventImpl &&
+            (identical(other.course, course) || other.course == course) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess) &&
+            (identical(other.onError, onError) || other.onError == onError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, course, onSuccess, onError);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CoursesDeleteEventImplCopyWith<_$CoursesDeleteEventImpl> get copyWith =>
+      __$$CoursesDeleteEventImplCopyWithImpl<_$CoursesDeleteEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(String query) searchStream,
+    required TResult Function(String query) search,
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        addCourse,
+    required TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        updateCourse,
+    required TResult Function(
+            Course course,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)
+        deleteCourse,
+  }) {
+    return deleteCourse(course, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? load,
+    TResult? Function(String query)? searchStream,
+    TResult? Function(String query)? search,
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        addCourse,
+    TResult? Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
+    TResult? Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
+  }) {
+    return deleteCourse?.call(course, onSuccess, onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(String query)? searchStream,
+    TResult Function(String query)? search,
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        addCourse,
+    TResult Function(
+            Course course,
+            List<Lesson>? lessons,
+            FilePickerResult? pickerResult,
+            dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        updateCourse,
+    TResult Function(Course course, dynamic Function(Course)? onSuccess,
+            dynamic Function(Exception?)? onError)?
+        deleteCourse,
+    required TResult orElse(),
+  }) {
+    if (deleteCourse != null) {
+      return deleteCourse(course, onSuccess, onError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CoursesLoadEvent value) load,
+    required TResult Function(CoursesStreamSearchEvent value) searchStream,
+    required TResult Function(CoursesSearchEvent value) search,
+    required TResult Function(CoursesAddCourseEvent value) addCourse,
+    required TResult Function(CourseUpdateEvent value) updateCourse,
+    required TResult Function(CoursesDeleteEvent value) deleteCourse,
+  }) {
+    return deleteCourse(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CoursesLoadEvent value)? load,
+    TResult? Function(CoursesStreamSearchEvent value)? searchStream,
+    TResult? Function(CoursesSearchEvent value)? search,
+    TResult? Function(CoursesAddCourseEvent value)? addCourse,
+    TResult? Function(CourseUpdateEvent value)? updateCourse,
+    TResult? Function(CoursesDeleteEvent value)? deleteCourse,
+  }) {
+    return deleteCourse?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CoursesLoadEvent value)? load,
+    TResult Function(CoursesStreamSearchEvent value)? searchStream,
+    TResult Function(CoursesSearchEvent value)? search,
+    TResult Function(CoursesAddCourseEvent value)? addCourse,
+    TResult Function(CourseUpdateEvent value)? updateCourse,
+    TResult Function(CoursesDeleteEvent value)? deleteCourse,
+    required TResult orElse(),
+  }) {
+    if (deleteCourse != null) {
+      return deleteCourse(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CoursesDeleteEvent extends CoursesEvent {
+  const factory CoursesDeleteEvent(
+      {required final Course course,
+      final dynamic Function(Course)? onSuccess,
+      final dynamic Function(Exception?)? onError}) = _$CoursesDeleteEventImpl;
+  const CoursesDeleteEvent._() : super._();
+
+  Course get course;
+  dynamic Function(Course)? get onSuccess;
+  dynamic Function(Exception?)? get onError;
+  @JsonKey(ignore: true)
+  _$$CoursesDeleteEventImplCopyWith<_$CoursesDeleteEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

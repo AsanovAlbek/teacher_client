@@ -33,7 +33,7 @@ class _FillWordsState extends State<FillWordsQuestion> {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<TasksBloc>();
-    return DeletableItem(
+    return NewDeletableItem(
         deleteClick: () {
           context
               .read<TasksBloc>()

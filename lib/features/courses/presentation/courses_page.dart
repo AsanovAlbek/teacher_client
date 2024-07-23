@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/core/navigation/router.dart';
 import 'package:teacher_client/core/resources/colors.dart';
 import 'package:teacher_client/core/utils/utils.dart';
@@ -29,6 +30,15 @@ class _CoursesPageState extends State<CoursesPage> {
       context
           .read<CourseBloc>()
           .add(const CoursesEvent.searchStream(query: ''));
+      // final channel = Supabase.instance.client.channel('courses')
+      //   .onPostgresChanges(
+      //       event: PostgresChangeEvent.all,
+      //       schema: 'public',
+      //       table: 'courses',
+      //       callback: (playload) {
+      //         debugPrint('playload $playload new record = ${playload.newRecord}');
+      //       })
+      //   .subscribe();
     }
   }
 
@@ -40,7 +50,7 @@ class _CoursesPageState extends State<CoursesPage> {
 
   @override
   Widget build(BuildContext context) {
-    //context.read<CourseBloc>().add(const CoursesEvent.load());
+    // context.read<CourseBloc>().add(const CoursesEvent.searchStream(query: ''));
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
@@ -86,8 +96,8 @@ class _CoursesPageContent extends StatelessWidget {
                         fillColor: Colors.white,
                         border: OutlineInputBorder()),
                     onChanged: (text) {
-                      AppUtils().debounce(
-                          () => bloc.add(CoursesEvent.searchStream(query: text)));
+                      AppUtils().debounce(() =>
+                          bloc.add(CoursesEvent.searchStream(query: text)));
                     }),
               ),
               const SizedBox(width: 8),

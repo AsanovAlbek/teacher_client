@@ -19,7 +19,13 @@ void main() async {
   await Supabase.initialize(
       url: SupabaseConst.supabaseUrl,
       anonKey: SupabaseConst.supabaseKey,
-      realtimeClientOptions: const RealtimeClientOptions(eventsPerSecond: 2),
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
+        'Content-Type': 'application/json'
+      },
+      realtimeClientOptions: const RealtimeClientOptions(
+          eventsPerSecond: 2, timeout: Duration(minutes: 2)),
       authOptions:
           const FlutterAuthClientOptions(authFlowType: AuthFlowType.pkce));
   usePathUrlStrategy();
@@ -47,7 +53,8 @@ class TeacherAppState extends State<TeacherApp> {
   void initState() {
     super.initState();
     _appRouter = AppRouter();
-    _authEvents = Supabase.instance.client.auth.onAuthStateChange.listen((state) {
+    _authEvents =
+        Supabase.instance.client.auth.onAuthStateChange.listen((state) {
       debugPrint("auth event is ${state.event.name}");
     });
   }
@@ -65,7 +72,7 @@ class TeacherAppState extends State<TeacherApp> {
         debugShowCheckedModeBanner: false,
         title: 'Teacher App',
         theme: ThemeData(
-          fontFamily: AppFonts.ptSans,
+            fontFamily: AppFonts.ptSans,
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
             elevatedButtonTheme: AppThemes.elevatedButtonTheme,

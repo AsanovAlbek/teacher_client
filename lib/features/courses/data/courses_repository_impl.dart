@@ -72,4 +72,15 @@ class CoursesRepositoryImpl implements CoursesRepository {
           List<Map<String, dynamic>>.from(data).map(Course.fromJson).toList());
     });
   }
+
+  @override
+  Future<Course> deleteCourse(Course course) async {
+    return _client
+        .from('courses')
+        .delete()
+        .eq('id', course.id)
+        .select()
+        .single()
+        .withConverter(Course.fromJson);
+  }
 }

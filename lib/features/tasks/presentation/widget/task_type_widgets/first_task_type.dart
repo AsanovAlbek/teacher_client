@@ -8,6 +8,7 @@ import 'package:teacher_client/features/tasks/domain/bloc/tasks_bloc.dart';
 import 'package:collection/collection.dart';
 import 'package:teacher_client/features/tasks/domain/model/answer.dart';
 import 'package:teacher_client/features/tasks/presentation/widget/right_answer_dropdown.dart';
+import 'package:teacher_client/features/tasks/presentation/widget/task_type_widgets/deletable_item.dart';
 
 import '../../../domain/model/task.dart';
 
@@ -23,75 +24,71 @@ class FirstTaskTypeView extends StatefulWidget {
 class _FirstTaskTypeState extends State<FirstTaskTypeView> {
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Positioned(
-        top: 8,
-        right: 8,
-        child: IconButton(
-            onPressed: () {
-              context
-                  .read<TasksBloc>()
-                  .add(TasksEvent.removeTask(taskId: widget.task.id));
-            },
-            icon: const Icon(Icons.delete, color: Colors.red)),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 2,
-              child: TextFormField(
-                initialValue: widget.task.task,
-                decoration: const InputDecoration(
-                    label: Text('Задание'),
-                    fillColor: Colors.white,
-                    filled: true),
-                onChanged: (text) {
-                  AppUtils().debounce(() {
-                    context.read<TasksBloc>().add(TasksEvent.updateTask(
-                        task: widget.task.copyWith(task: text.trim())));
-                  });
-                },
+    return NewDeletableItem(
+        deleteClick: () {
+          context
+              .read<TasksBloc>()
+              .add(TasksEvent.removeTask(taskId: widget.task.id));
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 2,
+                child: TextFormField(
+                  initialValue: widget.task.task,
+                  decoration: const InputDecoration(
+                      label: Text('Задание'),
+                      fillColor: Colors.white,
+                      filled: true),
+                  onChanged: (text) {
+                    AppUtils().debounce(() {
+                      context.read<TasksBloc>().add(TasksEvent.updateTask(
+                          task: widget.task.copyWith(task: text.trim())));
+                    });
+                  },
+                ),
               ),
-            ),
-            Wrap(
-              alignment: WrapAlignment.center,
-              direction: Axis.horizontal,
-              children: [
-                ...widget.task.answerModels.take(2).mapIndexed((index, e) =>
-                    _ImageItem(index: index, answerModel: e, task: widget.task))
-              ],
-            ),
-            Wrap(
-              direction: Axis.horizontal,
-              alignment: WrapAlignment.center,
-              children: [
-                ...widget.task.answerModels.skip(2).take(2).mapIndexed(
-                    (index, e) => _ImageItem(
-                        index: index + 2, answerModel: e, task: widget.task))
-              ],
-            ),
-            const SizedBox(height: 8),
-            RightAnswerSwitcher(
-              task: widget.task,
-              onSelected: (selection) {
-                for (var answerModel in widget.task.answerModels) {
-                  final answerModelUpdated = answerModel.copyWith(
-                      answer: answerModel.answer.copyWith(
-                          rightAnswer: (answerModel == selection).toString()));
-                  context.read<TasksBloc>().add(TasksEvent.updateAnswer(
-                      answer: answerModelUpdated.answer,
-                      taskId: widget.task.id));
-                }
-              },
-            )
-          ],
-        ),
-      ),
-    ]);
+              Wrap(
+                alignment: WrapAlignment.center,
+                direction: Axis.horizontal,
+                children: [
+                  ...widget.task.answerModels.take(2).mapIndexed((index, e) =>
+                      _ImageItem(
+                          index: index, answerModel: e, task: widget.task))
+                ],
+              ),
+              Wrap(
+                direction: Axis.horizontal,
+                alignment: WrapAlignment.center,
+                children: [
+                  ...widget.task.answerModels.skip(2).take(2).mapIndexed(
+                      (index, e) => _ImageItem(
+                          index: index + 2, answerModel: e, task: widget.task))
+                ],
+              ),
+              const SizedBox(height: 8),
+              RightAnswerSwitcher(
+                task: widget.task,
+                onSelected: (selection) {
+                  for (var answerModel in widget.task.answerModels) {
+                    final answerModelUpdated = answerModel.copyWith(
+                        answer: answerModel.answer.copyWith(
+                            rightAnswer:
+                                (answerModel == selection).toString()));
+                    context.read<TasksBloc>().add(TasksEvent.updateAnswer(
+                        answer: answerModelUpdated.answer,
+                        taskId: widget.task.id));
+                  }
+                },
+              )
+            ],
+          ),
+        ));
   }
 }
 
@@ -188,9 +185,9 @@ class _ImageItemState extends State<_ImageItem> {
               onChanged: (String text) {
                 AppUtils().debounce(() {
                   context.read<TasksBloc>().add(TasksEvent.updateAnswer(
-                    answer:
-                        widget.answerModel.answer.copyWith(answer: text.trim()),
-                    taskId: widget.task.id));
+                      answer: widget.answerModel.answer
+                          .copyWith(answer: text.trim()),
+                      taskId: widget.task.id));
                 });
               },
             ),

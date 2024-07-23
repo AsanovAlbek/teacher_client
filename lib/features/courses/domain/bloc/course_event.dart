@@ -23,4 +23,10 @@ class CoursesEvent with _$CoursesEvent {
     FilePickerResult? pickerResult,
     Function(Course)? onSuccess,
     Function(Exception?)? onError}) = CourseUpdateEvent;
+
+  const factory CoursesEvent.deleteCourse({
+    required Course course,
+    Function(Course)? onSuccess,
+    Function(Exception?)? onError
+  }) = CoursesDeleteEvent;
 }
