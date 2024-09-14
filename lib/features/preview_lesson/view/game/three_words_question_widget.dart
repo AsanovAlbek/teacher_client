@@ -65,19 +65,23 @@ class ThreeWordsState extends State<ThreeWordsQuestionPreview> {
                     onTap: () {
                       select(index);
                     },
-                    child: Card(
-                      clipBehavior: Clip.antiAlias,
-                      child: ListTile(
-                        title: Text(
-                          widget.answers[index].answer,
-                          textAlign: TextAlign.center,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width / 4,
+                      child: Card(
+                        clipBehavior: Clip.antiAlias,
+                        child: ListTile(
+                          title: Text(
+                            widget.answers[index].answer,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.displayLarge?.copyWith(fontWeight: FontWeight.normal),
+                          ),
+                          selected: widget.selectedIndex == index,
+                          selectedTileColor: Colors.indigo,
+                          selectedColor: Colors.white,
+                          onTap: () {
+                            select(index);
+                          },
                         ),
-                        selected: widget.selectedIndex == index,
-                        selectedTileColor: Colors.indigo,
-                        selectedColor: Colors.white,
-                        onTap: () {
-                          select(index);
-                        },
                       ),
                     )),
               ),

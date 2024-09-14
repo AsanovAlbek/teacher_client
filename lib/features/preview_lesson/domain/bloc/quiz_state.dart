@@ -18,7 +18,10 @@ class QuizState with _$QuizState {
       @Default("") String rightAnswer,
       @Default(0) int mistakesCounter,
       @Default(0) int totalMistakes,
-      @Default(false) bool canSkipTask}) = QuizStateLoaded;
+      @Default(false) bool canSkipTask,
+      @Default(100) int health,
+      @Default(0) int coins
+      }) = QuizStateLoaded;
 
   const factory QuizState.error({@Default("")String message}) = QuizStateError;
 }

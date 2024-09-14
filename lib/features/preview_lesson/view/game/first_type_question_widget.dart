@@ -53,57 +53,56 @@ class _FirstTypeQuestionPreviewState extends State<FirstTypeQuestionPreview> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return GridView.builder(
-            scrollDirection: Axis.vertical,
-            itemCount: widget.answers.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 10, crossAxisSpacing: 10, crossAxisCount: 2, childAspectRatio: constraints.maxWidth / (constraints.maxWidth / 2 - 20)),
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.all(8),
-                child: Card(
-                    margin: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    color: widget.selectedIndex == index
-                        ? Colors.blueAccent
-                        : Colors.white,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          select(index);
-                        });
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Expanded(
-                            child: ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(8),
-                                  topRight: Radius.circular(8)),
+    return Scaffold(body: Center(
+      child: LayoutBuilder(builder: (context, constraints) {
+        return SizedBox(
+          width: MediaQuery.of(context).size.width / 2.2,
+          child: GridView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: widget.answers.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  childAspectRatio:
+                      constraints.maxWidth / (constraints.maxWidth / 2 - 20)),
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Card(
+                      margin: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      color: widget.selectedIndex == index
+                          ? Colors.blueAccent
+                          : Colors.white,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            select(index);
+                          });
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
                               child: CachedNetworkImage(
                                 imageUrl: widget.answers[index].imageUrl,
-                                fit: BoxFit.contain,
-                                placeholder: (context, url) =>
-                                    const Center(child: CircularProgressIndicator()),
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) => const Center(
+                                    child: CircularProgressIndicator()),
                               ),
                             ),
-                          ),
-                          Text(widget.answers[index].answer,
-                              style: const TextStyle(
-                                  fontFamily: 'PT-Sans', fontSize: 16))
-                        ],
-                      ),
-                    )),
-              );
-            });
-        }
-      ),
+                            Text(widget.answers[index].answer,
+                                style: const TextStyle(
+                                    fontFamily: 'PT-Sans', fontSize: 16))
+                          ],
+                        ),
+                      )),
+                );
+              }),
+        );
+      }),
     ));
   }
 

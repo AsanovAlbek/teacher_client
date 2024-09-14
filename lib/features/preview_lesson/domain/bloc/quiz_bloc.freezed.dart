@@ -745,7 +745,9 @@ mixin _$QuizState {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)
+            bool canSkipTask,
+            int health,
+            int coins)
         loaded,
     required TResult Function(String message) error,
   }) =>
@@ -765,7 +767,9 @@ mixin _$QuizState {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)?
+            bool canSkipTask,
+            int health,
+            int coins)?
         loaded,
     TResult? Function(String message)? error,
   }) =>
@@ -785,7 +789,9 @@ mixin _$QuizState {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)?
+            bool canSkipTask,
+            int health,
+            int coins)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -883,7 +889,9 @@ class _$QuizStateLoadingImpl extends QuizStateLoading {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)
+            bool canSkipTask,
+            int health,
+            int coins)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -906,7 +914,9 @@ class _$QuizStateLoadingImpl extends QuizStateLoading {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)?
+            bool canSkipTask,
+            int health,
+            int coins)?
         loaded,
     TResult? Function(String message)? error,
   }) {
@@ -929,7 +939,9 @@ class _$QuizStateLoadingImpl extends QuizStateLoading {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)?
+            bool canSkipTask,
+            int health,
+            int coins)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -998,7 +1010,9 @@ abstract class _$$QuizStateLoadedImplCopyWith<$Res> {
       String rightAnswer,
       int mistakesCounter,
       int totalMistakes,
-      bool canSkipTask});
+      bool canSkipTask,
+      int health,
+      int coins});
 }
 
 /// @nodoc
@@ -1024,6 +1038,8 @@ class __$$QuizStateLoadedImplCopyWithImpl<$Res>
     Object? mistakesCounter = null,
     Object? totalMistakes = null,
     Object? canSkipTask = null,
+    Object? health = null,
+    Object? coins = null,
   }) {
     return _then(_$QuizStateLoadedImpl(
       selectedIndex: null == selectedIndex
@@ -1074,6 +1090,14 @@ class __$$QuizStateLoadedImplCopyWithImpl<$Res>
           ? _value.canSkipTask
           : canSkipTask // ignore: cast_nullable_to_non_nullable
               as bool,
+      health: null == health
+          ? _value.health
+          : health // ignore: cast_nullable_to_non_nullable
+              as int,
+      coins: null == coins
+          ? _value.coins
+          : coins // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -1093,7 +1117,9 @@ class _$QuizStateLoadedImpl extends QuizStateLoaded {
       this.rightAnswer = "",
       this.mistakesCounter = 0,
       this.totalMistakes = 0,
-      this.canSkipTask = false})
+      this.canSkipTask = false,
+      this.health = 100,
+      this.coins = 0})
       : _tasks = tasks,
         _questionWidgets = questionWidgets,
         super._();
@@ -1145,10 +1171,16 @@ class _$QuizStateLoadedImpl extends QuizStateLoaded {
   @override
   @JsonKey()
   final bool canSkipTask;
+  @override
+  @JsonKey()
+  final int health;
+  @override
+  @JsonKey()
+  final int coins;
 
   @override
   String toString() {
-    return 'QuizState.loaded(selectedIndex: $selectedIndex, tasks: $tasks, questionWidgets: $questionWidgets, currentQuestion: $currentQuestion, isTrial: $isTrial, endTrialFlag: $endTrialFlag, isDialogShow: $isDialogShow, userAnswer: $userAnswer, rightAnswer: $rightAnswer, mistakesCounter: $mistakesCounter, totalMistakes: $totalMistakes, canSkipTask: $canSkipTask)';
+    return 'QuizState.loaded(selectedIndex: $selectedIndex, tasks: $tasks, questionWidgets: $questionWidgets, currentQuestion: $currentQuestion, isTrial: $isTrial, endTrialFlag: $endTrialFlag, isDialogShow: $isDialogShow, userAnswer: $userAnswer, rightAnswer: $rightAnswer, mistakesCounter: $mistakesCounter, totalMistakes: $totalMistakes, canSkipTask: $canSkipTask, health: $health, coins: $coins)';
   }
 
   @override
@@ -1177,7 +1209,9 @@ class _$QuizStateLoadedImpl extends QuizStateLoaded {
             (identical(other.totalMistakes, totalMistakes) ||
                 other.totalMistakes == totalMistakes) &&
             (identical(other.canSkipTask, canSkipTask) ||
-                other.canSkipTask == canSkipTask));
+                other.canSkipTask == canSkipTask) &&
+            (identical(other.health, health) || other.health == health) &&
+            (identical(other.coins, coins) || other.coins == coins));
   }
 
   @override
@@ -1194,7 +1228,9 @@ class _$QuizStateLoadedImpl extends QuizStateLoaded {
       rightAnswer,
       mistakesCounter,
       totalMistakes,
-      canSkipTask);
+      canSkipTask,
+      health,
+      coins);
 
   @JsonKey(ignore: true)
   @override
@@ -1219,7 +1255,9 @@ class _$QuizStateLoadedImpl extends QuizStateLoaded {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)
+            bool canSkipTask,
+            int health,
+            int coins)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -1235,7 +1273,9 @@ class _$QuizStateLoadedImpl extends QuizStateLoaded {
         rightAnswer,
         mistakesCounter,
         totalMistakes,
-        canSkipTask);
+        canSkipTask,
+        health,
+        coins);
   }
 
   @override
@@ -1254,7 +1294,9 @@ class _$QuizStateLoadedImpl extends QuizStateLoaded {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)?
+            bool canSkipTask,
+            int health,
+            int coins)?
         loaded,
     TResult? Function(String message)? error,
   }) {
@@ -1270,7 +1312,9 @@ class _$QuizStateLoadedImpl extends QuizStateLoaded {
         rightAnswer,
         mistakesCounter,
         totalMistakes,
-        canSkipTask);
+        canSkipTask,
+        health,
+        coins);
   }
 
   @override
@@ -1289,7 +1333,9 @@ class _$QuizStateLoadedImpl extends QuizStateLoaded {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)?
+            bool canSkipTask,
+            int health,
+            int coins)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -1307,7 +1353,9 @@ class _$QuizStateLoadedImpl extends QuizStateLoaded {
           rightAnswer,
           mistakesCounter,
           totalMistakes,
-          canSkipTask);
+          canSkipTask,
+          health,
+          coins);
     }
     return orElse();
   }
@@ -1360,7 +1408,9 @@ abstract class QuizStateLoaded extends QuizState {
       final String rightAnswer,
       final int mistakesCounter,
       final int totalMistakes,
-      final bool canSkipTask}) = _$QuizStateLoadedImpl;
+      final bool canSkipTask,
+      final int health,
+      final int coins}) = _$QuizStateLoadedImpl;
   const QuizStateLoaded._() : super._();
 
   int get selectedIndex;
@@ -1375,6 +1425,8 @@ abstract class QuizStateLoaded extends QuizState {
   int get mistakesCounter;
   int get totalMistakes;
   bool get canSkipTask;
+  int get health;
+  int get coins;
   @JsonKey(ignore: true)
   _$$QuizStateLoadedImplCopyWith<_$QuizStateLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1459,7 +1511,9 @@ class _$QuizStateErrorImpl extends QuizStateError {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)
+            bool canSkipTask,
+            int health,
+            int coins)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -1482,7 +1536,9 @@ class _$QuizStateErrorImpl extends QuizStateError {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)?
+            bool canSkipTask,
+            int health,
+            int coins)?
         loaded,
     TResult? Function(String message)? error,
   }) {
@@ -1505,7 +1561,9 @@ class _$QuizStateErrorImpl extends QuizStateError {
             String rightAnswer,
             int mistakesCounter,
             int totalMistakes,
-            bool canSkipTask)?
+            bool canSkipTask,
+            int health,
+            int coins)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),

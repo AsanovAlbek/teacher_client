@@ -7,6 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:teacher_client/features/auth/domain/exceptions/auth_exceptions.dart';
 import 'package:teacher_client/features/auth/login/login_page_state.dart';
+import 'package:teacher_client/features/collaborators/view/collaborators.dart';
 
 import '../../domain/repository/auth_repository.dart';
 
@@ -36,12 +37,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       await _repository.signIn(email: event.email, password: event.password);
       event.onSuccess?.call();
-    } on AuthException {
+    } on AuthException catch(e, s) {
       event.onError?.call('Нет подключения к интернету');
-    } on UserNotTeacherException {
+      Talker().handle(e, s, 'auth exception');
+    } on UserNotTeacherException catch(e, s) {
       event.onError?.call('Ошибка входа');
+      Talker().handle(e, s, 'user not found');
     } catch (e, stack) {
-      log(e.toString(), stackTrace: stack);
+      Talker().handle(e, stack, 'other exception');
       event.onError?.call('Нет подключения к интернету');
     }
   }

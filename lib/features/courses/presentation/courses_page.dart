@@ -30,15 +30,6 @@ class _CoursesPageState extends State<CoursesPage> {
       context
           .read<CourseBloc>()
           .add(const CoursesEvent.searchStream(query: ''));
-      // final channel = Supabase.instance.client.channel('courses')
-      //   .onPostgresChanges(
-      //       event: PostgresChangeEvent.all,
-      //       schema: 'public',
-      //       table: 'courses',
-      //       callback: (playload) {
-      //         debugPrint('playload $playload new record = ${playload.newRecord}');
-      //       })
-      //   .subscribe();
     }
   }
 
@@ -50,7 +41,6 @@ class _CoursesPageState extends State<CoursesPage> {
 
   @override
   Widget build(BuildContext context) {
-    // context.read<CourseBloc>().add(const CoursesEvent.searchStream(query: ''));
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(

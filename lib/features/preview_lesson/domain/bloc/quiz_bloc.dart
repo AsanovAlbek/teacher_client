@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:talker/talker.dart';
 import 'package:teacher_client/core/model/lesson/lesson.dart';
 import 'package:teacher_client/core/model/task/task.dart';
 import 'package:teacher_client/features/preview_lesson/view/game/fill_word_question.dart';
@@ -21,7 +22,6 @@ part 'quiz_state.dart';
 part 'quiz_bloc.freezed.dart';
 
 class QuizBloc extends Bloc<QuizEvent, QuizState> {
-
   QuizBloc() : super(const QuizState.loading()) {
     on<LoadingEvent>((event, emit) => _loadLesson(event, emit));
     on<NextQuestion>((event, emit) => _nextQuestion(event, emit));
@@ -29,7 +29,9 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
   }
 
   QuizStateLoaded get _quizState => state as QuizStateLoaded;
-  Question question() => _quizState.questionWidgets[_quizState.selectedIndex] as Question;
+  Question question() =>
+      _quizState.questionWidgets[_quizState.selectedIndex] as Question;
+
 
   Widget _pagesFactory(Task task) {
     switch (task.taskType) {
@@ -64,8 +66,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
             tasks: tasks,
             questionWidgets: tasks.map((task) => _pagesFactory(task)).toList(),
             currentQuestion: _pagesFactory(tasks.first) as Question,
-            isTrial: event.isTrial
-        ));
+            isTrial: event.isTrial));
       } else {
         event.ifLessonEmpty();
       }
@@ -79,52 +80,56 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
   }
 
   _nextQuestion(NextQuestion event, Emitter<QuizState> emit) {
-      if (_quizState.selectedIndex < _quizState.tasks.length - 1) {
-        emit(_quizState.copyWith(
-            selectedIndex: _quizState.selectedIndex + 1,
-            currentQuestion: _quizState.questionWidgets[_quizState.selectedIndex + 1] as Question,
-            isDialogShow: false));
-        _quizState.currentQuestion?.clear();
+    if (_quizState.selectedIndex < _quizState.tasks.length - 1) {
+      emit(_quizState.copyWith(
+          selectedIndex: _quizState.selectedIndex + 1,
+          currentQuestion: _quizState
+              .questionWidgets[_quizState.selectedIndex + 1] as Question,
+          isDialogShow: false));
+      _quizState.currentQuestion?.clear();
+    } else {
+      if (_quizState.isTrial) {
+        emit(_quizState.copyWith(endTrialFlag: true, isDialogShow: false));
       } else {
-        if (_quizState.isTrial) {
-          emit(_quizState.copyWith(endTrialFlag: true, isDialogShow: false));
-        } else {
-          emit(_quizState.copyWith(isDialogShow: false));
-          event.onFinish();
-          emit(QuizState.loaded(
+        emit(_quizState.copyWith(isDialogShow: false));
+        event.onFinish();
+        emit(QuizState.loaded(
             selectedIndex: 0,
-            currentQuestion: _pagesFactory(_quizState.tasks.first) as Question
-        ));
-        }
-        
+            currentQuestion:
+                _pagesFactory(_quizState.tasks.first) as Question));
       }
+    }
   }
 
   _getAnswer(GetAnswer event, Emitter<QuizState> emit) {
-      if (!question().isSelected()) {
-        // Пользователь не дал ответ
-        // Показать ему сообщение, чтобы он его дал
+    if (!question().isSelected()) {
+      // Пользователь не дал ответ
+      // Показать ему сообщение, чтобы он его дал
+    } else {
+      emit(_quizState.copyWith(
+        // Показываем диалог
+        currentQuestion: question(),
+        isDialogShow: true,
+      ));
+      event.onAnswer?.call(_quizState.currentQuestion);
+      // Далее такая логика
+      if (question().isRight()) {
+        final coinsForOneQuestion = 100 / _quizState.tasks.length;
+        emit(_quizState.copyWith(
+            coins: _quizState.coins + coinsForOneQuestion.toInt()));
       } else {
         emit(_quizState.copyWith(
-          // Показываем диалог
-          currentQuestion: question(),
-          isDialogShow: true,
-        ));
-        event.onAnswer?.call(_quizState.currentQuestion);
-        // Далее такая логика
-        // if (isRight) {
-        //   coins++;
-        // } else {
-        //   hp--;
-        //   mistakesCount++;
-        //   if (mistakesCount >= 3) {
-        //     restart();
-        //     mistakesCount = 0;
-        //   }
-        //   if (hp >= 0) {
-        //     fail();
-        //   }
-        // }
+            health: _quizState.health - 10,
+            mistakesCounter: _quizState.mistakesCounter + 1,
+            totalMistakes: _quizState.totalMistakes + 1));
+        if (_quizState.mistakesCounter >= 3) {
+          Talker().debug('Вы совершили 3 ошибки');
+          emit(_quizState.copyWith(mistakesCounter: 0));
+        }
+        if (_quizState.health <= 0) {
+          Talker().debug('Вы проиграли');
+        }
       }
+    }
   }
 }

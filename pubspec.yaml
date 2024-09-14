@@ -29,6 +29,7 @@ dependencies:
   bloc_concurrency: ^0.2.5
   collection: ^1.18.0
   async: ^2.11.0
+  flutter_svg: ^2.0.10+1
 
 
 dev_dependencies:
@@ -44,6 +45,8 @@ flutter:
   assets:
     - assets/images/
     - assets/images/person1.png
+    - assets/images/heart.svg
+    - assets/images/coin.svg
   uses-material-design: true
   fonts:
     - family: PT-Sans
